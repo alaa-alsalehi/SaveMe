@@ -3,7 +3,7 @@ package com.serveme.savemyphone;
 import java.util.List;
 
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
+import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
@@ -17,11 +17,11 @@ public class GridAdapter extends BaseAdapter {
 
 	private Context context;
 
-	List<ApplicationInfo> aList = null;
+	List<ResolveInfo> aList = null;
 	GridView gridview;
 
 	// Constructor
-	public GridAdapter(Context c, List<ApplicationInfo> aList, GridView gridview) {
+	public GridAdapter(Context c, List<ResolveInfo> aList, GridView gridview) {
 		this.context = c;
 		this.aList = aList;
 		this.gridview = gridview;
@@ -51,7 +51,7 @@ public class GridAdapter extends BaseAdapter {
 			txtView = (TextView) convertView;
 		}
 
-		ApplicationInfo appinfo = aList.get(position);
+		ResolveInfo appinfo = aList.get(position);
 		txtView.setText(appinfo.loadLabel((context.getPackageManager())));
 		txtView.setTextColor(Color.WHITE);
 		txtView.setGravity(Gravity.CENTER_HORIZONTAL);
