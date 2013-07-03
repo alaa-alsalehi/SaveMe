@@ -20,6 +20,9 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		startService(new Intent(this, AppsMonitor.class));
+		
+		
 		Intent in = new Intent(Intent.ACTION_MAIN);
 		in.addCategory(Intent.CATEGORY_LAUNCHER);
 		appsinfolist = getPackageManager().queryIntentActivities(in, 0);
@@ -32,6 +35,7 @@ public class MainActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, View v,
 					int position, long id) {
 				Intent i = getPackageManager().getLaunchIntentForPackage(appsinfolist.get(position).resolvePackageName);
+//				stopService(new Intent(getBaseContext(), AppsMonitor.class));
 				startActivity(i);
 			}
 		});
