@@ -4,6 +4,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,8 +21,9 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		startService(new Intent(this, AppsMonitor.class));
-		
+//		startService(new Intent(this, AppsMonitor.class));
+		DBHandler db = new DBHandler(this);
+		SQLiteDatabase sqldb = db.getWritableDatabase();
 		
 		Intent in = new Intent(Intent.ACTION_MAIN);
 		in.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -30,6 +32,8 @@ public class MainActivity extends Activity {
 		GridView gridView = (GridView) findViewById(R.id.grid_view);
 		gridView.setAdapter(new GridAdapter(this, appsinfolist, gridView));
 
+		gridView.setStretchMode( GridView.STRETCH_COLUMN_WIDTH );
+		gridView.setNumColumns( GridView.AUTO_FIT );
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v,

@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
@@ -18,13 +19,11 @@ public class GridAdapter extends BaseAdapter {
 	private Context context;
 
 	List<ResolveInfo> aList = null;
-	GridView gridview;
 
 	// Constructor
 	public GridAdapter(Context c, List<ResolveInfo> aList, GridView gridview) {
 		this.context = c;
 		this.aList = aList;
-		this.gridview = gridview;
 	}
 
 	@Override
@@ -57,11 +56,12 @@ public class GridAdapter extends BaseAdapter {
 		txtView.setGravity(Gravity.CENTER_HORIZONTAL);
 		txtView.setLines(2); // to make all text view in the same size
 		Drawable img = appinfo.loadIcon(context.getPackageManager());
-		// img.setBounds(0, 0, (int)(gridview.getColumnWidth()*0.60), (int)(gridview.getColumnWidth()*0.60));
-		// txtView.setCompoundDrawables(null, img, null, null);
+		GridView gridview = (GridView) parent;
+		img.setBounds(0, 0, (int)(gridview.getColumnWidth()/2), (int)(gridview.getColumnWidth()/2));
+		txtView.setCompoundDrawables(null, img, null, null);
 		txtView.setCompoundDrawablePadding(10);
-		txtView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
-
+//		txtView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+		
 		return txtView;
 	}
 
