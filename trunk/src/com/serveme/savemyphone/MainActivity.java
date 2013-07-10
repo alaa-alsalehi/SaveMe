@@ -38,12 +38,17 @@ public class MainActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v,
 					int position, long id) {
-				Intent i = getPackageManager().getLaunchIntentForPackage(appsinfolist.get(position).resolvePackageName);
+				Intent i = getPackageManager().getLaunchIntentForPackage(appsinfolist.get(position).activityInfo.packageName);
 //				stopService(new Intent(getBaseContext(), AppsMonitor.class));
 				startActivity(i);
 			}
 		});
 
+	}
+	
+	@Override
+	public void onBackPressed() {
+	    // your code.
 	}
 
 }
