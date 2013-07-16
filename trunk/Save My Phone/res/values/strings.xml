@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="app_name">Save My Phone</string>
+    <string name="action_unlock">Unlock</string>
+    <string name="action_lock">Lock</string>
+
+</resources>
