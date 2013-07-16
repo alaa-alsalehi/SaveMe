@@ -11,11 +11,12 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import view.AdminActivity;
 import view.UserActivity;
 
 public class AppsMonitor extends Service {
 	int counter = 1;
-	static final int UPDATE_INTERVAL = 250;
+	static final int UPDATE_INTERVAL = 100;
 	private Timer timer = new Timer();
 	ActivityManager am;
 
@@ -44,7 +45,7 @@ public class AppsMonitor extends Service {
 				List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
 				ComponentName componentInfo = taskInfo.get(0).topActivity;
 				Log.v("this is ",componentInfo.getClassName().toString());
-				if (!componentInfo.getClassName().toString().equals("com.serveme.savemyphone.UserActivity")) {
+				if (!AdminActivity.getWhiteList().contains(componentInfo.getPackageName())) {
 					Intent saveintent = new Intent(getBaseContext(), UserActivity.class);
 					saveintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					getApplication().startActivity(saveintent);

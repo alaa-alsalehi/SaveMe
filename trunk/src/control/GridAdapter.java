@@ -12,7 +12,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.TextView;
 
 public class GridAdapter extends BaseAdapter {
@@ -63,7 +62,7 @@ public class GridAdapter extends BaseAdapter {
 		txtView.setGravity(Gravity.CENTER_HORIZONTAL);
 		txtView.setLines(2); // to make all text view in the same size
 		Drawable img = appinfo.loadIcon(context.getPackageManager());
-		GridView gridview = (GridView) parent;
+//		GridView gridview = (GridView) parent;
 //		img.setBounds(0, 0, (int)(gridview.getColumnWidth()/2), (int)(gridview.getColumnWidth()/2));
 //		txtView.setCompoundDrawables(null, img, null, null);
 		txtView.setCompoundDrawablePadding(10);
