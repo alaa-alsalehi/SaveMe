@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
@@ -28,13 +29,19 @@ public class UserActivity extends Activity {
 
 	final Context context = this;
 	List<String> appsinfolist;
+	public static boolean OnPause = false;
+	public static boolean OnResume = false;
 	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		
 		setContentView(R.layout.activity_main);
-		AdminActivity.context = this;
+		
+		AdminActivity.setContext(this);
 		
 		appsinfolist = AdminActivity.getWhiteList();
 		
@@ -49,6 +56,14 @@ public class UserActivity extends Activity {
 
 		gridView.setStretchMode( GridView.STRETCH_COLUMN_WIDTH );
 		gridView.setNumColumns( GridView.AUTO_FIT );
+	
+//		float scalefactor = getResources().getDisplayMetrics().density * 80;
+//		Point size = new Point();
+//		this.getWindowManager().getDefaultDisplay().getSize(size);
+//		int screenWidth = size.x;
+//		int columns = (int) ((float) screenWidth / (float) scalefactor);
+//		gridView.setNumColumns(columns);
+		
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v,
@@ -92,6 +107,7 @@ public class UserActivity extends Activity {
 	        	  String value = input.getText().toString();
 	        	  Log.v("text", value);
 	        	  if(value.equals("omar")){
+	        		  AdminActivity.getDBOperator().updateStatus(0);
 	        		  context.stopService(new Intent(context,AppsMonitor.class));
 	        		  Toast.makeText(context, "done", Toast.LENGTH_LONG).show();
 	        	  }
@@ -109,6 +125,15 @@ public class UserActivity extends Activity {
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
+	    
 	}
-
+	
+//	@Override
+//	public void onAttachedToWindow()
+//	{  
+//	    Log.i("TESTE", "onAttachedToWindow");
+//	    this.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD);
+//	    super.onAttachedToWindow();  
+//	}
+	
 }

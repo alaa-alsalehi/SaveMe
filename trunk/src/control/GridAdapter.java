@@ -65,8 +65,11 @@ public class GridAdapter extends BaseAdapter {
 //		GridView gridview = (GridView) parent;
 //		img.setBounds(0, 0, (int)(gridview.getColumnWidth()/2), (int)(gridview.getColumnWidth()/2));
 //		txtView.setCompoundDrawables(null, img, null, null);
+		float scalefactor = context.getResources().getDisplayMetrics().density * 50;
 		txtView.setCompoundDrawablePadding(10);
-		txtView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
+		img.setBounds(0, 0, (int)(scalefactor), (int)(scalefactor));
+		txtView.setCompoundDrawables(null, img, null, null);
+//		txtView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
 		
 		return txtView;
 	}

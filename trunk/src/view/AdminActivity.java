@@ -14,12 +14,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class AdminActivity extends ListActivity {
 
@@ -33,9 +31,9 @@ public class AdminActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		context = this;
 		db = DBOperations.getInstance(context);
-		Log.v("Befor", "done");
 		AppsListAdapter adapter = new AppsListAdapter(context);
 		this.setListAdapter(adapter);
+//		Log.d("", getDBOperator().getStatus()+"");
 	}
 	
 	@Override
@@ -63,10 +61,10 @@ public class AdminActivity extends ListActivity {
 	        	alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 	        	public void onClick(DialogInterface dialog, int whichButton) {
 	        	  String value = input.getText().toString();
-	        	  Log.v("text", value);
 	        	  if(value.equals("omar")){
+	        		  AdminActivity.getDBOperator().updateStatus(1);
 	        		  context.startService(new Intent(context,AppsMonitor.class));
-	        		  Toast.makeText(context, "done", Toast.LENGTH_LONG).show();
+	        		  finish();
 	        	  }
 	        	  }
 	        	});
@@ -96,5 +94,9 @@ public class AdminActivity extends ListActivity {
 			whitelist = getDBOperator().getWhiteListApps();
 		}
 		return whitelist;
+	}
+	
+	public static void setContext(Context c){
+		context = c;
 	}
 }

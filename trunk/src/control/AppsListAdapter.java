@@ -41,7 +41,7 @@ public class AppsListAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		return aList.size();
+		return aList.size()-1;
 	}
 
 	@Override
@@ -58,24 +58,27 @@ public class AppsListAdapter extends BaseAdapter {
 	@SuppressWarnings("deprecation")
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
-		ViewHolder viewHolder; // more performance for ListView by use Holder
-								// Pattern
+	Log.d("test", aList.get(position).activityInfo.packageName);
+		if(aList.get(position).activityInfo.packageName.equals("com.serveme.savemyphone")){
+			aList.remove(aList.get(position));
+		}
+		
+		Log.d("test", aList.get(position).activityInfo.packageName);
+		final ResolveInfo appinfo = aList.get(position);
+		
+		ViewHolder viewHolder; // more performance for ListView by use Holder Pattern
 
-		if (convertView == null) { // if it's not recycled, initialize some
-									// attributes
+		if (convertView == null) { // if it's not recycled, initialize some attributes
 			convertView = inflater.inflate(R.layout.item_layout, parent, false);
 			viewHolder = new ViewHolder();
 			viewHolder.name = (TextView) convertView.findViewById(R.id.name);
 			viewHolder.icon = (ImageView) convertView.findViewById(R.id.icon);
-			viewHolder.tg = (ToggleButton) convertView
-					.findViewById(R.id.enable_disable);
+			viewHolder.tg = (ToggleButton) convertView.findViewById(R.id.enable_disable);
 			// first you set Tag Not get it
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-
-		final ResolveInfo appinfo = aList.get(position);
 		
 		viewHolder.tg.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -100,8 +103,6 @@ public class AppsListAdapter extends BaseAdapter {
 			}
 		});
 
-		// ”ƒ«· ÕÊ· „Ê÷Ê⁄ «· — Ì» Ê»ﬁ«¡ Õ«·… «·“—
-		// ”ƒ«· ⁄‰ «·base adapter  Ê arrayadapter Ê«·›—ﬁ »Ì‰Â„ ›Ì «·≈” Œœ«„ ø
 		viewHolder.name.setText(appinfo.loadLabel((context.getPackageManager())));
 		Drawable img = appinfo.loadIcon(context.getPackageManager());
 		img.setBounds(0, 0, 75, 75);

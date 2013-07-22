@@ -5,7 +5,6 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.IBinder;
-import android.util.Log;
 import android.widget.Toast;
 import java.util.List;
 import java.util.Timer;
@@ -31,6 +30,7 @@ public class AppsMonitor extends Service {
 		// stopped, so return sticky.
 		Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
 		am = (ActivityManager) this.getSystemService(ACTIVITY_SERVICE);
+		AdminActivity.setContext(this);
 		doGetRunningApp();
 		return START_STICKY;
 	}
@@ -44,13 +44,11 @@ public class AppsMonitor extends Service {
 //				ComponentName componentInfo = taskInfo.get(0).origActivity;
 				List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
 				ComponentName componentInfo = taskInfo.get(0).topActivity;
-				Log.v("this is ",componentInfo.getClassName().toString());
 				if (!AdminActivity.getWhiteList().contains(componentInfo.getPackageName())) {
 					Intent saveintent = new Intent(getBaseContext(), UserActivity.class);
 					saveintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					getApplication().startActivity(saveintent);
 				}
-				Log.v("MyService", String.valueOf(++counter));
 			}
 		}, 1, UPDATE_INTERVAL);
 	}
@@ -62,5 +60,14 @@ public class AppsMonitor extends Service {
 			timer.cancel();
 		}
 		Toast.makeText(this, "Service Destroyed", Toast.LENGTH_LONG).show();
+		
+//		Intent home = new Intent(Intent.ACTION_MAIN);
+//		home.addCategory(Intent.CATEGORY_HOME);
+//		home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//      getApplication().startActivity(home);
+		
+//        Process.killProcess(android.os.Process.myPid());
+		
+        System.exit(0);
 	}
 }

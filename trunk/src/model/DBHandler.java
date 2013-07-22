@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBHandler extends SQLiteOpenHelper {
 
 	// Database Version
-	private static final int DATABASE_VERSION = 2;
+	private static final int DATABASE_VERSION = 1;
 
 	// Database Name
 	private static final String DATABASE_NAME = "db.sqlite";
@@ -26,6 +26,9 @@ public class DBHandler extends SQLiteOpenHelper {
 		db.execSQL(createTableStr);
 		createTableStr = "CREATE TABLE " + DB_KEYS.ADMIN_TABLE + " ( " + DB_KEYS.KEY_USERNAME + " TEXT, " + DB_KEYS.KEY_PASSWORD + " TEXT)";
 		db.execSQL(createTableStr);
+		createTableStr = "CREATE TABLE " + DB_KEYS.STATUS_TABLE + " ( " + DB_KEYS.KEY_STATUS+ " INTEGER )";
+		db.execSQL(createTableStr);
+		db.execSQL("insert into " + DB_KEYS.STATUS_TABLE + "(" + DB_KEYS.KEY_STATUS + ") values(0)");
 	}
 
 	@Override
