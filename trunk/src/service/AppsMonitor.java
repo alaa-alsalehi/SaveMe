@@ -5,6 +5,7 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 import java.util.List;
 import java.util.Timer;
@@ -15,7 +16,7 @@ import view.UserActivity;
 
 public class AppsMonitor extends Service {
 	int counter = 1;
-	static final int UPDATE_INTERVAL = 100;
+	static final int UPDATE_INTERVAL = 250;
 	private Timer timer = new Timer();
 	ActivityManager am;
 
@@ -38,17 +39,17 @@ public class AppsMonitor extends Service {
 	private void doGetRunningApp() {
 		timer.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
-
 				// get the info from the currently running task
 //				List<ActivityManager.RecentTaskInfo> taskInfo = am.getRecentTasks(1, ActivityManager.RECENT_WITH_EXCLUDED );
 //				ComponentName componentInfo = taskInfo.get(0).origActivity;
 				List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
 				ComponentName componentInfo = taskInfo.get(0).topActivity;
-				if (!AdminActivity.getWhiteList().contains(componentInfo.getPackageName())) {
+				if (!AdminActivity.getWhiteList().contains(componentInfo.getPackageName())&&!componentInfo.getPackageName().equals("android")) {
 					Intent saveintent = new Intent(getBaseContext(), UserActivity.class);
-					saveintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					saveintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					getApplication().startActivity(saveintent);
 				}
+				Log.v("", componentInfo.getPackageName());
 			}
 		}, 1, UPDATE_INTERVAL);
 	}
