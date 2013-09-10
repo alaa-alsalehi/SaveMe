@@ -15,7 +15,7 @@ import com.serveme.savemyphone.R;
 
 public class AdminRequest extends Activity {
 
-	private final int REQUEST_ENABLE = 0;
+	private final int REQUEST_ENABLE = 1;
 	private DevicePolicyManager devicePolicyManager;
 	private ComponentName adminComponent;
 	
@@ -32,13 +32,13 @@ public class AdminRequest extends Activity {
 			@Override
 			public void onClick(View v) {
 					devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-					adminComponent = new ComponentName(AdminRequest.this,
-							AdminReciver.class);
+					adminComponent = new ComponentName(AdminRequest.this, AdminReciver.class);
 					if (!devicePolicyManager.isAdminActive(adminComponent)) {
 						Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
 						intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN,adminComponent);
 						intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,"Additional text explaining why this needs to be added.");
 						intent.putExtra("force-locked",	DeviceAdminInfo.USES_POLICY_FORCE_LOCK);
+						intent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
 						startActivityForResult(intent, REQUEST_ENABLE);
 					}
 			}
@@ -46,17 +46,23 @@ public class AdminRequest extends Activity {
 
 	}
 	
+	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		Log.v("result", "result");
-		if (REQUEST_ENABLE == requestCode) {
-			if (resultCode == Activity.RESULT_OK) {
-				Intent intent = new Intent(getBaseContext(), AdminActivity.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-				startActivity(intent);
-			} 
-		} else {
-			startActivity(new Intent(getApplicationContext(),AdminRequest.class));
-		}
+	    switch (requestCode) {
+	        case REQUEST_ENABLE:
+	            if (resultCode == Activity.RESULT_OK) {
+	                Log.v("DeviceAdminSample", "Administration enabled!");
+	                Intent intent = new Intent(getBaseContext(), AdminActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+					startActivity(intent);
+	            } else {
+	                Log.v("DeviceAdminSample", "Administration enable FAILED!");
+	    			startActivity(new Intent(getApplicationContext(),AdminRequest.class));
+	            }
+	            return;
+	    }
+	    super.onActivityResult(requestCode, resultCode, data);
 	}
+	
 }

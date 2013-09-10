@@ -2,13 +2,14 @@ package view;
 
 import java.util.List;
 
+import model.DBOperations;
+
 import service.AppsMonitor;
 
 import com.serveme.savemyphone.R;
 import control.GridAdapter;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.admin.DeviceAdminInfo;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -32,6 +33,7 @@ public class UserActivity extends Activity {
 
 	final Context context = this;
 	List<String> appsinfolist;
+	private DBOperations db;
 
 	protected static final int REQUEST_ENABLE = 0;
 	DevicePolicyManager devicePolicyManager;
@@ -46,9 +48,9 @@ public class UserActivity extends Activity {
 
 		setContentView(R.layout.activity_main);
 
-		AdminActivity.setContext(this);
+		db = new DBOperations(this);
 
-		appsinfolist = AdminActivity.getWhiteList();
+		appsinfolist = db.getWhiteListApps();
 
 		startService(new Intent(this, AppsMonitor.class));
 
@@ -102,10 +104,8 @@ public class UserActivity extends Activity {
 		// Handle item selection
 		switch (item.getItemId()) {
 		case R.id.action_unlock:
-
-			AdminActivity.getDBOperator().updateStatus(0);
+			db.updateStatus(0);
 			context.stopService(new Intent(context, AppsMonitor.class));
-
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -137,7 +137,7 @@ public class UserActivity extends Activity {
     	  String value = input.getText().toString();
     	  Log.v("text", value);
     	  if(value.equals("omar")){
-    		  AdminActivity.getDBOperator().updateStatus(0);
+    		  db.updateStatus(0);
     		  context.stopService(new Intent(context,AppsMonitor.class));
     		  Toast.makeText(context, "done", Toast.LENGTH_LONG).show();
     		  finish();

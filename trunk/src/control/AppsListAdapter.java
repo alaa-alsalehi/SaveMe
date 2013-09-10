@@ -2,11 +2,14 @@ package control;
 
 import java.util.List;
 
+import model.DBOperations;
+
 import view.AdminActivity;
 
 import com.serveme.savemyphone.R;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -27,6 +30,8 @@ public class AppsListAdapter extends BaseAdapter {
 	private List<String> whitelist = null;
 	private static boolean[] status;
 	private LayoutInflater inflater = null;
+	private final ImageLoader imageloader = new ImageLoader();
+	private DBOperations db;
 
 	// Constructor
 	public AppsListAdapter(Context c) {
@@ -34,14 +39,20 @@ public class AppsListAdapter extends BaseAdapter {
 		Intent in = new Intent(Intent.ACTION_MAIN);
 		in.addCategory(Intent.CATEGORY_LAUNCHER);
 		aList = c.getPackageManager().queryIntentActivities(in, 0);
-		whitelist = AdminActivity.getWhiteList();
+		db = new DBOperations(c);
+		whitelist = db.getWhiteListApps();
 		status = new boolean[aList.size()];
 		inflater = LayoutInflater.from(context);
+		for(ResolveInfo rinfo:aList){
+			if(rinfo.activityInfo.packageName.equals("com.serveme.savemyphone")){
+				aList.remove(rinfo);
+			}
+		}
 	}
 
 	@Override
 	public int getCount() {
-		return aList.size()-1;
+		return aList.size();
 	}
 
 	@Override
@@ -59,11 +70,7 @@ public class AppsListAdapter extends BaseAdapter {
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 	Log.d("test", aList.get(position).activityInfo.packageName);
-		if(aList.get(position).activityInfo.packageName.equals("com.serveme.savemyphone")){
-			aList.remove(aList.get(position));
-		}
-		
-		Log.d("test", aList.get(position).activityInfo.packageName);
+
 		final ResolveInfo appinfo = aList.get(position);
 		
 		ViewHolder viewHolder; // more performance for ListView by use Holder Pattern
@@ -89,13 +96,13 @@ public class AppsListAdapter extends BaseAdapter {
 					status[position] = true;
 					
 					if (!whitelist.contains(appinfo.activityInfo.packageName)) {
-						AdminActivity.getDBOperator().insertöApp(	appinfo.activityInfo.packageName);
+						db.insertöApp(appinfo.activityInfo.packageName);
 						whitelist.add(appinfo.activityInfo.packageName);
 					}
 				} else {
 					status[position] = false;
 					if (whitelist.contains(appinfo.activityInfo.packageName)) {
-						AdminActivity.getDBOperator().deleteApp(appinfo.activityInfo.packageName);
+						db.deleteApp(appinfo.activityInfo.packageName);
 						whitelist.remove(appinfo.activityInfo.packageName);
 					}
 				}
@@ -104,9 +111,10 @@ public class AppsListAdapter extends BaseAdapter {
 		});
 
 		viewHolder.name.setText(appinfo.loadLabel((context.getPackageManager())));
-		Drawable img = appinfo.loadIcon(context.getPackageManager());
-		img.setBounds(0, 0, 75, 75);
-		viewHolder.icon.setBackgroundDrawable(img);
+//		Drawable img = appinfo.loadIcon(context.getPackageManager());
+//		img.setBounds(0, 0, 75, 75);
+//		viewHolder.icon.setBackgroundDrawable(img);
+		imageloader.load(viewHolder.icon,appinfo,context);
 		Log.v("hi", status[position] + "");
 		if (whitelist.contains(appinfo.activityInfo.packageName)) {
 			status[position] = true;

@@ -7,14 +7,25 @@ import android.util.Log;
 
 public class AdminReciver extends DeviceAdminReceiver {
 
-	@Override
-	public void onEnabled(Context context, Intent intent) {
-Log.v("rec", "rec");
-	}
+    @Override
+    public void onEnabled(Context context, Intent intent) {
+    	Log.v("enabled", "enabled");
+    }
 
-	@Override
-	public void onDisabled(Context context, Intent intent) {
-		Log.v("admin reciver", "admin disable");
-	}
+    @Override
+    public CharSequence onDisableRequested(Context context, Intent intent) {
+        return "";
+    }
+
+    @Override
+    public void onDisabled(Context context, Intent intent) {
+    	Log.v("disables", "disabled");
+    }
+
+    @Override
+    public void onPasswordChanged(Context context, Intent intent) {
+
+    }
+    
 
 }

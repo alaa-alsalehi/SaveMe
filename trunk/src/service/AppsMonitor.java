@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import model.DBOperations;
+
 import view.AdminActivity;
 import view.UserActivity;
 
@@ -19,6 +21,7 @@ public class AppsMonitor extends Service {
 	static final int UPDATE_INTERVAL = 250;
 	private Timer timer = new Timer();
 	ActivityManager am;
+	private DBOperations db;
 
 	@Override
 	public IBinder onBind(Intent arg0) {
@@ -30,8 +33,8 @@ public class AppsMonitor extends Service {
 		// We want this service to continue running until it is explicitly
 		// stopped, so return sticky.
 		Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
+		db = new DBOperations(this);
 		am = (ActivityManager) this.getSystemService(ACTIVITY_SERVICE);
-		AdminActivity.setContext(this);
 		doGetRunningApp();
 		return START_STICKY;
 	}
@@ -44,7 +47,7 @@ public class AppsMonitor extends Service {
 //				ComponentName componentInfo = taskInfo.get(0).origActivity;
 				List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
 				ComponentName componentInfo = taskInfo.get(0).topActivity;
-				if (!AdminActivity.getWhiteList().contains(componentInfo.getPackageName())&&!componentInfo.getPackageName().equals("android")) {
+				if (!db.getWhiteListApps().contains(componentInfo.getPackageName())) {
 					Intent saveintent = new Intent(getBaseContext(), UserActivity.class);
 					saveintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					getApplication().startActivity(saveintent);
@@ -69,6 +72,6 @@ public class AppsMonitor extends Service {
 		
 //        Process.killProcess(android.os.Process.myPid());
 		
-        System.exit(0);
+//        System.exit(0);
 	}
 }
