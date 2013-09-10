@@ -6,5 +6,12 @@
         android:showAsAction="never"
         android:icon="@drawable/lock"
         android:title="@string/action_lock"/>
+    
+    <item
+        android:id="@+id/action_uninstall"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_uninstall"/>
 
 </menu>

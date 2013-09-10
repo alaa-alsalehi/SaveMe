@@ -3,6 +3,7 @@
     <string name="app_name">Save My Phone</string>
     <string name="action_unlock">Unlock</string>
     <string name="action_lock">Lock</string>
+    <string name="action_uninstall">Uninstall</string>
     <string name="admin_button">Grant Admin Access</string>
     <string name="admin_message">This app need device admin access to work</string>
 
