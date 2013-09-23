@@ -55,7 +55,7 @@ public class AdminActivity extends ListActivity {
 			context.startService(new Intent(context, AppsMonitor.class));
 			finish();
 			return true;
-		case R.id.action_uninstall:
+		case R.id.action_settings:
 
 			return true;
 		default:

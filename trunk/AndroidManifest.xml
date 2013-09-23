@@ -17,55 +17,60 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
+        <!-- android:theme="@style/AppTheme" > --> 
+        
+        <service
+            android:name=".service.AppsMonitor"
+            android:enabled="true" />
+
         <receiver android:name=".BootReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
-
+        
         <receiver
-            android:name="com.serveme.savemyphone.view.AdminReciver"
+            android:name=".view.AdminReciver"
             android:label="@string/app_name"
             android:permission="android.permission.BIND_DEVICE_ADMIN" >
             <meta-data
                 android:name="android.app.device_admin"
                 android:resource="@xml/my_admin" />
-            
+
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
             </intent-filter>
         </receiver>
 
         <activity
-            android:name="com.serveme.savemyphone.view.AdminActivity"
+            android:name=".view.AdminActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <activity
-            android:name="com.serveme.savemyphone.view.UserActivity"
+            android:name=".view.UserActivity"
             android:label="UserActivity"
             android:launchMode="singleInstance" >
             <intent-filter>
                 <action android:name="edu.itf.activities.UserActivity" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         
         <activity
-            android:name="com.serveme.savemyphone.view.AdminRequest"
+            android:name=".view.AdminRequest"
             android:label="Request Device Admin" />
-
-        <service
-            android:name="com.serveme.savemyphone.service.AppsMonitor"
-            android:enabled="true" />
         
+        <activity
+            android:name="group.pals.android.lib.ui.lockpattern.LockPatternActivity"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
+            android:screenOrientation="user"
+            android:theme="@style/Alp.Theme.Dark" />
     </application>
-    
 
 </manifest>

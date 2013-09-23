@@ -66,6 +66,15 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int aosp_dialog_fixed_height_minor=0x7f060005;
         public static final int aosp_dialog_fixed_width_major=0x7f060002;
         public static final int aosp_dialog_fixed_width_minor=0x7f060003;
+        public static final int apps_names=0x7f06000b;
+        public static final int button_padding=0x7f06000a;
+        /** 
+         Customize dimensions originally defined in res/values/dimens.xml (such as
+         screen margins) for sw600dp devices (e.g. 7" tablets) here.
+    
+         */
+        public static final int image_size=0x7f060008;
+        public static final int row_height=0x7f060009;
     }
     public static final class drawable {
         public static final int alp_btn_code_lock_default_holo_dark=0x7f020000;
@@ -85,11 +94,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int aosp_indicator_code_lock_point_area_red_holo=0x7f02000e;
         public static final int ic_launcher=0x7f02000f;
         public static final int lock=0x7f020010;
-        public static final int unlock=0x7f020011;
+        public static final int settings=0x7f020011;
+        public static final int unlock=0x7f020012;
     }
     public static final class id {
         public static final int action_lock=0x7f0c000b;
-        public static final int action_uninstall=0x7f0c000c;
+        public static final int action_settings=0x7f0c000c;
         public static final int action_unlock=0x7f0c000d;
         public static final int admin_btn=0x7f0c0000;
         public static final int alp_button_cancel=0x7f0c0005;
@@ -123,7 +133,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class string {
         public static final int action_lock=0x7f07001c;
-        public static final int action_uninstall=0x7f07001d;
         public static final int action_unlock=0x7f07001b;
         public static final int admin_button=0x7f07001e;
         public static final int admin_message=0x7f07001f;
@@ -154,6 +163,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int alp_pkey_sys_pattern=0x7f070002;
         public static final int alp_pmsg_connect_x_dots=0x7f070019;
         public static final int app_name=0x7f07001a;
+        public static final int settings=0x7f07001d;
     }
     public static final class style {
         public static final int AOSP_DialogWindowTitle=0x7f0a000c;
