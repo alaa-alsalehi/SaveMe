@@ -1,4 +1,4 @@
-package model;
+package com.serveme.savemyphone.model;
 
 public class DB_KEYS {
 

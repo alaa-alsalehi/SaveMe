@@ -1,13 +1,14 @@
-package view;
+package com.serveme.savemyphone.view;
 
 import java.util.List;
 
-import model.DBOperations;
 
-import service.AppsMonitor;
 
 import com.serveme.savemyphone.R;
-import control.GridAdapter;
+import com.serveme.savemyphone.control.GridAdapter;
+import com.serveme.savemyphone.model.DBOperations;
+import com.serveme.savemyphone.service.AppsMonitor;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;

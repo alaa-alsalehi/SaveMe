@@ -1,4 +1,4 @@
-package view;
+package com.serveme.savemyphone.view;
 
 import android.app.Activity;
 import android.app.admin.DeviceAdminInfo;

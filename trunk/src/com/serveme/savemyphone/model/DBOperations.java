@@ -1,4 +1,4 @@
-package model;
+package com.serveme.savemyphone.model;
 
 import java.util.ArrayList;
 import java.util.List;

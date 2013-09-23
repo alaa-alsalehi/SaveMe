@@ -1,12 +1,13 @@
-package control;
+package com.serveme.savemyphone.control;
 
 import java.util.List;
 
-import model.DBOperations;
 
-import view.AdminActivity;
 
 import com.serveme.savemyphone.R;
+import com.serveme.savemyphone.model.DBOperations;
+import com.serveme.savemyphone.view.AdminActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;

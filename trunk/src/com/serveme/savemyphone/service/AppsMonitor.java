@@ -1,4 +1,4 @@
-package service;
+package com.serveme.savemyphone.service;
 
 import android.app.ActivityManager;
 import android.app.Service;
@@ -11,10 +11,11 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import model.DBOperations;
+import com.serveme.savemyphone.model.DBOperations;
+import com.serveme.savemyphone.view.AdminActivity;
+import com.serveme.savemyphone.view.UserActivity;
 
-import view.AdminActivity;
-import view.UserActivity;
+
 
 public class AppsMonitor extends Service {
 	int counter = 1;

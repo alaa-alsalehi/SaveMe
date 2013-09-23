@@ -27,7 +27,8 @@ public final class R {
     }
     public static final class id {
         public static final int action_lock=0x7f090006;
-        public static final int action_unlock=0x7f090007;
+        public static final int action_uninstall=0x7f090007;
+        public static final int action_unlock=0x7f090008;
         public static final int admin_btn=0x7f090001;
         public static final int enable_disable=0x7f090005;
         public static final int grid_view=0x7f090000;
@@ -46,9 +47,10 @@ public final class R {
     }
     public static final class string {
         public static final int action_lock=0x7f060002;
+        public static final int action_uninstall=0x7f060003;
         public static final int action_unlock=0x7f060001;
-        public static final int admin_button=0x7f060003;
-        public static final int admin_message=0x7f060004;
+        public static final int admin_button=0x7f060004;
+        public static final int admin_message=0x7f060005;
         public static final int app_name=0x7f060000;
     }
     public static final class style {

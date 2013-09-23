@@ -1,11 +1,12 @@
-package view;
+package com.serveme.savemyphone.view;
 
 import java.util.List;
 
-import service.AppsMonitor;
-import model.DBOperations;
 import com.serveme.savemyphone.R;
-import control.AppsListAdapter;
+import com.serveme.savemyphone.control.AppsListAdapter;
+import com.serveme.savemyphone.model.DBOperations;
+import com.serveme.savemyphone.service.AppsMonitor;
+
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.admin.DevicePolicyManager;

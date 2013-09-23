@@ -1,4 +1,4 @@
-package model;
+package com.serveme.savemyphone.model;
 
 
 import android.content.Context;
