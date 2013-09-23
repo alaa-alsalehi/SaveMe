@@ -9,6 +9,47 @@ package com.serveme.savemyphone;
 
 public final class R {
     public static final class attr {
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int alp_button_bar_button_style=0x7f010006;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int alp_button_bar_style=0x7f010005;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int alp_color_pattern_path=0x7f010000;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int alp_drawable_btn_code_lock_default_holo=0x7f010001;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int alp_drawable_btn_code_lock_touched_holo=0x7f010002;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int alp_drawable_indicator_code_lock_point_area_default_holo=0x7f010003;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int alp_theme_dialog=0x7f010007;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int aosp_drawable_indicator_code_lock_point_area_normal=0x7f010004;
+    }
+    public static final class bool {
+        public static final int alp_is_large_screen=0x7f090000;
+        public static final int alp_pkey_display_stealth_mode_default=0x7f090002;
+        public static final int alp_pkey_sys_auto_save_pattern_default=0x7f090001;
+    }
+    public static final class color {
+        public static final int alp_pattern_path_dark=0x7f050001;
+        public static final int alp_pattern_path_light=0x7f050000;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -17,43 +58,117 @@ public final class R {
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f050000;
-        public static final int activity_vertical_margin=0x7f050001;
+        public static final int activity_horizontal_margin=0x7f060006;
+        public static final int activity_vertical_margin=0x7f060007;
+        public static final int alp_lockpatternview_size=0x7f060000;
+        public static final int alp_separator_size=0x7f060001;
+        public static final int aosp_dialog_fixed_height_major=0x7f060004;
+        public static final int aosp_dialog_fixed_height_minor=0x7f060005;
+        public static final int aosp_dialog_fixed_width_major=0x7f060002;
+        public static final int aosp_dialog_fixed_width_minor=0x7f060003;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int lock=0x7f020001;
-        public static final int unlock=0x7f020002;
+        public static final int alp_btn_code_lock_default_holo_dark=0x7f020000;
+        public static final int alp_btn_code_lock_default_holo_light=0x7f020001;
+        public static final int alp_btn_code_lock_touched_holo_dark=0x7f020002;
+        public static final int alp_btn_code_lock_touched_holo_light=0x7f020003;
+        public static final int alp_indicator_code_lock_point_area_default_holo_dark=0x7f020004;
+        public static final int alp_indicator_code_lock_point_area_default_holo_light=0x7f020005;
+        public static final int aosp_background_holo_dark=0x7f020006;
+        public static final int aosp_background_holo_light=0x7f020007;
+        public static final int aosp_dialog_full_holo_dark=0x7f020008;
+        public static final int aosp_dialog_full_holo_light=0x7f020009;
+        public static final int aosp_indicator_code_lock_drag_direction_green_up=0x7f02000a;
+        public static final int aosp_indicator_code_lock_drag_direction_red_up=0x7f02000b;
+        public static final int aosp_indicator_code_lock_point_area_blue_holo=0x7f02000c;
+        public static final int aosp_indicator_code_lock_point_area_green_holo=0x7f02000d;
+        public static final int aosp_indicator_code_lock_point_area_red_holo=0x7f02000e;
+        public static final int ic_launcher=0x7f02000f;
+        public static final int lock=0x7f020010;
+        public static final int unlock=0x7f020011;
     }
     public static final class id {
-        public static final int action_lock=0x7f090006;
-        public static final int action_uninstall=0x7f090007;
-        public static final int action_unlock=0x7f090008;
-        public static final int admin_btn=0x7f090001;
-        public static final int enable_disable=0x7f090005;
-        public static final int grid_view=0x7f090000;
-        public static final int icon=0x7f090003;
-        public static final int name=0x7f090004;
-        public static final int textView=0x7f090002;
+        public static final int action_lock=0x7f0c000b;
+        public static final int action_uninstall=0x7f0c000c;
+        public static final int action_unlock=0x7f0c000d;
+        public static final int admin_btn=0x7f0c0000;
+        public static final int alp_button_cancel=0x7f0c0005;
+        public static final int alp_button_confirm=0x7f0c0006;
+        public static final int alp_textview_info=0x7f0c0002;
+        public static final int alp_view_lock_pattern=0x7f0c0004;
+        public static final int alp_viewgroup_footer=0x7f0c0003;
+        public static final int enable_disable=0x7f0c0009;
+        public static final int grid_view=0x7f0c000a;
+        public static final int icon=0x7f0c0007;
+        public static final int name=0x7f0c0008;
+        public static final int textView=0x7f0c0001;
+    }
+    public static final class integer {
+        public static final int alp_lib_version_code=0x7f080000;
+        public static final int alp_pkey_display_captcha_wired_dots_default=0x7f080003;
+        public static final int alp_pkey_display_max_retry_default=0x7f080002;
+        public static final int alp_pkey_display_min_wired_dots_default=0x7f080001;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
-        public static final int admin_request=0x7f030001;
-        public static final int item_layout=0x7f030002;
+        public static final int admin_request=0x7f030000;
+        public static final int alp_lock_pattern_activity=0x7f030001;
+        public static final int alp_lock_pattern_activity_land=0x7f030002;
+        public static final int alp_lock_pattern_view=0x7f030003;
+        public static final int item_layout=0x7f030004;
+        public static final int user_activity=0x7f030005;
     }
     public static final class menu {
-        public static final int admin=0x7f080000;
-        public static final int user=0x7f080001;
+        public static final int admin=0x7f0b0000;
+        public static final int user=0x7f0b0001;
     }
     public static final class string {
-        public static final int action_lock=0x7f060002;
-        public static final int action_uninstall=0x7f060003;
-        public static final int action_unlock=0x7f060001;
-        public static final int admin_button=0x7f060004;
-        public static final int admin_message=0x7f060005;
-        public static final int app_name=0x7f060000;
+        public static final int action_lock=0x7f07001c;
+        public static final int action_uninstall=0x7f07001d;
+        public static final int action_unlock=0x7f07001b;
+        public static final int admin_button=0x7f07001e;
+        public static final int admin_message=0x7f07001f;
+        public static final int alp_cmd_confirm=0x7f070009;
+        public static final int alp_cmd_continue=0x7f07000a;
+        public static final int alp_cmd_forgot_pattern=0x7f07000b;
+        public static final int alp_cmd_retry=0x7f07000c;
+        public static final int alp_lib_name=0x7f070000;
+        public static final int alp_lib_version_name=0x7f070001;
+        public static final int alp_lockscreen_access_pattern_cell_added=0x7f07000d;
+        public static final int alp_lockscreen_access_pattern_cleared=0x7f07000e;
+        public static final int alp_lockscreen_access_pattern_detected=0x7f07000f;
+        public static final int alp_lockscreen_access_pattern_start=0x7f070010;
+        public static final int alp_msg_connect_4dots=0x7f070011;
+        public static final int alp_msg_draw_an_unlock_pattern=0x7f070012;
+        public static final int alp_msg_draw_pattern_to_unlock=0x7f070013;
+        public static final int alp_msg_pattern_recorded=0x7f070014;
+        public static final int alp_msg_redraw_pattern_to_confirm=0x7f070015;
+        public static final int alp_msg_release_finger_when_done=0x7f070016;
+        public static final int alp_msg_try_again=0x7f070017;
+        public static final int alp_msg_your_new_unlock_pattern=0x7f070018;
+        public static final int alp_pkey_display_captcha_wired_dots=0x7f070008;
+        public static final int alp_pkey_display_max_retry=0x7f070007;
+        public static final int alp_pkey_display_min_wired_dots=0x7f070006;
+        public static final int alp_pkey_display_stealth_mode=0x7f070005;
+        public static final int alp_pkey_sys_auto_save_pattern=0x7f070003;
+        public static final int alp_pkey_sys_encrypter_class=0x7f070004;
+        public static final int alp_pkey_sys_pattern=0x7f070002;
+        public static final int alp_pmsg_connect_x_dots=0x7f070019;
+        public static final int app_name=0x7f07001a;
     }
     public static final class style {
+        public static final int AOSP_DialogWindowTitle=0x7f0a000c;
+        public static final int Alp_BaseTheme_Dark=0x7f0a0000;
+        public static final int Alp_BaseTheme_Dialog_Dark=0x7f0a0006;
+        public static final int Alp_BaseTheme_Dialog_Light=0x7f0a0009;
+        public static final int Alp_BaseTheme_Light=0x7f0a0003;
+        public static final int Alp_BaseThemeHelper_Dark=0x7f0a0001;
+        public static final int Alp_BaseThemeHelper_Dialog_Dark=0x7f0a0007;
+        public static final int Alp_BaseThemeHelper_Dialog_Light=0x7f0a000a;
+        public static final int Alp_BaseThemeHelper_Light=0x7f0a0004;
+        public static final int Alp_Theme_Dark=0x7f0a0002;
+        public static final int Alp_Theme_Dialog_Dark=0x7f0a0008;
+        public static final int Alp_Theme_Dialog_Light=0x7f0a000b;
+        public static final int Alp_Theme_Light=0x7f0a0005;
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -75,11 +190,13 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f070000;
+        public static final int AppBaseTheme=0x7f0a000f;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f070001;
+        public static final int AppTheme=0x7f0a0010;
+        public static final int alp_button_bar_button_style=0x7f0a000e;
+        public static final int alp_button_bar_style=0x7f0a000d;
     }
     public static final class xml {
         public static final int my_admin=0x7f040000;

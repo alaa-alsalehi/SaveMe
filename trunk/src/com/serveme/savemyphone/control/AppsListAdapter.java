@@ -1,18 +1,14 @@
 package com.serveme.savemyphone.control;
 
+import java.util.Iterator;
 import java.util.List;
-
-
 
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.model.DBOperations;
-import com.serveme.savemyphone.view.AdminActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,9 +40,17 @@ public class AppsListAdapter extends BaseAdapter {
 		whitelist = db.getWhiteListApps();
 		status = new boolean[aList.size()];
 		inflater = LayoutInflater.from(context);
-		for(ResolveInfo rinfo:aList){
-			if(rinfo.activityInfo.packageName.equals("com.serveme.savemyphone")){
-				aList.remove(rinfo);
+//		for (ResolveInfo rinfo : aList) {
+//			if (rinfo.activityInfo.packageName
+//					.equals("com.serveme.savemyphone")) {
+//				aList.remove(rinfo);
+//			}
+//		}
+		for (Iterator<ResolveInfo> it = aList.iterator(); it.hasNext();) {
+			ResolveInfo rinfo = it.next();
+			if (rinfo.activityInfo.packageName
+					.equals("com.serveme.savemyphone")) {
+				it.remove();
 			}
 		}
 	}
@@ -67,27 +71,29 @@ public class AppsListAdapter extends BaseAdapter {
 		return 0;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
-	Log.d("test", aList.get(position).activityInfo.packageName);
+		Log.d("test", aList.get(position).activityInfo.packageName);
 
 		final ResolveInfo appinfo = aList.get(position);
-		
-		ViewHolder viewHolder; // more performance for ListView by use Holder Pattern
 
-		if (convertView == null) { // if it's not recycled, initialize some attributes
+		ViewHolder viewHolder; // more performance for ListView by use Holder
+								// Pattern
+
+		if (convertView == null) { // if it's not recycled, initialize some
+									// attributes
 			convertView = inflater.inflate(R.layout.item_layout, parent, false);
 			viewHolder = new ViewHolder();
 			viewHolder.name = (TextView) convertView.findViewById(R.id.name);
 			viewHolder.icon = (ImageView) convertView.findViewById(R.id.icon);
-			viewHolder.tg = (ToggleButton) convertView.findViewById(R.id.enable_disable);
+			viewHolder.tg = (ToggleButton) convertView
+					.findViewById(R.id.enable_disable);
 			// first you set Tag Not get it
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-		
+
 		viewHolder.tg.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			@Override
@@ -95,7 +101,7 @@ public class AppsListAdapter extends BaseAdapter {
 					boolean isChecked) {
 				if (isChecked) {
 					status[position] = true;
-					
+
 					if (!whitelist.contains(appinfo.activityInfo.packageName)) {
 						db.insertöApp(appinfo.activityInfo.packageName);
 						whitelist.add(appinfo.activityInfo.packageName);
@@ -111,11 +117,12 @@ public class AppsListAdapter extends BaseAdapter {
 			}
 		});
 
-		viewHolder.name.setText(appinfo.loadLabel((context.getPackageManager())));
-//		Drawable img = appinfo.loadIcon(context.getPackageManager());
-//		img.setBounds(0, 0, 75, 75);
-//		viewHolder.icon.setBackgroundDrawable(img);
-		imageloader.load(viewHolder.icon,appinfo,context);
+		viewHolder.name
+				.setText(appinfo.loadLabel((context.getPackageManager())));
+		// Drawable img = appinfo.loadIcon(context.getPackageManager());
+		// img.setBounds(0, 0, 75, 75);
+		// viewHolder.icon.setBackgroundDrawable(img);
+		imageloader.load(viewHolder.icon, appinfo, context);
 		Log.v("hi", status[position] + "");
 		if (whitelist.contains(appinfo.activityInfo.packageName)) {
 			status[position] = true;

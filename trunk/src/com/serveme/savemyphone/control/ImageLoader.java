@@ -2,6 +2,7 @@ package com.serveme.savemyphone.control;
 
 import java.lang.ref.WeakReference;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
@@ -34,11 +35,14 @@ public class ImageLoader {
 	    // Actual download method, run in the task thread
 	    protected Drawable doInBackground(String... params) {
 	    	Drawable img = info.loadIcon(context.getPackageManager());
-			img.setBounds(0, 0, 75, 75);
+			ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+			int iconSize = am.getLauncherLargeIconSize();
+			img.setBounds(0, 0, iconSize,iconSize);
 			return img;
 	    }
 
-	    @Override
+	    @SuppressWarnings("deprecation")
+		@Override
 	    // Once the image is loaded, associates it to the imageView
 	    protected void onPostExecute(Drawable img) {
 	        if (isCancelled()) {

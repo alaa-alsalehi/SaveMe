@@ -12,9 +12,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.serveme.savemyphone.model.DBOperations;
-import com.serveme.savemyphone.view.AdminActivity;
 import com.serveme.savemyphone.view.UserActivity;
-
 
 
 public class AppsMonitor extends Service {

@@ -1,8 +1,8 @@
 package com.serveme.savemyphone.view;
 
+import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
+
 import java.util.List;
-
-
 
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.control.GridAdapter;
@@ -10,25 +10,19 @@ import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.service.AppsMonitor;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.Toast;
 
 public class UserActivity extends Activity {
 
@@ -45,9 +39,9 @@ public class UserActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+//		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.user_activity);
 
 		db = new DBOperations(this);
 
@@ -105,6 +99,8 @@ public class UserActivity extends Activity {
 		// Handle item selection
 		switch (item.getItemId()) {
 		case R.id.action_unlock:
+			Intent lockIntent = new Intent(getBaseContext(), LockPatternActivity.class);
+			startActivity(lockIntent);
 			db.updateStatus(0);
 			context.stopService(new Intent(context, AppsMonitor.class));
 			return true;
@@ -114,44 +110,44 @@ public class UserActivity extends Activity {
 
 	}
 
-	// @Override
-	// public void onAttachedToWindow()
-	// {
-	// Log.i("TESTE", "onAttachedToWindow");
-	// this.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD);
-	// super.onAttachedToWindow();
-	// }
+//	 @Override
+//	 public void onAttachedToWindow()
+//	 {
+//	 Log.i("TESTE", "onAttachedToWindow");
+//	 this.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD);
+//	 super.onAttachedToWindow();
+//	 }
 
-	private void showUnlockDialog(){
-    	AlertDialog.Builder alert = new AlertDialog.Builder(this);
-
-    	alert.setTitle("Unlock Phone");
-    	alert.setMessage("Enter the password");
-
-    	// Set an EditText view to get user input 
-    	final EditText input = new EditText(this);
-    	input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-    	alert.setView(input);
-
-    	alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-    	public void onClick(DialogInterface dialog, int whichButton) {
-    	  String value = input.getText().toString();
-    	  Log.v("text", value);
-    	  if(value.equals("omar")){
-    		  db.updateStatus(0);
-    		  context.stopService(new Intent(context,AppsMonitor.class));
-    		  Toast.makeText(context, "done", Toast.LENGTH_LONG).show();
-    		  finish();
-    	  }
-    	  }
-    	});
-
-    	alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-    	  public void onClick(DialogInterface dialog, int whichButton) {
-    	    // Canceled.
-    	  }
-    	});
-
-    	alert.show();
-	}
+//	private void showUnlockDialog(){
+//    	AlertDialog.Builder alert = new AlertDialog.Builder(this);
+//
+//    	alert.setTitle("Unlock Phone");
+//    	alert.setMessage("Enter the password");
+//
+//    	// Set an EditText view to get user input 
+//    	final EditText input = new EditText(this);
+//    	input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+//    	alert.setView(input);
+//
+//    	alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//    	public void onClick(DialogInterface dialog, int whichButton) {
+//    	  String value = input.getText().toString();
+//    	  Log.v("text", value);
+//    	  if(value.equals("omar")){
+//    		  db.updateStatus(0);
+//    		  context.stopService(new Intent(context,AppsMonitor.class));
+//    		  Toast.makeText(context, "done", Toast.LENGTH_LONG).show();
+//    		  finish();
+//    	  }
+//    	  }
+//    	});
+//
+//    	alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//    	  public void onClick(DialogInterface dialog, int whichButton) {
+//    	    // Canceled.
+//    	  }
+//    	});
+//
+//    	alert.show();
+//	}
 }

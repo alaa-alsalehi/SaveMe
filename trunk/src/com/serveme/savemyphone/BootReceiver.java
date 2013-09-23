@@ -2,7 +2,6 @@ package com.serveme.savemyphone;
 
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.service.AppsMonitor;
-import com.serveme.savemyphone.view.AdminActivity;
 import com.serveme.savemyphone.view.UserActivity;
 
 import android.content.BroadcastReceiver;

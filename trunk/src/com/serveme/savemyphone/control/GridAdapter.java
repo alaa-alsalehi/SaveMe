@@ -2,11 +2,11 @@ package com.serveme.savemyphone.control;
 
 import java.util.List;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.View;
@@ -46,6 +46,11 @@ public class GridAdapter extends BaseAdapter {
 		TextView txtView;
 		if (convertView == null) { // if it's not recycled, initialize some attributes
 			txtView = new TextView(context);
+//			txtView.setTextColor(Color.WHITE);
+			txtView.setGravity(Gravity.CENTER_HORIZONTAL);
+			txtView.setLines(2); // to make all text view in the same size
+			txtView.setPadding(0, 30, 0, 0);
+			txtView.setCompoundDrawablePadding(10);
 		} else {
 			txtView = (TextView) convertView;
 		}
@@ -58,16 +63,15 @@ public class GridAdapter extends BaseAdapter {
 			e.printStackTrace();
 		}
 		txtView.setText(appinfo.loadLabel((context.getPackageManager())));
-		txtView.setTextColor(Color.WHITE);
-		txtView.setGravity(Gravity.CENTER_HORIZONTAL);
-		txtView.setLines(2); // to make all text view in the same size
 		Drawable img = appinfo.loadIcon(context.getPackageManager());
 //		GridView gridview = (GridView) parent;
 //		img.setBounds(0, 0, (int)(gridview.getColumnWidth()/2), (int)(gridview.getColumnWidth()/2));
 //		txtView.setCompoundDrawables(null, img, null, null);
-		float scalefactor = context.getResources().getDisplayMetrics().density * 50;
-		txtView.setCompoundDrawablePadding(10);
-		img.setBounds(0, 0, (int)(scalefactor), (int)(scalefactor));
+//		float scalefactor = context.getResources().getDisplayMetrics().density * 50;
+//		img.setBounds(0, 0, (int)(scalefactor), (int)(scalefactor));
+		ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+		int iconSize = am.getLauncherLargeIconSize();
+		img.setBounds(0, 0, iconSize,iconSize);
 		txtView.setCompoundDrawables(null, img, null, null);
 //		txtView.setCompoundDrawablesWithIntrinsicBounds(null, img, null, null);
 		

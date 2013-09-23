@@ -24,8 +24,6 @@ public class DBHandler extends SQLiteOpenHelper {
 		// TODO Auto-generated method stub
 		String createTableStr = "CREATE TABLE " + DB_KEYS.WHITE_LIST_TABLE + " ( "+ DB_KEYS.KEY_PKGNAME + " TEXT PRIMARY KEY)";
 		db.execSQL(createTableStr);
-		createTableStr = "CREATE TABLE " + DB_KEYS.ADMIN_TABLE + " ( " + DB_KEYS.KEY_USERNAME + " TEXT, " + DB_KEYS.KEY_PASSWORD + " TEXT)";
-		db.execSQL(createTableStr);
 		createTableStr = "CREATE TABLE " + DB_KEYS.STATUS_TABLE + " ( " + DB_KEYS.KEY_STATUS+ " INTEGER )";
 		db.execSQL(createTableStr);
 		db.execSQL("insert into " + DB_KEYS.STATUS_TABLE + "(" + DB_KEYS.KEY_STATUS + ") values(0)");
@@ -37,7 +35,7 @@ public class DBHandler extends SQLiteOpenHelper {
 		if (oldversion != newversion) {
 			// later
 			db.execSQL("DROP TABLE IF EXISTS '" + DB_KEYS.WHITE_LIST_TABLE + "'");
-			db.execSQL("DROP TABLE IF EXISTS '" + DB_KEYS.ADMIN_TABLE + "'");
+			db.execSQL("DROP TABLE IF EXISTS 'admin'");
 			onCreate(db);
 		}
 

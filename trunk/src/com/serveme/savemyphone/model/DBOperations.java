@@ -71,21 +71,5 @@ public class DBOperations {
 				.getInt((cursor.getColumnIndexOrThrow(DB_KEYS.KEY_STATUS)));
 	}
 
-	public void updatePassword(String password) {
-		ContentValues values = new ContentValues();
-		values.put(DB_KEYS.KEY_PASSWORD, password);
-		SQLiteDatabase database = dbhandler.getWritableDatabase();
-		database.update(DB_KEYS.ADMIN_TABLE, null, null, null);
-		database.close();
-	}
-
-	public String getPassword() {
-		SQLiteDatabase database = dbhandler.getReadableDatabase();
-		cursor = database.query(DB_KEYS.ADMIN_TABLE, null, null, null, null,
-				null, null);
-		cursor.moveToFirst();
-		return cursor.getString((cursor
-				.getColumnIndexOrThrow(DB_KEYS.KEY_PASSWORD)));
-	}
 
 }
