@@ -68,6 +68,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int aosp_dialog_fixed_width_minor=0x7f060003;
         public static final int apps_names=0x7f06000b;
         public static final int button_padding=0x7f06000a;
+        public static final int col_width=0x7f06000e;
+        public static final int grid_hspace=0x7f06000d;
+        public static final int grid_vspace=0x7f06000c;
         /** 
          Customize dimensions originally defined in res/values/dimens.xml (such as
          screen margins) for sw600dp devices (e.g. 7" tablets) here.
