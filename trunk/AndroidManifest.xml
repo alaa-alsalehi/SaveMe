@@ -39,8 +39,9 @@
                 android:resource="@xml/my_admin" />
 
             <intent-filter>
-                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
-            </intent-filter>
+		        <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+		        <action android:name="android.app.action.DEVICE_ADMIN_DISABLED" />
+		    </intent-filter>
         </receiver>
 
         <activity
@@ -65,6 +66,20 @@
         <activity
             android:name=".view.AdminRequest"
             android:label="Request Device Admin" />
+        
+         <activity
+            android:name=".view.SettingsActivity"
+            android:label="Settings" />
+         
+          <activity
+            android:name=".view.UninstallActivity"
+            android:label="Uninstall"
+            android:theme="@android:style/Theme.Dialog" >
+            <intent-filter>
+                <action android:name="com.serveme.savemyphone.view.UninstallActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            </activity>
         
         <activity
             android:name="group.pals.android.lib.ui.lockpattern.LockPatternActivity"

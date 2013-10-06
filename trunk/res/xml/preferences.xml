@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+      <!-- android:dependency="pref_sync" -->
+    <ListPreference
+        android:key="lock_method"
+        android:title="lock method"
+        android:dialogTitle="choose lock method"
+        android:entries="@array/lock_options"
+        android:entryValues="@array/lock_options"
+        android:defaultValue="pattern" />
+	
+    <!-- android:dialogLayout="@layout/uninstall_activity" -->
+    <com.serveme.savemyphone.view.UninstallDialogPreference
+		android:key="uninstall" 
+		android:title="uninstall"
+		android:dialogMessage="@string/uninstall_confirmation"
+		android:positiveButtonText="OK"
+		android:negativeButtonText="Cancel"
+	/>
+    
+    <Preference android:title="test" >
+	    <intent android:action="com.serveme.savemyphone.view.UninstallActivity" />
+	</Preference>
+</PreferenceScreen>

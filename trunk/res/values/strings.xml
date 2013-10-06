@@ -7,4 +7,11 @@
     <string name="admin_button">Grant Admin Access</string>
     <string name="admin_message">This app need device admin access to work</string>
 
+    <string-array name="lock_options">
+        <item>pattern</item>
+        <item>password</item>
+    </string-array>
+        <string name="uninstall_confirmation">are you really want to uninstall this app ?</string>
+        <string name="yes_action">Yes</string>
+        <string name="no_action">No</string>
 </resources>

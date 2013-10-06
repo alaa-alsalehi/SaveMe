@@ -14,6 +14,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,6 +30,8 @@ public class AdminActivity extends ListActivity {
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		// Calling this to ensures that your application is properly initialized with default settings
+		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 		checkAdminAccess();
 		super.onCreate(savedInstanceState);
 		context = this;
@@ -56,7 +59,8 @@ public class AdminActivity extends ListActivity {
 			finish();
 			return true;
 		case R.id.action_settings:
-
+		    Intent intent = new Intent(context, SettingsActivity.class);
+		    startActivity(intent);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

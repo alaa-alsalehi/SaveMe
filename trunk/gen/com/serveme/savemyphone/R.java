@@ -8,6 +8,9 @@
 package com.serveme.savemyphone;
 
 public final class R {
+    public static final class array {
+        public static final int lock_options=0x7f0b0000;
+    }
     public static final class attr {
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -101,20 +104,24 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int unlock=0x7f020012;
     }
     public static final class id {
-        public static final int action_lock=0x7f0c000b;
-        public static final int action_settings=0x7f0c000c;
-        public static final int action_unlock=0x7f0c000d;
-        public static final int admin_btn=0x7f0c0000;
-        public static final int alp_button_cancel=0x7f0c0005;
-        public static final int alp_button_confirm=0x7f0c0006;
-        public static final int alp_textview_info=0x7f0c0002;
-        public static final int alp_view_lock_pattern=0x7f0c0004;
-        public static final int alp_viewgroup_footer=0x7f0c0003;
-        public static final int enable_disable=0x7f0c0009;
-        public static final int grid_view=0x7f0c000a;
-        public static final int icon=0x7f0c0007;
-        public static final int name=0x7f0c0008;
-        public static final int textView=0x7f0c0001;
+        public static final int RelativeLayout1=0x7f0d000a;
+        public static final int action_lock=0x7f0d000f;
+        public static final int action_settings=0x7f0d0010;
+        public static final int action_unlock=0x7f0d0011;
+        public static final int admin_btn=0x7f0d0000;
+        public static final int alp_button_cancel=0x7f0d0005;
+        public static final int alp_button_confirm=0x7f0d0006;
+        public static final int alp_textview_info=0x7f0d0002;
+        public static final int alp_view_lock_pattern=0x7f0d0004;
+        public static final int alp_viewgroup_footer=0x7f0d0003;
+        public static final int button1=0x7f0d000c;
+        public static final int button2=0x7f0d000d;
+        public static final int enable_disable=0x7f0d0009;
+        public static final int grid_view=0x7f0d000e;
+        public static final int icon=0x7f0d0007;
+        public static final int name=0x7f0d0008;
+        public static final int textView=0x7f0d0001;
+        public static final int textView1=0x7f0d000b;
     }
     public static final class integer {
         public static final int alp_lib_version_code=0x7f080000;
@@ -128,11 +135,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int alp_lock_pattern_activity_land=0x7f030002;
         public static final int alp_lock_pattern_view=0x7f030003;
         public static final int item_layout=0x7f030004;
-        public static final int user_activity=0x7f030005;
+        public static final int uninstall_activity=0x7f030005;
+        public static final int user_activity=0x7f030006;
     }
     public static final class menu {
-        public static final int admin=0x7f0b0000;
-        public static final int user=0x7f0b0001;
+        public static final int admin=0x7f0c0000;
+        public static final int user=0x7f0c0001;
     }
     public static final class string {
         public static final int action_lock=0x7f07001c;
@@ -166,7 +174,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int alp_pkey_sys_pattern=0x7f070002;
         public static final int alp_pmsg_connect_x_dots=0x7f070019;
         public static final int app_name=0x7f07001a;
+        public static final int no_action=0x7f070022;
         public static final int settings=0x7f07001d;
+        public static final int uninstall_confirmation=0x7f070020;
+        public static final int yes_action=0x7f070021;
     }
     public static final class style {
         public static final int AOSP_DialogWindowTitle=0x7f0a000c;
@@ -213,5 +224,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class xml {
         public static final int my_admin=0x7f040000;
+        public static final int preferences=0x7f040001;
     }
 }
