@@ -117,8 +117,7 @@ public class AppsListAdapter extends BaseAdapter {
 			}
 		});
 
-		viewHolder.name
-				.setText(appinfo.loadLabel((context.getPackageManager())));
+		viewHolder.name.setText(appinfo.loadLabel((context.getPackageManager())));
 		// Drawable img = appinfo.loadIcon(context.getPackageManager());
 		// img.setBounds(0, 0, 75, 75);
 		// viewHolder.icon.setBackgroundDrawable(img);
