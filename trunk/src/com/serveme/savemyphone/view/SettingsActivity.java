@@ -1,8 +1,6 @@
 package com.serveme.savemyphone.view;
 
 import com.serveme.savemyphone.R;
-
-import android.app.admin.DevicePolicyManager;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
