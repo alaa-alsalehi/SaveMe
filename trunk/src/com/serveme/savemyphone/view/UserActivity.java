@@ -8,8 +8,8 @@ import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.control.GridAdapter;
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.service.AppsMonitor;
-
 import android.app.Activity;
+import android.app.WallpaperManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
@@ -38,13 +39,16 @@ public class UserActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-//		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		setContentView(R.layout.user_activity);
 
+		
+		View v = findViewById(R.id.grid_view);
+		v.setBackgroundDrawable(WallpaperManager.getInstance(context).getDrawable());
+		
 		db = new DBOperations(this);
-
+		 
 		appsinfolist = db.getWhiteListApps();
 
 		startService(new Intent(this, AppsMonitor.class));

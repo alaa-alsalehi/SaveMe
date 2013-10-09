@@ -1,4 +1,4 @@
-package com.serveme.savemyphone;
+package com.serveme.savemyphone.receiver;
 
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.service.AppsMonitor;

@@ -1,5 +1,4 @@
 package com.serveme.savemyphone.service;
-
 import android.app.ActivityManager;
 import android.app.Service;
 import android.content.ComponentName;
@@ -17,10 +16,11 @@ import com.serveme.savemyphone.view.UserActivity;
 
 public class AppsMonitor extends Service {
 	int counter = 1;
-	static final int UPDATE_INTERVAL = 250;
+	static final int UPDATE_INTERVAL = 200;
 	private Timer timer = new Timer();
 	ActivityManager am;
 	private DBOperations db;
+	private ComponentName lastallowedapp;
 
 	@Override
 	public IBinder onBind(Intent arg0) {
@@ -46,12 +46,37 @@ public class AppsMonitor extends Service {
 //				ComponentName componentInfo = taskInfo.get(0).origActivity;
 				List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
 				ComponentName componentInfo = taskInfo.get(0).topActivity;
-				if (!db.getWhiteListApps().contains(componentInfo.getPackageName())) {
-					Intent saveintent = new Intent(getBaseContext(), UserActivity.class);
-					saveintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					getApplication().startActivity(saveintent);
+				if (!db.getWhiteListApps().contains(componentInfo.getPackageName()) && !componentInfo.getPackageName().equals("android")) {
+//					ActivityManager manager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+//					List<RunningAppProcessInfo> services = manager.getRunningAppProcesses();
+//					for(RunningAppProcessInfo rpi : services){
+//						if(rpi.processName.startsWith(componentInfo.getPackageName())){
+//							android.os.Process.killProcess(rpi.pid);
+//							Log.v("service", String.valueOf(rpi.uid));
+//						}
+//					}
+//					am.killBackgroundProcesses(componentInfo.getPackageName());
+//					Log.v("", (componentInfo.getPackageName()));
+					if(db.getWhiteListApps().contains(taskInfo.get(0).baseActivity.getPackageName())){
+//						Intent intent = new Intent(Intent.ACTION_MAIN);
+//						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//						intent.setComponent(new ComponentName(lastallowedapp.getPackageName(),lastallowedapp.getClassName()));
+//						Log.v("", lastallowedapp.getClassName());
+//						startActivity(intent);
+						
+						Intent saveintent = AppsMonitor.this.getPackageManager().getLaunchIntentForPackage(taskInfo.get(0).baseActivity.getPackageName());
+						saveintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+						getApplication().startActivity(saveintent);
+					} else {
+						Intent saveintent = new Intent(getBaseContext(), UserActivity.class);
+						saveintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						getApplication().startActivity(saveintent);
+					}
+//					
+				} else if (!componentInfo.getPackageName().equals("android")){
+					lastallowedapp = taskInfo.get(0).topActivity;
 				}
-				Log.v("", componentInfo.getPackageName());
+				
 			}
 		}, 1, UPDATE_INTERVAL);
 	}

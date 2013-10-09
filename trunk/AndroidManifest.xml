@@ -23,7 +23,7 @@
             android:name=".service.AppsMonitor"
             android:enabled="true" />
 
-        <receiver android:name=".BootReceiver" >
+        <receiver android:name="com.serveme.savemyphone.receiver.BootReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
@@ -55,7 +55,7 @@
         
         <activity
             android:name=".view.UserActivity"
-            android:label="UserActivity"
+            android:label=""
             android:launchMode="singleInstance" >
             <intent-filter>
                 <action android:name="edu.itf.activities.UserActivity" />

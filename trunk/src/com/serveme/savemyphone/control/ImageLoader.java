@@ -2,8 +2,8 @@ package com.serveme.savemyphone.control;
 
 import java.lang.ref.WeakReference;
 
-import android.R;
-import android.app.ActivityManager;
+import com.serveme.savemyphone.R;
+
 import android.content.Context;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
@@ -36,7 +36,7 @@ public class ImageLoader {
 	    // Actual download method, run in the task thread
 	    protected Drawable doInBackground(String... params) {
 	    	Drawable img = info.loadIcon(context.getPackageManager());
-	    	int imagesize = (int) context.getResources().getDimension(R.dimen.app_icon_size);
+	    	int imagesize = (int) context.getResources().getDimension(R.dimen.image_size);
 			img.setBounds(0, 0, imagesize, imagesize);
 //			ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
 //			int iconSize = am.getLauncherLargeIconSize();
