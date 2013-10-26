@@ -67,6 +67,10 @@
             android:name=".view.AdminRequest"
             android:label="Request Device Admin" />
         
+        <activity
+            android:name=".view.PasswordRequest"
+            android:label="Set your lock key" />
+        
          <activity
             android:name=".view.SettingsActivity"
             android:label="Settings" />

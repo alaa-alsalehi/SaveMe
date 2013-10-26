@@ -1,5 +1,9 @@
 package com.serveme.savemyphone.view;
 
+import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
+import group.pals.android.lib.ui.lockpattern.prefs.DisplayPrefs;
+import group.pals.android.lib.ui.lockpattern.prefs.SecurityPrefs;
+
 import java.util.List;
 
 import com.serveme.savemyphone.R;
@@ -13,6 +17,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -27,12 +32,15 @@ public class AdminActivity extends ListActivity {
 	private DevicePolicyManager devicePolicyManager;
 	private ComponentName adminComponent;
 
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// Calling this to ensures that your application is properly initialized with default settings
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 		checkAdminAccess();
+		
+		creatPattern();
 		super.onCreate(savedInstanceState);
 		context = this;
 		db = new DBOperations(context);
@@ -77,6 +85,18 @@ public class AdminActivity extends ListActivity {
 			Intent intent = new Intent(getBaseContext(), AdminRequest.class);
 			startActivity(intent);
 		}
+	}
+	
+	private void creatPattern() {
+		SharedPreferences mySharedPreferences = getSharedPreferences("mypref", Context.MODE_PRIVATE);
+		if( mySharedPreferences != null &&  mySharedPreferences.contains("pass_code")){
+			
+		} else {
+			finish();
+			Intent intent = new Intent(getBaseContext(), PasswordRequest.class);
+			startActivity(intent);
+		}
+
 	}
 
 //	private void showConfirmationDialog() {

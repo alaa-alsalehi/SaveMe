@@ -14,4 +14,7 @@
         <string name="uninstall_confirmation">are you really want to uninstall this app ?</string>
         <string name="yes_action">Yes</string>
         <string name="no_action">No</string>
+        <string name="security_choice">"Choose your prefered lock method "</string>
+        <string name="pattern">Pattern</string>
+        <string name="password">Password</string>
 </resources>

@@ -16,7 +16,7 @@ import com.serveme.savemyphone.view.UserActivity;
 
 public class AppsMonitor extends Service {
 	int counter = 1;
-	static final int UPDATE_INTERVAL = 200;
+	static final int UPDATE_INTERVAL = 2000;
 	private Timer timer = new Timer();
 	ActivityManager am;
 	private DBOperations db;
@@ -46,7 +46,11 @@ public class AppsMonitor extends Service {
 //				ComponentName componentInfo = taskInfo.get(0).origActivity;
 				List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
 				ComponentName componentInfo = taskInfo.get(0).topActivity;
-				if (!db.getWhiteListApps().contains(componentInfo.getPackageName()) && !componentInfo.getPackageName().equals("android")) {
+				if (!db.getWhiteListApps().contains(componentInfo.getPackageName())
+						&& !componentInfo.getPackageName().equals("android") 
+						&& !componentInfo.getClassName().equals("com.serveme.savemyphone.view.UserActivity")
+						&& !componentInfo.getClassName().equals("group.pals.android.lib.ui.lockpattern.LockPatternActivity") ) {
+					Log.v("", (componentInfo.getClassName()));
 //					ActivityManager manager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
 //					List<RunningAppProcessInfo> services = manager.getRunningAppProcesses();
 //					for(RunningAppProcessInfo rpi : services){
