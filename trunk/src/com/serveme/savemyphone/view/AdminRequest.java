@@ -53,12 +53,12 @@ public class AdminRequest extends Activity {
 	        case REQUEST_ENABLE:
 	            if (resultCode == Activity.RESULT_OK) {
 	                Log.v("DeviceAdminSample", "Administration enabled!");
+	                finish();
 	                Intent intent = new Intent(getBaseContext(), AdminActivity.class);
-					intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 					startActivity(intent);
 	            } else {
 	                Log.v("DeviceAdminSample", "Administration enable FAILED!");
-	    			startActivity(new Intent(getApplicationContext(),AdminRequest.class));
+//	    			startActivity(new Intent(getApplicationContext(),AdminRequest.class));
 	            }
 	            return;
 	    }

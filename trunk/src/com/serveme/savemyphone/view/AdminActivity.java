@@ -1,9 +1,5 @@
 package com.serveme.savemyphone.view;
 
-import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
-import group.pals.android.lib.ui.lockpattern.prefs.DisplayPrefs;
-import group.pals.android.lib.ui.lockpattern.prefs.SecurityPrefs;
-
 import java.util.List;
 
 import com.serveme.savemyphone.R;
@@ -38,6 +34,7 @@ public class AdminActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		// Calling this to ensures that your application is properly initialized with default settings
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+		
 		checkAdminAccess();
 		
 		creatPattern();
@@ -88,6 +85,7 @@ public class AdminActivity extends ListActivity {
 	}
 	
 	private void creatPattern() {
+		if (devicePolicyManager.isAdminActive(adminComponent)) {
 		SharedPreferences mySharedPreferences = getSharedPreferences("mypref", Context.MODE_PRIVATE);
 		if( mySharedPreferences != null &&  mySharedPreferences.contains("pass_code")){
 			
@@ -96,7 +94,7 @@ public class AdminActivity extends ListActivity {
 			Intent intent = new Intent(getBaseContext(), PasswordRequest.class);
 			startActivity(intent);
 		}
-
+		}
 	}
 
 //	private void showConfirmationDialog() {

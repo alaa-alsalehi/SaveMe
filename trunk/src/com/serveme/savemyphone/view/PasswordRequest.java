@@ -15,8 +15,8 @@ import com.serveme.savemyphone.R;
 
 public class PasswordRequest extends Activity {
 
-	// This is preferred flag for pattern lib
 	private static final int REQ_CREATE_PATTERN = 1;
+	
 	private char[] pattern;
 	
 	/** Called when the activity is first created. */
@@ -30,7 +30,7 @@ public class PasswordRequest extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(LockPatternActivity.ACTION_CREATE_PATTERN, null,getBaseContext(), LockPatternActivity.class);
+				Intent intent = new Intent(LockPatternActivity.ACTION_CREATE_PATTERN, null, getBaseContext(), LockPatternActivity.class);
 				startActivityForResult(intent, REQ_CREATE_PATTERN);
 			}
 		});
@@ -46,7 +46,6 @@ public class PasswordRequest extends Activity {
 	            pattern = data.getCharArrayExtra(LockPatternActivity.EXTRA_PATTERN);
 	            SharedPreferences preferences = getSharedPreferences("mypref", Context.MODE_PRIVATE);
 	            Editor edit = preferences.edit();
-	            Log.v("hi",String.copyValueOf(pattern));
 	            edit.putString("pass_code", String.copyValueOf(pattern));
 	            edit.apply(); 
 	            finish();

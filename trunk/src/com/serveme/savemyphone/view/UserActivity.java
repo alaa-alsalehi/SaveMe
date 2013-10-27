@@ -1,6 +1,7 @@
 package com.serveme.savemyphone.view;
 
 import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
+import group.pals.android.lib.ui.lockpattern.prefs.DisplayPrefs;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
@@ -38,6 +40,7 @@ public class UserActivity extends Activity {
 	ComponentName adminComponent;
 
 	/** Called when the activity is first created. */
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,17 +48,19 @@ public class UserActivity extends Activity {
 		setContentView(R.layout.user_activity);
 		db = new DBOperations(this);
 		appsinfolist = db.getWhiteListApps();
-		
+
 		startService(new Intent(this, AppsMonitor.class));
-		
+
 		GridView gridView = (GridView) findViewById(R.id.grid_view);
-		gridView.setBackgroundDrawable(WallpaperManager.getInstance(context).getDrawable());
+		gridView.setBackgroundDrawable(WallpaperManager.getInstance(context)
+				.getDrawable());
 		gridView.setAdapter(new GridAdapter(this, appsinfolist));
 		gridView.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
 		gridView.setNumColumns(GridView.AUTO_FIT);
 
 		devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-		adminComponent = new ComponentName(UserActivity.this,AdminReciver.class);
+		adminComponent = new ComponentName(UserActivity.this,
+				AdminReciver.class);
 
 		// float scalefactor = getResources().getDisplayMetrics().density * 80;
 		// Point size = new Point();
@@ -93,10 +98,13 @@ public class UserActivity extends Activity {
 		// Handle item selection
 		switch (item.getItemId()) {
 		case R.id.action_unlock:
-			SharedPreferences mySharedPreferences = getSharedPreferences("mypref", Context.MODE_PRIVATE);
-			String pass_code = mySharedPreferences.getString("pass_code", "null");
+			SharedPreferences mySharedPreferences = getSharedPreferences(
+					"mypref", Context.MODE_PRIVATE);
+			String pass_code = mySharedPreferences.getString("pass_code",
+					"null");
 			char[] savedPattern = pass_code.toCharArray();
-			Intent intent = new Intent(LockPatternActivity.ACTION_COMPARE_PATTERN, null,context, LockPatternActivity.class);
+			DisplayPrefs.setStealthMode(context, false);
+			Intent intent = new Intent(LockPatternActivity.ACTION_COMPARE_PATTERN, null, context,LockPatternActivity.class);
 			intent.putExtra(LockPatternActivity.EXTRA_PATTERN, savedPattern);
 			startActivityForResult(intent, REQ_ENTER_PATTERN);
 			return true;
@@ -110,20 +118,18 @@ public class UserActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
 		case REQ_ENTER_PATTERN: {
-			/*
-			 * NOTE that there are 4 possible result codes!!!
-			 */
 			switch (resultCode) {
 			case RESULT_OK:
+				Log.v("result", "passed");
 				db.updateStatus(0);
 				context.stopService(new Intent(context, AppsMonitor.class));
 				finish();
 				break;
 			case RESULT_CANCELED:
-				// The user cancelled the task
+				Log.v("result", "canceled");
 				break;
 			case LockPatternActivity.RESULT_FAILED:
-				// The user failed to enter the pattern
+				Log.v("result", "faild");
 				break;
 			case LockPatternActivity.RESULT_FORGOT_PATTERN:
 				// The user forgot the pattern and invoked your recovery
@@ -135,7 +141,11 @@ public class UserActivity extends Activity {
 			 * In any case, there's always a key EXTRA_RETRY_COUNT, which holds
 			 * the number of tries that the user did.
 			 */
-//			int retryCount = data.getIntExtra(LockPatternActivity.EXTRA_RETRY_COUNT, 0);
+			 /*
+	         * In any case, there's always a key EXTRA_RETRY_COUNT, which holds
+	         * the number of tries that the user did.
+	         */
+	       // int retryCount = data.getIntExtra(LockPatternActivity.EXTRA_RETRY_COUNT, 0);
 
 			break;
 		}// REQ_ENTER_PATTERN
