@@ -8,6 +8,7 @@
     <dimen name="row_height">80dp</dimen>
     <dimen name="button_padding">15dp</dimen>
     <dimen name="apps_names">20sp</dimen>
+    <dimen name="grid_item_padding">15dp</dimen>
     <dimen name="grid_vspace">30dp</dimen>
     <dimen name="grid_hspace">30dp</dimen>
     <dimen name="col_width">95dp</dimen>

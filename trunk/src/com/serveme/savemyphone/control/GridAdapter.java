@@ -55,7 +55,8 @@ public class GridAdapter extends BaseAdapter {
 			txtView.setShadowLayer(5, 1, 1, Color.BLACK);
 			txtView.setGravity(Gravity.CENTER_HORIZONTAL);
 			txtView.setLines(2); // to make all text view in the same size
-			txtView.setPadding(0, 30, 0, 0);
+			int padding = context.getResources().getDimensionPixelSize(R.dimen.grid_item_padding);
+			txtView.setPadding(0, padding, 0, 0);
 			txtView.setCompoundDrawablePadding(10);
 		} else {
 			txtView = (TextView) convertView;

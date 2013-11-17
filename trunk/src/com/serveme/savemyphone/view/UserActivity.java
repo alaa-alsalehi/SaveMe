@@ -12,9 +12,11 @@ import com.serveme.savemyphone.service.AppsMonitor;
 import android.app.Activity;
 import android.app.WallpaperManager;
 import android.app.admin.DevicePolicyManager;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,7 +26,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
@@ -48,7 +49,7 @@ public class UserActivity extends Activity {
 		setContentView(R.layout.user_activity);
 		db = new DBOperations(this);
 		appsinfolist = db.getWhiteListApps();
-
+		registerReceiver(bcr, new IntentFilter("finish_user_activity"));
 		startService(new Intent(this, AppsMonitor.class));
 
 		GridView gridView = (GridView) findViewById(R.id.grid_view);
@@ -82,6 +83,12 @@ public class UserActivity extends Activity {
 	}
 
 	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		unregisterReceiver(bcr);
+	}
+
+	@Override
 	public void onBackPressed() {
 		// your code.
 	}
@@ -104,7 +111,9 @@ public class UserActivity extends Activity {
 					"null");
 			char[] savedPattern = pass_code.toCharArray();
 			DisplayPrefs.setStealthMode(context, false);
-			Intent intent = new Intent(LockPatternActivity.ACTION_COMPARE_PATTERN, null, context,LockPatternActivity.class);
+			Intent intent = new Intent(
+					LockPatternActivity.ACTION_COMPARE_PATTERN, null, context,
+					LockPatternActivity.class);
 			intent.putExtra(LockPatternActivity.EXTRA_PATTERN, savedPattern);
 			startActivityForResult(intent, REQ_ENTER_PATTERN);
 			return true;
@@ -123,7 +132,6 @@ public class UserActivity extends Activity {
 				Log.v("result", "passed");
 				db.updateStatus(0);
 				context.stopService(new Intent(context, AppsMonitor.class));
-				finish();
 				break;
 			case RESULT_CANCELED:
 				Log.v("result", "canceled");
@@ -141,11 +149,12 @@ public class UserActivity extends Activity {
 			 * In any case, there's always a key EXTRA_RETRY_COUNT, which holds
 			 * the number of tries that the user did.
 			 */
-			 /*
-	         * In any case, there's always a key EXTRA_RETRY_COUNT, which holds
-	         * the number of tries that the user did.
-	         */
-	       // int retryCount = data.getIntExtra(LockPatternActivity.EXTRA_RETRY_COUNT, 0);
+			/*
+			 * In any case, there's always a key EXTRA_RETRY_COUNT, which holds
+			 * the number of tries that the user did.
+			 */
+			// int retryCount =
+			// data.getIntExtra(LockPatternActivity.EXTRA_RETRY_COUNT, 0);
 
 			break;
 		}// REQ_ENTER_PATTERN
@@ -159,6 +168,13 @@ public class UserActivity extends Activity {
 	// this.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD);
 	// super.onAttachedToWindow();
 	// }
+
+	private final BroadcastReceiver bcr = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			finish();
+		}
+	};
 
 	// private void showUnlockDialog(){
 	// AlertDialog.Builder alert = new AlertDialog.Builder(this);

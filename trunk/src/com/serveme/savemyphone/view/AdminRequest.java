@@ -54,6 +54,7 @@ public class AdminRequest extends Activity {
 	            if (resultCode == Activity.RESULT_OK) {
 	                Log.v("DeviceAdminSample", "Administration enabled!");
 	                finish();
+	                devicePolicyManager.lockNow();
 	                Intent intent = new Intent(getBaseContext(), AdminActivity.class);
 					startActivity(intent);
 	            } else {

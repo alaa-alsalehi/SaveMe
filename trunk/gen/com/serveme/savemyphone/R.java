@@ -75,9 +75,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int aosp_dialog_fixed_width_minor=0x7f060003;
         public static final int apps_names=0x7f06000b;
         public static final int button_padding=0x7f06000a;
-        public static final int col_width=0x7f06000e;
-        public static final int grid_hspace=0x7f06000d;
-        public static final int grid_vspace=0x7f06000c;
+        public static final int col_width=0x7f06000f;
+        public static final int grid_hspace=0x7f06000e;
+        public static final int grid_item_padding=0x7f06000c;
+        public static final int grid_vspace=0x7f06000d;
         /** 
          Customize dimensions originally defined in res/values/dimens.xml (such as
          screen margins) for sw600dp devices (e.g. 7" tablets) here.
@@ -110,26 +111,29 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int unlock=0x7f020014;
     }
     public static final class id {
-        public static final int RelativeLayout1=0x7f0e000c;
-        public static final int action_lock=0x7f0e0011;
-        public static final int action_settings=0x7f0e0012;
-        public static final int action_unlock=0x7f0e0013;
+        public static final int RelativeLayout1=0x7f0e000f;
+        public static final int action_lock=0x7f0e0014;
+        public static final int action_settings=0x7f0e0015;
+        public static final int action_unlock=0x7f0e0016;
         public static final int admin_btn=0x7f0e0000;
         public static final int alp_button_cancel=0x7f0e0005;
         public static final int alp_button_confirm=0x7f0e0006;
         public static final int alp_textview_info=0x7f0e0002;
         public static final int alp_view_lock_pattern=0x7f0e0004;
         public static final int alp_viewgroup_footer=0x7f0e0003;
-        public static final int button1=0x7f0e000e;
-        public static final int button2=0x7f0e000f;
+        public static final int button1=0x7f0e0011;
+        public static final int button2=0x7f0e0012;
+        public static final int edittext0=0x7f0e000a;
+        public static final int edittext1=0x7f0e000b;
         public static final int enable_disable=0x7f0e0009;
-        public static final int grid_view=0x7f0e0010;
+        public static final int grid_view=0x7f0e0013;
         public static final int icon=0x7f0e0007;
+        public static final int keyboardview=0x7f0e000c;
         public static final int name=0x7f0e0008;
-        public static final int password_btn=0x7f0e000b;
-        public static final int pattern_ptn=0x7f0e000a;
+        public static final int password_btn=0x7f0e000e;
+        public static final int pattern_ptn=0x7f0e000d;
         public static final int textView=0x7f0e0001;
-        public static final int textView1=0x7f0e000d;
+        public static final int textView1=0x7f0e0010;
     }
     public static final class integer {
         public static final int alp_pkey_display_captcha_wired_dots_default=0x7f090002;
@@ -142,9 +146,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int alp_lock_pattern_activity_land=0x7f030002;
         public static final int alp_lock_pattern_view=0x7f030003;
         public static final int item_layout=0x7f030004;
-        public static final int password_request=0x7f030005;
-        public static final int uninstall_activity=0x7f030006;
-        public static final int user_activity=0x7f030007;
+        public static final int password_entry=0x7f030005;
+        public static final int password_request=0x7f030006;
+        public static final int uninstall_activity=0x7f030007;
+        public static final int user_activity=0x7f030008;
     }
     public static final class menu {
         public static final int admin=0x7f0d0000;

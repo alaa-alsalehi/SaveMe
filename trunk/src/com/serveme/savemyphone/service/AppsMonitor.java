@@ -68,13 +68,13 @@ public class AppsMonitor extends Service {
 //						Log.v("", lastallowedapp.getClassName());
 //						startActivity(intent);
 						
-//						Intent saveintent = AppsMonitor.this.getPackageManager().getLaunchIntentForPackage(taskInfo.get(0).baseActivity.getPackageName());
-//						saveintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-//						getApplication().startActivity(saveintent);
+						Intent saveintent = AppsMonitor.this.getPackageManager().getLaunchIntentForPackage(taskInfo.get(0).baseActivity.getPackageName());
+						saveintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+						getApplication().startActivity(saveintent);
 					} else {
-//						Intent saveintent = new Intent(getBaseContext(), UserActivity.class);
-//						saveintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//						getApplication().startActivity(saveintent);
+						Intent saveintent = new Intent(getBaseContext(), UserActivity.class);
+						saveintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						getApplication().startActivity(saveintent);
 					}
 //					
 				} else if (!componentInfo.getPackageName().equals("android")){
@@ -91,6 +91,7 @@ public class AppsMonitor extends Service {
 		if (timer != null) {
 			timer.cancel();
 		}
+		sendBroadcast(new Intent("finish_user_activity"));
 		Toast.makeText(this, "Service Destroyed", Toast.LENGTH_LONG).show();
 		
 //		Intent home = new Intent(Intent.ACTION_MAIN);
