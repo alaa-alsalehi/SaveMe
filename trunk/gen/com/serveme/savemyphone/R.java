@@ -105,19 +105,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int aosp_indicator_code_lock_point_area_blue_holo=0x7f02000e;
         public static final int aosp_indicator_code_lock_point_area_green_holo=0x7f02000f;
         public static final int aosp_indicator_code_lock_point_area_red_holo=0x7f020010;
-        public static final int hex=0x7f020011;
-        public static final int ic_launcher=0x7f020012;
-        public static final int lock=0x7f020013;
-        public static final int settings=0x7f020014;
-        public static final int sym_keyboard_allleft=0x7f020015;
-        public static final int sym_keyboard_allright=0x7f020016;
-        public static final int sym_keyboard_delete=0x7f020017;
-        public static final int sym_keyboard_done=0x7f020018;
-        public static final int sym_keyboard_left=0x7f020019;
-        public static final int sym_keyboard_return=0x7f02001a;
-        public static final int sym_keyboard_right=0x7f02001b;
-        public static final int txt=0x7f02001c;
-        public static final int unlock=0x7f02001d;
+        public static final int ic_launcher=0x7f020011;
+        public static final int lock=0x7f020012;
+        public static final int settings=0x7f020013;
+        public static final int sym_keyboard_delete=0x7f020014;
+        public static final int unlock=0x7f020015;
     }
     public static final class id {
         public static final int RelativeLayout1=0x7f0e000f;
