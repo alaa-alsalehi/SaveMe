@@ -58,7 +58,9 @@ public class AdminActivity extends ListActivity {
 		switch (item.getItemId()) {
 		case R.id.action_lock:
 			db.updateStatus(1);
-			Intent saveintent = new Intent(getBaseContext(), UserActivity.class);
+//			Intent saveintent = new Intent(getBaseContext(), UserActivity.class);
+//			startActivity(saveintent);
+			Intent saveintent = new Intent(getBaseContext(), PasswordEntryActivity.class);
 			startActivity(saveintent);
 			context.startService(new Intent(context, AppsMonitor.class));
 			finish();

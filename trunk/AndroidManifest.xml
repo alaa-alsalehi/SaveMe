@@ -83,6 +83,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".view.PasswordEntryActivity"
+            android:label="Unlock" />
+        <activity
             android:name="group.pals.android.lib.ui.lockpattern.LockPatternActivity"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
             android:screenOrientation="user"
