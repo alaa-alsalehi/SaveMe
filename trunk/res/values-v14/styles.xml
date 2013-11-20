@@ -5,16 +5,13 @@
         AppBaseTheme from BOTH res/values/styles.xml and
         res/values-v11/styles.xml on API 14+ devices.
     -->
-    <style name="AppBaseTheme" parent="android:Theme.Holo">
+    <style name="AppBaseTheme" parent="@style/Theme.AppCompat">
         <item name="android:actionBarStyle">@style/customActionBar</item>
     </style>
 
-    <style name="customActionBar" parent="@android:style/Widget.Holo.ActionBar">
+    <style name="customActionBar" parent="@style/Widget.AppCompat.ActionBar">
         <item name="android:background">@color/actionbar_background</item>
         <item name="android:backgroundSplit">@color/actionbar_tab</item>
     </style>
-    
-    <color name="actionbar_background">#FF274A5E</color>
-    <color name="actionbar_tab">#FF274A5E</color>
 
 </resources>

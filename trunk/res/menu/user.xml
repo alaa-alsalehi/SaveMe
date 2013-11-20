@@ -1,9 +1,10 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:saveme="http://schemas.android.com/apk/res-auto" >
 
     <item
         android:id="@+id/action_unlock"
         android:orderInCategory="100"
-        android:showAsAction="always|withText"
+        saveme:showAsAction="always|withText"
         android:icon="@drawable/unlock"
         android:title="@string/action_unlock"/>
 
