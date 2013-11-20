@@ -1,17 +1,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-
-    <item
-        android:id="@+id/action_lock"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:icon="@drawable/lock"
-        android:title="@string/action_lock"/>
     
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:showAsAction="ifRoom"
+        android:showAsAction="always|withText"
         android:icon="@drawable/settings"
         android:title="@string/settings"/>
+    
+    <item
+        android:id="@+id/action_lock"
+        android:orderInCategory="100"
+        android:showAsAction="always|withText"
+        android:icon="@drawable/lock"
+        android:title="@string/action_lock"/>
 
 </menu>

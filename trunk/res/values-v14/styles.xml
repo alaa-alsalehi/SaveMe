@@ -11,7 +11,7 @@
 
     <style name="customActionBar" parent="@android:style/Widget.Holo.ActionBar">
         <item name="android:background">@color/actionbar_background</item>
-        
+        <item name="android:backgroundSplit">@color/actionbar_tab</item>
     </style>
     
     <color name="actionbar_background">#FF274A5E</color>
