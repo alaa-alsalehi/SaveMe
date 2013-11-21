@@ -46,7 +46,7 @@ public class UserActivity extends ActionBarActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		//requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.user_activity);
 		db = new DBOperations(this);
 		appsinfolist = db.getWhiteListApps();
