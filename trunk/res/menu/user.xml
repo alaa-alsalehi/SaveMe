@@ -4,7 +4,7 @@
     <item
         android:id="@+id/action_unlock"
         android:orderInCategory="100"
-        saveme:showAsAction="always|withText"
+        saveme:showAsAction="always"
         android:icon="@drawable/unlock"
         android:title="@string/action_unlock"/>
 
