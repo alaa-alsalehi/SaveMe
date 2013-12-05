@@ -1,6 +1,6 @@
 package com.serveme.savemyphone.view;
 
-import org.omar.android.lib.ui.passwordlock.PasswordEntryActivity;
+//import org.omar.android.lib.ui.passwordlock.PasswordEntryActivity;
 
 import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
 import android.app.Activity;
@@ -41,8 +41,8 @@ public class PasswordRequest extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(LockPatternActivity.ACTION_CREATE_PATTERN, null, getBaseContext(), PasswordEntryActivity.class);
-				startActivityForResult(intent, REQ_CREATE_PATTERN);
+				//Intent intent = new Intent(LockPatternActivity.ACTION_CREATE_PATTERN, null, getBaseContext(), PasswordEntryActivity.class);
+				//startActivityForResult(intent, REQ_CREATE_PATTERN);
 			}
 		});
 

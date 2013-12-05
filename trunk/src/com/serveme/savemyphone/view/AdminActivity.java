@@ -2,7 +2,7 @@ package com.serveme.savemyphone.view;
 
 import java.util.List;
 
-import org.omar.android.lib.ui.passwordlock.PasswordEntryActivity;
+//import org.omar.android.lib.ui.passwordlock.PasswordEntryActivity;
 
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.control.AppsListAdapter;
@@ -65,13 +65,14 @@ public class AdminActivity extends ActionBarActivity {
 		case R.id.action_lock:
 			PrefEditor pe = new PrefEditor(AdminActivity.this);
 			pe.updateStatus(1);
-			// Intent saveintent = new Intent(getBaseContext(),
-			// UserActivity.class);
-			// startActivity(saveintent);
-			Intent saveintent = new Intent(getBaseContext(),PasswordEntryActivity.class);
+			Intent saveintent = new Intent(getBaseContext(), UserActivity.class);
 			startActivity(saveintent);
-			context.startService(new Intent(context, AppsMonitor.class));
-			finish();
+			/*
+			 * Intent saveintent = new
+			 * Intent(getBaseContext(),PasswordEntryActivity.class);
+			 * startActivity(saveintent); context.startService(new
+			 * Intent(context, AppsMonitor.class)); finish();
+			 */
 			return true;
 		case R.id.action_settings:
 			Intent intent = new Intent(context, SettingsActivity.class);
