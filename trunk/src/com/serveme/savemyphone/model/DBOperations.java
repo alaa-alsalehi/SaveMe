@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -53,23 +55,5 @@ public class DBOperations {
 		}
 		return whitelist;
 	}
-
-	public void updateStatus(int status) {
-		ContentValues values = new ContentValues();
-		values.put(DB_KEYS.KEY_STATUS, status);
-		SQLiteDatabase database = dbhandler.getWritableDatabase();
-		database.update(DB_KEYS.STATUS_TABLE, values, null, null);
-		database.close();
-	}
-
-	public int getStatus() {
-		SQLiteDatabase database = dbhandler.getReadableDatabase();
-		cursor = database.query(DB_KEYS.STATUS_TABLE, null, null, null, null,
-				null, null);
-		cursor.moveToFirst();
-		return cursor
-				.getInt((cursor.getColumnIndexOrThrow(DB_KEYS.KEY_STATUS)));
-	}
-
 
 }

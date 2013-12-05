@@ -1,5 +1,6 @@
 package com.serveme.savemyphone.control;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -45,10 +46,10 @@ public class AppsListAdapter extends BaseAdapter {
 //				aList.remove(rinfo);
 //			}
 //		}
+		Collections.sort(aList, new ResolveInfo.DisplayNameComparator(c.getPackageManager()));
 		for (Iterator<ResolveInfo> it = aList.iterator(); it.hasNext();) {
 			ResolveInfo rinfo = it.next();
-			if (rinfo.activityInfo.packageName
-					.equals("com.serveme.savemyphone")) {
+			if (rinfo.activityInfo.packageName.equals("com.serveme.savemyphone")) {
 				it.remove();
 			}
 		}
@@ -75,12 +76,12 @@ public class AppsListAdapter extends BaseAdapter {
 		Log.d("test", aList.get(position).activityInfo.packageName);
 
 		final ResolveInfo appinfo = aList.get(position);
+		
+		// more performance for ListView by use Holder Pattern
+		ViewHolder viewHolder; 
 
-		ViewHolder viewHolder; // more performance for ListView by use Holder
-								// Pattern
-
-		if (convertView == null) { // if it's not recycled, initialize some
-									// attributes
+		if (convertView == null) { 
+			// if it's not recycled, initialize some attributes
 			convertView = inflater.inflate(R.layout.item_layout, parent, false);
 			viewHolder = new ViewHolder();
 			viewHolder.name = (TextView) convertView.findViewById(R.id.name);
@@ -102,12 +103,20 @@ public class AppsListAdapter extends BaseAdapter {
 					status[position] = true;
 
 					if (!whitelist.contains(appinfo.activityInfo.packageName)) {
+						if(appinfo.activityInfo.packageName.equals("com.android.contacts")){
+							db.insertöApp("com.android.phone");
+							whitelist.add("com.android.phone");
+						}
 						db.insertöApp(appinfo.activityInfo.packageName);
 						whitelist.add(appinfo.activityInfo.packageName);
 					}
 				} else {
 					status[position] = false;
 					if (whitelist.contains(appinfo.activityInfo.packageName)) {
+						if(appinfo.activityInfo.packageName.equals("com.android.contacts")){
+							db.deleteApp("com.android.phone");
+							whitelist.remove("com.android.phone");
+						} 
 						db.deleteApp(appinfo.activityInfo.packageName);
 						whitelist.remove(appinfo.activityInfo.packageName);
 					}

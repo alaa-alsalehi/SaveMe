@@ -16,7 +16,7 @@ import com.serveme.savemyphone.view.UserActivity;
 
 public class AppsMonitor extends Service {
 	int counter = 1;
-	static final int UPDATE_INTERVAL = 2000;
+	static final int UPDATE_INTERVAL = 200;
 	private Timer timer = new Timer();
 	ActivityManager am;
 	private DBOperations db;
@@ -29,9 +29,7 @@ public class AppsMonitor extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		// We want this service to continue running until it is explicitly
-		// stopped, so return sticky.
-		Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
+		// We want this service to continue running until it is explicitly stopped, so return sticky.
 		db = new DBOperations(this);
 		am = (ActivityManager) this.getSystemService(ACTIVITY_SERVICE);
 		doGetRunningApp();
@@ -46,11 +44,13 @@ public class AppsMonitor extends Service {
 //				ComponentName componentInfo = taskInfo.get(0).origActivity;
 				List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
 				ComponentName componentInfo = taskInfo.get(0).topActivity;
+				Log.v("", (componentInfo.getPackageName())); 
 				if (!db.getWhiteListApps().contains(componentInfo.getPackageName())
 						&& !componentInfo.getPackageName().equals("android") 
 						&& !componentInfo.getClassName().equals("com.serveme.savemyphone.view.UserActivity")
 						&& !componentInfo.getClassName().equals("group.pals.android.lib.ui.lockpattern.LockPatternActivity") ) {
 					Log.v("", (componentInfo.getClassName()));
+					Log.v("", (componentInfo.getPackageName()));
 //					ActivityManager manager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
 //					List<RunningAppProcessInfo> services = manager.getRunningAppProcesses();
 //					for(RunningAppProcessInfo rpi : services){

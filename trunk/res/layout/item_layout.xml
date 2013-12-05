@@ -29,7 +29,6 @@
         android:layout_marginRight="10dp"
         android:textOff="Disabled"
         android:textOn="Enabled "
-        android:padding="@dimen/button_padding"
         android:textSize="@dimen/apps_names" />
 
 </RelativeLayout>

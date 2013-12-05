@@ -2,12 +2,15 @@ package com.serveme.savemyphone.view;
 
 import java.util.List;
 
+import org.omar.android.lib.ui.passwordlock.PasswordEntryActivity;
+
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.control.AppsListAdapter;
 import com.serveme.savemyphone.model.DBOperations;
+import com.serveme.savemyphone.preferences.PrefEditor;
+import com.serveme.savemyphone.receivers.AdminReciver;
 import com.serveme.savemyphone.service.AppsMonitor;
 
-import android.app.ListActivity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -60,12 +63,12 @@ public class AdminActivity extends ActionBarActivity {
 		// Handle item selection
 		switch (item.getItemId()) {
 		case R.id.action_lock:
-			db.updateStatus(1);
+			PrefEditor pe = new PrefEditor(AdminActivity.this);
+			pe.updateStatus(1);
 			// Intent saveintent = new Intent(getBaseContext(),
 			// UserActivity.class);
 			// startActivity(saveintent);
-			Intent saveintent = new Intent(getBaseContext(),
-					PasswordEntryActivity.class);
+			Intent saveintent = new Intent(getBaseContext(),PasswordEntryActivity.class);
 			startActivity(saveintent);
 			context.startService(new Intent(context, AppsMonitor.class));
 			finish();

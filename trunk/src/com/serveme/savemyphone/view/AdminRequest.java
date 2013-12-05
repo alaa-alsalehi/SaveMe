@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.serveme.savemyphone.R;
+import com.serveme.savemyphone.receivers.AdminReciver;
 
 public class AdminRequest extends Activity {
 

@@ -1,5 +1,7 @@
 package com.serveme.savemyphone.view;
 
+import com.serveme.savemyphone.receivers.AdminReciver;
+
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;

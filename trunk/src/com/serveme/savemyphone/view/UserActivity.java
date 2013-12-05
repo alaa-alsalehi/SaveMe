@@ -8,8 +8,12 @@ import java.util.List;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.control.GridAdapter;
 import com.serveme.savemyphone.model.DBOperations;
+import com.serveme.savemyphone.preferences.PrefEditor;
+import com.serveme.savemyphone.receivers.AdminReciver;
 import com.serveme.savemyphone.service.AppsMonitor;
-import android.app.Activity;
+
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.WallpaperManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
@@ -18,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -30,6 +35,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
+@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+@SuppressLint("NewApi")
 public class UserActivity extends ActionBarActivity {
 
 	final Context context = this;
@@ -41,12 +48,20 @@ public class UserActivity extends ActionBarActivity {
 	DevicePolicyManager devicePolicyManager;
 	ComponentName adminComponent;
 
-	/** Called when the activity is first created. */
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//requestWindowFeature(Window.FEATURE_NO_TITLE);
+		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
+			requestWindowFeature(Window.FEATURE_NO_TITLE);
+		}
+//		getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+//		ActionBar actionBar = getActionBar();
+//		actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#33ffffff")));
+//		actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#55ffffff")));
+//		actionBar.setDisplayShowHomeEnabled(false);
+//		actionBar.setDisplayShowTitleEnabled(false);
+		
 		setContentView(R.layout.user_activity);
 		db = new DBOperations(this);
 		appsinfolist = db.getWhiteListApps();
@@ -54,8 +69,7 @@ public class UserActivity extends ActionBarActivity {
 		startService(new Intent(this, AppsMonitor.class));
 
 		GridView gridView = (GridView) findViewById(R.id.grid_view);
-		gridView.setBackgroundDrawable(WallpaperManager.getInstance(context)
-				.getDrawable());
+		gridView.setBackgroundDrawable(WallpaperManager.getInstance(context).getDrawable());
 		gridView.setAdapter(new GridAdapter(this, appsinfolist));
 		gridView.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
 		gridView.setNumColumns(GridView.AUTO_FIT);
@@ -131,7 +145,8 @@ public class UserActivity extends ActionBarActivity {
 			switch (resultCode) {
 			case RESULT_OK:
 				Log.v("result", "passed");
-				db.updateStatus(0);
+				PrefEditor pe = new PrefEditor(UserActivity.this);
+				pe.updateStatus(0);
 				context.stopService(new Intent(context, AppsMonitor.class));
 				break;
 			case RESULT_CANCELED:
