@@ -32,11 +32,9 @@ public class SettingsActivity extends PreferenceActivity implements
 		Preference myPref = (Preference) findPreference("uninstall");
 		myPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			public boolean onPreferenceClick(Preference preference) {
-				Activity context = SettingsActivity.this;
-				ComponentName devAdminReceiver = new ComponentName(context,
-						AdminReciver.class);
-				DevicePolicyManager dpm = (DevicePolicyManager) context
-						.getSystemService(Context.DEVICE_POLICY_SERVICE);
+				Context context = SettingsActivity.this; 
+				ComponentName devAdminReceiver = new ComponentName(context,	AdminReciver.class);
+				DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
 				dpm.removeActiveAdmin(devAdminReceiver);
 				Intent intent = new Intent(Intent.ACTION_DELETE);
 				intent.setData(Uri.parse("package:" + context.getPackageName()));

@@ -10,7 +10,7 @@ public class RemovePackageReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		DBOperations dbOperations=new DBOperations(context);
+		DBOperations dbOperations = new DBOperations(context);
 		dbOperations.deleteApp(intent.getData().getEncodedSchemeSpecificPart());
 	}
 

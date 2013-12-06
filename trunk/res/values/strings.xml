@@ -12,9 +12,6 @@
     <string name="admin_message">This app need device admin access to work</string>
 
     <string name="uninstall">Uninstall</string>
-    <string name="uninstall_confirmation">are you really want to uninstall this app ?</string>
-   	<string name="yes_action">OK</string>
-    <string name="no_action">Cancel</string>
     
     <string name="lock_choice">"Choose your preferred lock"</string>
     <string name="pattern">Pattern</string>

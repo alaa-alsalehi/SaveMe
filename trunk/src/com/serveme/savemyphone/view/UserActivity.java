@@ -120,17 +120,7 @@ public class UserActivity extends ActionBarActivity {
 		// Handle item selection
 		switch (item.getItemId()) {
 		case R.id.action_unlock:
-			SharedPreferences mySharedPreferences = getSharedPreferences(
-					"mypref", Context.MODE_PRIVATE);
-			String pass_code = mySharedPreferences.getString("pass_code",
-					"null");
-			char[] savedPattern = pass_code.toCharArray();
-			DisplayPrefs.setStealthMode(context, false);
-			Intent intent = new Intent(
-					LockPatternActivity.ACTION_COMPARE_PATTERN, null, context,
-					LockPatternActivity.class);
-			intent.putExtra(LockPatternActivity.EXTRA_PATTERN, savedPattern);
-			startActivityForResult(intent, REQ_ENTER_PATTERN);
+			new Checker(this).checkPattern(REQ_ENTER_PATTERN);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
