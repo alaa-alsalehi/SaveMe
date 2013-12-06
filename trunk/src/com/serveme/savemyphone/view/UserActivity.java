@@ -8,6 +8,7 @@ import java.util.List;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.control.GridAdapter;
 import com.serveme.savemyphone.model.DBOperations;
+import com.serveme.savemyphone.model.Launcher;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.receivers.AdminReciver;
 import com.serveme.savemyphone.service.AppsMonitor;
@@ -40,7 +41,7 @@ import android.widget.GridView;
 public class UserActivity extends ActionBarActivity {
 
 	final Context context = this;
-	List<String> appsinfolist;
+	List<Launcher> appsinfolist;
 	private DBOperations db;
 
 	private static final int REQ_ENTER_PATTERN = 2;
@@ -52,16 +53,18 @@ public class UserActivity extends ActionBarActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
 			requestWindowFeature(Window.FEATURE_NO_TITLE);
 		}
-//		getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-//		ActionBar actionBar = getActionBar();
-//		actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#33ffffff")));
-//		actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#55ffffff")));
-//		actionBar.setDisplayShowHomeEnabled(false);
-//		actionBar.setDisplayShowTitleEnabled(false);
-		
+		// getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+		// ActionBar actionBar = getActionBar();
+		// actionBar.setBackgroundDrawable(new
+		// ColorDrawable(Color.parseColor("#33ffffff")));
+		// actionBar.setStackedBackgroundDrawable(new
+		// ColorDrawable(Color.parseColor("#55ffffff")));
+		// actionBar.setDisplayShowHomeEnabled(false);
+		// actionBar.setDisplayShowTitleEnabled(false);
+
 		setContentView(R.layout.user_activity);
 		db = new DBOperations(this);
 		appsinfolist = db.getWhiteListApps();
@@ -69,7 +72,8 @@ public class UserActivity extends ActionBarActivity {
 		startService(new Intent(this, AppsMonitor.class));
 
 		GridView gridView = (GridView) findViewById(R.id.grid_view);
-		gridView.setBackgroundDrawable(WallpaperManager.getInstance(context).getDrawable());
+		gridView.setBackgroundDrawable(WallpaperManager.getInstance(context)
+				.getDrawable());
 		gridView.setAdapter(new GridAdapter(this, appsinfolist));
 		gridView.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
 		gridView.setNumColumns(GridView.AUTO_FIT);
@@ -89,8 +93,16 @@ public class UserActivity extends ActionBarActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v,
 					int position, long id) {
-				Intent i = getPackageManager().getLaunchIntentForPackage(
-						appsinfolist.get(position));
+				Launcher launcher = appsinfolist.get(position);
+
+				Intent i = new Intent();
+				i.setAction(Intent.ACTION_MAIN);
+				i.addCategory(Intent.CATEGORY_LAUNCHER);
+				i.setClassName(launcher.getPackageName(),
+						launcher.getActivity());
+				
+
+				Log.d("pakage", i.toString());
 				startActivity(i);
 			}
 		});

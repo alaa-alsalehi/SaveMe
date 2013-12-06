@@ -1,10 +1,8 @@
 package com.serveme.savemyphone.model;
 
-
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 
 public class DBHandler extends SQLiteOpenHelper {
 
@@ -14,7 +12,6 @@ public class DBHandler extends SQLiteOpenHelper {
 	// Database Name
 	private static final String DATABASE_NAME = "db.sqlite";
 
-
 	public DBHandler(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
@@ -22,7 +19,9 @@ public class DBHandler extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
-		String createTableStr = "CREATE TABLE " + DB_KEYS.WHITE_LIST_TABLE + " ( "+ DB_KEYS.KEY_PKGNAME + " TEXT PRIMARY KEY)";
+		String createTableStr = "CREATE TABLE " + DB_KEYS.WHITE_LIST_TABLE
+				+ " ( "+ DB_KEYS.KEY_ID+" long primary key ,"+ DB_KEYS.KEY_PKGNAME + " TEXT not null, "
+				+ DB_KEYS.KEY_ACTIVITY + " TEXT)";
 		db.execSQL(createTableStr);
 	}
 
@@ -31,12 +30,12 @@ public class DBHandler extends SQLiteOpenHelper {
 		// TODO Auto-generated method stub
 		if (oldversion != newversion) {
 			// later
-			db.execSQL("DROP TABLE IF EXISTS '" + DB_KEYS.WHITE_LIST_TABLE + "'");
+			db.execSQL("DROP TABLE IF EXISTS '" + DB_KEYS.WHITE_LIST_TABLE
+					+ "'");
 			db.execSQL("DROP TABLE IF EXISTS 'admin'");
 			onCreate(db);
 		}
 
 	}
-
 
 }

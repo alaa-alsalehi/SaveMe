@@ -44,7 +44,6 @@ public class ImageLoader {
 			return img;
 	    }
 
-	    @SuppressWarnings("deprecation")
 		@Override
 	    // Once the image is loaded, associates it to the imageView
 	    protected void onPostExecute(Drawable img) {
@@ -55,7 +54,7 @@ public class ImageLoader {
 	        if (imageViewReference != null) {
 	            ImageView imageView = imageViewReference.get();
 	            if (imageView != null) {
-	                imageView.setBackgroundDrawable(img);
+	                imageView.setImageDrawable(img);
 	            }
 	        }
 	    }

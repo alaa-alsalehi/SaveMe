@@ -6,6 +6,9 @@ import java.util.List;
 
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.model.DBOperations;
+import com.serveme.savemyphone.model.Launcher;
+
+import android.app.LauncherActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
@@ -24,7 +27,7 @@ public class AppsListAdapter extends BaseAdapter {
 
 	private Context context;
 	private List<ResolveInfo> aList = null;
-	private List<String> whitelist = null;
+	private List<Launcher> whitelist = null;
 	private static boolean[] status;
 	private LayoutInflater inflater = null;
 	private final ImageLoader imageloader = new ImageLoader();
@@ -40,16 +43,18 @@ public class AppsListAdapter extends BaseAdapter {
 		whitelist = db.getWhiteListApps();
 		status = new boolean[aList.size()];
 		inflater = LayoutInflater.from(context);
-//		for (ResolveInfo rinfo : aList) {
-//			if (rinfo.activityInfo.packageName
-//					.equals("com.serveme.savemyphone")) {
-//				aList.remove(rinfo);
-//			}
-//		}
-		Collections.sort(aList, new ResolveInfo.DisplayNameComparator(c.getPackageManager()));
+		// for (ResolveInfo rinfo : aList) {
+		// if (rinfo.activityInfo.packageName
+		// .equals("com.serveme.savemyphone")) {
+		// aList.remove(rinfo);
+		// }
+		// }
+		Collections.sort(aList,
+				new ResolveInfo.DisplayNameComparator(c.getPackageManager()));
 		for (Iterator<ResolveInfo> it = aList.iterator(); it.hasNext();) {
 			ResolveInfo rinfo = it.next();
-			if (rinfo.activityInfo.packageName.equals("com.serveme.savemyphone")) {
+			if (rinfo.activityInfo.packageName
+					.equals("com.serveme.savemyphone")) {
 				it.remove();
 			}
 		}
@@ -76,11 +81,13 @@ public class AppsListAdapter extends BaseAdapter {
 		Log.d("test", aList.get(position).activityInfo.packageName);
 
 		final ResolveInfo appinfo = aList.get(position);
-		
-		// more performance for ListView by use Holder Pattern
-		ViewHolder viewHolder; 
+		final Launcher launcher = new Launcher(
+				appinfo.activityInfo.packageName, appinfo.activityInfo.name);
 
-		if (convertView == null) { 
+		// more performance for ListView by use Holder Pattern
+		ViewHolder viewHolder;
+
+		if (convertView == null) {
 			// if it's not recycled, initialize some attributes
 			convertView = inflater.inflate(R.layout.item_layout, parent, false);
 			viewHolder = new ViewHolder();
@@ -101,37 +108,30 @@ public class AppsListAdapter extends BaseAdapter {
 					boolean isChecked) {
 				if (isChecked) {
 					status[position] = true;
+					if (!whitelist.contains(launcher)) {
 
-					if (!whitelist.contains(appinfo.activityInfo.packageName)) {
-						if(appinfo.activityInfo.packageName.equals("com.android.contacts")){
-							db.insertöApp("com.android.phone");
-							whitelist.add("com.android.phone");
-						}
-						db.insertöApp(appinfo.activityInfo.packageName);
-						whitelist.add(appinfo.activityInfo.packageName);
+						db.insertöApp(launcher);
+						whitelist.add(launcher);
 					}
 				} else {
 					status[position] = false;
-					if (whitelist.contains(appinfo.activityInfo.packageName)) {
-						if(appinfo.activityInfo.packageName.equals("com.android.contacts")){
-							db.deleteApp("com.android.phone");
-							whitelist.remove("com.android.phone");
-						} 
-						db.deleteApp(appinfo.activityInfo.packageName);
-						whitelist.remove(appinfo.activityInfo.packageName);
+					if (whitelist.contains(launcher)) {
+						db.deleteLauncher(launcher);
+						whitelist.remove(launcher);
 					}
 				}
 
 			}
 		});
 
-		viewHolder.name.setText(appinfo.loadLabel((context.getPackageManager())));
+		viewHolder.name
+				.setText(appinfo.loadLabel((context.getPackageManager())));
 		// Drawable img = appinfo.loadIcon(context.getPackageManager());
 		// img.setBounds(0, 0, 75, 75);
 		// viewHolder.icon.setBackgroundDrawable(img);
 		imageloader.load(viewHolder.icon, appinfo, context);
 		Log.v("hi", status[position] + "");
-		if (whitelist.contains(appinfo.activityInfo.packageName)) {
+		if (whitelist.contains(launcher)) {
 			status[position] = true;
 		}
 		viewHolder.tg.setChecked(status[position]);
