@@ -10,7 +10,7 @@
         android:defaultValue="pattern" />
 	
     <!-- android:dialogLayout="@layout/uninstall_activity" -->
-    <com.serveme.savemyphone.view.UninstallDialogPreference
+    <Preference
 		android:key="uninstall" 
 		android:title="@string/uninstall"
 		android:dialogMessage="@string/uninstall_confirmation"
