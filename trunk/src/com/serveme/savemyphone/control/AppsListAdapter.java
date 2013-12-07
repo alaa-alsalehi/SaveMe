@@ -7,8 +7,6 @@ import java.util.List;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.model.Launcher;
-
-import android.app.LauncherActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;

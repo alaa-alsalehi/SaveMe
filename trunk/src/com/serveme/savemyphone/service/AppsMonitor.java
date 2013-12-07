@@ -6,7 +6,6 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -112,7 +111,6 @@ public class AppsMonitor extends Service {
 			timer.cancel();
 		}
 		sendBroadcast(new Intent("finish_user_activity"));
-		Toast.makeText(this, "Service Destroyed", Toast.LENGTH_LONG).show();
 
 		// Intent home = new Intent(Intent.ACTION_MAIN);
 		// home.addCategory(Intent.CATEGORY_HOME);

@@ -60,7 +60,8 @@ public class PasswordRequest extends Activity {
 	            edit.putString("pass_code", String.copyValueOf(passCode));
 	            edit.apply(); 
 	            finish();
-				Intent intent = new Intent(getBaseContext(), AdminActivity.class);
+				Intent intent = new Intent(PasswordRequest.this, AdminActivity.class);
+				intent.putExtra("first_time", true);
 				startActivity(intent);
 	        }
 	        break;

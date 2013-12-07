@@ -8,8 +8,6 @@ import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.control.AppsListAdapter;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.receivers.AdminReciver;
-import com.serveme.savemyphone.service.AppsMonitor;
-
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -93,19 +91,18 @@ public class AdminActivity extends ActionBarActivity {
 
 	private void checkPassCode() {
 		if (devicePolicyManager.isAdminActive(adminComponent)) {
-			SharedPreferences mySharedPreferences = getSharedPreferences(
-					"mypref", Context.MODE_PRIVATE);
+			SharedPreferences mySharedPreferences = getSharedPreferences("mypref", Context.MODE_PRIVATE);
 			if (mySharedPreferences != null	&& mySharedPreferences.contains("pass_code")) {
-
-//				if(pattern){
-				new Checker(this).checkPattern(REQ_ENTER_PATTERN);
-//				}else{
-					
-//				}
+				if(!getIntent().getExtras().getBoolean("first_time")){
+	//				if(pattern){
+					new Checker(this).checkPattern(REQ_ENTER_PATTERN);
+	//				}else{
+						
+	//				}
+				}
 			} else {
 				finish();
-				Intent intent = new Intent(getBaseContext(),
-						PasswordRequest.class);
+				Intent intent = new Intent(getBaseContext(),PasswordRequest.class);
 				startActivity(intent);
 			}
 		}
@@ -146,61 +143,5 @@ public class AdminActivity extends ActionBarActivity {
 		}// REQ_ENTER_PATTERN
 		}
 	}
-
-	// private void showConfirmationDialog() {
-	// AlertDialog.Builder alert = new AlertDialog.Builder(this);
-	//
-	// alert.setTitle("Confirmation");
-	// alert.setMessage("Are you sure you want to uninstall the app ?");
-	//
-	// alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-	// public void onClick(DialogInterface dialog, int whichButton) {
-	//
-	// }
-	// });
-	//
-	// alert.setNegativeButton("Cancel",
-	// new DialogInterface.OnClickListener() {
-	// public void onClick(DialogInterface dialog, int whichButton) {
-	//
-	// }
-	// });
-	//
-	// alert.show();
-	// }
-
-	// private void showPasswordDialog() {
-	// AlertDialog.Builder alert = new AlertDialog.Builder(this);
-	//
-	// alert.setTitle("Lock Phone");
-	// alert.setMessage("Enter the password");
-	//
-	// // Set an EditText view to get user input
-	// final EditText input = new EditText(this);
-	// input.setInputType(InputType.TYPE_CLASS_TEXT
-	// | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-	// alert.setView(input);
-	//
-	// alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-	// public void onClick(DialogInterface dialog, int whichButton) {
-	// String value = input.getText().toString();
-	// if (value.equals("omar")) {
-	// AdminActivity.getDBOperator().updateStatus(1);
-	// Intent saveintent = new Intent(getBaseContext(),UserActivity.class);
-	// startActivity(saveintent);
-	// context.startService(new Intent(context, AppsMonitor.class));
-	// finish();
-	// }
-	// }
-	// });
-	//
-	// alert.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
-	// public void onClick(DialogInterface dialog, int whichButton) {
-	// // Canceled.
-	// }
-	// });
-	//
-	// alert.show();
-	// }
 
 }

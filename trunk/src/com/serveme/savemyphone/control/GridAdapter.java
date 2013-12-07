@@ -8,12 +8,10 @@ import com.serveme.savemyphone.model.Launcher;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +23,6 @@ public class GridAdapter extends BaseAdapter {
 	private Context context;
 
 	List<Launcher> aList = null;
-
-	private int defaultTextColor;
 
 	// Constructor
 	public GridAdapter(Context c, List<Launcher> aList) {
@@ -70,9 +66,7 @@ public class GridAdapter extends BaseAdapter {
 		ActivityInfo appinfo = null;
 		try {
 			Launcher launcher = aList.get(position);
-			appinfo = context.getPackageManager().getActivityInfo(
-					new ComponentName(launcher.getPackageName(),
-							launcher.getActivity()),
+			appinfo = context.getPackageManager().getActivityInfo(new ComponentName(launcher.getPackageName(),launcher.getActivity()),
 					PackageManager.GET_META_DATA);
 		} catch (NameNotFoundException e) {
 			// TODO Auto-generated catch block
