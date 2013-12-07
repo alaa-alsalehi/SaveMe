@@ -5,7 +5,6 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.IBinder;
-import android.util.Log;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -15,12 +14,12 @@ import com.serveme.savemyphone.model.Launcher;
 import com.serveme.savemyphone.view.UserActivity;
 
 public class AppsMonitor extends Service {
-	int counter = 1;
-	static final int UPDATE_INTERVAL = 200;
+	private static final int UPDATE_INTERVAL = 200;
 	private Timer timer = new Timer();
-	ActivityManager am;
+	private ActivityManager am;
 	private DBOperations db;
-	private ComponentName lastallowedapp;
+//	private ComponentName lastallowedapp;
+	int counter = 1;
 
 	@Override
 	public IBinder onBind(Intent arg0) {
@@ -29,75 +28,47 @@ public class AppsMonitor extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		// We want this service to continue running until it is explicitly
-		// stopped, so return sticky.
 		db = new DBOperations(this);
 		am = (ActivityManager) this.getSystemService(ACTIVITY_SERVICE);
 		doGetRunningApp();
-		return START_STICKY;
+		return START_STICKY; // continue running until it is explicitly stopped, so return sticky
 	}
 
 	private void doGetRunningApp() {
 		timer.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
-				// get the info from the currently running task
-				// List<ActivityManager.RecentTaskInfo> taskInfo =
-				// am.getRecentTasks(1, ActivityManager.RECENT_WITH_EXCLUDED );
-				// ComponentName componentInfo = taskInfo.get(0).origActivity;
-				List<ActivityManager.RunningTaskInfo> taskInfo = am
-						.getRunningTasks(1);
+				List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
 				ComponentName componentInfo = taskInfo.get(0).topActivity;
-				Log.v("", (componentInfo.getPackageName()));
-				Launcher launcher = new Launcher(
-						componentInfo.getPackageName(), componentInfo
-								.getClassName());
+				Launcher launcher = new Launcher(componentInfo.getPackageName(), componentInfo.getClassName());
 				if (!db.getWhiteListApps().contains(launcher)
 						&& !componentInfo.getPackageName().equals("android")
-						&& !componentInfo.getClassName().equals(
-								"com.serveme.savemyphone.view.UserActivity")
-						&& !componentInfo
-								.getClassName()
-								.equals("group.pals.android.lib.ui.lockpattern.LockPatternActivity")) {
-					Log.v("", (componentInfo.getClassName()));
-					Log.v("", (componentInfo.getPackageName()));
-					// ActivityManager manager =
-					// (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
-					// List<RunningAppProcessInfo> services =
-					// manager.getRunningAppProcesses();
-					// for(RunningAppProcessInfo rpi : services){
-					// if(rpi.processName.startsWith(componentInfo.getPackageName())){
-					// android.os.Process.killProcess(rpi.pid);
-					// Log.v("service", String.valueOf(rpi.uid));
-					// }
-					// }
-					// am.killBackgroundProcesses(componentInfo.getPackageName());
-					// Log.v("", (componentInfo.getPackageName()));
-					if (db.getWhiteListApps().contains(
-							taskInfo.get(0).baseActivity.getPackageName())) {
+						&& !componentInfo.getClassName().equals("com.serveme.savemyphone.view.UserActivity")
+						&& !componentInfo.getClassName().equals("group.pals.android.lib.ui.lockpattern.LockPatternActivity")) {
+//					 ActivityManager manager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+//					 List<RunningAppProcessInfo> services = manager.getRunningAppProcesses();
+//					 for(RunningAppProcessInfo rpi : services){
+//						 if(rpi.processName.startsWith(componentInfo.getPackageName())){
+//								android.os.Process.killProcess(rpi.pid);
+//						 }
+//					 }
+//					am.killBackgroundProcesses(componentInfo.getPackageName());
+					if (db.getWhiteListApps().contains(taskInfo.get(0).baseActivity.getPackageName())) {
 						// Intent intent = new Intent(Intent.ACTION_MAIN);
-						// intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
-						// Intent.FLAG_ACTIVITY_NEW_TASK);
-						// intent.setComponent(new
-						// ComponentName(lastallowedapp.getPackageName(),lastallowedapp.getClassName()));
-						// Log.v("", lastallowedapp.getClassName());
+						// intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+						// intent.setComponent(new ComponentName(lastallowedapp.getPackageName(),lastallowedapp.getClassName()));
 						// startActivity(intent);
 
-						Intent saveintent = AppsMonitor.this
-								.getPackageManager().getLaunchIntentForPackage(
-										taskInfo.get(0).baseActivity
-												.getPackageName());
-						saveintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-								| Intent.FLAG_ACTIVITY_NEW_TASK);
+						Intent saveintent = AppsMonitor.this.getPackageManager().getLaunchIntentForPackage(taskInfo.get(0).baseActivity.getPackageName());
+						saveintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 						getApplication().startActivity(saveintent);
 					} else {
-						Intent saveintent = new Intent(getBaseContext(),
-								UserActivity.class);
+						Intent saveintent = new Intent(getBaseContext(),UserActivity.class);
 						saveintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						getApplication().startActivity(saveintent);
 					}
 					//
 				} else if (!componentInfo.getPackageName().equals("android")) {
-					lastallowedapp = taskInfo.get(0).topActivity;
+//					lastallowedapp = taskInfo.get(0).topActivity;
 				}
 
 			}
@@ -111,14 +82,5 @@ public class AppsMonitor extends Service {
 			timer.cancel();
 		}
 		sendBroadcast(new Intent("finish_user_activity"));
-
-		// Intent home = new Intent(Intent.ACTION_MAIN);
-		// home.addCategory(Intent.CATEGORY_HOME);
-		// home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		// getApplication().startActivity(home);
-
-		// Process.killProcess(android.os.Process.myPid());
-
-		// System.exit(0);
 	}
 }

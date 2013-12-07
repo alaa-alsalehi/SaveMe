@@ -11,7 +11,7 @@
         android:numColumns="auto_fit"
         android:paddingRight="5dp"
         android:paddingLeft="5dp"
-        android:paddingTop="20dp"
+        android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:verticalSpacing="@dimen/grid_vspace"
         android:horizontalSpacing="@dimen/grid_hspace"

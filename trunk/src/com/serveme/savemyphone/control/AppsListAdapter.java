@@ -24,35 +24,26 @@ import android.widget.ToggleButton;
 public class AppsListAdapter extends BaseAdapter {
 
 	private Context context;
+	private final ImageLoader imageloader = new ImageLoader();
 	private List<ResolveInfo> aList = null;
 	private List<Launcher> whitelist = null;
 	private static boolean[] status;
 	private LayoutInflater inflater = null;
-	private final ImageLoader imageloader = new ImageLoader();
 	private DBOperations db;
 
-	// Constructor
-	public AppsListAdapter(Context c) {
-		this.context = c;
+	public AppsListAdapter(Context context) {
+		this.context = context;
 		Intent in = new Intent(Intent.ACTION_MAIN);
 		in.addCategory(Intent.CATEGORY_LAUNCHER);
-		aList = c.getPackageManager().queryIntentActivities(in, 0);
-		db = new DBOperations(c);
-		whitelist = db.getWhiteListApps();
-		status = new boolean[aList.size()];
+		aList = context.getPackageManager().queryIntentActivities(in, 0);
+		db = new DBOperations(context);
+		whitelist = db.getWhiteListApps(); // allowed applications
+		status = new boolean[aList.size()]; // to keep enable/disable status
 		inflater = LayoutInflater.from(context);
-		// for (ResolveInfo rinfo : aList) {
-		// if (rinfo.activityInfo.packageName
-		// .equals("com.serveme.savemyphone")) {
-		// aList.remove(rinfo);
-		// }
-		// }
-		Collections.sort(aList,
-				new ResolveInfo.DisplayNameComparator(c.getPackageManager()));
+		Collections.sort(aList,new ResolveInfo.DisplayNameComparator(context.getPackageManager()));
 		for (Iterator<ResolveInfo> it = aList.iterator(); it.hasNext();) {
 			ResolveInfo rinfo = it.next();
-			if (rinfo.activityInfo.packageName
-					.equals("com.serveme.savemyphone")) {
+			if (rinfo.activityInfo.packageName.equals("com.serveme.savemyphone")) {
 				it.remove();
 			}
 		}
@@ -79,10 +70,9 @@ public class AppsListAdapter extends BaseAdapter {
 		Log.d("test", aList.get(position).activityInfo.packageName);
 
 		final ResolveInfo appinfo = aList.get(position);
-		final Launcher launcher = new Launcher(
-				appinfo.activityInfo.packageName, appinfo.activityInfo.name);
+		final Launcher launcher = new Launcher(appinfo.activityInfo.packageName, appinfo.activityInfo.name);
 
-		// more performance for ListView by use Holder Pattern
+		// more performance for ListView to use Holder Pattern
 		ViewHolder viewHolder;
 
 		if (convertView == null) {
@@ -91,10 +81,8 @@ public class AppsListAdapter extends BaseAdapter {
 			viewHolder = new ViewHolder();
 			viewHolder.name = (TextView) convertView.findViewById(R.id.name);
 			viewHolder.icon = (ImageView) convertView.findViewById(R.id.icon);
-			viewHolder.tg = (ToggleButton) convertView
-					.findViewById(R.id.enable_disable);
-			// first you set Tag Not get it
-			convertView.setTag(viewHolder);
+			viewHolder.tg = (ToggleButton) convertView.findViewById(R.id.enable_disable);
+			convertView.setTag(viewHolder); // first you set Tag to get it later
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
@@ -107,7 +95,6 @@ public class AppsListAdapter extends BaseAdapter {
 				if (isChecked) {
 					status[position] = true;
 					if (!whitelist.contains(launcher)) {
-
 						db.insertöApp(launcher);
 						whitelist.add(launcher);
 					}
@@ -122,16 +109,12 @@ public class AppsListAdapter extends BaseAdapter {
 			}
 		});
 
-		viewHolder.name
-				.setText(appinfo.loadLabel((context.getPackageManager())));
+		viewHolder.name.setText(appinfo.loadLabel((context.getPackageManager())));
 		// Drawable img = appinfo.loadIcon(context.getPackageManager());
 		// img.setBounds(0, 0, 75, 75);
 		// viewHolder.icon.setBackgroundDrawable(img);
 		imageloader.load(viewHolder.icon, appinfo, context);
-		Log.v("hi", status[position] + "");
-		if (whitelist.contains(launcher)) {
-			status[position] = true;
-		}
+		if (whitelist.contains(launcher)) {	status[position] = true; }
 		viewHolder.tg.setChecked(status[position]);
 
 		return convertView;

@@ -5,7 +5,6 @@ public class Launcher {
 	private String activity;
 
 	public Launcher(String packageName, String activity) {
-		super();
 		this.packageName = packageName;
 		this.activity = activity;
 	}
@@ -23,8 +22,7 @@ public class Launcher {
 		if (o instanceof Launcher) {
 			Launcher launcher = (Launcher) o;
 			String myActivityPath = getPackageName() + " " + getActivity();
-			String otherActivityPath = launcher.getPackageName() + " "
-					+ launcher.getActivity();
+			String otherActivityPath = launcher.getPackageName() + " " + launcher.getActivity();
 			return myActivityPath.equals(otherActivityPath);
 		} else
 			return false;
@@ -38,7 +36,6 @@ public class Launcher {
 
 	@Override
 	public String toString() {
-		return "Package Name " + getPackageName() + " Activity "
-				+ getActivity();
+		return "Package Name " + getPackageName() + " Activity " + getActivity();
 	}
 }

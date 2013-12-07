@@ -24,8 +24,7 @@ public class ImageLoader {
 		ImageView img;
 	    private final WeakReference<ImageView> imageViewReference;
 
-	    public LoadingThread(ImageView icon, ResolveInfo appinfo,
-				Context context) {
+	    public LoadingThread(ImageView icon, ResolveInfo appinfo,Context context) {
 	    	imageViewReference = new WeakReference<ImageView>(icon);
 	    	info = appinfo;
 	    	this.context = context;
@@ -33,7 +32,6 @@ public class ImageLoader {
 
 
 	    @Override
-	    // Actual download method, run in the task thread
 	    protected Drawable doInBackground(String... params) {
 	    	Drawable img = info.loadIcon(context.getPackageManager());
 	    	int imagesize = (int) context.getResources().getDimension(R.dimen.image_size);

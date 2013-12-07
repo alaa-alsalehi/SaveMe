@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBHandler extends SQLiteOpenHelper {
 
 	// Database Version
-	private static final int DATABASE_VERSION = 2;
+	private static final int DATABASE_VERSION = 1;
 
 	// Database Name
 	private static final String DATABASE_NAME = "db.sqlite";
@@ -18,21 +18,18 @@ public class DBHandler extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		// TODO Auto-generated method stub
 		String createTableStr = "CREATE TABLE " + DB_KEYS.WHITE_LIST_TABLE
-				+ " ( "+ DB_KEYS.KEY_ID+" long primary key ,"+ DB_KEYS.KEY_PKGNAME + " TEXT not null, "
+				+ " ( " + DB_KEYS.KEY_ID + " long primary key ,"
+				+ DB_KEYS.KEY_PKGNAME + " TEXT not null, "
 				+ DB_KEYS.KEY_ACTIVITY + " TEXT)";
 		db.execSQL(createTableStr);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldversion, int newversion) {
-		// TODO Auto-generated method stub
 		if (oldversion != newversion) {
 			// later
-			db.execSQL("DROP TABLE IF EXISTS '" + DB_KEYS.WHITE_LIST_TABLE
-					+ "'");
-			db.execSQL("DROP TABLE IF EXISTS 'admin'");
+			db.execSQL("DROP TABLE IF EXISTS '" + DB_KEYS.WHITE_LIST_TABLE + "'");
 			onCreate(db);
 		}
 

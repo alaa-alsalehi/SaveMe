@@ -24,7 +24,6 @@ import android.widget.ListView;
 
 public class AdminActivity extends ActionBarActivity {
 
-
 	private DevicePolicyManager devicePolicyManager;
 	private ComponentName adminComponent;
 	private static final int REQ_ENTER_PATTERN = 2;
@@ -93,12 +92,16 @@ public class AdminActivity extends ActionBarActivity {
 		if (devicePolicyManager.isAdminActive(adminComponent)) {
 			SharedPreferences mySharedPreferences = getSharedPreferences("mypref", Context.MODE_PRIVATE);
 			if (mySharedPreferences != null	&& mySharedPreferences.contains("pass_code")) {
-				if(!getIntent().getExtras().getBoolean("first_time")){
-	//				if(pattern){
-					new Checker(this).checkPattern(REQ_ENTER_PATTERN);
-	//				}else{
-						
-	//				}
+				try{
+					if(!getIntent().getExtras().getBoolean("first_time")){
+		//				if(pattern){
+						new Checker(this).checkPattern(REQ_ENTER_PATTERN);
+		//				}else{
+							
+		//				}
+					}
+				} catch(NullPointerException npe){
+					// nothing
 				}
 			} else {
 				finish();

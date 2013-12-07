@@ -10,9 +10,6 @@ import com.serveme.savemyphone.model.Launcher;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.receivers.AdminReciver;
 import com.serveme.savemyphone.service.AppsMonitor;
-
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.WallpaperManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
@@ -23,7 +20,6 @@ import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -33,8 +29,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
-@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-@SuppressLint("NewApi")
 public class UserActivity extends ActionBarActivity {
 
 	final Context context = this;
@@ -69,15 +63,13 @@ public class UserActivity extends ActionBarActivity {
 		startService(new Intent(this, AppsMonitor.class));
 
 		GridView gridView = (GridView) findViewById(R.id.grid_view);
-		gridView.setBackgroundDrawable(WallpaperManager.getInstance(context)
-				.getDrawable());
+		gridView.setBackgroundDrawable(WallpaperManager.getInstance(context).getDrawable());
 		gridView.setAdapter(new GridAdapter(this, appsinfolist));
 		gridView.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
 		gridView.setNumColumns(GridView.AUTO_FIT);
 
 		devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-		adminComponent = new ComponentName(UserActivity.this,
-				AdminReciver.class);
+		adminComponent = new ComponentName(UserActivity.this,AdminReciver.class);
 
 		// float scalefactor = getResources().getDisplayMetrics().density * 80;
 		// Point size = new Point();
@@ -88,18 +80,12 @@ public class UserActivity extends ActionBarActivity {
 
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> parent, View v,
-					int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View v,int position, long id) {
 				Launcher launcher = appsinfolist.get(position);
-
 				Intent i = new Intent();
 				i.setAction(Intent.ACTION_MAIN);
 				i.addCategory(Intent.CATEGORY_LAUNCHER);
-				i.setClassName(launcher.getPackageName(),
-						launcher.getActivity());
-				
-
-				Log.d("pakage", i.toString());
+				i.setClassName(launcher.getPackageName(),launcher.getActivity());
 				startActivity(i);
 			}
 		});
@@ -143,20 +129,19 @@ public class UserActivity extends ActionBarActivity {
 		case REQ_ENTER_PATTERN: {
 			switch (resultCode) {
 			case RESULT_OK:
-				Log.v("result", "passed");
+//				Log.v("result", "passed");
 				PrefEditor pe = new PrefEditor(UserActivity.this);
 				pe.updateStatus(0);
 				context.stopService(new Intent(context, AppsMonitor.class));
 				break;
 			case RESULT_CANCELED:
-				Log.v("result", "canceled");
+//				Log.v("result", "canceled");
 				break;
 			case LockPatternActivity.RESULT_FAILED:
-				Log.v("result", "faild");
+//				Log.v("result", "faild");
 				break;
 			case LockPatternActivity.RESULT_FORGOT_PATTERN:
-				// The user forgot the pattern and invoked your recovery
-				// Activity.
+				// The user forgot the pattern and invoked your recovery Activity.
 				break;
 			}
 
@@ -168,8 +153,7 @@ public class UserActivity extends ActionBarActivity {
 			 * In any case, there's always a key EXTRA_RETRY_COUNT, which holds
 			 * the number of tries that the user did.
 			 */
-			// int retryCount =
-			// data.getIntExtra(LockPatternActivity.EXTRA_RETRY_COUNT, 0);
+			// int retryCount = data.getIntExtra(LockPatternActivity.EXTRA_RETRY_COUNT, 0);
 
 			break;
 		}// REQ_ENTER_PATTERN
@@ -191,37 +175,4 @@ public class UserActivity extends ActionBarActivity {
 		}
 	};
 
-	// private void showUnlockDialog(){
-	// AlertDialog.Builder alert = new AlertDialog.Builder(this);
-	//
-	// alert.setTitle("Unlock Phone");
-	// alert.setMessage("Enter the password");
-	//
-	// // Set an EditText view to get user input
-	// final EditText input = new EditText(this);
-	// input.setInputType(InputType.TYPE_CLASS_TEXT |
-	// InputType.TYPE_TEXT_VARIATION_PASSWORD);
-	// alert.setView(input);
-	//
-	// alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-	// public void onClick(DialogInterface dialog, int whichButton) {
-	// String value = input.getText().toString();
-	// Log.v("text", value);
-	// if(value.equals("omar")){
-	// db.updateStatus(0);
-	// context.stopService(new Intent(context,AppsMonitor.class));
-	// Toast.makeText(context, "done", Toast.LENGTH_LONG).show();
-	// finish();
-	// }
-	// }
-	// });
-	//
-	// alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-	// public void onClick(DialogInterface dialog, int whichButton) {
-	// // Canceled.
-	// }
-	// });
-	//
-	// alert.show();
-	// }
 }

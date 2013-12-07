@@ -30,21 +30,17 @@ public class DBOperations {
 		database.close();
 	}
 
-	public void deleteLauncher(Launcher launcher) {
-		SQLiteDatabase db = dbhandler.getWritableDatabase();
-		db.delete(
-				DB_KEYS.WHITE_LIST_TABLE,
-				DB_KEYS.KEY_PKGNAME + " = ? and " + DB_KEYS.KEY_ACTIVITY
-						+ " = ?",
-				new String[] { launcher.getPackageName(),
-						launcher.getActivity() });
-		db.close();
-	}
-
 	public void deleteApp(String packageName) {
 		SQLiteDatabase db = dbhandler.getWritableDatabase();
 		db.delete(DB_KEYS.WHITE_LIST_TABLE, DB_KEYS.KEY_PKGNAME + " = ?",
 				new String[] { packageName });
+		db.close();
+	}
+	
+	public void deleteLauncher(Launcher launcher) {
+		SQLiteDatabase db = dbhandler.getWritableDatabase();
+		db.delete(DB_KEYS.WHITE_LIST_TABLE, DB_KEYS.KEY_PKGNAME + " = ? and " + DB_KEYS.KEY_ACTIVITY + " = ?",
+				new String[] { launcher.getPackageName(),launcher.getActivity() });
 		db.close();
 	}
 
@@ -52,15 +48,12 @@ public class DBOperations {
 		if (whitelist == null) {
 			whitelist = new ArrayList<Launcher>();
 			SQLiteDatabase database = dbhandler.getReadableDatabase();
-			cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null, null, null,
-					null, null, DB_KEYS.KEY_PKGNAME);
-			// looping through all rows and adding to list
+			cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null, null, null, null, null, DB_KEYS.KEY_PKGNAME);
+			// loop through all rows and add it to white list
 			if (cursor.moveToFirst()) {
 				do {
-					String packageName = cursor.getString((cursor
-							.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
-					String activity = cursor.getString((cursor
-							.getColumnIndexOrThrow(DB_KEYS.KEY_ACTIVITY)));
+					String packageName = cursor.getString((cursor.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
+					String activity = cursor.getString((cursor.getColumnIndexOrThrow(DB_KEYS.KEY_ACTIVITY)));
 					Launcher lanucher = new Launcher(packageName, activity);
 					whitelist.add(lanucher);
 				} while (cursor.moveToNext());
