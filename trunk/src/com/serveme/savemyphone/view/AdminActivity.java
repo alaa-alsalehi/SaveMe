@@ -96,19 +96,19 @@ public class AdminActivity extends ActionBarActivity {
 					"mypref", Context.MODE_PRIVATE);
 			if (mySharedPreferences != null
 					&& mySharedPreferences.contains("pass_code")) {
-				try {
-					if (!getIntent().getExtras().getBoolean("first_time")) {
+				if (getIntent() != null) {
+					if (!getIntent().getBooleanExtra("first_time", false)) {
 						// if(pattern){
 						new Checker(this).checkPattern(REQ_ENTER_PATTERN);
 						// }else{
 
 						// }
 					}
-				} catch (NullPointerException npe) {
-					// nothing
+				}else{
+					new Checker(this).checkPattern(REQ_ENTER_PATTERN);
 				}
 			} else {
-				//finish();
+				// finish();
 				PasswordRequester.requestPatternPassword(this);
 				/*
 				 * Intent intent = new
@@ -121,7 +121,6 @@ public class AdminActivity extends ActionBarActivity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		Toast.makeText(this, "test", Toast.LENGTH_LONG).show();
 		switch (requestCode) {
 		case REQ_ENTER_PATTERN: {
 			switch (resultCode) {
