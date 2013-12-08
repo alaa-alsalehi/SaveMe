@@ -10,6 +10,7 @@ import com.serveme.savemyphone.model.Launcher;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +25,7 @@ import android.widget.ToggleButton;
 public class AppsListAdapter extends BaseAdapter {
 
 	private Context context;
-	private final ImageLoader imageloader = new ImageLoader();
+	//private final ImageLoader imageloader = new ImageLoader();
 	private List<ResolveInfo> aList = null;
 	private List<Launcher> whitelist = null;
 	private static boolean[] status;
@@ -110,10 +111,11 @@ public class AppsListAdapter extends BaseAdapter {
 		});
 
 		viewHolder.name.setText(appinfo.loadLabel((context.getPackageManager())));
-		// Drawable img = appinfo.loadIcon(context.getPackageManager());
-		// img.setBounds(0, 0, 75, 75);
-		// viewHolder.icon.setBackgroundDrawable(img);
-		imageloader.load(viewHolder.icon, appinfo, context);
+		Drawable img = appinfo.loadIcon(context.getPackageManager());
+    	int imagesize = (int) context.getResources().getDimension(R.dimen.image_size);
+		img.setBounds(0, 0, imagesize, imagesize);
+		 viewHolder.icon.setImageDrawable(img);
+		//imageloader.load(viewHolder.icon, appinfo, context);
 		if (whitelist.contains(launcher)) {	status[position] = true; }
 		viewHolder.tg.setChecked(status[position]);
 
