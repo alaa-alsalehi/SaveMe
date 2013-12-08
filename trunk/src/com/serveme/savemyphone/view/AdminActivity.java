@@ -21,13 +21,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class AdminActivity extends ActionBarActivity {
 
 	private DevicePolicyManager devicePolicyManager;
 	private ComponentName adminComponent;
 	private static final int REQ_ENTER_PATTERN = 2;
-	
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class AdminActivity extends ActionBarActivity {
 		checkAdminAccess();
 
 		checkPassCode();
-		
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_layout);
 		AppsListAdapter adapter = new AppsListAdapter(this);
@@ -80,7 +81,8 @@ public class AdminActivity extends ActionBarActivity {
 
 	private void checkAdminAccess() {
 		devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-		adminComponent = new ComponentName(AdminActivity.this,	AdminReciver.class);
+		adminComponent = new ComponentName(AdminActivity.this,
+				AdminReciver.class);
 		if (!devicePolicyManager.isAdminActive(adminComponent)) {
 			finish();
 			Intent intent = new Intent(getBaseContext(), AdminRequest.class);
@@ -90,29 +92,36 @@ public class AdminActivity extends ActionBarActivity {
 
 	private void checkPassCode() {
 		if (devicePolicyManager.isAdminActive(adminComponent)) {
-			SharedPreferences mySharedPreferences = getSharedPreferences("mypref", Context.MODE_PRIVATE);
-			if (mySharedPreferences != null	&& mySharedPreferences.contains("pass_code")) {
-				try{
-					if(!getIntent().getExtras().getBoolean("first_time")){
-		//				if(pattern){
+			SharedPreferences mySharedPreferences = getSharedPreferences(
+					"mypref", Context.MODE_PRIVATE);
+			if (mySharedPreferences != null
+					&& mySharedPreferences.contains("pass_code")) {
+				try {
+					if (!getIntent().getExtras().getBoolean("first_time")) {
+						// if(pattern){
 						new Checker(this).checkPattern(REQ_ENTER_PATTERN);
-		//				}else{
-							
-		//				}
+						// }else{
+
+						// }
 					}
-				} catch(NullPointerException npe){
+				} catch (NullPointerException npe) {
 					// nothing
 				}
 			} else {
-				finish();
-				Intent intent = new Intent(getBaseContext(),PasswordRequest.class);
-				startActivity(intent);
+				//finish();
+				PasswordRequester.requestPatternPassword(this);
+				/*
+				 * Intent intent = new
+				 * Intent(getBaseContext(),PasswordRequest.class);
+				 * startActivity(intent);
+				 */
 			}
 		}
 	}
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		Toast.makeText(this, "test", Toast.LENGTH_LONG).show();
 		switch (requestCode) {
 		case REQ_ENTER_PATTERN: {
 			switch (resultCode) {
@@ -145,6 +154,8 @@ public class AdminActivity extends ActionBarActivity {
 			break;
 		}// REQ_ENTER_PATTERN
 		}
+		PasswordRequester.onPatternPasswordRecived(requestCode, resultCode,
+				data, this);
 	}
 
 }
