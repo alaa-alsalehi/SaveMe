@@ -18,10 +18,10 @@ public class PasswordRequester {
 		activity.startActivityForResult(intent, REQ_CREATE_PATTERN);
 	}
 
-	public static void onPatternPasswordRecived(int requestCode, int resultCode,
-			Intent data, Activity activity) {
+	public static void onPatternPasswordRecived(int requestCode,
+			int resultCode, Intent data, Activity activity) {
 		switch (requestCode) {
-		case REQ_CREATE_PATTERN: 
+		case REQ_CREATE_PATTERN:
 			if (resultCode == Activity.RESULT_OK) {
 				char[] passCode = data
 						.getCharArrayExtra(LockPatternActivity.EXTRA_PATTERN);
@@ -34,8 +34,11 @@ public class PasswordRequester {
 				intent.putExtra("first_time", true);
 				activity.startActivity(intent);
 				activity.finish();
+			} else {
+				activity.finish();
 			}
 			break;
+
 		}
 	}
 
