@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.model.Launcher;
@@ -68,7 +70,6 @@ public class AppsListAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
-		Log.d("test", aList.get(position).activityInfo.packageName);
 
 		final ResolveInfo appinfo = aList.get(position);
 		final Launcher launcher = new Launcher(appinfo.activityInfo.packageName, appinfo.activityInfo.name);
@@ -106,7 +107,10 @@ public class AppsListAdapter extends BaseAdapter {
 						whitelist.remove(launcher);
 					}
 				}
-
+				EasyTracker.getInstance(context).send(
+						MapBuilder.createEvent("ui_action", "button_press",
+								"enable_disable_app", Long.valueOf(1))
+								.build());
 			}
 		});
 

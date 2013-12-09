@@ -4,6 +4,10 @@ package com.serveme.savemyphone.view;
 
 import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.ExceptionReporter;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.control.AppsListAdapter;
 import com.serveme.savemyphone.preferences.PrefEditor;
@@ -48,6 +52,25 @@ public class AdminActivity extends ActionBarActivity {
 	}
 
 	@Override
+	protected void onStart() {
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this);
+		Thread.UncaughtExceptionHandler uncaughtExceptionHandler = Thread
+				.getDefaultUncaughtExceptionHandler();
+		if (uncaughtExceptionHandler instanceof ExceptionReporter) {
+			ExceptionReporter exceptionReporter = (ExceptionReporter) uncaughtExceptionHandler;
+			exceptionReporter
+					.setExceptionParser(new AnalyticsExceptionParser());
+		}
+	}
+	
+	@Override
+	protected void onStop() {
+		EasyTracker.getInstance(this).activityStop(this);
+		super.onStop();
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.admin, menu);
@@ -63,6 +86,9 @@ public class AdminActivity extends ActionBarActivity {
 			pe.updateStatus(1);
 			Intent saveintent = new Intent(getBaseContext(), UserActivity.class);
 			startActivity(saveintent);
+			EasyTracker.getInstance(this).send(
+					MapBuilder.createEvent("ui_action", "button_press", "lock",
+							Long.valueOf(1)).build());
 			/*
 			 * Intent saveintent = new
 			 * Intent(getBaseContext(),PasswordEntryActivity.class);
@@ -73,6 +99,9 @@ public class AdminActivity extends ActionBarActivity {
 		case R.id.action_settings:
 			Intent intent = new Intent(this, SettingsActivity.class);
 			startActivity(intent);
+			EasyTracker.getInstance(this).send(
+					MapBuilder.createEvent("ui_action", "button_press",
+							"settings", Long.valueOf(1)).build());
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -104,7 +133,7 @@ public class AdminActivity extends ActionBarActivity {
 
 						// }
 					}
-				}else{
+				} else {
 					new Checker(this).checkPattern(REQ_ENTER_PATTERN);
 				}
 			} else {

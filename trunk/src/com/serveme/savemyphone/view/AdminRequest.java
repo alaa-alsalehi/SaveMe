@@ -11,6 +11,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.ExceptionReporter;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.receivers.AdminReciver;
 
@@ -41,10 +45,33 @@ public class AdminRequest extends Activity {
 						intent.putExtra("force-locked",	DeviceAdminInfo.USES_POLICY_FORCE_LOCK);
 						intent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
 						startActivityForResult(intent, REQUEST_ENABLE);
+						EasyTracker.getInstance(AdminRequest.this).send(
+								MapBuilder.createEvent("ui_action", "button_press",
+										"request_admin_permission", Long.valueOf(1))
+										.build());
 					}
 			}
 		});
 
+	}
+	
+		@Override
+	protected void onStart() {
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this);
+		Thread.UncaughtExceptionHandler uncaughtExceptionHandler = Thread
+				.getDefaultUncaughtExceptionHandler();
+		if (uncaughtExceptionHandler instanceof ExceptionReporter) {
+			ExceptionReporter exceptionReporter = (ExceptionReporter) uncaughtExceptionHandler;
+			exceptionReporter
+					.setExceptionParser(new AnalyticsExceptionParser());
+		}
+	}
+	
+	@Override
+	protected void onStop() {
+		EasyTracker.getInstance(this).activityStop(this);
+		super.onStop();
 	}
 	
 	
@@ -58,9 +85,15 @@ public class AdminRequest extends Activity {
 	                devicePolicyManager.lockNow();
 	                Intent intent = new Intent(getBaseContext(), AdminActivity.class);
 					startActivity(intent);
+					EasyTracker.getInstance(this).send(
+							MapBuilder.createEvent("ui_action", "button_press",
+									"admin_permission_done", Long.valueOf(1))
+									.build());
 	            } else {
-	                Log.v("DeviceAdminSample", "Administration enable FAILED!");
-//	    			startActivity(new Intent(getApplicationContext(),AdminRequest.class));
+	            	EasyTracker.getInstance(this).send(
+							MapBuilder.createEvent("ui_action", "button_press",
+									"admin_permission_cancelled", Long.valueOf(1))
+									.build());
 	            }
 	            return;
 	    }

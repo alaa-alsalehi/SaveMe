@@ -1,5 +1,8 @@
 package com.serveme.savemyphone.view;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
+
 import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
 import android.app.Activity;
 import android.content.Context;
@@ -16,6 +19,10 @@ public class PasswordRequester {
 		Intent intent = new Intent(LockPatternActivity.ACTION_CREATE_PATTERN,
 				null, activity, LockPatternActivity.class);
 		activity.startActivityForResult(intent, REQ_CREATE_PATTERN);
+		EasyTracker.getInstance(activity).send(
+				MapBuilder.createEvent("ui_action", "button_press",
+						"request_password", Long.valueOf(1))
+						.build());
 	}
 
 	public static void onPatternPasswordRecived(int requestCode,
@@ -34,7 +41,15 @@ public class PasswordRequester {
 				intent.putExtra("first_time", true);
 				activity.startActivity(intent);
 				activity.finish();
+				EasyTracker.getInstance(activity).send(
+						MapBuilder.createEvent("ui_action", "button_press",
+								"request_password_done", Long.valueOf(1))
+								.build());
 			} else {
+				EasyTracker.getInstance(activity).send(
+						MapBuilder.createEvent("ui_action", "button_press",
+								"request_password_cancelled", Long.valueOf(1))
+								.build());
 				activity.finish();
 			}
 			break;

@@ -3,6 +3,10 @@ package com.serveme.savemyphone.view;
 import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
 import java.util.List;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.ExceptionReporter;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.control.GridAdapter;
 import com.serveme.savemyphone.model.DBOperations;
@@ -87,9 +91,32 @@ public class UserActivity extends ActionBarActivity {
 				i.addCategory(Intent.CATEGORY_LAUNCHER);
 				i.setClassName(launcher.getPackageName(),launcher.getActivity());
 				startActivity(i);
+				EasyTracker.getInstance(context).send(
+						MapBuilder.createEvent("ui_action", "button_press",
+								"run_app", Long.valueOf(1))
+								.build());
 			}
 		});
 
+	}
+	
+		@Override
+	protected void onStart() {
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this);
+		Thread.UncaughtExceptionHandler uncaughtExceptionHandler = Thread
+				.getDefaultUncaughtExceptionHandler();
+		if (uncaughtExceptionHandler instanceof ExceptionReporter) {
+			ExceptionReporter exceptionReporter = (ExceptionReporter) uncaughtExceptionHandler;
+			exceptionReporter
+					.setExceptionParser(new AnalyticsExceptionParser());
+		}
+	}
+	
+	@Override
+	protected void onStop() {
+		EasyTracker.getInstance(this).activityStop(this);
+		super.onStop();
 	}
 
 	@Override
@@ -116,6 +143,10 @@ public class UserActivity extends ActionBarActivity {
 		switch (item.getItemId()) {
 		case R.id.action_unlock:
 			new Checker(this).checkPattern(REQ_ENTER_PATTERN);
+			EasyTracker.getInstance(context).send(
+					MapBuilder.createEvent("ui_action", "button_press",
+							"unlock", Long.valueOf(1))
+							.build());
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

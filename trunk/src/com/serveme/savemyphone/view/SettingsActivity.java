@@ -1,5 +1,9 @@
 package com.serveme.savemyphone.view;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.ExceptionReporter;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.receivers.AdminReciver;
 import android.app.admin.DevicePolicyManager;
@@ -30,6 +34,10 @@ public class SettingsActivity extends PreferenceActivity implements
 		Preference myPref = (Preference) findPreference("uninstall");
 		myPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			public boolean onPreferenceClick(Preference preference) {
+				EasyTracker.getInstance(SettingsActivity.this).send(
+						MapBuilder.createEvent("ui_action", "button_press",
+								"uninstall", Long.valueOf(1))
+								.build());
 				Context context = SettingsActivity.this; 
 				ComponentName devAdminReceiver = new ComponentName(context,	AdminReciver.class);
 				DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
@@ -40,6 +48,25 @@ public class SettingsActivity extends PreferenceActivity implements
 				return true;
 			}
 		});
+	}
+	
+		@Override
+	protected void onStart() {
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this);
+		Thread.UncaughtExceptionHandler uncaughtExceptionHandler = Thread
+				.getDefaultUncaughtExceptionHandler();
+		if (uncaughtExceptionHandler instanceof ExceptionReporter) {
+			ExceptionReporter exceptionReporter = (ExceptionReporter) uncaughtExceptionHandler;
+			exceptionReporter
+					.setExceptionParser(new AnalyticsExceptionParser());
+		}
+	}
+	
+	@Override
+	protected void onStop() {
+		EasyTracker.getInstance(this).activityStop(this);
+		super.onStop();
 	}
 
 	@SuppressWarnings("deprecation")
