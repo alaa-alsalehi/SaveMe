@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -8,5 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
     </ListView>
+    
+    <com.google.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="fc948e83758e4541"
+        ads:loadAdOnCreate="true"
+        android:layout_gravity="bottom" />
 
 </FrameLayout>

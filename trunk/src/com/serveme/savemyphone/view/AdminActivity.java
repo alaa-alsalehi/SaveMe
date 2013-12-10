@@ -4,26 +4,33 @@ package com.serveme.savemyphone.view;
 
 import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
 
+import com.google.ads.AdRequest;
+import com.google.ads.AdView;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.ExceptionReporter;
 import com.google.analytics.tracking.android.MapBuilder;
+import com.serveme.ads.AdMobListener;
 import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.control.AppsListAdapter;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.receivers.AdminReciver;
+
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -49,6 +56,28 @@ public class AdminActivity extends ActionBarActivity {
 		AppsListAdapter adapter = new AppsListAdapter(this);
 		ListView listView = (ListView) findViewById(R.id.app_list);
 		listView.setAdapter(adapter);
+		adsStuff();
+	}
+
+	private void adsStuff() {
+		final AdView adView = (AdView) findViewById(R.id.adView);
+		// Create the adView
+
+		adView.setGravity(Gravity.CENTER);
+		adView.setAdListener(new AdMobListener(this));
+		// Initiate a generic request to load it with an ad
+		final AdRequest adRequest = new AdRequest();
+		adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
+		// adRequest.addTestDevice("8E7864D6D7911778659788D0B39F99E8");
+		Thread thread = new Thread(new Runnable() {
+
+			public void run() {
+				Looper.prepare();
+				adView.loadAd(adRequest);
+
+			}
+		});
+		thread.start();
 	}
 
 	@Override
@@ -63,7 +92,7 @@ public class AdminActivity extends ActionBarActivity {
 					.setExceptionParser(new AnalyticsExceptionParser());
 		}
 	}
-	
+
 	@Override
 	protected void onStop() {
 		EasyTracker.getInstance(this).activityStop(this);
