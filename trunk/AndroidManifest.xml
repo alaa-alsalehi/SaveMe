@@ -126,6 +126,20 @@
             android:name="com.google.ads.AdActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenLayout|screenSize|smallestScreenSize|uiMode"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+         
+                 <activity
+            android:name="com.noqoush.adfalcon.android.sdk.ADFBrowser"
+            android:configChanges="keyboard|keyboardHidden|orientation|uiMode|screenLayout|screenSize|smallestScreenSize" />
+        <activity
+            android:name="com.noqoush.adfalcon.android.sdk.ADFActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|uiMode|screenLayout|screenSize|smallestScreenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name="com.noqoush.adfalcon.android.sdk.ADFCanvas"
+            android:configChanges="keyboard|keyboardHidden|orientation|uiMode|screenLayout|screenSize|smallestScreenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
     </application>
 
 </manifest>
