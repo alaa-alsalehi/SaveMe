@@ -1,0 +1,28 @@
+<resources>
+    
+    <string name="app_name">احرس هاتفك</string>
+    <string name="settings">الإعدادات</string>
+    <string name="apps">التطبيقات</string>
+    
+    <string name="action_unlock">إلغاء الحماية</string>
+    <string name="action_lock">تفعيل الحماية</string>
+
+    <string name="device_admin_request">طلب صلاحيات المدير</string>
+    <string name="admin_button">منح صلاحيات المدير</string>
+    <string name="admin_message">هذا التطبيق يحتاج إلى صلاحيات المدير للعمل بشكل صحيح</string>
+
+    <string name="uninstall">إزالة التطبيق</string>
+    
+    <string name="lock_choice">"اختار نوع الحماية"</string>
+    <string name="pattern">نمط</string>
+    <string name="password">كلمة سر</string>
+        
+    <string name="setup_key">اختر مفتاح القفل</string>
+    
+    <string name="lock_method">نوع القفل</string>
+    <string-array name="lock_options">
+        <item>نمط</item>
+        <item>كلمة سر</item>
+    </string-array>
+    
+</resources>
