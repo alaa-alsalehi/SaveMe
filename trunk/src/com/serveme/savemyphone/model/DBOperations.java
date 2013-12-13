@@ -12,6 +12,7 @@ public class DBOperations {
 	private static DBHandler dbhandler;
 	private Cursor cursor;
 	private List<Launcher> whitelist;
+	private List<Launcher> whitelistPackages;
 
 	public DBOperations(Context context) {
 		dbhandler = getInstance(context);
@@ -36,11 +37,15 @@ public class DBOperations {
 				new String[] { packageName });
 		db.close();
 	}
-	
+
 	public void deleteLauncher(Launcher launcher) {
 		SQLiteDatabase db = dbhandler.getWritableDatabase();
-		db.delete(DB_KEYS.WHITE_LIST_TABLE, DB_KEYS.KEY_PKGNAME + " = ? and " + DB_KEYS.KEY_ACTIVITY + " = ?",
-				new String[] { launcher.getPackageName(),launcher.getActivity() });
+		db.delete(
+				DB_KEYS.WHITE_LIST_TABLE,
+				DB_KEYS.KEY_PKGNAME + " = ? and " + DB_KEYS.KEY_ACTIVITY
+						+ " = ?",
+				new String[] { launcher.getPackageName(),
+						launcher.getActivity() });
 		db.close();
 	}
 
@@ -48,12 +53,15 @@ public class DBOperations {
 		if (whitelist == null) {
 			whitelist = new ArrayList<Launcher>();
 			SQLiteDatabase database = dbhandler.getReadableDatabase();
-			cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null, null, null, null, null, DB_KEYS.KEY_PKGNAME);
+			cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null, null, null,
+					null, null, DB_KEYS.KEY_PKGNAME);
 			// loop through all rows and add it to white list
 			if (cursor.moveToFirst()) {
 				do {
-					String packageName = cursor.getString((cursor.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
-					String activity = cursor.getString((cursor.getColumnIndexOrThrow(DB_KEYS.KEY_ACTIVITY)));
+					String packageName = cursor.getString((cursor
+							.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
+					String activity = cursor.getString((cursor
+							.getColumnIndexOrThrow(DB_KEYS.KEY_ACTIVITY)));
 					Launcher lanucher = new Launcher(packageName, activity);
 					whitelist.add(lanucher);
 				} while (cursor.moveToNext());
@@ -61,6 +69,26 @@ public class DBOperations {
 			database.close();
 		}
 		return whitelist;
+	}
+
+	public List<Launcher> getWhiteListPackages() {
+		if (whitelistPackages == null) {
+			whitelistPackages = new ArrayList<Launcher>();
+			SQLiteDatabase database = dbhandler.getReadableDatabase();
+			cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null, null, null,
+					null, null, DB_KEYS.KEY_PKGNAME);
+			// loop through all rows and add it to white list
+			if (cursor.moveToFirst()) {
+				do {
+					String packageName = cursor.getString((cursor
+							.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
+					Launcher lanucher = new Launcher(packageName, null);
+					whitelistPackages.add(lanucher);
+				} while (cursor.moveToNext());
+			}
+			database.close();
+		}
+		return whitelistPackages;
 	}
 
 }
