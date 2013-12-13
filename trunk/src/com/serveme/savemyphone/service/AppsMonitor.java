@@ -39,8 +39,8 @@ public class AppsMonitor extends Service {
 			public void run() {
 				List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
 				ComponentName componentInfo = taskInfo.get(0).topActivity;
-				Launcher launcher = new Launcher(componentInfo.getPackageName(), componentInfo.getClassName());
-				if (!db.getWhiteListApps().contains(launcher)
+				Launcher launcher = new Launcher(componentInfo.getPackageName(), null);
+				if (!db.getWhiteListPackages().contains(launcher)
 						&& !componentInfo.getPackageName().equals("android")
 						&& !componentInfo.getClassName().equals("com.serveme.savemyphone.view.UserActivity")
 						&& !componentInfo.getClassName().equals("group.pals.android.lib.ui.lockpattern.LockPatternActivity")) {
@@ -52,7 +52,7 @@ public class AppsMonitor extends Service {
 //						 }
 //					 }
 //					am.killBackgroundProcesses(componentInfo.getPackageName());
-					if (db.getWhiteListApps().contains(taskInfo.get(0).baseActivity.getPackageName())) {
+					if (db.getWhiteListPackages().contains(launcher)) {
 						// Intent intent = new Intent(Intent.ACTION_MAIN);
 						// intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 						// intent.setComponent(new ComponentName(lastallowedapp.getPackageName(),lastallowedapp.getClassName()));
