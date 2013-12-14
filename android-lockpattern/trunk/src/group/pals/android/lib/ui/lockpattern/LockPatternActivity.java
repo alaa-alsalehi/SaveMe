@@ -342,7 +342,7 @@ public class LockPatternActivity extends Activity {
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        Log.d(CLASSNAME, "onConfigurationChanged()");
+        //Log.d(CLASSNAME, "onConfigurationChanged()");
         super.onConfigurationChanged(newConfig);
         initContentView();
     }// onConfigurationChanged()
