@@ -10159,11 +10159,13 @@ com.serveme.savemyphone.model.DBOperations -> com.serveme.savemyphone.b.b:
     com.serveme.savemyphone.model.DBHandler dbhandler -> a
     android.database.Cursor cursor -> b
     java.util.List whitelist -> c
+    java.util.List whitelistPackages -> d
     com.serveme.savemyphone.model.DBHandler getInstance(android.content.Context) -> a
     void insertöApp(com.serveme.savemyphone.model.Launcher) -> a
     void deleteApp(java.lang.String) -> a
     void deleteLauncher(com.serveme.savemyphone.model.Launcher) -> b
     java.util.List getWhiteListApps() -> a
+    java.util.List getWhiteListPackages() -> b
 com.serveme.savemyphone.model.Launcher -> com.serveme.savemyphone.b.c:
     java.lang.String packageName -> a
     java.lang.String activity -> b
