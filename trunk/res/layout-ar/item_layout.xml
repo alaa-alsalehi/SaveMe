@@ -19,7 +19,7 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:gravity="right"
-        android:textSize="@dimen/apps_names" />
+        android:textSize="@dimen/apps_names" android:textAlignment="gravity"/>
 
     <ImageView
         android:id="@+id/icon"
