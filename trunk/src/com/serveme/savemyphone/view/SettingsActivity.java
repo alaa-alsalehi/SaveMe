@@ -29,8 +29,8 @@ public class SettingsActivity extends PreferenceActivity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences);
-		ListPreference lock_Preference = (ListPreference) findPreference(KEY_LOCK_METHOD);
-		lock_Preference.setSummary(lock_Preference.getEntry());
+		//ListPreference lock_Preference = (ListPreference) findPreference(KEY_LOCK_METHOD);
+		//lock_Preference.setSummary(lock_Preference.getEntry());
 		Preference myPref = (Preference) findPreference("uninstall");
 		myPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			public boolean onPreferenceClick(Preference preference) {
