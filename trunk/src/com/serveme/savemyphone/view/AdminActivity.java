@@ -46,10 +46,11 @@ public class AdminActivity extends ActionBarActivity {
 		// Calling this to ensures that your application is properly initialized
 		// with default settings
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+		if (savedInstanceState == null) {
+			checkAdminAccess();
 
-		checkAdminAccess();
-
-		checkPassCode();
+			checkPassCode();
+		}
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_layout);
