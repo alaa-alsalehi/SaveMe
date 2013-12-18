@@ -18,7 +18,7 @@ public class PrefEditor {
 	}
 
 	public int getStatus() {
-		return preferences.getInt("status", 1);
+		return preferences.getInt("status", 0);
 	}
 	
 	public String getPassCode(){
