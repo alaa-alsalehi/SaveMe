@@ -10620,3 +10620,33 @@ group.pals.android.lib.ui.lockpattern.widget.LockPatternView_v14 -> group.pals.a
     boolean onHoverEvent(android.view.MotionEvent) -> onHoverEvent
 group.pals.android.lib.ui.lockpattern.widget.ViewCompat_v16 -> group.pals.android.lib.ui.lockpattern.widget.f:
     void announceForAccessibility(android.view.View,java.lang.CharSequence) -> a
+org.codechimp.apprater.AppRater -> a.a.a.a:
+    org.codechimp.apprater.Market market -> a
+    void app_launched(android.content.Context) -> a
+    void app_launched(android.content.Context,int,int) -> a
+    void showRateAlertDialog(android.content.Context,android.content.SharedPreferences$Editor) -> a
+    org.codechimp.apprater.Market access$0() -> a
+org.codechimp.apprater.AppRater$1 -> a.a.a.b:
+    android.content.Context val$context -> a
+    android.content.SharedPreferences$Editor val$editor -> b
+    void onClick(android.content.DialogInterface,int) -> onClick
+org.codechimp.apprater.AppRater$2 -> a.a.a.c:
+    android.content.SharedPreferences$Editor val$editor -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+org.codechimp.apprater.AppRater$3 -> a.a.a.d:
+    android.content.SharedPreferences$Editor val$editor -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+org.codechimp.apprater.GoogleMarket -> a.a.a.e:
+    java.lang.String marketLink -> a
+    android.net.Uri getMarketURI(android.content.Context) -> a
+org.codechimp.apprater.InCorrectMarketException -> a.a.a.f:
+org.codechimp.apprater.Market -> a.a.a.g:
+    android.net.Uri getMarketURI(android.content.Context) -> a
+org.codechimp.apprater.R -> a.a.a.h:
+org.codechimp.apprater.R$string -> a.a.a.i:
+    int app_name -> app_name
+    int dialog_title -> dialog_title
+    int later -> later
+    int no_thanks -> no_thanks
+    int rate -> rate
+    int rate_message -> rate_message

@@ -2,6 +2,9 @@ package com.serveme.savemyphone.view;
 
 //import org.omar.android.lib.ui.passwordlock.PasswordEntryActivity;
 
+import org.codechimp.apprater.AppRater;
+import org.codechimp.apprater.InCorrectMarketException;
+
 import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
 
 import com.google.ads.AdRequest;
@@ -58,6 +61,12 @@ public class AdminActivity extends ActionBarActivity {
 		ListView listView = (ListView) findViewById(R.id.app_list);
 		listView.setAdapter(adapter);
 		adsStuff();
+		
+		try {
+			AppRater.app_launched(this);
+		} catch (InCorrectMarketException e) {
+
+		}
 	}
 
 	private void adsStuff() {
