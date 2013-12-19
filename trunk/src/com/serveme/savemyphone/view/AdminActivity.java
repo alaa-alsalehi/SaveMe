@@ -16,12 +16,15 @@ import com.serveme.ads.AdMobListener;
 import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.control.AppsListAdapter;
+import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.receivers.AdminReciver;
 
+import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -61,7 +64,7 @@ public class AdminActivity extends ActionBarActivity {
 		ListView listView = (ListView) findViewById(R.id.app_list);
 		listView.setAdapter(adapter);
 		adsStuff();
-		
+
 		try {
 			AppRater.app_launched(this);
 		} catch (InCorrectMarketException e) {
@@ -88,6 +91,44 @@ public class AdminActivity extends ActionBarActivity {
 			}
 		});
 		thread.start();
+	}
+
+	@Override
+	public void onBackPressed() {
+		DBOperations db = new DBOperations(this);
+		boolean activecount = db.isThereEnabledApps();
+		if (activecount) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage(R.string.activiate_lock_quesition);
+			builder.setPositiveButton(
+					getResources().getString(android.R.string.yes),
+					new DialogInterface.OnClickListener() {
+
+						public void onClick(DialogInterface dialog, int which) {
+							lock();
+							EasyTracker.getInstance(AdminActivity.this).send(
+									MapBuilder.createEvent("ui_action",
+											"button_press", "lock",
+											Long.valueOf(1)).build());
+							finish();
+						}
+					});
+			builder.setNegativeButton(
+					getResources().getString(android.R.string.no),
+					new DialogInterface.OnClickListener() {
+
+						public void onClick(DialogInterface dialog, int which) {
+							EasyTracker.getInstance(AdminActivity.this).send(
+									MapBuilder.createEvent("ui_action",
+											"button_press", "stop_dialog",
+											Long.valueOf(1)).build());
+							finish();
+						}
+					});
+			builder.show();
+		} else {
+			super.onBackPressed();
+		}
 	}
 
 	@Override
@@ -121,10 +162,7 @@ public class AdminActivity extends ActionBarActivity {
 		// Handle item selection
 		switch (item.getItemId()) {
 		case R.id.action_lock:
-			PrefEditor pe = new PrefEditor(AdminActivity.this);
-			pe.updateStatus(1);
-			Intent saveintent = new Intent(getBaseContext(), UserActivity.class);
-			startActivity(saveintent);
+			lock();
 			EasyTracker.getInstance(this).send(
 					MapBuilder.createEvent("ui_action", "button_press", "lock",
 							Long.valueOf(1)).build());
@@ -145,6 +183,13 @@ public class AdminActivity extends ActionBarActivity {
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+
+	protected void lock() {
+		PrefEditor pe = new PrefEditor(AdminActivity.this);
+		pe.updateStatus(1);
+		Intent saveintent = new Intent(getBaseContext(), UserActivity.class);
+		startActivity(saveintent);
 	}
 
 	private void checkAdminAccess() {

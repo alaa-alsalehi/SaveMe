@@ -19,6 +19,7 @@
         
     <string name="setup_key">اختر مفتاح القفل</string>
     <string name="lock_permission_request">نحتاج صلاحية قفل الجهاز للتأكد من ملكيتك له</string>
+    <string name="activiate_lock_quesition">تفعيل وضع القفل؟</string>
     
     <string name="lock_method">نوع القفل</string>
     <string-array name="lock_options">

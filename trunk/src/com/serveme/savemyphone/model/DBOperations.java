@@ -2,6 +2,12 @@ package com.serveme.savemyphone.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.Tracker;
+import com.serveme.analytics.AnalyticsExceptionParser;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -10,9 +16,9 @@ import android.database.sqlite.SQLiteDatabase;
 public class DBOperations {
 
 	private static DBHandler dbhandler;
-	private Cursor cursor;
 	private List<Launcher> whitelist;
 	private List<Launcher> whitelistPackages;
+	private Context context;
 
 	public DBOperations(Context context) {
 		dbhandler = getInstance(context);
@@ -49,12 +55,50 @@ public class DBOperations {
 		db.close();
 	}
 
+	public boolean isThereEnabledApps() {
+		SQLiteDatabase database = null;
+		Cursor cursor = null;
+		try {
+			database = dbhandler.getReadableDatabase();
+			cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null, null, null,
+					null, null, DB_KEYS.KEY_PKGNAME);
+			if (cursor.moveToFirst()) {
+				return true;
+			} else {
+				return false;
+			}
+		} finally {
+			if (cursor != null) {
+				try {
+					cursor.close();
+				} catch (Exception exception) {
+					Tracker tracker = EasyTracker.getInstance(context);
+					tracker.send(MapBuilder.createException(
+							new AnalyticsExceptionParser().getDescription(
+									Thread.currentThread().toString(),
+									exception), false).build());
+				}
+			}
+			if (database != null) {
+				try {
+					database.close();
+				} catch (Exception exception) {
+					Tracker tracker = EasyTracker.getInstance(context);
+					tracker.send(MapBuilder.createException(
+							new AnalyticsExceptionParser().getDescription(
+									Thread.currentThread().toString(),
+									exception), false).build());
+				}
+			}
+		}
+	}
+
 	public List<Launcher> getWhiteListApps() {
 		if (whitelist == null) {
 			whitelist = new ArrayList<Launcher>();
 			SQLiteDatabase database = dbhandler.getReadableDatabase();
-			cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null, null, null,
-					null, null, DB_KEYS.KEY_PKGNAME);
+			Cursor cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null,
+					null, null, null, null, DB_KEYS.KEY_PKGNAME);
 			// loop through all rows and add it to white list
 			if (cursor.moveToFirst()) {
 				do {
@@ -75,8 +119,8 @@ public class DBOperations {
 		if (whitelistPackages == null) {
 			whitelistPackages = new ArrayList<Launcher>();
 			SQLiteDatabase database = dbhandler.getReadableDatabase();
-			cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null, null, null,
-					null, null, DB_KEYS.KEY_PKGNAME);
+			Cursor cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null,
+					null, null, null, null, DB_KEYS.KEY_PKGNAME);
 			// loop through all rows and add it to white list
 			if (cursor.moveToFirst()) {
 				do {
