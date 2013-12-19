@@ -1,6 +1,8 @@
 package com.serveme.savemyphone.control;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.model.Launcher;
@@ -47,13 +49,15 @@ public class GridAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		TextView txtView;
-		if (convertView == null) { // if it's not recycled, initialize some attributes
+		if (convertView == null) { // if it's not recycled, initialize some
+									// attributes
 			txtView = new TextView(context);
 			txtView.setTextColor(Color.WHITE);
 			txtView.setShadowLayer(5, 1, 1, Color.BLACK);
 			txtView.setGravity(Gravity.CENTER_HORIZONTAL);
 			txtView.setLines(2); // to make all text view in the same size
-			int padding = context.getResources().getDimensionPixelSize(	R.dimen.grid_item_padding);
+			int padding = context.getResources().getDimensionPixelSize(
+					R.dimen.grid_item_padding);
 			txtView.setPadding(0, padding, 0, 0);
 			txtView.setCompoundDrawablePadding(10);
 		} else {
@@ -63,7 +67,10 @@ public class GridAdapter extends BaseAdapter {
 		ActivityInfo appinfo = null;
 		try {
 			Launcher launcher = aList.get(position);
-			appinfo = context.getPackageManager().getActivityInfo(new ComponentName(launcher.getPackageName(),launcher.getActivity()),PackageManager.GET_META_DATA);
+			appinfo = context.getPackageManager().getActivityInfo(
+					new ComponentName(launcher.getPackageName(),
+							launcher.getActivity()),
+					PackageManager.GET_META_DATA);
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}

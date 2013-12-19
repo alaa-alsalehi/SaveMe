@@ -1,6 +1,8 @@
 package com.serveme.savemyphone.view;
 
 import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.analytics.tracking.android.EasyTracker;
@@ -62,18 +64,21 @@ public class UserActivity extends ActionBarActivity {
 
 		setContentView(R.layout.user_activity);
 		db = new DBOperations(this);
-		appsinfolist = db.getWhiteListApps();
+		appsinfolist = new ArrayList<Launcher>();
+		appsinfolist.addAll(db.getWhiteListApps());
 		registerReceiver(bcr, new IntentFilter("finish_user_activity"));
 		startService(new Intent(this, AppsMonitor.class));
 
 		GridView gridView = (GridView) findViewById(R.id.grid_view);
-		gridView.setBackgroundDrawable(WallpaperManager.getInstance(context).getDrawable());
+		gridView.setBackgroundDrawable(WallpaperManager.getInstance(context)
+				.getDrawable());
 		gridView.setAdapter(new GridAdapter(this, appsinfolist));
 		gridView.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
 		gridView.setNumColumns(GridView.AUTO_FIT);
 
 		devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-		adminComponent = new ComponentName(UserActivity.this,AdminReciver.class);
+		adminComponent = new ComponentName(UserActivity.this,
+				AdminReciver.class);
 
 		// float scalefactor = getResources().getDisplayMetrics().density * 80;
 		// Point size = new Point();
@@ -84,23 +89,24 @@ public class UserActivity extends ActionBarActivity {
 
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> parent, View v,int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View v,
+					int position, long id) {
 				Launcher launcher = appsinfolist.get(position);
 				Intent i = new Intent();
 				i.setAction(Intent.ACTION_MAIN);
 				i.addCategory(Intent.CATEGORY_LAUNCHER);
-				i.setClassName(launcher.getPackageName(),launcher.getActivity());
+				i.setClassName(launcher.getPackageName(),
+						launcher.getActivity());
 				startActivity(i);
 				EasyTracker.getInstance(context).send(
 						MapBuilder.createEvent("ui_action", "button_press",
-								"run_app", Long.valueOf(1))
-								.build());
+								"run_app", Long.valueOf(1)).build());
 			}
 		});
 
 	}
-	
-		@Override
+
+	@Override
 	protected void onStart() {
 		super.onStart();
 		EasyTracker.getInstance(this).activityStart(this);
@@ -112,7 +118,7 @@ public class UserActivity extends ActionBarActivity {
 					.setExceptionParser(new AnalyticsExceptionParser());
 		}
 	}
-	
+
 	@Override
 	protected void onStop() {
 		EasyTracker.getInstance(this).activityStop(this);
@@ -145,8 +151,7 @@ public class UserActivity extends ActionBarActivity {
 			new Checker(this).checkPattern(REQ_ENTER_PATTERN);
 			EasyTracker.getInstance(context).send(
 					MapBuilder.createEvent("ui_action", "button_press",
-							"unlock", Long.valueOf(1))
-							.build());
+							"unlock", Long.valueOf(1)).build());
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -160,19 +165,20 @@ public class UserActivity extends ActionBarActivity {
 		case REQ_ENTER_PATTERN: {
 			switch (resultCode) {
 			case RESULT_OK:
-//				Log.v("result", "passed");
+				// Log.v("result", "passed");
 				PrefEditor pe = new PrefEditor(UserActivity.this);
 				pe.updateStatus(0);
 				context.stopService(new Intent(context, AppsMonitor.class));
 				break;
 			case RESULT_CANCELED:
-//				Log.v("result", "canceled");
+				// Log.v("result", "canceled");
 				break;
 			case LockPatternActivity.RESULT_FAILED:
-//				Log.v("result", "faild");
+				// Log.v("result", "faild");
 				break;
 			case LockPatternActivity.RESULT_FORGOT_PATTERN:
-				// The user forgot the pattern and invoked your recovery Activity.
+				// The user forgot the pattern and invoked your recovery
+				// Activity.
 				break;
 			}
 
@@ -184,7 +190,8 @@ public class UserActivity extends ActionBarActivity {
 			 * In any case, there's always a key EXTRA_RETRY_COUNT, which holds
 			 * the number of tries that the user did.
 			 */
-			// int retryCount = data.getIntExtra(LockPatternActivity.EXTRA_RETRY_COUNT, 0);
+			// int retryCount =
+			// data.getIntExtra(LockPatternActivity.EXTRA_RETRY_COUNT, 0);
 
 			break;
 		}// REQ_ENTER_PATTERN

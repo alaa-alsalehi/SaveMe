@@ -1,7 +1,9 @@
 package com.serveme.savemyphone.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
@@ -16,8 +18,8 @@ import android.database.sqlite.SQLiteDatabase;
 public class DBOperations {
 
 	private static DBHandler dbhandler;
-	private List<Launcher> whitelist;
-	private List<Launcher> whitelistPackages;
+	private Set<Launcher> whitelist;
+	private Set<Launcher> whitelistPackages;
 	private Context context;
 
 	public DBOperations(Context context) {
@@ -93,9 +95,9 @@ public class DBOperations {
 		}
 	}
 
-	public List<Launcher> getWhiteListApps() {
+	public Set<Launcher> getWhiteListApps() {
 		if (whitelist == null) {
-			whitelist = new ArrayList<Launcher>();
+			whitelist = new HashSet<Launcher>();
 			SQLiteDatabase database = dbhandler.getReadableDatabase();
 			Cursor cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null,
 					null, null, null, null, DB_KEYS.KEY_PKGNAME);
@@ -115,9 +117,9 @@ public class DBOperations {
 		return whitelist;
 	}
 
-	public List<Launcher> getWhiteListPackages() {
+	public Set<Launcher> getWhiteListPackages() {
 		if (whitelistPackages == null) {
-			whitelistPackages = new ArrayList<Launcher>();
+			whitelistPackages = new HashSet<Launcher>();
 			SQLiteDatabase database = dbhandler.getReadableDatabase();
 			Cursor cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null,
 					null, null, null, null, DB_KEYS.KEY_PKGNAME);

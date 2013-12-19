@@ -3,6 +3,7 @@ package com.serveme.savemyphone.control;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
@@ -29,7 +30,7 @@ public class AppsListAdapter extends BaseAdapter {
 	private Context context;
 	//private final ImageLoader imageloader = new ImageLoader();
 	private List<ResolveInfo> aList = null;
-	private List<Launcher> whitelist = null;
+	private Set<Launcher> whitelist = null;
 	private static boolean[] status;
 	private LayoutInflater inflater = null;
 	private DBOperations db;
