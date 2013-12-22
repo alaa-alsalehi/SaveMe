@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="lock_permission_title">صلاحية قفل الجهاز</string>
+    <string name="lock_permission_request_help">نحتاج صلاحية قفل الجهاز للتأكد من ملكيتك للجهاز.\nسنقوم بقفل الجهاز رجاءاً قم بفك القفل وإكمال عملية تنزيل SaveMe.</string>
+    <string name="get_permission">منح الصلاحية</string>
+    
+    <string name="pattern_request_title">النمط</string>
+    <string name="pattern_request_help">برنامج SaveMe يحتاج إلى نمط, هذا النمط يجعلك قادر على الانتقال من الوضع الآمن إلى الوضع الكامل.\nملاحظة: هذا النمط خاص بـ SaveMe فقط.\nتحذير: هذا النمط غير قابل للاستعادة ونسيانه قد يمنعك من الدخول على جهازك.</string>
+    <string name="create_pattern">نمط جديد</string>
+    
+    <string name="use_title">استخدام البرنامج</string>
+    <string name="use_help">1- اختر التطبيقات التي لا تمانع بظهورها للآخرين وتسمح لهم باستخدامها -كل التطبيقات تكون ممنوعة في البداية-.\n2- بعد الإنتهاء من اختيار التطبيقات المسموحة اضغط على زر القفل {1} لتأمين الجهاز.\n3- بعد الضغط على زر القفل ستظهر فقط التطبيقات التي قمت بالسماح لها.\n4- لآن يمكنك أن تقوم بإعطاء هاتفك المحمول لأي شخص تريد مع التأكد بأنه لن يمكنه أن يقوم بفتح أي تطبيق غير التطبيقات التي سمحت له بفتحها.\n5- لإغلاق الوضع الآمن اضغط على زر إلغاء القفل {2}.</string>
+    
+    <string name="next">التالي</string>
+    <string name="previous">السابق</string>
+    <string name="finish">إنهاء</string>
+    <string name="help">المساعدة</string>
+    <string name="direction">right</string>
+
+</resources>

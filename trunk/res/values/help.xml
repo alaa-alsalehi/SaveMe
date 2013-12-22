@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="lock_permission_title">Lock Permission</string>
+    <string name="lock_permission_request_help">We request lock permission to guarantee you are the owner of this device.\n We will lock your device, please unlock it and continue setup SaveMe.</string>
+    <string name="get_permission">Grant Permission</string>
+    
+    <string name="pattern_request_title">Pattern</string>
+    <string name="pattern_request_help">SaveMe need pattern, this pattern make you apple move form Save Mode to full access mode.\nNote: this pattern private to SaveMe app.\nCaution: this pattern irrecovable and forget it may prevent you using your mobile</string>
+    <string name="create_pattern">Create Pattern</string>
+    
+    <string name="use_title">How to Use</string>
+    <string name="use_help">1- Choose which apps you want to enable it for others -all apps will be disabled at the beginning-.\n2- Click on the lock button {1} to enter the protected mode.\n3- Now you will just see allowed apps and no one can run any other apps that you are not allowed it.\n4- To close protexted mode click on unlock button {2}.</string>
+    
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="finish">Finish</string>
+    <string name="help">Help</string>
+    <string name="direction">left</string>
+
+</resources>

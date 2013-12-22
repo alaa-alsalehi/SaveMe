@@ -19,6 +19,7 @@ import com.serveme.savemyphone.control.AppsListAdapter;
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.receivers.AdminReciver;
+import com.serveme.savemyphone.view.wizard.AdminRequest;
 
 import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
@@ -198,7 +199,7 @@ public class AdminActivity extends ActionBarActivity {
 				AdminReciver.class);
 		if (!devicePolicyManager.isAdminActive(adminComponent)) {
 			finish();
-			Intent intent = new Intent(getBaseContext(), AdminRequest.class);
+			Intent intent = new Intent(this, AdminRequest.class);
 			startActivity(intent);
 		}
 	}
@@ -221,13 +222,13 @@ public class AdminActivity extends ActionBarActivity {
 					new Checker(this).checkPattern(REQ_ENTER_PATTERN);
 				}
 			} else {
-				// finish();
-				PasswordRequester.requestPatternPassword(this);
-				/*
-				 * Intent intent = new
-				 * Intent(getBaseContext(),PasswordRequest.class);
-				 * startActivity(intent);
-				 */
+				finish();
+				//PasswordRequester.requestPatternPassword(this);
+				
+				 Intent intent = new
+				 Intent(this,AdminRequest.class);
+				 startActivity(intent);
+				 
 			}
 		}
 	}
@@ -266,8 +267,6 @@ public class AdminActivity extends ActionBarActivity {
 			break;
 		}// REQ_ENTER_PATTERN
 		}
-		PasswordRequester.onPatternPasswordRecived(requestCode, resultCode,
-				data, this);
 	}
 
 }

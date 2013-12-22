@@ -7,9 +7,7 @@
     <string name="action_unlock">إلغاء الحماية</string>
     <string name="action_lock">تفعيل الحماية</string>
 
-    <string name="device_admin_request">طلب صلاحيات المدير</string>
     <string name="admin_button">منح صلاحيات المدير</string>
-    <string name="admin_message">هذا التطبيق يحتاج إلى صلاحيات المدير للعمل بشكل صحيح</string>
 
     <string name="uninstall">إزالة التطبيق</string>
     

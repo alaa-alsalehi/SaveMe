@@ -10124,7 +10124,7 @@ com.serveme.exception.util.ExceptionUtil -> com.serveme.c.a.a:
 com.serveme.savemyphone.control.AppsListAdapter -> com.serveme.savemyphone.a.a:
     android.content.Context context -> a
     java.util.List aList -> b
-    java.util.List whitelist -> c
+    java.util.Set whitelist -> c
     boolean[] status -> d
     android.view.LayoutInflater inflater -> e
     com.serveme.savemyphone.model.DBOperations db -> f
@@ -10133,7 +10133,7 @@ com.serveme.savemyphone.control.AppsListAdapter -> com.serveme.savemyphone.a.a:
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     boolean[] access$0() -> a
-    java.util.List access$1(com.serveme.savemyphone.control.AppsListAdapter) -> a
+    java.util.Set access$1(com.serveme.savemyphone.control.AppsListAdapter) -> a
     com.serveme.savemyphone.model.DBOperations access$2(com.serveme.savemyphone.control.AppsListAdapter) -> b
     android.content.Context access$3(com.serveme.savemyphone.control.AppsListAdapter) -> c
 com.serveme.savemyphone.control.AppsListAdapter$1 -> com.serveme.savemyphone.a.b:
@@ -10157,15 +10157,16 @@ com.serveme.savemyphone.model.DBHandler -> com.serveme.savemyphone.b.a:
     void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
 com.serveme.savemyphone.model.DBOperations -> com.serveme.savemyphone.b.b:
     com.serveme.savemyphone.model.DBHandler dbhandler -> a
-    android.database.Cursor cursor -> b
-    java.util.List whitelist -> c
-    java.util.List whitelistPackages -> d
+    java.util.Set whitelist -> b
+    java.util.Set whitelistPackages -> c
+    android.content.Context context -> d
     com.serveme.savemyphone.model.DBHandler getInstance(android.content.Context) -> a
     void insertöApp(com.serveme.savemyphone.model.Launcher) -> a
     void deleteApp(java.lang.String) -> a
     void deleteLauncher(com.serveme.savemyphone.model.Launcher) -> b
-    java.util.List getWhiteListApps() -> a
-    java.util.List getWhiteListPackages() -> b
+    boolean isThereEnabledApps() -> a
+    java.util.Set getWhiteListApps() -> b
+    java.util.Set getWhiteListPackages() -> c
 com.serveme.savemyphone.model.Launcher -> com.serveme.savemyphone.b.c:
     java.lang.String packageName -> a
     java.lang.String activity -> b
@@ -10206,49 +10207,31 @@ com.serveme.savemyphone.view.AdminActivity -> com.serveme.savemyphone.view.Admin
     android.app.admin.DevicePolicyManager devicePolicyManager -> o
     android.content.ComponentName adminComponent -> p
     void onCreate(android.os.Bundle) -> onCreate
-    void adsStuff() -> h
+    void adsStuff() -> i
+    void onBackPressed() -> onBackPressed
     void onStart() -> onStart
     void onStop() -> onStop
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
     boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-    void checkAdminAccess() -> i
-    void checkPassCode() -> j
+    void lock() -> h
+    void checkAdminAccess() -> j
+    void checkPassCode() -> k
     void onActivityResult(int,int,android.content.Intent) -> onActivityResult
 com.serveme.savemyphone.view.AdminActivity$1 -> com.serveme.savemyphone.view.a:
     com.serveme.savemyphone.view.AdminActivity this$0 -> a
     com.google.ads.AdView val$adView -> b
     com.google.ads.AdRequest val$adRequest -> c
     void run() -> run
-com.serveme.savemyphone.view.AdminRequest -> com.serveme.savemyphone.view.AdminRequest:
-    int REQUEST_ENABLE -> a
-    android.app.admin.DevicePolicyManager devicePolicyManager -> b
-    android.content.ComponentName adminComponent -> c
-    void onCreate(android.os.Bundle) -> onCreate
-    void onStart() -> onStart
-    void onStop() -> onStop
-    void onActivityResult(int,int,android.content.Intent) -> onActivityResult
-    void access$0(com.serveme.savemyphone.view.AdminRequest,android.app.admin.DevicePolicyManager) -> a
-    void access$1(com.serveme.savemyphone.view.AdminRequest,android.content.ComponentName) -> a
-    android.app.admin.DevicePolicyManager access$2(com.serveme.savemyphone.view.AdminRequest) -> a
-    android.content.ComponentName access$3(com.serveme.savemyphone.view.AdminRequest) -> b
-com.serveme.savemyphone.view.AdminRequest$1 -> com.serveme.savemyphone.view.b:
-    com.serveme.savemyphone.view.AdminRequest this$0 -> a
-    void onClick(android.view.View) -> onClick
-com.serveme.savemyphone.view.Checker -> com.serveme.savemyphone.view.c:
+com.serveme.savemyphone.view.AdminActivity$2 -> com.serveme.savemyphone.view.b:
+    com.serveme.savemyphone.view.AdminActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.serveme.savemyphone.view.AdminActivity$3 -> com.serveme.savemyphone.view.c:
+    com.serveme.savemyphone.view.AdminActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.serveme.savemyphone.view.Checker -> com.serveme.savemyphone.view.d:
     android.app.Activity context -> a
     void checkPattern(int) -> a
-com.serveme.savemyphone.view.PasswordRequest -> com.serveme.savemyphone.view.PasswordRequest:
-    void onCreate(android.os.Bundle) -> onCreate
-    void onStart() -> onStart
-    void onStop() -> onStop
-    void onActivityResult(int,int,android.content.Intent) -> onActivityResult
-com.serveme.savemyphone.view.PasswordRequest$1 -> com.serveme.savemyphone.view.d:
-    com.serveme.savemyphone.view.PasswordRequest this$0 -> a
-    void onClick(android.view.View) -> onClick
-com.serveme.savemyphone.view.PasswordRequest$2 -> com.serveme.savemyphone.view.e:
-    com.serveme.savemyphone.view.PasswordRequest this$0 -> a
-    void onClick(android.view.View) -> onClick
-com.serveme.savemyphone.view.PasswordRequester -> com.serveme.savemyphone.view.f:
+com.serveme.savemyphone.view.PasswordRequester -> com.serveme.savemyphone.view.e:
     void requestPatternPassword(android.app.Activity) -> a
     void onPatternPasswordRecived(int,int,android.content.Intent,android.app.Activity) -> a
 com.serveme.savemyphone.view.SettingsActivity -> com.serveme.savemyphone.view.SettingsActivity:
@@ -10258,7 +10241,7 @@ com.serveme.savemyphone.view.SettingsActivity -> com.serveme.savemyphone.view.Se
     void onResume() -> onResume
     void onPause() -> onPause
     void onSharedPreferenceChanged(android.content.SharedPreferences,java.lang.String) -> onSharedPreferenceChanged
-com.serveme.savemyphone.view.SettingsActivity$1 -> com.serveme.savemyphone.view.g:
+com.serveme.savemyphone.view.SettingsActivity$1 -> com.serveme.savemyphone.view.f:
     com.serveme.savemyphone.view.SettingsActivity this$0 -> a
     boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
 com.serveme.savemyphone.view.UserActivity -> com.serveme.savemyphone.view.UserActivity:
@@ -10276,12 +10259,50 @@ com.serveme.savemyphone.view.UserActivity -> com.serveme.savemyphone.view.UserAc
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
     boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
     void onActivityResult(int,int,android.content.Intent) -> onActivityResult
-com.serveme.savemyphone.view.UserActivity$1 -> com.serveme.savemyphone.view.h:
+com.serveme.savemyphone.view.UserActivity$1 -> com.serveme.savemyphone.view.g:
     com.serveme.savemyphone.view.UserActivity this$0 -> a
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
-com.serveme.savemyphone.view.UserActivity$2 -> com.serveme.savemyphone.view.i:
+com.serveme.savemyphone.view.UserActivity$2 -> com.serveme.savemyphone.view.h:
     com.serveme.savemyphone.view.UserActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+com.serveme.savemyphone.view.wizard.AdminRequest -> com.serveme.savemyphone.view.wizard.AdminRequest:
+    int REQUEST_ENABLE -> o
+    android.app.admin.DevicePolicyManager devicePolicyManager -> p
+    android.content.ComponentName adminComponent -> q
+    void onCreate(android.os.Bundle) -> onCreate
+    void onStart() -> onStart
+    void onStop() -> onStop
+    void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    void access$0(com.serveme.savemyphone.view.wizard.AdminRequest,android.app.admin.DevicePolicyManager) -> a
+    void access$1(com.serveme.savemyphone.view.wizard.AdminRequest,android.content.ComponentName) -> a
+    android.app.admin.DevicePolicyManager access$2(com.serveme.savemyphone.view.wizard.AdminRequest) -> a
+    android.content.ComponentName access$3(com.serveme.savemyphone.view.wizard.AdminRequest) -> b
+com.serveme.savemyphone.view.wizard.AdminRequest$1 -> com.serveme.savemyphone.view.wizard.a:
+    com.serveme.savemyphone.view.wizard.AdminRequest this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.serveme.savemyphone.view.wizard.AdminRequest$2 -> com.serveme.savemyphone.view.wizard.b:
+    com.serveme.savemyphone.view.wizard.AdminRequest this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.serveme.savemyphone.view.wizard.HelpActivity -> com.serveme.savemyphone.view.wizard.HelpActivity:
+    void onCreate(android.os.Bundle) -> onCreate
+    void setTextWithImage(android.widget.TextView,int) -> a
+com.serveme.savemyphone.view.wizard.HelpActivity$1 -> com.serveme.savemyphone.view.wizard.c:
+    com.serveme.savemyphone.view.wizard.HelpActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.serveme.savemyphone.view.wizard.HelpActivity$2 -> com.serveme.savemyphone.view.wizard.d:
+    com.serveme.savemyphone.view.wizard.HelpActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.serveme.savemyphone.view.wizard.PasswordRequest -> com.serveme.savemyphone.view.wizard.PasswordRequest:
+    void onCreate(android.os.Bundle) -> onCreate
+    void onStart() -> onStart
+    void onStop() -> onStop
+    void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+com.serveme.savemyphone.view.wizard.PasswordRequest$1 -> com.serveme.savemyphone.view.wizard.e:
+    com.serveme.savemyphone.view.wizard.PasswordRequest this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.serveme.savemyphone.view.wizard.PasswordRequest$2 -> com.serveme.savemyphone.view.wizard.f:
+    com.serveme.savemyphone.view.wizard.PasswordRequest this$0 -> a
+    void onClick(android.view.View) -> onClick
 group.pals.android.lib.ui.lockpattern.LockPatternActivity -> group.pals.android.lib.ui.lockpattern.LockPatternActivity:
     java.lang.String CLASSNAME -> k
     java.lang.String ACTION_CREATE_PATTERN -> a

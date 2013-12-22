@@ -5,6 +5,8 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
+
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -37,9 +39,11 @@ public class AppsMonitor extends Service {
 	private void doGetRunningApp() {
 		timer.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
-				List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
+				List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(2);
 				ComponentName componentInfo = taskInfo.get(0).topActivity;
 				Launcher launcher = new Launcher(componentInfo.getPackageName(), null);
+//				Log.d("test", taskInfo.get(1).baseActivity.toString());
+//				Log.d("activity", taskInfo.get(1).topActivity.toString());
 				if (!db.getWhiteListPackages().contains(launcher)
 						&& !componentInfo.getPackageName().equals("android")
 						&& !componentInfo.getClassName().equals("com.serveme.savemyphone.view.UserActivity")
@@ -52,12 +56,13 @@ public class AppsMonitor extends Service {
 //						 }
 //					 }
 //					am.killBackgroundProcesses(componentInfo.getPackageName());
+					
 					if (db.getWhiteListPackages().contains(launcher)) {
 						// Intent intent = new Intent(Intent.ACTION_MAIN);
 						// intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 						// intent.setComponent(new ComponentName(lastallowedapp.getPackageName(),lastallowedapp.getClassName()));
 						// startActivity(intent);
-
+						
 						Intent saveintent = AppsMonitor.this.getPackageManager().getLaunchIntentForPackage(taskInfo.get(0).baseActivity.getPackageName());
 						saveintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 						getApplication().startActivity(saveintent);
@@ -65,6 +70,7 @@ public class AppsMonitor extends Service {
 						Intent saveintent = new Intent(getBaseContext(),UserActivity.class);
 						saveintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						getApplication().startActivity(saveintent);
+						
 					}
 					//
 				} else if (!componentInfo.getPackageName().equals("android")) {
