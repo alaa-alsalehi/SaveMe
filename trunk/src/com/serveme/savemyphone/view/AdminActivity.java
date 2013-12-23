@@ -167,6 +167,7 @@ public class AdminActivity extends ActionBarActivity {
 			EasyTracker.getInstance(this).send(
 					MapBuilder.createEvent("ui_action", "button_press", "lock",
 							Long.valueOf(1)).build());
+			finish();
 			/*
 			 * Intent saveintent = new
 			 * Intent(getBaseContext(),PasswordEntryActivity.class);
