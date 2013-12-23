@@ -19,6 +19,7 @@ import com.serveme.savemyphone.control.AppsListAdapter;
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.receivers.AdminReciver;
+import com.serveme.savemyphone.util.ConverterUtil;
 import com.serveme.savemyphone.view.wizard.AdminRequest;
 
 import android.app.AlertDialog;
@@ -33,12 +34,19 @@ import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.TextureView;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.view.ViewGroup.MarginLayoutParams;
+import android.widget.AbsListView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class AdminActivity extends ActionBarActivity {
@@ -63,6 +71,8 @@ public class AdminActivity extends ActionBarActivity {
 		setContentView(R.layout.main_layout);
 		AppsListAdapter adapter = new AppsListAdapter(this);
 		ListView listView = (ListView) findViewById(R.id.app_list);
+		LinearLayout headerLayout = createListHeader();
+		listView.addHeaderView(headerLayout);
 		listView.setAdapter(adapter);
 		adsStuff();
 
@@ -71,6 +81,19 @@ public class AdminActivity extends ActionBarActivity {
 		} catch (InCorrectMarketException e) {
 
 		}
+	}
+
+	protected LinearLayout createListHeader() {
+		TextView header = new TextView(this);
+		header.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources()
+				.getDimension(R.dimen.apps_names));
+		header.setText(R.string.admin_list_header);
+		LinearLayout headerLayout = new LinearLayout(this);
+		headerLayout.setBackgroundColor(getResources().getColor(R.color.listview_header));
+		int margin = (int) ConverterUtil.convertDpToPixel(15, this);
+		headerLayout.setPadding(margin, margin, margin, margin);
+		headerLayout.addView(header);
+		return headerLayout;
 	}
 
 	private void adsStuff() {
@@ -224,12 +247,11 @@ public class AdminActivity extends ActionBarActivity {
 				}
 			} else {
 				finish();
-				//PasswordRequester.requestPatternPassword(this);
-				
-				 Intent intent = new
-				 Intent(this,AdminRequest.class);
-				 startActivity(intent);
-				 
+				// PasswordRequester.requestPatternPassword(this);
+
+				Intent intent = new Intent(this, AdminRequest.class);
+				startActivity(intent);
+
 			}
 		}
 	}
