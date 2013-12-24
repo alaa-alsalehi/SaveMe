@@ -19,6 +19,7 @@
     <string name="lock_permission_request">We Request Lock Permission To Guarantee You Are The Owner Of This Device</string>
     <string name="activiate_lock_quesition">Activiate Lock Mode?</string>
     <string name="admin_list_header">Choose allowed apps:</string>
+    <string name="prevent_message">Unallowed app for use</string>
 
     
     <string name="lock_method">Lock Method</string>
