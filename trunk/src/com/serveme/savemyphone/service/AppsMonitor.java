@@ -100,7 +100,7 @@ public class AppsMonitor extends Service {
 								UserActivity.class);
 						saveintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						getApplication().startActivity(saveintent);
-						Log.d("test", "test");
+						//Log.d("test", "test");
 						handler.sendEmptyMessage(0);
 					}
 					//
