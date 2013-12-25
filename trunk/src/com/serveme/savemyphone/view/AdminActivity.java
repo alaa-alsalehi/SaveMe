@@ -21,6 +21,7 @@ import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.receivers.AdminReciver;
 import com.serveme.savemyphone.util.ConverterUtil;
 import com.serveme.savemyphone.view.wizard.AdminRequest;
+import com.serveme.savemyphone.view.wizard.HelpActivity;
 
 import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
@@ -199,12 +200,19 @@ public class AdminActivity extends ActionBarActivity {
 			 */
 			return true;
 		case R.id.action_settings:
-			Intent intent = new Intent(this, SettingsActivity.class);
-			startActivity(intent);
+			Intent settingIntent = new Intent(this, SettingsActivity.class);
+			startActivity(settingIntent);
 			EasyTracker.getInstance(this).send(
 					MapBuilder.createEvent("ui_action", "button_press",
 							"settings", Long.valueOf(1)).build());
 			return true;
+		case R.id.action_help:
+			Intent helpIntent = new Intent(this, HelpActivity.class);
+			startActivity(helpIntent);
+			EasyTracker.getInstance(this).send(
+					MapBuilder.createEvent("ui_action", "button_press",
+							"help", Long.valueOf(1)).build());
+			return true;			
 		default:
 			return super.onOptionsItemSelected(item);
 		}
