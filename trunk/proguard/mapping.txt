@@ -10194,28 +10194,37 @@ com.serveme.savemyphone.service.AppsMonitor -> com.serveme.savemyphone.service.A
     android.app.ActivityManager am -> c
     com.serveme.savemyphone.model.DBOperations db -> d
     int counter -> a
+    android.os.Handler handler -> e
     android.os.IBinder onBind(android.content.Intent) -> onBind
     int onStartCommand(android.content.Intent,int,int) -> onStartCommand
     void doGetRunningApp() -> a
     void onDestroy() -> onDestroy
     android.app.ActivityManager access$0(com.serveme.savemyphone.service.AppsMonitor) -> a
     com.serveme.savemyphone.model.DBOperations access$1(com.serveme.savemyphone.service.AppsMonitor) -> b
+    android.os.Handler access$2(com.serveme.savemyphone.service.AppsMonitor) -> c
 com.serveme.savemyphone.service.AppsMonitor$1 -> com.serveme.savemyphone.service.a:
+    android.widget.Toast toast -> a
+    com.serveme.savemyphone.service.AppsMonitor this$0 -> b
+    void handleMessage(android.os.Message) -> handleMessage
+com.serveme.savemyphone.service.AppsMonitor$2 -> com.serveme.savemyphone.service.b:
     com.serveme.savemyphone.service.AppsMonitor this$0 -> a
     void run() -> run
+com.serveme.savemyphone.util.ConverterUtil -> com.serveme.savemyphone.d.a:
+    float convertDpToPixel(float,android.content.Context) -> a
 com.serveme.savemyphone.view.AdminActivity -> com.serveme.savemyphone.view.AdminActivity:
     android.app.admin.DevicePolicyManager devicePolicyManager -> o
     android.content.ComponentName adminComponent -> p
     void onCreate(android.os.Bundle) -> onCreate
-    void adsStuff() -> i
+    android.widget.LinearLayout createListHeader() -> h
+    void adsStuff() -> j
     void onBackPressed() -> onBackPressed
     void onStart() -> onStart
     void onStop() -> onStop
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
     boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-    void lock() -> h
-    void checkAdminAccess() -> j
-    void checkPassCode() -> k
+    void lock() -> i
+    void checkAdminAccess() -> k
+    void checkPassCode() -> l
     void onActivityResult(int,int,android.content.Intent) -> onActivityResult
 com.serveme.savemyphone.view.AdminActivity$1 -> com.serveme.savemyphone.view.a:
     com.serveme.savemyphone.view.AdminActivity this$0 -> a
