@@ -15,6 +15,9 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.ExceptionReporter;
+import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.view.AdminActivity;
 
@@ -83,6 +86,25 @@ public class HelpActivity extends ActionBarActivity {
 		ssb.setSpan(imageSpan, index, index + 3,
 				Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		textView.setText(ssb, BufferType.SPANNABLE);
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this);
+		Thread.UncaughtExceptionHandler uncaughtExceptionHandler = Thread
+				.getDefaultUncaughtExceptionHandler();
+		if (uncaughtExceptionHandler instanceof ExceptionReporter) {
+			ExceptionReporter exceptionReporter = (ExceptionReporter) uncaughtExceptionHandler;
+			exceptionReporter
+					.setExceptionParser(new AnalyticsExceptionParser());
+		}
+	}
+
+	@Override
+	protected void onStop() {
+		EasyTracker.getInstance(this).activityStop(this);
+		super.onStop();
 	}
 
 }
