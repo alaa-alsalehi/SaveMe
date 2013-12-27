@@ -69,6 +69,11 @@ public class AdminRequest extends ActionBarActivity {
 				devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 				adminComponent = new ComponentName(AdminRequest.this,
 						AdminReciver.class);
+				EasyTracker.getInstance(AdminRequest.this).send(
+						MapBuilder
+								.createEvent("ui_action", "button_press",
+										"request_admin_permission",
+										Long.valueOf(1)).build());
 				if (!devicePolicyManager.isAdminActive(adminComponent)) {
 					Intent intent = new Intent(
 							DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
@@ -82,11 +87,6 @@ public class AdminRequest extends ActionBarActivity {
 							DeviceAdminInfo.USES_POLICY_FORCE_LOCK);
 					intent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
 					startActivityForResult(intent, REQUEST_ENABLE);
-					EasyTracker.getInstance(AdminRequest.this).send(
-							MapBuilder
-									.createEvent("ui_action", "button_press",
-											"request_admin_permission",
-											Long.valueOf(1)).build());
 				}else{
 					finish();			
 					devicePolicyManager.lockNow();//·· √ﬂœ „‰ √‰ «·„” Œœ„ ÂÊ ’«Õ» «·ÃÂ«“

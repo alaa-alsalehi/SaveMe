@@ -17,6 +17,7 @@ import android.widget.TextView.BufferType;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.ExceptionReporter;
+import com.google.analytics.tracking.android.MapBuilder;
 import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.view.AdminActivity;
@@ -59,6 +60,11 @@ public class HelpActivity extends ActionBarActivity {
 						AdminActivity.class);
 				intent.putExtra("first_time", true);
 				startActivity(intent);
+				EasyTracker.getInstance(HelpActivity.this).send(
+						MapBuilder
+								.createEvent("ui_action", "button_press",
+										"finish_wizard",
+										Long.valueOf(1)).build());
 				finish();
 			}
 		});
