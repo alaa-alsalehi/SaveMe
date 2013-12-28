@@ -23,6 +23,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -70,8 +71,10 @@ public class UserActivity extends ActionBarActivity {
 		startService(new Intent(this, AppsMonitor.class));
 
 		GridView gridView = (GridView) findViewById(R.id.grid_view);
-		gridView.setBackgroundDrawable(WallpaperManager.getInstance(context)
-				.getDrawable());
+		Drawable wallpaper = WallpaperManager.getInstance(context)
+				.getDrawable();
+		if (wallpaper != null)
+			gridView.setBackgroundDrawable(wallpaper);
 		gridView.setAdapter(new GridAdapter(this, appsinfolist));
 		gridView.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
 		gridView.setNumColumns(GridView.AUTO_FIT);
