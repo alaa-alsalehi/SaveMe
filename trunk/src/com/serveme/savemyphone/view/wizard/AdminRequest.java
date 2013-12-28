@@ -30,7 +30,7 @@ import com.serveme.savemyphone.view.AdminActivity;
 public class AdminRequest extends ActionBarActivity {
 
 	private final int REQUEST_ENABLE = 1;
-	private DevicePolicyManager devicePolicyManager;
+	
 	private ComponentName adminComponent;
 
 	@Override
@@ -66,7 +66,7 @@ public class AdminRequest extends ActionBarActivity {
 		nextButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+				DevicePolicyManager devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 				adminComponent = new ComponentName(AdminRequest.this,
 						AdminReciver.class);
 				EasyTracker.getInstance(AdminRequest.this).send(
@@ -124,6 +124,7 @@ public class AdminRequest extends ActionBarActivity {
 			if (resultCode == Activity.RESULT_OK) {
 				Log.v("DeviceAdminSample", "Administration enabled!");
 				finish();
+				DevicePolicyManager devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 				devicePolicyManager.lockNow();
 				Intent intent = new Intent(getBaseContext(),
 						PasswordRequest.class);
