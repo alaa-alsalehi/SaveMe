@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.Tracker;
+import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.model.Launcher;
 
@@ -71,27 +75,32 @@ public class GridAdapter extends BaseAdapter {
 					new ComponentName(launcher.getPackageName(),
 							launcher.getActivity()),
 					PackageManager.GET_META_DATA);
-		} catch (NameNotFoundException e) {
-			e.printStackTrace();
+			txtView.setText(appinfo.loadLabel((context.getPackageManager())));
+			Drawable img = appinfo.loadIcon(context.getPackageManager());
+			// GridView gridview = (GridView) parent;
+			// img.setBounds(0, 0, (int)(gridview.getColumnWidth()/2),
+			// (int)(gridview.getColumnWidth()/2));
+			// txtView.setCompoundDrawables(null, img, null, null);
+			// int imagesize = (int)
+			// context.getResources().getDimensionPixelSize(R.dimen.image_size);
+			// img.setBounds(0, 0, imagesize, imagesize);
+			float scalefactor = context.getResources().getDisplayMetrics().density * 50;
+			img.setBounds(0, 0, (int) (scalefactor), (int) (scalefactor));
+			// ActivityManager am = (ActivityManager)
+			// context.getSystemService(Context.ACTIVITY_SERVICE);
+			// int iconSize = am.getLauncherLargeIconSize();
+			// img.setBounds(0, 0, iconSize,iconSize);
+			txtView.setCompoundDrawables(null, img, null, null);
+			// txtView.setCompoundDrawablesWithIntrinsicBounds(null, img, null,
+			// null);
+		} catch (NameNotFoundException nameNotFoundException) {
+			Tracker tracker = EasyTracker.getInstance(context);
+			tracker.send(MapBuilder
+					.createException(
+							new AnalyticsExceptionParser().getDescription(
+									Thread.currentThread().toString(),
+									nameNotFoundException), false).build());
 		}
-		txtView.setText(appinfo.loadLabel((context.getPackageManager())));
-		Drawable img = appinfo.loadIcon(context.getPackageManager());
-		// GridView gridview = (GridView) parent;
-		// img.setBounds(0, 0, (int)(gridview.getColumnWidth()/2),
-		// (int)(gridview.getColumnWidth()/2));
-		// txtView.setCompoundDrawables(null, img, null, null);
-		// int imagesize = (int)
-		// context.getResources().getDimensionPixelSize(R.dimen.image_size);
-		// img.setBounds(0, 0, imagesize, imagesize);
-		float scalefactor = context.getResources().getDisplayMetrics().density * 50;
-		img.setBounds(0, 0, (int) (scalefactor), (int) (scalefactor));
-		// ActivityManager am = (ActivityManager)
-		// context.getSystemService(Context.ACTIVITY_SERVICE);
-		// int iconSize = am.getLauncherLargeIconSize();
-		// img.setBounds(0, 0, iconSize,iconSize);
-		txtView.setCompoundDrawables(null, img, null, null);
-		// txtView.setCompoundDrawablesWithIntrinsicBounds(null, img, null,
-		// null);
 
 		return txtView;
 	}
