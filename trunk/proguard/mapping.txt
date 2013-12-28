@@ -10148,10 +10148,10 @@ com.serveme.savemyphone.control.AppsListAdapter$ViewHolder -> com.serveme.savemy
 com.serveme.savemyphone.control.GridAdapter -> com.serveme.savemyphone.a.d:
     android.content.Context context -> b
     java.util.List aList -> a
-    36:36:int getCount() -> getCount
-    41:41:java.lang.Object getItem(int) -> getItem
-    46:46:long getItemId(int) -> getItemId
-    52:96:android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+    40:40:int getCount() -> getCount
+    45:45:java.lang.Object getItem(int) -> getItem
+    50:50:long getItemId(int) -> getItemId
+    56:105:android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
 com.serveme.savemyphone.model.DBHandler -> com.serveme.savemyphone.b.a:
     21:26:void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
     30:36:void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
@@ -10260,32 +10260,29 @@ com.serveme.savemyphone.view.UserActivity -> com.serveme.savemyphone.view.UserAc
     android.app.admin.DevicePolicyManager devicePolicyManager -> q
     android.content.ComponentName adminComponent -> r
     android.content.BroadcastReceiver bcr -> t
-    52:107:void onCreate(android.os.Bundle) -> onCreate
-    111:120:void onStart() -> onStart
-    124:126:void onStop() -> onStop
-    130:132:void onDestroy() -> onDestroy
-    137:137:void onBackPressed() -> onBackPressed
-    141:143:boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
-    149:157:boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-    164:199:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    53:110:void onCreate(android.os.Bundle) -> onCreate
+    114:123:void onStart() -> onStart
+    127:129:void onStop() -> onStop
+    133:135:void onDestroy() -> onDestroy
+    140:140:void onBackPressed() -> onBackPressed
+    144:146:boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    152:160:boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
+    167:202:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
 com.serveme.savemyphone.view.UserActivity$1 -> com.serveme.savemyphone.view.g:
     com.serveme.savemyphone.view.UserActivity this$0 -> a
-    212:213:void onReceive(android.content.Context,android.content.Intent) -> onReceive
+    215:216:void onReceive(android.content.Context,android.content.Intent) -> onReceive
 com.serveme.savemyphone.view.UserActivity$2 -> com.serveme.savemyphone.view.h:
     com.serveme.savemyphone.view.UserActivity this$0 -> a
-    94:104:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+    97:107:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 com.serveme.savemyphone.view.wizard.AdminRequest -> com.serveme.savemyphone.view.wizard.AdminRequest:
     int REQUEST_ENABLE -> o
-    android.app.admin.DevicePolicyManager devicePolicyManager -> p
-    android.content.ComponentName adminComponent -> q
+    android.content.ComponentName adminComponent -> p
     38:99:void onCreate(android.os.Bundle) -> onCreate
     103:112:void onStart() -> onStart
     116:118:void onStop() -> onStop
-    122:147:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
-    33:33:void access$0(com.serveme.savemyphone.view.wizard.AdminRequest,android.app.admin.DevicePolicyManager) -> a
-    34:34:void access$1(com.serveme.savemyphone.view.wizard.AdminRequest,android.content.ComponentName) -> a
-    33:33:android.app.admin.DevicePolicyManager access$2(com.serveme.savemyphone.view.wizard.AdminRequest) -> a
-    34:34:android.content.ComponentName access$3(com.serveme.savemyphone.view.wizard.AdminRequest) -> b
+    122:148:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    34:34:void access$0(com.serveme.savemyphone.view.wizard.AdminRequest,android.content.ComponentName) -> a
+    34:34:android.content.ComponentName access$1(com.serveme.savemyphone.view.wizard.AdminRequest) -> a
 com.serveme.savemyphone.view.wizard.AdminRequest$1 -> com.serveme.savemyphone.view.wizard.a:
     com.serveme.savemyphone.view.wizard.AdminRequest this$0 -> a
     64:64:void onClick(android.view.View) -> onClick
@@ -10293,14 +10290,16 @@ com.serveme.savemyphone.view.wizard.AdminRequest$2 -> com.serveme.savemyphone.vi
     com.serveme.savemyphone.view.wizard.AdminRequest this$0 -> a
     69:97:void onClick(android.view.View) -> onClick
 com.serveme.savemyphone.view.wizard.HelpActivity -> com.serveme.savemyphone.view.wizard.HelpActivity:
-    25:62:void onCreate(android.os.Bundle) -> onCreate
-    65:86:void setTextWithImage(android.widget.TextView,int) -> a
+    29:71:void onCreate(android.os.Bundle) -> onCreate
+    74:95:void setTextWithImage(android.widget.TextView,int) -> a
+    99:108:void onStart() -> onStart
+    112:114:void onStop() -> onStop
 com.serveme.savemyphone.view.wizard.HelpActivity$1 -> com.serveme.savemyphone.view.wizard.c:
     com.serveme.savemyphone.view.wizard.HelpActivity this$0 -> a
-    50:50:void onClick(android.view.View) -> onClick
+    54:54:void onClick(android.view.View) -> onClick
 com.serveme.savemyphone.view.wizard.HelpActivity$2 -> com.serveme.savemyphone.view.wizard.d:
     com.serveme.savemyphone.view.wizard.HelpActivity this$0 -> a
-    55:60:void onClick(android.view.View) -> onClick
+    59:69:void onClick(android.view.View) -> onClick
 com.serveme.savemyphone.view.wizard.PasswordRequest -> com.serveme.savemyphone.view.wizard.PasswordRequest:
     31:65:void onCreate(android.os.Bundle) -> onCreate
     69:78:void onStart() -> onStart
