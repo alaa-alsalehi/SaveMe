@@ -122,7 +122,6 @@ public class AdminRequest extends ActionBarActivity {
 		switch (requestCode) {
 		case REQUEST_ENABLE:
 			if (resultCode == Activity.RESULT_OK) {
-				Log.v("DeviceAdminSample", "Administration enabled!");
 				finish();
 				DevicePolicyManager devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 				devicePolicyManager.lockNow();
