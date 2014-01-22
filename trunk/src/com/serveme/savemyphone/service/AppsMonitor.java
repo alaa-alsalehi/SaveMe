@@ -1,23 +1,30 @@
 package com.serveme.savemyphone.service;
 
-import android.app.ActivityManager;
-import android.app.Service;
-import android.content.ComponentName;
-import android.content.Intent;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Looper;
-import android.os.Message;
-import android.util.Log;
-import android.widget.Toast;
-
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.app.ActivityManager;
+import android.app.Service;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PixelFormat;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Toast;
+
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.model.Launcher;
+import com.serveme.savemyphone.view.AlertUtility;
 import com.serveme.savemyphone.view.UserActivity;
 
 public class AppsMonitor extends Service {
@@ -29,6 +36,13 @@ public class AppsMonitor extends Service {
 	int counter = 1;
 	private Handler handler;
 
+	private enum MobileState {
+		START_APP, ALLOW_APP, UNALLOW_APP, ANDROID, USER_ACTIVITY, UNALLOW_APP_STARTED_BY_ALLOW_APP, ALERT_MESSAGE
+	}
+
+	private volatile MobileState currentState;
+	private volatile MobileState previousState;
+
 	@Override
 	public IBinder onBind(Intent arg0) {
 		return null;
@@ -36,15 +50,47 @@ public class AppsMonitor extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
+		currentState = MobileState.USER_ACTIVITY;
+		previousState = MobileState.START_APP;
 		db = new DBOperations(this);
 		am = (ActivityManager) this.getSystemService(ACTIVITY_SERVICE);
+		// view = LayoutInflater.from(AppsMonitor.this).inflate(
+		// R.layout.password_request, null);
+		final WindowManager.LayoutParams param = AlertUtility.getParam();
 		handler = new Handler() {
-			Toast toast = Toast.makeText(AppsMonitor.this, R.string.prevent_message,
-					Toast.LENGTH_LONG);
+			//Toast toast = Toast.makeText(AppsMonitor.this,
+			//		R.string.prevent_message, Toast.LENGTH_LONG);
+
 			@Override
 			public void handleMessage(Message msg) {
-				toast.show();
+				Log.d("alertMess", msg.toString());
+				final WindowManager wmgr = (WindowManager) getApplicationContext()
+						.getSystemService(Context.WINDOW_SERVICE);
+				View view = AlertUtility.getView(AppsMonitor.this);
+				if (msg.what == 0) {
+					synchronized (view) {
+						if (currentState == MobileState.UNALLOW_APP) {
+							Log.d("msg", "add view");
+							wmgr.addView(view, param);
+							//toast.show();
+							setCurrentState(MobileState.ALERT_MESSAGE);
+						}
+					}
+				} else if (msg.what == 1) {
+					synchronized (view) {
+						if (currentState == MobileState.USER_ACTIVITY) {
+							Log.d("msg", "remoge view");
+							try {
+								wmgr.removeView(view);
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
+						}
+					}
+				}
+
 			}
+
 		};
 		doGetRunningApp();
 		return START_STICKY; // continue running until it is explicitly stopped,
@@ -53,6 +99,7 @@ public class AppsMonitor extends Service {
 
 	private void doGetRunningApp() {
 		timer.scheduleAtFixedRate(new TimerTask() {
+
 			public void run() {
 
 				List<ActivityManager.RunningTaskInfo> taskInfo = am
@@ -62,6 +109,8 @@ public class AppsMonitor extends Service {
 						componentInfo.getPackageName(), null);
 				// Log.d("test", taskInfo.get(1).baseActivity.toString());
 				// Log.d("activity", taskInfo.get(1).topActivity.toString());
+				Log.d("class", componentInfo.toShortString());
+				Log.d("state", currentState.name());
 				if (!db.getWhiteListPackages().contains(launcher)
 						&& !componentInfo.getPackageName().equals("android")
 						&& !componentInfo.getClassName().equals(
@@ -79,7 +128,10 @@ public class AppsMonitor extends Service {
 					// }
 					// }
 					// am.killBackgroundProcesses(componentInfo.getPackageName());
-
+					/*
+					 * componentInfo = taskInfo.get(0).baseActivity; launcher =
+					 * new Launcher( componentInfo.getPackageName(), null);
+					 */
 					if (db.getWhiteListPackages().contains(launcher)) {
 						// Intent intent = new Intent(Intent.ACTION_MAIN);
 						// intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
@@ -95,23 +147,38 @@ public class AppsMonitor extends Service {
 						saveintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
 								| Intent.FLAG_ACTIVITY_NEW_TASK);
 						getApplication().startActivity(saveintent);
+						setCurrentState(MobileState.UNALLOW_APP_STARTED_BY_ALLOW_APP);
 					} else {
 						Intent saveintent = new Intent(getBaseContext(),
 								UserActivity.class);
 						saveintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						getApplication().startActivity(saveintent);
-						//Log.d("test", "test");
-						handler.sendEmptyMessage(0);
+						// Log.d("test", "test");
+						if (currentState != MobileState.UNALLOW_APP
+								&& currentState != MobileState.ALERT_MESSAGE) {
+							setCurrentState(MobileState.UNALLOW_APP);
+							handler.sendEmptyMessage(0);
+						}
 					}
 					//
-				} else if (!componentInfo.getPackageName().equals("android")) {
+				} else if (componentInfo.getPackageName().equals("android")) {
 					// lastallowedapp = taskInfo.get(0).topActivity;
+					currentState = MobileState.ANDROID;
+				} else if (componentInfo.getClassName().equals(
+						"com.serveme.savemyphone.view.UserActivity")) {
+					setCurrentState(MobileState.USER_ACTIVITY);
+					handler.sendEmptyMessage(1);
 				} else {
-					handler.removeMessages(0);
+					setCurrentState(MobileState.ALLOW_APP);
 				}
 
 			}
 		}, 1, UPDATE_INTERVAL);
+	}
+
+	private void setCurrentState(MobileState newState) {
+		previousState = currentState;
+		currentState = newState;
 	}
 
 	@Override
