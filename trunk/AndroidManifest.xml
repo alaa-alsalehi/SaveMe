@@ -73,7 +73,7 @@
         <activity
             android:name=".view.UserActivity"
             android:label="@string/apps"
-            android:launchMode="singleTask" >
+            android:launchMode="singleTask" android:theme="@style/UserActivity">
             <intent-filter>
                 <action android:name="edu.itf.activities.UserActivity" />
 

@@ -71,10 +71,10 @@ public class UserActivity extends ActionBarActivity {
 		startService(new Intent(this, AppsMonitor.class));
 
 		GridView gridView = (GridView) findViewById(R.id.grid_view);
-		Drawable wallpaper = WallpaperManager.getInstance(context)
-				.getDrawable();
-		if (wallpaper != null)
-			gridView.setBackgroundDrawable(wallpaper);
+		//Drawable wallpaper = WallpaperManager.getInstance(context)
+		//		.getDrawable();
+		//if (wallpaper != null)
+		//	gridView.setBackgroundDrawable(wallpaper);
 		gridView.setAdapter(new GridAdapter(this, appsinfolist));
 		gridView.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
 		gridView.setNumColumns(GridView.AUTO_FIT);
