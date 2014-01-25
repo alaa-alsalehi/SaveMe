@@ -6,47 +6,44 @@
     android:orientation="vertical"
     tools:context=".HelpActivity" >
 
+	<TextView
+		android:id="@+id/textView"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_centerHorizontal="true"
+		android:gravity="center_horizontal"
+		android:textAlignment="gravity"
+		android:bufferType="spannable"
+		android:lineSpacingMultiplier="1.4"
+		android:layout_margin="20dp"
+		android:textAppearance="?android:attr/textAppearanceLarge" />
+
+
     <LinearLayout
-        android:id="@+id/wrapper"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/choises"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true" android:layout_margin="20dp">
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:bufferType="spannable"
-            android:lineSpacingMultiplier="1.4"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    </LinearLayout>
-
-    <TableLayout
-        android:id="@+id/choises"
-        android:layout_width="wrap_content"
+        android:id="@+id/buttons_pane"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" >
+		android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:layout_margin="20dp"
+        android:weightSum="2" >
+        
+        <Button
+			android:id="@+id/next"
+			android:layout_weight="1"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="@string/next" />
 
-        <TableRow
-            android:id="@+id/choises_row"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <Button
-                android:id="@+id/next"
-                android:layout_width="200dp"
-                android:text="@string/next" />
-
-            <Button
-                android:id="@+id/previous"
-                android:layout_width="200dp"
-                android:text="@string/previous" />
-        </TableRow>
-    </TableLayout>
-
+       <Button
+			android:id="@+id/previous"
+			android:layout_weight="1"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="@string/previous" />
+            
+    </LinearLayout>
+    
 </RelativeLayout>

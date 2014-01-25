@@ -41,7 +41,6 @@
             <meta-data
                 android:name="android.app.device_admin"
                 android:resource="@xml/required_policies" />
-
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
                 <action android:name="android.app.action.DEVICE_ADMIN_DISABLED" />
@@ -50,7 +49,6 @@
         <receiver android:name="com.serveme.savemyphone.receivers.RemovePackageReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
-
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
@@ -96,7 +94,6 @@
             android:theme="@android:style/Theme.Dialog" >
             <intent-filter>
                 <action android:name="com.serveme.savemyphone.view.UninstallActivity" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

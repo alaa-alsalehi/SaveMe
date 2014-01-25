@@ -2,7 +2,7 @@
 <resources>
 
     <string name="lock_permission_title">Lock Permission</string>
-    <string name="lock_permission_request_help">We request lock permission to guarantee you are the owner of this device.\n We will lock your device, please unlock it and continue setup SaveMe.</string>
+    <string name="lock_permission_request_help">We request lock permission to guarantee you are the owner of this device.\n We will lock the screen and ask you to unlock it using your default lock method (password, pattern .. etc), when you unlock the screen you can continue setup SaveMe on your device.</string>
     <string name="get_permission">Grant Permission</string>
     
     <string name="pattern_request_title">Pattern</string>

@@ -1,8 +1,6 @@
 package com.serveme.savemyphone.model;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import com.google.analytics.tracking.android.EasyTracker;
@@ -40,21 +38,20 @@ public class DBOperations {
 	}
 
 	public void deleteApp(String packageName) {
-		SQLiteDatabase db = dbhandler.getWritableDatabase();
-		db.delete(DB_KEYS.WHITE_LIST_TABLE, DB_KEYS.KEY_PKGNAME + " = ?",
-				new String[] { packageName });
-		db.close();
+		SQLiteDatabase database = dbhandler.getWritableDatabase();
+		database.delete(DB_KEYS.WHITE_LIST_TABLE, DB_KEYS.KEY_PKGNAME + " = ?", new String[] { packageName });
+		database.close();
 	}
 
 	public void deleteLauncher(Launcher launcher) {
-		SQLiteDatabase db = dbhandler.getWritableDatabase();
-		db.delete(
+		SQLiteDatabase database = dbhandler.getWritableDatabase();
+		database.delete(
 				DB_KEYS.WHITE_LIST_TABLE,
 				DB_KEYS.KEY_PKGNAME + " = ? and " + DB_KEYS.KEY_ACTIVITY
 						+ " = ?",
 				new String[] { launcher.getPackageName(),
 						launcher.getActivity() });
-		db.close();
+		database.close();
 	}
 
 	public boolean isThereEnabledApps() {

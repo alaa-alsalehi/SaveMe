@@ -10,7 +10,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TableRow;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.analytics.tracking.android.EasyTracker;
@@ -31,22 +31,22 @@ public class PasswordRequest extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_help);
 		String direction = getResources().getString(R.string.direction);
-		TableRow choises = (TableRow) findViewById(R.id.choises_row);
-		final TextView textView2 = (TextView) findViewById(R.id.textView2);
-		textView2.setText(R.string.pattern_request_help);
-		textView2.setMovementMethod(ScrollingMovementMethod.getInstance());
+		LinearLayout buttonsPane = (LinearLayout) findViewById(R.id.buttons_pane);
+		final TextView textView = (TextView) findViewById(R.id.textView);
+		textView.setText(R.string.pattern_request_help);
+		textView.setMovementMethod(ScrollingMovementMethod.getInstance());
 		final Button previousButton = (Button) findViewById(R.id.previous);
 		previousButton.setVisibility(View.GONE);
 		final Button nextButton = (Button) findViewById(R.id.next);
 		nextButton.setText(R.string.create_pattern);
 		if ("right".equals(direction)) {
-			choises.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-			textView2.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+//			buttonsPane.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+//			textView.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
 			// remove and added at last of the choices row to make it right
-			choises.removeView(previousButton);
-			choises.addView(previousButton);
+			buttonsPane.removeView(previousButton);
+			buttonsPane.addView(previousButton);
 		} else {
-			choises.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+//			buttonsPane.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
 		}
 
 		previousButton.setOnClickListener(new OnClickListener() {

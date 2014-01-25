@@ -40,15 +40,9 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.TextureView;
-import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.view.ViewGroup.MarginLayoutParams;
-import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class AdminActivity extends ActionBarActivity {
 
@@ -59,21 +53,18 @@ public class AdminActivity extends ActionBarActivity {
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// Calling this to ensures that your application is properly initialized
-		// with default settings
+		super.onCreate(savedInstanceState);
+		// Calling this to ensures that your application is properly initialized with default settings
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 		if (savedInstanceState == null) {
 			checkAdminAccess();
-
 			checkPassCode();
 		}
-
-		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_layout);
 		AppsListAdapter adapter = new AppsListAdapter(this);
 		ListView listView = (ListView) findViewById(R.id.app_list);
 		LinearLayout headerLayout = createListHeader();
-		listView.addHeaderView(headerLayout);
+//		listView.addHeaderView(headerLayout);
 		listView.setAdapter(adapter);
 		adsStuff();
 
@@ -86,13 +77,12 @@ public class AdminActivity extends ActionBarActivity {
 
 	protected LinearLayout createListHeader() {
 		TextView header = new TextView(this);
-		header.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources()
-				.getDimension(R.dimen.apps_names));
+		header.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources().getDimension(R.dimen.apps_names));
 		header.setText(R.string.admin_list_header);
 		LinearLayout headerLayout = new LinearLayout(this);
 		headerLayout.setBackgroundColor(getResources().getColor(R.color.listview_header));
-		int margin = (int) ConverterUtil.convertDpToPixel(15, this);
-		headerLayout.setPadding(margin, margin, margin, margin);
+		int padding = (int) ConverterUtil.convertDpToPixel(15, this);
+		headerLayout.setPadding(padding, padding, padding, padding);
 		headerLayout.addView(header);
 		return headerLayout;
 	}
@@ -227,8 +217,7 @@ public class AdminActivity extends ActionBarActivity {
 
 	private void checkAdminAccess() {
 		devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-		adminComponent = new ComponentName(AdminActivity.this,
-				AdminReciver.class);
+		adminComponent = new ComponentName(AdminActivity.this,	AdminReciver.class);
 		if (!devicePolicyManager.isAdminActive(adminComponent)) {
 			finish();
 			Intent intent = new Intent(this, AdminRequest.class);

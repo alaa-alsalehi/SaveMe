@@ -11,10 +11,9 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TableRow;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
-
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.ExceptionReporter;
 import com.google.analytics.tracking.android.MapBuilder;
@@ -29,22 +28,23 @@ public class HelpActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_help);
 		String direction = getResources().getString(R.string.direction);
-		TableRow choises = (TableRow) findViewById(R.id.choises_row);
-		final TextView textView2 = (TextView) findViewById(R.id.textView2);
-		setTextWithImage(textView2, R.string.use_help);
-		textView2.setMovementMethod(ScrollingMovementMethod.getInstance());
+		LinearLayout buttonsPane = (LinearLayout) findViewById(R.id.buttons_pane);
+		buttonsPane.setWeightSum(1.0f);
+		final TextView textView = (TextView) findViewById(R.id.textView);
+		setTextWithImage(textView, R.string.use_help);
+		textView.setMovementMethod(ScrollingMovementMethod.getInstance());
 		final Button previousButton = (Button) findViewById(R.id.previous);
 		previousButton.setVisibility(View.GONE);
 		final Button nextButton = (Button) findViewById(R.id.next);
 		nextButton.setText(R.string.finish);
 		if ("right".equals(direction)) {
-			choises.setGravity(Gravity.RIGHT | Gravity.CENTER);
-			textView2.setGravity(Gravity.RIGHT | Gravity.CENTER);
+			buttonsPane.setGravity(Gravity.RIGHT | Gravity.CENTER);
+			textView.setGravity(Gravity.RIGHT | Gravity.CENTER);
 			// remove and added at last of the choices row to make it right
-			choises.removeView(previousButton);
-			choises.addView(previousButton);
+			buttonsPane.removeView(previousButton);
+			buttonsPane.addView(previousButton);
 		} else {
-			choises.setGravity(Gravity.LEFT | Gravity.CENTER);
+			buttonsPane.setGravity(Gravity.LEFT | Gravity.CENTER);
 		}
 
 		previousButton.setOnClickListener(new OnClickListener() {

@@ -17,9 +17,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:gravity="left"
         android:layout_weight="1"
-        android:textSize="@dimen/apps_names" android:textAlignment="gravity"/>
+        android:textSize="@dimen/apps_names"
+        android:gravity="left" 
+        android:textAlignment="gravity"/>
 
     <ToggleButton
         android:id="@+id/enable_disable"

@@ -18,8 +18,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
+        android:textSize="@dimen/apps_names" 
         android:gravity="right"
-        android:textSize="@dimen/apps_names" android:textAlignment="gravity"/>
+        android:textAlignment="gravity" />
 
     <ImageView
         android:id="@+id/icon"
