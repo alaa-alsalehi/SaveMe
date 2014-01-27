@@ -17,7 +17,7 @@ public class Checker {
 	}
 	
 	public void checkPattern(int requestCode){
-		char[] savedPattern = new PrefEditor(context).getPassCode().toCharArray();
+		char[] savedPattern = new PrefEditor(context).getSavedPattern().toCharArray();
 		DisplayPrefs.setStealthMode(context, false);
 		Intent intent = new Intent(LockPatternActivity.ACTION_COMPARE_PATTERN, null, context,LockPatternActivity.class);
 		intent.putExtra(LockPatternActivity.EXTRA_PATTERN, savedPattern);

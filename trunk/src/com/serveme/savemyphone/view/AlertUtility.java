@@ -2,7 +2,6 @@ package com.serveme.savemyphone.view;
 
 import com.serveme.savemyphone.R;
 
-import android.app.Service;
 import android.content.Context;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -29,8 +28,7 @@ public class AlertUtility {
 			view.setText(R.string.prevent_message);
 			view.setGravity(Gravity.CENTER);
 			view.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
-			view.setBackgroundColor(context.getResources().getColor(
-					R.color.actionbar_background));
+			view.setBackgroundColor(context.getResources().getColor(R.color.actionbar_background));
 			thisView = view;
 			return view;
 		} else {

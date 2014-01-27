@@ -2,63 +2,60 @@ package com.serveme.savemyphone.view.wizard;
 
 //import org.omar.android.lib.ui.passwordlock.PasswordEntryActivity;
 
+import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.method.ScrollingMovementMethod;
-import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.google.analytics.tracking.android.EasyTracker;
-import com.google.analytics.tracking.android.ExceptionReporter;
-import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.R;
-import com.serveme.savemyphone.view.PasswordRequester;
+import com.serveme.savemyphone.util.MyTracker;
 
 public class PasswordRequest extends ActionBarActivity {
 
 	public static final int REQ_CREATE_PATTERN = 1;
-
-	private char[] passCode;
+	public static final int REQ_CREATE_PASSWORD = 2;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_help);
-		String direction = getResources().getString(R.string.direction);
-		LinearLayout buttonsPane = (LinearLayout) findViewById(R.id.buttons_pane);
+		setContentView(R.layout.guide_activity);
+//		String direction = getResources().getString(R.string.direction);
+//		LinearLayout buttonsPane = (LinearLayout) findViewById(R.id.buttons_pane);
 		final TextView textView = (TextView) findViewById(R.id.textView);
 		textView.setText(R.string.pattern_request_help);
 		textView.setMovementMethod(ScrollingMovementMethod.getInstance());
-		final Button previousButton = (Button) findViewById(R.id.previous);
-		previousButton.setVisibility(View.GONE);
-		final Button nextButton = (Button) findViewById(R.id.next);
-		nextButton.setText(R.string.create_pattern);
-		if ("right".equals(direction)) {
-//			buttonsPane.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-//			textView.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-			// remove and added at last of the choices row to make it right
-			buttonsPane.removeView(previousButton);
-			buttonsPane.addView(previousButton);
-		} else {
-//			buttonsPane.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-		}
+		final Button firstButton = (Button) findViewById(R.id.previous);
+		firstButton.setText(R.string.create_password);
+		// Temporarily ******************************************************
+		((LinearLayout) findViewById(R.id.buttons_pane)).setWeightSum(1.0f); 
+		firstButton.setVisibility(View.GONE);
+		/* *************************************************************** */
+		final Button secondButton = (Button) findViewById(R.id.next);
+		secondButton.setText(R.string.create_pattern);
 
-		previousButton.setOnClickListener(new OnClickListener() {
+		firstButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
 
 			}
 		});
-		nextButton.setOnClickListener(new OnClickListener() {
+		
+		secondButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				PasswordRequester.requestPatternPassword(PasswordRequest.this);
+				Intent intent = new Intent(LockPatternActivity.ACTION_CREATE_PATTERN, null, PasswordRequest.this, LockPatternActivity.class);
+				startActivityForResult(intent, REQ_CREATE_PATTERN);
+				MyTracker.fireButtonPressedEvent(PasswordRequest.this, "request_pattern");
 			}
 		});
 
@@ -67,27 +64,37 @@ public class PasswordRequest extends ActionBarActivity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		EasyTracker.getInstance(this).activityStart(this);
-		Thread.UncaughtExceptionHandler uncaughtExceptionHandler = Thread
-				.getDefaultUncaughtExceptionHandler();
-		if (uncaughtExceptionHandler instanceof ExceptionReporter) {
-			ExceptionReporter exceptionReporter = (ExceptionReporter) uncaughtExceptionHandler;
-			exceptionReporter
-					.setExceptionParser(new AnalyticsExceptionParser());
-		}
+		MyTracker.fireActivityStartEvent(PasswordRequest.this);
+		MyTracker.getUncaughtExceptionHandler();
 	}
-
+;
 	@Override
 	protected void onStop() {
-		EasyTracker.getInstance(this).activityStop(this);
+		MyTracker.fireActivityStopevent(PasswordRequest.this);
 		super.onStop();
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		PasswordRequester.onPatternPasswordRecived(requestCode, resultCode,
-				data, this);
 		super.onActivityResult(requestCode, resultCode, data);
+		switch (requestCode) {
+			case REQ_CREATE_PATTERN:
+				if (resultCode == Activity.RESULT_OK) {
+					char[] passCode = data.getCharArrayExtra(LockPatternActivity.EXTRA_PATTERN);
+					SharedPreferences preferences = getSharedPreferences("mypref", Context.MODE_PRIVATE);
+					Editor edit = preferences.edit();
+					edit.putString("saved_pattern", String.copyValueOf(passCode)); 
+					edit.apply();
+					Intent intent = new Intent(PasswordRequest.this, HelpActivity.class);
+					startActivity(intent); 
+					finish();
+					MyTracker.fireButtonPressedEvent(PasswordRequest.this, "request_pattern_done");
+				} else {
+					MyTracker.fireButtonPressedEvent(PasswordRequest.this, "request_pattern_cancelled");
+				}
+			break;
+
+		}
 	}
 
 }

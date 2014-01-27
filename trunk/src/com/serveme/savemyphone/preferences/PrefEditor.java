@@ -7,6 +7,7 @@ import android.content.SharedPreferences.Editor;
 public class PrefEditor {
 	//public static final int ADMIN_PERMISSION_OK = 1;
 	//public static final int ADMIN_PERMISSION_IGNORED = 2;
+	
 	SharedPreferences preferences;
 	
 	public PrefEditor(Context context){
@@ -29,7 +30,7 @@ public class PrefEditor {
 		return preferences.getInt("status", 0);
 	}
 	
-	public String getPassCode(){
-		return preferences.getString("pass_code","null");
+	public String getSavedPattern(){
+		return preferences.getString("saved_pattern","null");
 	}
 }

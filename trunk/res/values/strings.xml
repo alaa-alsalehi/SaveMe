@@ -11,6 +11,9 @@
 
     <string name="admin_button">Grant Admin Access</string>
 
+    <string name="pattern_settings_category">Pattern options</string>
+    <string name="change_pattern">Change Pattern</string>
+    <string name="uninstall_settings_category">Uninstall</string>
     <string name="uninstall">Uninstall</string>
     
     <string name="lock_choice">"Choose your preferred lock"</string>

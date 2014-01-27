@@ -20,8 +20,10 @@ import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.receivers.AdminReciver;
 import com.serveme.savemyphone.util.ConverterUtil;
+import com.serveme.savemyphone.util.MyTracker;
 import com.serveme.savemyphone.view.wizard.AdminRequest;
 import com.serveme.savemyphone.view.wizard.HelpActivity;
+import com.serveme.savemyphone.view.wizard.PasswordRequest;
 
 import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
@@ -44,7 +46,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class AdminActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity {
 
 	private DevicePolicyManager devicePolicyManager;
 	private ComponentName adminComponent;
@@ -60,11 +62,11 @@ public class AdminActivity extends ActionBarActivity {
 			checkAdminAccess();
 			checkPassCode();
 		}
-		setContentView(R.layout.main_layout);
+		setContentView(R.layout.main_activity);
 		AppsListAdapter adapter = new AppsListAdapter(this);
 		ListView listView = (ListView) findViewById(R.id.app_list);
 		LinearLayout headerLayout = createListHeader();
-//		listView.addHeaderView(headerLayout);
+		listView.addHeaderView(headerLayout);
 		listView.setAdapter(adapter);
 		adsStuff();
 
@@ -98,11 +100,9 @@ public class AdminActivity extends ActionBarActivity {
 		adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
 		// adRequest.addTestDevice("8E7864D6D7911778659788D0B39F99E8");
 		Thread thread = new Thread(new Runnable() {
-
 			public void run() {
 				Looper.prepare();
 				adView.loadAd(adRequest);
-
 			}
 		});
 		thread.start();
@@ -121,10 +121,7 @@ public class AdminActivity extends ActionBarActivity {
 
 						public void onClick(DialogInterface dialog, int which) {
 							lock();
-							EasyTracker.getInstance(AdminActivity.this).send(
-									MapBuilder.createEvent("ui_action",
-											"button_press", "lock",
-											Long.valueOf(1)).build());
+							MyTracker.fireButtonPressedEvent(MainActivity.this, "Ok_lock_dialog");
 							finish();
 						}
 					});
@@ -133,10 +130,7 @@ public class AdminActivity extends ActionBarActivity {
 					new DialogInterface.OnClickListener() {
 
 						public void onClick(DialogInterface dialog, int which) {
-							EasyTracker.getInstance(AdminActivity.this).send(
-									MapBuilder.createEvent("ui_action",
-											"button_press", "stop_dialog",
-											Long.valueOf(1)).build());
+							MyTracker.fireButtonPressedEvent(MainActivity.this, "Cancel_lock_dialog");
 							finish();
 						}
 					});
@@ -149,13 +143,11 @@ public class AdminActivity extends ActionBarActivity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		EasyTracker.getInstance(this).activityStart(this);
-		Thread.UncaughtExceptionHandler uncaughtExceptionHandler = Thread
-				.getDefaultUncaughtExceptionHandler();
+		MyTracker.fireActivityStartEvent(MainActivity.this);
+		Thread.UncaughtExceptionHandler uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
 		if (uncaughtExceptionHandler instanceof ExceptionReporter) {
 			ExceptionReporter exceptionReporter = (ExceptionReporter) uncaughtExceptionHandler;
-			exceptionReporter
-					.setExceptionParser(new AnalyticsExceptionParser());
+			exceptionReporter.setExceptionParser(new AnalyticsExceptionParser());
 		}
 	}
 
@@ -209,7 +201,7 @@ public class AdminActivity extends ActionBarActivity {
 	}
 
 	protected void lock() {
-		PrefEditor pe = new PrefEditor(AdminActivity.this);
+		PrefEditor pe = new PrefEditor(MainActivity.this);
 		pe.updateStatus(1);
 		Intent saveintent = new Intent(getBaseContext(), UserActivity.class);
 		startActivity(saveintent);
@@ -217,7 +209,7 @@ public class AdminActivity extends ActionBarActivity {
 
 	private void checkAdminAccess() {
 		devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-		adminComponent = new ComponentName(AdminActivity.this,	AdminReciver.class);
+		adminComponent = new ComponentName(MainActivity.this, AdminReciver.class);
 		if (!devicePolicyManager.isAdminActive(adminComponent)) {
 			finish();
 			Intent intent = new Intent(this, AdminRequest.class);
@@ -227,14 +219,12 @@ public class AdminActivity extends ActionBarActivity {
 
 	private void checkPassCode() {
 		if (devicePolicyManager.isAdminActive(adminComponent)) {
-			SharedPreferences mySharedPreferences = getSharedPreferences(
-					"mypref", Context.MODE_PRIVATE);
-			if (mySharedPreferences != null
-					&& mySharedPreferences.contains("pass_code")) {
+			SharedPreferences mySharedPreferences = getSharedPreferences("mypref", Context.MODE_PRIVATE);
+			if (mySharedPreferences != null	&& mySharedPreferences.contains("saved_pattern")) {
 				if (getIntent() != null) {
 					if (!getIntent().getBooleanExtra("first_time", false)) {
 						// if(pattern){
-						new Checker(this).checkPattern(REQ_ENTER_PATTERN);
+							new Checker(this).checkPattern(REQ_ENTER_PATTERN);
 						// }else{
 
 						// }
@@ -244,11 +234,8 @@ public class AdminActivity extends ActionBarActivity {
 				}
 			} else {
 				finish();
-				// PasswordRequester.requestPatternPassword(this);
-
-				Intent intent = new Intent(this, AdminRequest.class);
+				Intent intent = new Intent(MainActivity.this, PasswordRequest.class);
 				startActivity(intent);
-
 			}
 		}
 	}

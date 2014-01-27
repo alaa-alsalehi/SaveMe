@@ -1,16 +1,15 @@
-package com.serveme.savemyphone.view;
+/*package com.serveme.savemyphone.view;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.serveme.savemyphone.view.wizard.HelpActivity;
-
 import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.widget.Toast;
+
 
 public class PasswordRequester {
 
@@ -55,4 +54,4 @@ public class PasswordRequester {
 		}
 	}
 
-}
+}*/

@@ -11,7 +11,11 @@
 
     <string name="admin_button">منح صلاحيات المدير</string>
 
+    <string name="pattern_settings_category">خيارات النمط</string>
+    <string name="change_pattern">تغيير النمط</string>
+    <string name="uninstall_settings_category">إزالة التطبيق</string>
     <string name="uninstall">إزالة التطبيق</string>
+    
     
     <string name="lock_choice">"اختار نوع الحماية"</string>
     <string name="pattern">نمط</string>

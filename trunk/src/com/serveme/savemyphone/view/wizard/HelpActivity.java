@@ -19,14 +19,14 @@ import com.google.analytics.tracking.android.ExceptionReporter;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.R;
-import com.serveme.savemyphone.view.AdminActivity;
+import com.serveme.savemyphone.view.MainActivity;
 
 public class HelpActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_help);
+		setContentView(R.layout.guide_activity);
 		String direction = getResources().getString(R.string.direction);
 		LinearLayout buttonsPane = (LinearLayout) findViewById(R.id.buttons_pane);
 		buttonsPane.setWeightSum(1.0f);
@@ -56,8 +56,7 @@ public class HelpActivity extends ActionBarActivity {
 		nextButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				Intent intent = new Intent(HelpActivity.this,
-						AdminActivity.class);
+				Intent intent = new Intent(HelpActivity.this,MainActivity.class);
 				intent.putExtra("first_time", true);
 				startActivity(intent);
 				EasyTracker.getInstance(HelpActivity.this).send(

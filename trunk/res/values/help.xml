@@ -8,6 +8,7 @@
     <string name="pattern_request_title">Pattern</string>
     <string name="pattern_request_help">SaveMe need pattern, this pattern make you apple move form Save Mode to full access mode.\nNote: this pattern private to SaveMe app.\nCaution: this pattern irrecovable and forget it may prevent you using your mobile</string>
     <string name="create_pattern">Create Pattern</string>
+    <string name="create_password">Create Password</string>
     
     <string name="use_title">How to Use</string>
     <string name="use_help">1- Choose which apps you want to enable it for others -all apps will be disabled at the beginning-.\n2- Click on the lock button {1} to enter the protected mode.\n3- Now you will just see allowed apps and no one can run any other apps that you are not allowed it.\n4- To close protexted mode click on unlock button {2}.</string>

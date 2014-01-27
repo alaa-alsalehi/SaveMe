@@ -20,7 +20,7 @@ import com.google.analytics.tracking.android.MapBuilder;
 import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.receivers.AdminReciver;
-
+import com.serveme.savemyphone.util.MyTracker;
 
 public class AdminRequest extends ActionBarActivity {
 
@@ -31,17 +31,17 @@ public class AdminRequest extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_help);
+		setContentView(R.layout.guide_activity);
 		// the next line : because we have just one button in this activity and we want it to take the whole place
 		((LinearLayout) findViewById(R.id.buttons_pane)).setWeightSum(1.0f); 
 		final TextView textView = (TextView) findViewById(R.id.textView);
 		textView.setText(R.string.lock_permission_request_help);
 		textView.setMovementMethod(ScrollingMovementMethod.getInstance());
-		final Button previousButton = (Button) findViewById(R.id.previous);
-		final Button nextButton = (Button) findViewById(R.id.next);
-		nextButton.setText(R.string.get_permission);
-		previousButton.setVisibility(View.GONE);
-		nextButton.setOnClickListener(new OnClickListener() {
+		final Button firstButton = (Button) findViewById(R.id.previous);
+		final Button secondButton = (Button) findViewById(R.id.next);
+		firstButton.setVisibility(View.GONE);
+		secondButton.setText(R.string.get_permission);
+		secondButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
 				DevicePolicyManager devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
@@ -67,7 +67,7 @@ public class AdminRequest extends ActionBarActivity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		EasyTracker.getInstance(this).activityStart(this);
+		MyTracker.fireActivityStartEvent(AdminRequest.this);
 		Thread.UncaughtExceptionHandler uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
 		if (uncaughtExceptionHandler instanceof ExceptionReporter) {
 			ExceptionReporter exceptionReporter = (ExceptionReporter) uncaughtExceptionHandler;
@@ -77,7 +77,7 @@ public class AdminRequest extends ActionBarActivity {
 
 	@Override
 	protected void onStop() {
-		EasyTracker.getInstance(this).activityStop(this);
+		MyTracker.fireActivityStopevent(AdminRequest.this);
 		super.onStop();
 	}
 
