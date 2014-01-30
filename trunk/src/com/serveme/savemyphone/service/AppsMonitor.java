@@ -109,8 +109,6 @@ public class AppsMonitor extends Service {
 						componentInfo.getPackageName(), null);
 				// Log.d("test", taskInfo.get(1).baseActivity.toString());
 				// Log.d("activity", taskInfo.get(1).topActivity.toString());
-				Log.d("class", componentInfo.toShortString());
-				Log.d("state", currentState.name());
 				if (!db.getWhiteListPackages().contains(launcher)
 						&& !componentInfo.getPackageName().equals("android")
 						&& !componentInfo.getClassName().equals(
@@ -132,6 +130,9 @@ public class AppsMonitor extends Service {
 					 * componentInfo = taskInfo.get(0).baseActivity; launcher =
 					 * new Launcher( componentInfo.getPackageName(), null);
 					 */
+					componentInfo = taskInfo.get(0).baseActivity;
+					launcher = new Launcher(
+							componentInfo.getPackageName(), null);
 					if (db.getWhiteListPackages().contains(launcher)) {
 						// Intent intent = new Intent(Intent.ACTION_MAIN);
 						// intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
