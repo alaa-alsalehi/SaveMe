@@ -5,11 +5,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import com.google.analytics.tracking.android.EasyTracker;
-import com.google.analytics.tracking.android.MapBuilder;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.model.Launcher;
+import com.serveme.savemyphone.util.MyTracker;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
@@ -97,7 +97,7 @@ public class AppsListAdapter extends BaseAdapter {
 				if (isChecked) {
 					status[position] = true;
 					if (!whitelist.contains(launcher)) {
-						db.insertöApp(launcher);
+						db.insertoApp(launcher);
 						whitelist.add(launcher);
 					}
 				} else {
@@ -107,10 +107,7 @@ public class AppsListAdapter extends BaseAdapter {
 						whitelist.remove(launcher);
 					}
 				}
-				EasyTracker.getInstance(context).send(
-						MapBuilder.createEvent("ui_action", "button_press",
-								"enable_disable_app", Long.valueOf(1))
-								.build());
+				MyTracker.fireButtonPressedEvent(context, "enable_disable_app");
 			}
 		});
 

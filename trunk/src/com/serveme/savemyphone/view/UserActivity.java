@@ -18,6 +18,7 @@ import com.serveme.savemyphone.receivers.AdminReciver;
 import com.serveme.savemyphone.service.AppsMonitor;
 import android.app.WallpaperManager;
 import android.app.admin.DevicePolicyManager;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -26,13 +27,16 @@ import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
@@ -62,8 +66,13 @@ public class UserActivity extends ActionBarActivity {
 		// ColorDrawable(Color.parseColor("#55ffffff")));
 		// actionBar.setDisplayShowHomeEnabled(false);
 		// actionBar.setDisplayShowTitleEnabled(false);
-
 		setContentView(R.layout.user_activity);
+		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){ 
+			DBOperations.sdcard_mounted = true; 
+			Log.v("sdcard_mounted","true" );
+		} else {
+			DBOperations.sdcard_mounted = false;
+		}
 		db = new DBOperations(this);
 		appsinfolist = new ArrayList<Launcher>();
 		appsinfolist.addAll(db.getWhiteListApps());
@@ -94,6 +103,7 @@ public class UserActivity extends ActionBarActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v,
 					int position, long id) {
+				try{
 				Launcher launcher = appsinfolist.get(position);
 				Intent i = new Intent();
 				i.setAction(Intent.ACTION_MAIN);
@@ -104,6 +114,10 @@ public class UserActivity extends ActionBarActivity {
 				EasyTracker.getInstance(context).send(
 						MapBuilder.createEvent("ui_action", "button_press",
 								"run_app", Long.valueOf(1)).build());
+				} catch (ActivityNotFoundException e) {
+					// TODO: handle exception
+					Toast.makeText(context, "Application not Installed", Toast.LENGTH_LONG).show();
+				}
 			}
 		});
 

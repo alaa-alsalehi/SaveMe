@@ -102,20 +102,15 @@ public class AppsMonitor extends Service {
 
 			public void run() {
 
-				List<ActivityManager.RunningTaskInfo> taskInfo = am
-						.getRunningTasks(2);
+				List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(2);
 				ComponentName componentInfo = taskInfo.get(0).topActivity;
-				Launcher launcher = new Launcher(
-						componentInfo.getPackageName(), null);
+				Launcher launcher = new Launcher(componentInfo.getPackageName(), null);
 				// Log.d("test", taskInfo.get(1).baseActivity.toString());
 				// Log.d("activity", taskInfo.get(1).topActivity.toString());
 				if (!db.getWhiteListPackages().contains(launcher)
 						&& !componentInfo.getPackageName().equals("android")
-						&& !componentInfo.getClassName().equals(
-								"com.serveme.savemyphone.view.UserActivity")
-						&& !componentInfo
-								.getClassName()
-								.equals("group.pals.android.lib.ui.lockpattern.LockPatternActivity")) {
+						&& !componentInfo.getClassName().equals("com.serveme.savemyphone.view.UserActivity")
+						&& !componentInfo.getClassName().equals("group.pals.android.lib.ui.lockpattern.LockPatternActivity")) {
 					// ActivityManager manager =
 					// (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
 					// List<RunningAppProcessInfo> services =
