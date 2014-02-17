@@ -63,11 +63,10 @@ public class MainActivity extends ActionBarActivity {
 			checkPassCode();
 		}
 		setContentView(R.layout.main_activity);
-		if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)){ 
-			DBOperations.sdcard_mounted = true; 
-		} else {
-			DBOperations.sdcard_mounted = false;
-		}
+		PrefEditor pe = new PrefEditor(MainActivity.this);
+		Log.v("sdcard flag", pe.isSDCardMounted()+ "");
+		if (pe.isSDCardMounted()) { DBOperations.sdcard_mounted = true; } else { DBOperations.sdcard_mounted = false; }
+
 		AppsListAdapter adapter = new AppsListAdapter(this);
 		ListView listView = (ListView) findViewById(R.id.app_list);
 		LinearLayout headerLayout = createListHeader();

@@ -52,7 +52,20 @@
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
-
+        <receiver android:name="com.serveme.savemyphone.receivers.SDCardReceiver" >
+		    <intent-filter>
+		        <action android:name="android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE"/>
+		        <action android:name="android.intent.action.EXTERNAL_APPLICATIONS_UNAVAILABLE"/>
+		        <action android:name="android.intent.ACTION_MEDIA_BAD_REMOVAL" />
+		        <action android:name="android.intent.action.MEDIA_REMOVED" />
+		        <action android:name="android.intent.action.ACTION_MEDIA_SHARED" />
+		        <action android:name="android.intent.action.MEDIA_UNMOUNTED" />
+		        <action android:name="android.intent.action.MEDIA_MOUNTED" />
+		        <data android:scheme="file" />
+		       
+		    </intent-filter>
+		</receiver>
+		
         <!-- activities -->
         <activity
             android:name=".view.MainActivity"

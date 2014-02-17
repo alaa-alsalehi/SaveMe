@@ -67,12 +67,8 @@ public class UserActivity extends ActionBarActivity {
 		// actionBar.setDisplayShowHomeEnabled(false);
 		// actionBar.setDisplayShowTitleEnabled(false);
 		setContentView(R.layout.user_activity);
-		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){ 
-			DBOperations.sdcard_mounted = true; 
-			Log.v("sdcard_mounted","true" );
-		} else {
-			DBOperations.sdcard_mounted = false;
-		}
+		PrefEditor pe = new PrefEditor(UserActivity.this);
+		if (pe.isSDCardMounted()) { DBOperations.sdcard_mounted = true; } else { DBOperations.sdcard_mounted = false; }
 		db = new DBOperations(this);
 		appsinfolist = new ArrayList<Launcher>();
 		appsinfolist.addAll(db.getWhiteListApps());

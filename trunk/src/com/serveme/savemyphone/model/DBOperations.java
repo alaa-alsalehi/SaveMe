@@ -8,11 +8,16 @@ import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.Tracker;
 import com.serveme.analytics.AnalyticsExceptionParser;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build.VERSION;
 import android.util.Log;
 
 public class DBOperations {
@@ -51,37 +56,6 @@ public class DBOperations {
 		SQLiteDatabase database = dbhandler.getWritableDatabase();
 		database.delete(DB_KEYS.WHITE_LIST_TABLE,DB_KEYS.KEY_PKGNAME + " = ? and " + DB_KEYS.KEY_ACTIVITY + " = ?",	new String[] { launcher.getPackageName(), launcher.getActivity() });
 		database.close();
-	}
-	
-	public void removeSDCardApps(){
-		for (Launcher aLuncher : whitelistPackages)
-		{
-			String sourceDir = null;
-			try {
-				sourceDir = context.getPackageManager().getPackageInfo(aLuncher.getPackageName(), 0).applicationInfo.dataDir;
-			} catch (NameNotFoundException e) {
-			    Log.w("not found!", "Error Package name not found ", e);
-			}
-		   if(!sourceDir.startsWith("/data/"))
-		   {
-			   // SD card
-			  whitelistPackages.remove(aLuncher);
-		   }
-		}
-		for (Launcher aLuncher : whitelist)
-		{
-			String sourceDir = null;
-			try {
-				sourceDir = context.getPackageManager().getPackageInfo(aLuncher.getPackageName(), 0).applicationInfo.dataDir;
-			} catch (NameNotFoundException e) {
-			    Log.w("not found!", "Error Package name not found ", e);
-			}
-		   if(!sourceDir.startsWith("/data/"))
-		   {
-			  // SD card
-			  whitelistPackages.remove(aLuncher);
-		   }
-		}
 	}
 
 	public boolean isThereEnabledApps() {
@@ -144,16 +118,10 @@ public class DBOperations {
 					do {
 						String packageName = cursor.getString((cursor.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
 						String activity = cursor.getString((cursor.getColumnIndexOrThrow(DB_KEYS.KEY_ACTIVITY)));
-						try {
-							String sourceDir = context.getPackageManager().getApplicationInfo(packageName, 0).dataDir;
-							if(sourceDir.startsWith("/data/"))
-							{
-								Launcher lanucher = new Launcher(packageName, activity);
-								whitelist.add(lanucher);
-							}
-						} catch (NameNotFoundException e) {
-						    Log.w("not found!", "Error Package name not found ", e);
-						}
+						if(!isInstalledOnSdCard(context,packageName)){
+							Launcher lanucher = new Launcher(packageName, activity);
+							whitelist.add(lanucher);
+						}						
 					} while (cursor.moveToNext());
 				}
 			}
@@ -180,16 +148,10 @@ public class DBOperations {
 				} else {
 					do {
 						String packageName = cursor.getString((cursor.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
-						try {
-							String sourceDir = context.getPackageManager().getPackageInfo(packageName, 0).applicationInfo.dataDir;
-							if(sourceDir.startsWith("/data/"))
-							{
-								Launcher lanucher = new Launcher(packageName, null);
-								whitelistPackages.add(lanucher);
-							}
-						} catch (NameNotFoundException e) {
-						    Log.w("not found!", "Error Package name not found ", e);
-						}
+						if(!isInstalledOnSdCard(context,packageName)){
+							Launcher lanucher = new Launcher(packageName, null);
+							whitelistPackages.add(lanucher);
+						}	
 					} while (cursor.moveToNext());
 				}
 			}
@@ -199,5 +161,43 @@ public class DBOperations {
 	}
 	
 	
+	  
+	public static boolean isInstalledOnSdCard(Context context, String packageName) {
 
+	    PackageManager pm = context.getPackageManager();
+        ApplicationInfo appinfo = null;
+		try {
+			appinfo = pm.getApplicationInfo(packageName, 0);
+		} catch (NameNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        
+	    // check for API level 8 and higher
+	    if (VERSION.SDK_INT > android.os.Build.VERSION_CODES.ECLAIR_MR1) 
+	    {
+	      try {
+	    	if ((appinfo.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) == ApplicationInfo.FLAG_EXTERNAL_STORAGE) {
+		    	return true; // installed in SD Card but available
+	    	} 
+	      } catch(NullPointerException npe){
+	    	  return true; // installed in SD Card and not available
+	      }
+	    } 
+	    // check for API level 7 - check files dir
+	    else 
+	    {
+		    try {
+		    	String  sourceDir = appinfo.dataDir;
+		    	if(sourceDir.startsWith("/data/")) {
+		    		return false;
+		      	} else { // if (sourceDir.contains("/mnt/") || sourceDir.contains("/sdcard/"))
+		      		return true;
+		      	}
+		    } catch (Throwable e) {
+		      // ignore
+		    }
+	    }
+		return false;
+	}
 }

@@ -1,5 +1,6 @@
 package com.serveme.savemyphone.preferences;
 
+import android.R.bool;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -20,6 +21,13 @@ public class PrefEditor {
         edit.apply();
 	}
 	
+	public void setSDCardMounted(boolean flag) {
+	       
+        Editor edit = preferences.edit();
+        edit.putBoolean("sdcardFlag", flag);
+        edit.apply();
+	}
+	
 /*	public void updateAdminPermission(int adminPermission){
 		Editor edit = preferences.edit();
         edit.putInt("status", adminPermission);
@@ -30,7 +38,12 @@ public class PrefEditor {
 		return preferences.getInt("status", 0);
 	}
 	
+	public boolean isSDCardMounted() {
+		return preferences.getBoolean("sdcardFlag", true);
+	}
+	
 	public String getSavedPattern(){
 		return preferences.getString("saved_pattern","null");
 	}
+
 }
