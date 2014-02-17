@@ -1,6 +1,5 @@
 package com.serveme.savemyphone.preferences;
 
-import android.R.bool;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;

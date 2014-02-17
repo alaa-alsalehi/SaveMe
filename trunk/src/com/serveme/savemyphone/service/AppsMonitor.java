@@ -4,24 +4,18 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PixelFormat;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Toast;
-
-import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.model.Launcher;
 import com.serveme.savemyphone.view.AlertUtility;
@@ -48,6 +42,7 @@ public class AppsMonitor extends Service {
 		return null;
 	}
 
+	@SuppressLint("HandlerLeak")
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		currentState = MobileState.USER_ACTIVITY;

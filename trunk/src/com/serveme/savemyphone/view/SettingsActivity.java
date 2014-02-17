@@ -9,9 +9,6 @@ import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.receivers.AdminReciver;
 import com.serveme.savemyphone.util.MyTracker;
-import com.serveme.savemyphone.view.wizard.HelpActivity;
-import com.serveme.savemyphone.view.wizard.PasswordRequest;
-
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
