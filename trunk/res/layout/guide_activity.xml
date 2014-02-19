@@ -12,13 +12,13 @@
 		android:layout_height="wrap_content"
 		android:layout_alignParentTop="true"
 		android:layout_centerHorizontal="true"
+		android:layout_above="@+id/buttons_pane"
 		android:gravity="center_horizontal"
 		android:textAlignment="gravity"
 		android:bufferType="spannable"
 		android:lineSpacingMultiplier="1.4"
-		android:layout_margin="20dp"
+		android:layout_margin="10dp"
 		android:textAppearance="?android:attr/textAppearanceLarge" />
-
 
     <LinearLayout
         android:id="@+id/buttons_pane"
@@ -27,7 +27,7 @@
         android:layout_alignParentBottom="true"
 		android:layout_centerHorizontal="true"
         android:orientation="horizontal"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         android:weightSum="2" >
         
         <Button
