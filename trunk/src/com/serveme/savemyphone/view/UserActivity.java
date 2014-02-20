@@ -3,6 +3,7 @@ package com.serveme.savemyphone.view;
 import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.google.analytics.tracking.android.EasyTracker;
@@ -26,6 +27,7 @@ import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -41,6 +43,8 @@ public class UserActivity extends ActionBarActivity {
 	final Context context = this;
 	List<Launcher> appsinfolist;
 	private DBOperations db;
+	private PrefEditor pe;
+	private GridAdapter ga;
 
 	private static final int REQ_ENTER_PATTERN = 2;
 
@@ -53,29 +57,24 @@ public class UserActivity extends ActionBarActivity {
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
 			requestWindowFeature(Window.FEATURE_NO_TITLE);
 		}
-		// getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-		// ActionBar actionBar = getActionBar();
-		// actionBar.setBackgroundDrawable(new
-		// ColorDrawable(Color.parseColor("#33ffffff")));
-		// actionBar.setStackedBackgroundDrawable(new
-		// ColorDrawable(Color.parseColor("#55ffffff")));
-		// actionBar.setDisplayShowHomeEnabled(false);
-		// actionBar.setDisplayShowTitleEnabled(false);
 		setContentView(R.layout.user_activity);
-		PrefEditor pe = new PrefEditor(UserActivity.this);
-		if (pe.isSDCardMounted()) { DBOperations.sdcard_mounted = true; } else { DBOperations.sdcard_mounted = false; }
-		db = new DBOperations(this);
+		db = DBOperations.getInstance(context);
+		pe = new PrefEditor(UserActivity.this);
+		registerReceiver(bcr, new IntentFilter("finish_user_activity"));
+		registerReceiver(refresh_list, new IntentFilter("refresh_white_list"));
+		
+		if (pe.isSDCardMounted()) {
+			DBOperations.sdcard_mounted = true;
+		} else {
+			DBOperations.sdcard_mounted = false;
+		}
 		appsinfolist = new ArrayList<Launcher>();
 		appsinfolist.addAll(db.getWhiteListApps());
-		registerReceiver(bcr, new IntentFilter("finish_user_activity"));
 		startService(new Intent(this, AppsMonitor.class));
 
 		GridView gridView = (GridView) findViewById(R.id.grid_view);
-		//Drawable wallpaper = WallpaperManager.getInstance(context)
-		//		.getDrawable();
-		//if (wallpaper != null)
-		//	gridView.setBackgroundDrawable(wallpaper);
-		gridView.setAdapter(new GridAdapter(this, appsinfolist));
+		ga = new GridAdapter(this, appsinfolist);
+		gridView.setAdapter(ga);
 		gridView.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
 		gridView.setNumColumns(GridView.AUTO_FIT);
 
@@ -94,20 +93,21 @@ public class UserActivity extends ActionBarActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v,
 					int position, long id) {
-				try{
-				Launcher launcher = appsinfolist.get(position);
-				Intent i = new Intent();
-				i.setAction(Intent.ACTION_MAIN);
-				i.addCategory(Intent.CATEGORY_LAUNCHER);
-				i.setClassName(launcher.getPackageName(),
-						launcher.getActivity());
-				startActivity(i);
-				EasyTracker.getInstance(context).send(
-						MapBuilder.createEvent("ui_action", "button_press",
-								"run_app", Long.valueOf(1)).build());
+				try {
+					Launcher launcher = appsinfolist.get(position);
+					Intent i = new Intent();
+					i.setAction(Intent.ACTION_MAIN);
+					i.addCategory(Intent.CATEGORY_LAUNCHER);
+					i.setClassName(launcher.getPackageName(),
+							launcher.getActivity());
+					startActivity(i);
+					EasyTracker.getInstance(context).send(
+							MapBuilder.createEvent("ui_action", "button_press",
+									"run_app", Long.valueOf(1)).build());
 				} catch (ActivityNotFoundException e) {
 					// TODO: handle exception
-					Toast.makeText(context, "Application not Installed", Toast.LENGTH_LONG).show();
+					Toast.makeText(context, "Application not Installed",
+							Toast.LENGTH_LONG).show();
 				}
 			}
 		});
@@ -174,7 +174,6 @@ public class UserActivity extends ActionBarActivity {
 			switch (resultCode) {
 			case RESULT_OK:
 				// Log.v("result", "passed");
-				PrefEditor pe = new PrefEditor(UserActivity.this);
 				pe.updateStatus(0);
 				context.stopService(new Intent(context, AppsMonitor.class));
 				break;
@@ -218,6 +217,20 @@ public class UserActivity extends ActionBarActivity {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			finish();
+		}
+	};
+
+	private final BroadcastReceiver refresh_list = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			Iterator<Launcher> myIterator = appsinfolist.iterator();
+			while (myIterator.hasNext()) {
+				myIterator.next();
+				myIterator.remove();
+			}
+			appsinfolist.addAll(db.getWhiteListApps());
+			ga.notifyDataSetChanged();
+			Log.v("recived", "recived");
 		}
 	};
 

@@ -13,13 +13,13 @@ public class AdminReciver extends DeviceAdminReceiver {
     }
 
     @Override
-    public CharSequence onDisableRequested(Context context, Intent intent) {
-        return "";
-    }
-
-    @Override
     public void onDisabled(Context context, Intent intent) {
     	Log.v("disables", "disabled");
+    }
+    
+    @Override
+    public CharSequence onDisableRequested(Context context, Intent intent) {
+        return "";
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.serveme.savemyphone.model;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
@@ -19,18 +20,19 @@ import android.util.Log;
 public class DBOperations {
 
 	public static boolean sdcard_mounted = true;
-	private static DBHandler dbhandler;
-	private Set<Launcher> whitelist;
-	private Set<Launcher> whitelistPackages;
+	private static DBOperations dboperations;
+	private static Set<Launcher> whitelist; // for user and admin activity - for view -
+	private Set<Launcher> whitelistPackages; // for service
+	private DBHandler dbhandler;
 	private Context context;
 	
-	public DBOperations(Context context) {
+	private DBOperations(Context context) {
 		this.context = context;
-		dbhandler = getInstance(context);
+		dbhandler = new DBHandler(context);
 	}
 
-	public static DBHandler getInstance(Context c) {
-		return dbhandler != null ? dbhandler : (dbhandler = new DBHandler(c));
+	public static DBOperations getInstance(Context c) {
+		return dboperations != null ? dboperations : (dboperations = new DBOperations(c));
 	}
 
 	public void insertoApp(Launcher launcher) {
@@ -124,6 +126,17 @@ public class DBOperations {
 			database.close();
 		}
 		return whitelist;
+	}
+	
+	public void reCreateWhiteList(){
+		if(whitelist != null){
+			Iterator<Launcher> myIterator = whitelist.iterator();
+			while (myIterator.hasNext()) {
+				myIterator.next();
+				myIterator.remove();
+			}
+			whitelist = null;
+		}
 	}
 
 	public Set<Launcher> getWhiteListPackages() {

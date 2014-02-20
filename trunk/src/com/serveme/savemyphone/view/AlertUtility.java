@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 public class AlertUtility {
+	
 	private static View thisView;
 
 	public static WindowManager.LayoutParams getParam() {

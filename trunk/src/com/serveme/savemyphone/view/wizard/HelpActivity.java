@@ -11,14 +11,10 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
-import com.google.analytics.tracking.android.EasyTracker;
-import com.google.analytics.tracking.android.ExceptionReporter;
-import com.google.analytics.tracking.android.MapBuilder;
-import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.R;
+import com.serveme.savemyphone.util.MyTracker;
 import com.serveme.savemyphone.view.MainActivity;
 
 public class HelpActivity extends ActionBarActivity {
@@ -27,43 +23,29 @@ public class HelpActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.guide_activity);
-		String direction = getResources().getString(R.string.direction);
-		LinearLayout buttonsPane = (LinearLayout) findViewById(R.id.buttons_pane);
-		buttonsPane.setWeightSum(1.0f);
 		final TextView textView = (TextView) findViewById(R.id.textView);
-		setTextWithImage(textView, R.string.use_help);
+		setTextWithImage(textView, R.string.usage_help_text);
 		textView.setMovementMethod(ScrollingMovementMethod.getInstance());
-		final Button previousButton = (Button) findViewById(R.id.previous);
-		previousButton.setVisibility(View.GONE);
-		final Button nextButton = (Button) findViewById(R.id.next);
-		nextButton.setText(R.string.finish);
-		if ("right".equals(direction)) {
-			buttonsPane.setGravity(Gravity.RIGHT | Gravity.CENTER);
-			textView.setGravity(Gravity.RIGHT | Gravity.CENTER);
-			// remove and added at last of the choices row to make it right
-			buttonsPane.removeView(previousButton);
-			buttonsPane.addView(previousButton);
+		Button okButton = (Button) findViewById(R.id.btn);
+		okButton.setText(android.R.string.ok);
+		String direction = getResources().getString(R.string.direction);
+		if (direction.equals("right")) {
+			textView.setGravity(Gravity.RIGHT);
 		} else {
-			buttonsPane.setGravity(Gravity.LEFT | Gravity.CENTER);
+			textView.setGravity(Gravity.LEFT);
 		}
 
-		previousButton.setOnClickListener(new OnClickListener() {
+		okButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-
-			}
-		});
-		nextButton.setOnClickListener(new OnClickListener() {
-
-			public void onClick(View v) {
-				Intent intent = new Intent(HelpActivity.this,MainActivity.class);
-				intent.putExtra("first_time", true);
-				startActivity(intent);
-				EasyTracker.getInstance(HelpActivity.this).send(
-						MapBuilder
-								.createEvent("ui_action", "button_press",
-										"finish_wizard",
-										Long.valueOf(1)).build());
+				if (getIntent() != null) {
+					if (getIntent().getBooleanExtra("first_time", false)) {
+						Intent intent = new Intent(HelpActivity.this, MainActivity.class);
+						intent.putExtra("first_time", true);
+						startActivity(intent);
+					}
+				}
+				MyTracker.fireButtonPressedEvent(HelpActivity.this,	"finish_wizard");
 				finish();
 			}
 		});
@@ -76,39 +58,27 @@ public class HelpActivity extends ActionBarActivity {
 			throw new UnknownError();
 		}
 		SpannableStringBuilder ssb = new SpannableStringBuilder(useHelp);
-		ImageSpan imageSpan = new ImageSpan(HelpActivity.this, R.drawable.lock,
-				ImageSpan.ALIGN_BASELINE);
-
-		ssb.setSpan(imageSpan, index, index + 3,
-				Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		ImageSpan imageSpan = new ImageSpan(HelpActivity.this, R.drawable.lock,	ImageSpan.ALIGN_BASELINE);
+		ssb.setSpan(imageSpan, index, index + 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		index = useHelp.indexOf("{2}");
 		if (index < 0) {
 			throw new UnknownError();
 		}
-		imageSpan = new ImageSpan(HelpActivity.this, R.drawable.unlock,
-				ImageSpan.ALIGN_BASELINE);
-
-		ssb.setSpan(imageSpan, index, index + 3,
-				Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		imageSpan = new ImageSpan(HelpActivity.this, R.drawable.unlock,	ImageSpan.ALIGN_BASELINE);
+		ssb.setSpan(imageSpan, index, index + 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		textView.setText(ssb, BufferType.SPANNABLE);
 	}
 
 	@Override
 	protected void onStart() {
 		super.onStart();
-		EasyTracker.getInstance(this).activityStart(this);
-		Thread.UncaughtExceptionHandler uncaughtExceptionHandler = Thread
-				.getDefaultUncaughtExceptionHandler();
-		if (uncaughtExceptionHandler instanceof ExceptionReporter) {
-			ExceptionReporter exceptionReporter = (ExceptionReporter) uncaughtExceptionHandler;
-			exceptionReporter
-					.setExceptionParser(new AnalyticsExceptionParser());
-		}
+		MyTracker.fireActivityStartEvent(HelpActivity.this);
+		MyTracker.getUncaughtExceptionHandler();
 	}
 
 	@Override
 	protected void onStop() {
-		EasyTracker.getInstance(this).activityStop(this);
+		MyTracker.fireActivityStopevent(HelpActivity.this);
 		super.onStop();
 	}
 

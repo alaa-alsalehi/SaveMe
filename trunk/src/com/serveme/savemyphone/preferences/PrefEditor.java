@@ -13,6 +13,7 @@ public class PrefEditor {
 	public PrefEditor(Context context){
 		 preferences = context.getSharedPreferences("mypref", Context.MODE_PRIVATE);
 	}
+	
 	public void updateStatus(int status) {
        
         Editor edit = preferences.edit();
@@ -27,11 +28,17 @@ public class PrefEditor {
         edit.apply();
 	}
 	
-/*	public void updateAdminPermission(int adminPermission){
+	public void setLockMethod(String lockMethod){
 		Editor edit = preferences.edit();
-        edit.putInt("status", adminPermission);
-        edit.apply();
-	}*/
+		edit.putString("lock_method", lockMethod); 
+		edit.apply();	
+	}
+	
+	public void setPattern(char[] passCode) {
+		Editor edit = preferences.edit();
+		edit.putString("saved_pattern", String.copyValueOf(passCode)); 
+		edit.apply();	
+	}
 
 	public int getStatus() {
 		return preferences.getInt("status", 0);
@@ -44,5 +51,7 @@ public class PrefEditor {
 	public String getSavedPattern(){
 		return preferences.getString("saved_pattern","null");
 	}
+
+
 
 }

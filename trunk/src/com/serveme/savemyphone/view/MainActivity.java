@@ -11,7 +11,6 @@ import com.google.ads.AdRequest;
 import com.google.ads.AdView;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.ExceptionReporter;
-import com.google.analytics.tracking.android.MapBuilder;
 import com.serveme.ads.AdMobListener;
 import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.R;
@@ -114,7 +113,7 @@ public class MainActivity extends ActionBarActivity {
 
 	@Override
 	public void onBackPressed() {
-		DBOperations db = new DBOperations(this);
+		DBOperations db = DBOperations.getInstance(this);
 		boolean activecount = db.isThereEnabledApps();
 		if (activecount) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -174,9 +173,7 @@ public class MainActivity extends ActionBarActivity {
 		switch (item.getItemId()) {
 		case R.id.action_lock:
 			lock();
-			EasyTracker.getInstance(this).send(
-					MapBuilder.createEvent("ui_action", "button_press", "lock",
-							Long.valueOf(1)).build());
+			MyTracker.fireButtonPressedEvent(MainActivity.this, "lock");
 			finish();
 			/*
 			 * Intent saveintent = new
@@ -188,16 +185,12 @@ public class MainActivity extends ActionBarActivity {
 		case R.id.action_settings:
 			Intent settingIntent = new Intent(this, SettingsActivity.class);
 			startActivity(settingIntent);
-			EasyTracker.getInstance(this).send(
-					MapBuilder.createEvent("ui_action", "button_press",
-							"settings", Long.valueOf(1)).build());
+			MyTracker.fireButtonPressedEvent(MainActivity.this, "settings");
 			return true;
 		case R.id.action_help:
 			Intent helpIntent = new Intent(this, HelpActivity.class);
 			startActivity(helpIntent);
-			EasyTracker.getInstance(this).send(
-					MapBuilder.createEvent("ui_action", "button_press",
-							"help", Long.valueOf(1)).build());
+			MyTracker.fireButtonPressedEvent(MainActivity.this, "help");
 			return true;			
 		default:
 			return super.onOptionsItemSelected(item);
@@ -207,7 +200,7 @@ public class MainActivity extends ActionBarActivity {
 	protected void lock() {
 		PrefEditor pe = new PrefEditor(MainActivity.this);
 		pe.updateStatus(1);
-		Intent saveintent = new Intent(getBaseContext(), UserActivity.class);
+		Intent saveintent = new Intent(MainActivity.this, UserActivity.class);
 		startActivity(saveintent);
 	}
 
@@ -259,8 +252,7 @@ public class MainActivity extends ActionBarActivity {
 				finish();
 				break;
 			case LockPatternActivity.RESULT_FORGOT_PATTERN:
-				// The user forgot the pattern and invoked your recovery
-				// Activity.
+				// The user forgot the pattern and invoked your recovery Activity.
 				break;
 			}
 

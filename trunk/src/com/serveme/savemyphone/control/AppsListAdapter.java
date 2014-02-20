@@ -39,7 +39,7 @@ public class AppsListAdapter extends BaseAdapter {
 		Intent in = new Intent(Intent.ACTION_MAIN);
 		in.addCategory(Intent.CATEGORY_LAUNCHER);
 		aList = context.getPackageManager().queryIntentActivities(in, 0);
-		db = new DBOperations(context);
+		db = DBOperations.getInstance(context);
 		whitelist = db.getWhiteListApps(); // allowed applications
 		status = new boolean[aList.size()]; // to keep enable/disable status
 		inflater = LayoutInflater.from(context);

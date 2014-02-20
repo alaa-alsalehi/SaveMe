@@ -13,7 +13,6 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import com.serveme.savemyphone.model.DBOperations;
@@ -47,7 +46,7 @@ public class AppsMonitor extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		currentState = MobileState.USER_ACTIVITY;
 		previousState = MobileState.START_APP;
-		db = new DBOperations(this);
+		db = DBOperations.getInstance(this);
 		am = (ActivityManager) this.getSystemService(ACTIVITY_SERVICE);
 		// view = LayoutInflater.from(AppsMonitor.this).inflate(
 		// R.layout.password_request, null);
@@ -58,14 +57,12 @@ public class AppsMonitor extends Service {
 
 			@Override
 			public void handleMessage(Message msg) {
-				Log.d("alertMess", msg.toString());
 				final WindowManager wmgr = (WindowManager) getApplicationContext()
 						.getSystemService(Context.WINDOW_SERVICE);
 				View view = AlertUtility.getView(AppsMonitor.this);
 				if (msg.what == 0) {
 					synchronized (view) {
 						if (currentState == MobileState.UNALLOW_APP) {
-							Log.d("msg", "add view");
 							wmgr.addView(view, param);
 							//toast.show();
 							setCurrentState(MobileState.ALERT_MESSAGE);
@@ -74,7 +71,6 @@ public class AppsMonitor extends Service {
 				} else if (msg.what == 1) {
 					synchronized (view) {
 						if (currentState == MobileState.USER_ACTIVITY) {
-							Log.d("msg", "remoge view");
 							try {
 								wmgr.removeView(view);
 							} catch (Exception e) {
@@ -121,8 +117,7 @@ public class AppsMonitor extends Service {
 					 * new Launcher( componentInfo.getPackageName(), null);
 					 */
 					componentInfo = taskInfo.get(0).baseActivity;
-					launcher = new Launcher(
-							componentInfo.getPackageName(), null);
+					launcher = new Launcher(componentInfo.getPackageName(), null);
 					if (db.getWhiteListPackages().contains(launcher)) {
 						// Intent intent = new Intent(Intent.ACTION_MAIN);
 						// intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
@@ -132,11 +127,8 @@ public class AppsMonitor extends Service {
 						// startActivity(intent);
 
 						Intent saveintent = AppsMonitor.this
-								.getPackageManager().getLaunchIntentForPackage(
-										taskInfo.get(0).baseActivity
-												.getPackageName());
-						saveintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-								| Intent.FLAG_ACTIVITY_NEW_TASK);
+								.getPackageManager().getLaunchIntentForPackage(	taskInfo.get(0).baseActivity.getPackageName());
+						saveintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 						getApplication().startActivity(saveintent);
 						setCurrentState(MobileState.UNALLOW_APP_STARTED_BY_ALLOW_APP);
 					} else {
