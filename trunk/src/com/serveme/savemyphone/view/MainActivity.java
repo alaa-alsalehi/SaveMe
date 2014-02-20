@@ -86,12 +86,13 @@ public class MainActivity extends ActionBarActivity {
 
 	protected LinearLayout createListHeader() {
 		TextView header = new TextView(this);
-		header.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources().getDimension(R.dimen.apps_names));
+//		header.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources().getDimension(R.dimen.apps_names));
+		header.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
 		header.setText(R.string.admin_list_header);
 		LinearLayout headerLayout = new LinearLayout(this);
 		headerLayout.setBackgroundColor(getResources().getColor(R.color.listview_header));
 //		int padding = (int) ConverterUtil.convertDpToPixel(15, this);
-		int padding = (int) TypedValue.applyDimension (TypedValue.COMPLEX_UNIT_PX, 15, getResources().getDisplayMetrics());
+		int padding = (int) TypedValue.applyDimension (TypedValue.COMPLEX_UNIT_DIP, 15, getResources().getDisplayMetrics());
 		headerLayout.setPadding(padding, padding, padding, padding);
 		headerLayout.addView(header);
 		return headerLayout;
