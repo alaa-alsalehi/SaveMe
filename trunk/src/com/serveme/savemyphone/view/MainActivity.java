@@ -64,7 +64,11 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.main_activity);
 		PrefEditor pe = new PrefEditor(MainActivity.this);
 		Log.v("sdcard flag", pe.isSDCardMounted()+ "");
-		if (pe.isSDCardMounted()) { DBOperations.sdcard_mounted = true; } else { DBOperations.sdcard_mounted = false; }
+		if (pe.isSDCardMounted()) {
+			DBOperations.sdcard_mounted = true;
+		} else {
+			DBOperations.sdcard_mounted = false;
+		}
 
 		AppsListAdapter adapter = new AppsListAdapter(this);
 		ListView listView = (ListView) findViewById(R.id.app_list);
@@ -86,7 +90,8 @@ public class MainActivity extends ActionBarActivity {
 		header.setText(R.string.admin_list_header);
 		LinearLayout headerLayout = new LinearLayout(this);
 		headerLayout.setBackgroundColor(getResources().getColor(R.color.listview_header));
-		int padding = (int) ConverterUtil.convertDpToPixel(15, this);
+//		int padding = (int) ConverterUtil.convertDpToPixel(15, this);
+		int padding = (int) TypedValue.applyDimension (TypedValue.COMPLEX_UNIT_PX, 15, getResources().getDisplayMetrics());
 		headerLayout.setPadding(padding, padding, padding, padding);
 		headerLayout.addView(header);
 		return headerLayout;

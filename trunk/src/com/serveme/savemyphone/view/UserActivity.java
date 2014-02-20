@@ -24,6 +24,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ResolveInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -81,14 +82,6 @@ public class UserActivity extends ActionBarActivity {
 		registerReceiver(refresh_list, new IntentFilter("refresh_white_list"));
 
 		startService(new Intent(this, AppsMonitor.class));
-		
-
-		// float scalefactor = getResources().getDisplayMetrics().density * 80;
-		// Point size = new Point();
-		// this.getWindowManager().getDefaultDisplay().getSize(size);
-		// int screenWidth = size.x;
-		// int columns = (int) ((float) screenWidth / (float) scalefactor);
-		// gridView.setNumColumns(columns);
 
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -106,9 +99,7 @@ public class UserActivity extends ActionBarActivity {
 							MapBuilder.createEvent("ui_action", "button_press",
 									"run_app", Long.valueOf(1)).build());
 				} catch (ActivityNotFoundException e) {
-					// TODO: handle exception
-					Toast.makeText(context, "Application not Installed",
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(context, "Application not Installed", Toast.LENGTH_LONG).show();
 				}
 			}
 		});
@@ -222,7 +213,8 @@ public class UserActivity extends ActionBarActivity {
 		public void onReceive(Context context, Intent intent) {
 			Iterator<Launcher> myIterator = appsinfolist.iterator();
 			while (myIterator.hasNext()) {
-				myIterator.next();
+				Launcher ln = myIterator.next();
+				Log.v("package", ln.getPackageName());
 				myIterator.remove();
 			}
 			appsinfolist.addAll(db.getWhiteListApps());
