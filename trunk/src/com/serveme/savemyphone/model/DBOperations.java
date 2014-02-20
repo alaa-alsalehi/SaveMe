@@ -1,7 +1,6 @@
 package com.serveme.savemyphone.model;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
@@ -106,13 +105,10 @@ public class DBOperations {
 				if(sdcard_mounted){
 					Log.d("SDCard Receiver", "added");
 					do {
-						String packageName = cursor.getString((cursor
-								.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
-						String activity = cursor.getString((cursor
-								.getColumnIndexOrThrow(DB_KEYS.KEY_ACTIVITY)));
+						String packageName = cursor.getString((cursor.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
+						String activity = cursor.getString((cursor.getColumnIndexOrThrow(DB_KEYS.KEY_ACTIVITY)));
 						Launcher lanucher = new Launcher(packageName, activity);
 						whitelist.add(lanucher);
-						Log.v("package", packageName);
 					} while (cursor.moveToNext());
 				} else {
 					Log.d("SDCard Receiver", "removed");
@@ -122,7 +118,6 @@ public class DBOperations {
 						if(!isInstalledOnSdCard(context,packageName)){
 							Launcher lanucher = new Launcher(packageName, activity);
 							whitelist.add(lanucher);
-							Log.v("package", packageName);
 						}						
 					} while (cursor.moveToNext());
 				}
@@ -149,8 +144,7 @@ public class DBOperations {
 			if (cursor.moveToFirst()) {
 				if(sdcard_mounted){
 					do {
-						String packageName = cursor.getString((cursor
-								.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
+						String packageName = cursor.getString((cursor.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
 						Launcher lanucher = new Launcher(packageName, null);
 						whitelistPackages.add(lanucher);
 					} while (cursor.moveToNext());
@@ -178,7 +172,6 @@ public class DBOperations {
 		try {
 			appinfo = pm.getApplicationInfo(packageName, 0);
 		} catch (NameNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
         

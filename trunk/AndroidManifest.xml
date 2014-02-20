@@ -65,9 +65,8 @@
 		        <action android:name="android.intent.ACTION_MEDIA_BAD_REMOVAL" />
 		        <action android:name="android.intent.action.MEDIA_REMOVED" />
 		        <action android:name="android.intent.action.ACTION_MEDIA_SHARED" />
-		        <action android:name="android.intent.action.MEDIA_UNMOUNTED" />
-		        <action android:name="android.intent.action.MEDIA_MOUNTED" />
-		        
+		        <action android:name="android.intent.action.MEDIA_UNMOUNTED"/>
+		        <action android:name="android.intent.action.MEDIA_MOUNTED"/> 
 		    </intent-filter>
 		</receiver>
 		
