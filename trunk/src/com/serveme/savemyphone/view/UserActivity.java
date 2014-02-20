@@ -42,7 +42,7 @@ import android.widget.GridView;
 public class UserActivity extends ActionBarActivity {
 
 	private static final int REQ_ENTER_PATTERN = 2;
-	
+
 	private final Context context = this;
 	private List<Launcher> appsinfolist;
 	private DBOperations db;
@@ -51,6 +51,7 @@ public class UserActivity extends ActionBarActivity {
 	private DevicePolicyManager devicePolicyManager;
 	private ComponentName adminComponent;
 
+	private GridView gridView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -60,24 +61,25 @@ public class UserActivity extends ActionBarActivity {
 		}
 		setContentView(R.layout.user_activity);
 		devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-		adminComponent = new ComponentName(UserActivity.this, AdminReciver.class);
+		adminComponent = new ComponentName(UserActivity.this,
+				AdminReciver.class);
 		db = DBOperations.getInstance(context);
 		pe = new PrefEditor(UserActivity.this);
 		appsinfolist = new ArrayList<Launcher>();
-		
+
 		if (pe.isSDCardMounted()) {
 			DBOperations.sdcard_mounted = true;
 		} else {
 			DBOperations.sdcard_mounted = false;
 		}
-		
-		GridView gridView = (GridView) findViewById(R.id.grid_view);
+
+		gridView = (GridView) findViewById(R.id.grid_view);
 		appsinfolist.addAll(db.getWhiteListApps());
 		ga = new GridAdapter(this, appsinfolist);
 		gridView.setAdapter(ga);
 		gridView.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
 		gridView.setNumColumns(GridView.AUTO_FIT);
-		
+
 		registerReceiver(bcr, new IntentFilter("finish_user_activity"));
 		registerReceiver(refresh_list, new IntentFilter("refresh_white_list"));
 
@@ -99,24 +101,25 @@ public class UserActivity extends ActionBarActivity {
 							MapBuilder.createEvent("ui_action", "button_press",
 									"run_app", Long.valueOf(1)).build());
 				} catch (ActivityNotFoundException e) {
-					Toast.makeText(context, "Application not Installed", Toast.LENGTH_LONG).show();
+					Toast.makeText(context, "Application not Installed",
+							Toast.LENGTH_LONG).show();
 				}
 			}
 		});
 
 	}
-	
+
 	@Override
 	public void onPause() {
-	    super.onPause(); 
+		super.onPause();
 	}
-	
+
 	@Override
 	public void onResume() {
-	    super.onResume();
-	    ga.notifyDataSetChanged();
+		super.onResume();
+		ga.notifyDataSetChanged();
 	}
-	
+
 	@Override
 	protected void onStart() {
 		super.onStart();
@@ -211,14 +214,9 @@ public class UserActivity extends ActionBarActivity {
 	private final BroadcastReceiver refresh_list = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			Iterator<Launcher> myIterator = appsinfolist.iterator();
-			while (myIterator.hasNext()) {
-				Launcher ln = myIterator.next();
-				Log.v("package", ln.getPackageName());
-				myIterator.remove();
-			}
+			appsinfolist.clear();
 			appsinfolist.addAll(db.getWhiteListApps());
-			ga.notifyDataSetChanged();
+			ga.notifyDataSetInvalidated();
 			Log.v("recived", "recived");
 		}
 	};

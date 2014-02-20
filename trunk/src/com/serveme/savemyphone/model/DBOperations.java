@@ -104,6 +104,7 @@ public class DBOperations {
 			// loop through all rows and add it to white list
 			if (cursor.moveToFirst()) {
 				if(sdcard_mounted){
+					Log.d("SDCard Receiver", "added");
 					do {
 						String packageName = cursor.getString((cursor
 								.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
@@ -111,14 +112,17 @@ public class DBOperations {
 								.getColumnIndexOrThrow(DB_KEYS.KEY_ACTIVITY)));
 						Launcher lanucher = new Launcher(packageName, activity);
 						whitelist.add(lanucher);
+						Log.v("package", packageName);
 					} while (cursor.moveToNext());
 				} else {
+					Log.d("SDCard Receiver", "removed");
 					do {
 						String packageName = cursor.getString((cursor.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
 						String activity = cursor.getString((cursor.getColumnIndexOrThrow(DB_KEYS.KEY_ACTIVITY)));
 						if(!isInstalledOnSdCard(context,packageName)){
 							Launcher lanucher = new Launcher(packageName, activity);
 							whitelist.add(lanucher);
+							Log.v("package", packageName);
 						}						
 					} while (cursor.moveToNext());
 				}
@@ -130,11 +134,7 @@ public class DBOperations {
 	
 	public void reCreateWhiteList(){
 		if(whitelist != null){
-			Iterator<Launcher> myIterator = whitelist.iterator();
-			while (myIterator.hasNext()) {
-				myIterator.next();
-				myIterator.remove();
-			}
+			whitelist.clear();
 			whitelist = null;
 		}
 	}

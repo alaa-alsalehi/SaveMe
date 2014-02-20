@@ -67,7 +67,7 @@
 		        <action android:name="android.intent.action.ACTION_MEDIA_SHARED" />
 		        <action android:name="android.intent.action.MEDIA_UNMOUNTED" />
 		        <action android:name="android.intent.action.MEDIA_MOUNTED" />
-		        <data android:scheme="file" />
+		        
 		    </intent-filter>
 		</receiver>
 		
