@@ -18,7 +18,6 @@ import com.serveme.savemyphone.control.AppsListAdapter;
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.receivers.AdminReciver;
-import com.serveme.savemyphone.util.ConverterUtil;
 import com.serveme.savemyphone.util.MyTracker;
 import com.serveme.savemyphone.view.wizard.AdminRequest;
 import com.serveme.savemyphone.view.wizard.HelpActivity;

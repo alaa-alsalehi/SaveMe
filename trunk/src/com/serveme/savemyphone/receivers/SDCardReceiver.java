@@ -6,7 +6,7 @@ import com.serveme.savemyphone.preferences.PrefEditor;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+
 
 public class SDCardReceiver extends BroadcastReceiver {
 

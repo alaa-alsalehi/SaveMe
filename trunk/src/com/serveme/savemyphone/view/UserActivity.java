@@ -3,7 +3,6 @@ package com.serveme.savemyphone.view;
 import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import com.google.analytics.tracking.android.EasyTracker;
@@ -13,18 +12,13 @@ import com.serveme.savemyphone.control.GridAdapter;
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.model.Launcher;
 import com.serveme.savemyphone.preferences.PrefEditor;
-import com.serveme.savemyphone.receivers.AdminReciver;
 import com.serveme.savemyphone.service.AppsMonitor;
 import com.serveme.savemyphone.util.MyTracker;
-
-import android.app.admin.DevicePolicyManager;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.ResolveInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -48,10 +42,8 @@ public class UserActivity extends ActionBarActivity {
 	private DBOperations db;
 	private PrefEditor pe;
 	private GridAdapter ga;
-	private DevicePolicyManager devicePolicyManager;
-	private ComponentName adminComponent;
-
 	private GridView gridView;
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -60,9 +52,6 @@ public class UserActivity extends ActionBarActivity {
 			requestWindowFeature(Window.FEATURE_NO_TITLE);
 		}
 		setContentView(R.layout.user_activity);
-		devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-		adminComponent = new ComponentName(UserActivity.this,
-				AdminReciver.class);
 		db = DBOperations.getInstance(context);
 		pe = new PrefEditor(UserActivity.this);
 		appsinfolist = new ArrayList<Launcher>();
@@ -81,7 +70,7 @@ public class UserActivity extends ActionBarActivity {
 		gridView.setNumColumns(GridView.AUTO_FIT);
 
 		registerReceiver(bcr, new IntentFilter("finish_user_activity"));
-		registerReceiver(refresh_list, new IntentFilter("refresh_white_list"));
+		registerReceiver(refreshList, new IntentFilter("refresh_white_list"));
 
 		startService(new Intent(this, AppsMonitor.class));
 
@@ -137,7 +126,7 @@ public class UserActivity extends ActionBarActivity {
 	public void onDestroy() {
 		super.onDestroy();
 		unregisterReceiver(bcr);
-		unregisterReceiver(refresh_list);
+		unregisterReceiver(refreshList);
 	}
 
 	@Override
@@ -207,11 +196,11 @@ public class UserActivity extends ActionBarActivity {
 	private final BroadcastReceiver bcr = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			finish();
+			UserActivity.this.finish();
 		}
 	};
 
-	private final BroadcastReceiver refresh_list = new BroadcastReceiver() {
+	private final BroadcastReceiver refreshList = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			appsinfolist.clear();
