@@ -21,7 +21,7 @@
     <string name="password">Password</string>
         
     <string name="setup_key">Set your lock key</string>
-    <string name="lock_permission_request">We Request Lock Permission To Guarantee You Are The Owner Of This Device</string>
+    
     <string name="activiate_lock_quesition">Activiate Lock Mode?</string>
     <string name="admin_list_header">Choose allowed apps:</string>
     <string name="prevent_message">Unallowed app for use \nPlease wait to load Allowed list</string>

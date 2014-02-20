@@ -7,9 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.google.analytics.tracking.android.EasyTracker;
-import com.google.analytics.tracking.android.ExceptionReporter;
 import com.google.analytics.tracking.android.MapBuilder;
-import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.control.GridAdapter;
 import com.serveme.savemyphone.model.DBOperations;
@@ -17,6 +15,8 @@ import com.serveme.savemyphone.model.Launcher;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.receivers.AdminReciver;
 import com.serveme.savemyphone.service.AppsMonitor;
+import com.serveme.savemyphone.util.MyTracker;
+
 import android.app.admin.DevicePolicyManager;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
@@ -40,16 +40,16 @@ import android.widget.GridView;
 
 public class UserActivity extends ActionBarActivity {
 
-	final Context context = this;
-	List<Launcher> appsinfolist;
+	private static final int REQ_ENTER_PATTERN = 2;
+	
+	private final Context context = this;
+	private List<Launcher> appsinfolist;
 	private DBOperations db;
 	private PrefEditor pe;
 	private GridAdapter ga;
+	private DevicePolicyManager devicePolicyManager;
+	private ComponentName adminComponent;
 
-	private static final int REQ_ENTER_PATTERN = 2;
-
-	DevicePolicyManager devicePolicyManager;
-	ComponentName adminComponent;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -58,29 +58,30 @@ public class UserActivity extends ActionBarActivity {
 			requestWindowFeature(Window.FEATURE_NO_TITLE);
 		}
 		setContentView(R.layout.user_activity);
+		devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+		adminComponent = new ComponentName(UserActivity.this, AdminReciver.class);
 		db = DBOperations.getInstance(context);
 		pe = new PrefEditor(UserActivity.this);
-		registerReceiver(bcr, new IntentFilter("finish_user_activity"));
-		registerReceiver(refresh_list, new IntentFilter("refresh_white_list"));
+		appsinfolist = new ArrayList<Launcher>();
 		
 		if (pe.isSDCardMounted()) {
 			DBOperations.sdcard_mounted = true;
 		} else {
 			DBOperations.sdcard_mounted = false;
 		}
-		appsinfolist = new ArrayList<Launcher>();
-		appsinfolist.addAll(db.getWhiteListApps());
-		startService(new Intent(this, AppsMonitor.class));
-
+		
 		GridView gridView = (GridView) findViewById(R.id.grid_view);
+		appsinfolist.addAll(db.getWhiteListApps());
 		ga = new GridAdapter(this, appsinfolist);
 		gridView.setAdapter(ga);
 		gridView.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
 		gridView.setNumColumns(GridView.AUTO_FIT);
+		
+		registerReceiver(bcr, new IntentFilter("finish_user_activity"));
+		registerReceiver(refresh_list, new IntentFilter("refresh_white_list"));
 
-		devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-		adminComponent = new ComponentName(UserActivity.this,
-				AdminReciver.class);
+		startService(new Intent(this, AppsMonitor.class));
+		
 
 		// float scalefactor = getResources().getDisplayMetrics().density * 80;
 		// Point size = new Point();
@@ -113,23 +114,28 @@ public class UserActivity extends ActionBarActivity {
 		});
 
 	}
-
+	
+	@Override
+	public void onPause() {
+	    super.onPause(); 
+	}
+	
+	@Override
+	public void onResume() {
+	    super.onResume();
+	    ga.notifyDataSetChanged();
+	}
+	
 	@Override
 	protected void onStart() {
 		super.onStart();
-		EasyTracker.getInstance(this).activityStart(this);
-		Thread.UncaughtExceptionHandler uncaughtExceptionHandler = Thread
-				.getDefaultUncaughtExceptionHandler();
-		if (uncaughtExceptionHandler instanceof ExceptionReporter) {
-			ExceptionReporter exceptionReporter = (ExceptionReporter) uncaughtExceptionHandler;
-			exceptionReporter
-					.setExceptionParser(new AnalyticsExceptionParser());
-		}
+		MyTracker.fireActivityStartEvent(UserActivity.this);
+		MyTracker.getUncaughtExceptionHandler();
 	}
 
 	@Override
 	protected void onStop() {
-		EasyTracker.getInstance(this).activityStop(this);
+		MyTracker.fireActivityStopevent(UserActivity.this);
 		super.onStop();
 	}
 
@@ -137,6 +143,7 @@ public class UserActivity extends ActionBarActivity {
 	public void onDestroy() {
 		super.onDestroy();
 		unregisterReceiver(bcr);
+		unregisterReceiver(refresh_list);
 	}
 
 	@Override
@@ -157,9 +164,7 @@ public class UserActivity extends ActionBarActivity {
 		switch (item.getItemId()) {
 		case R.id.action_unlock:
 			new Checker(this).checkPattern(REQ_ENTER_PATTERN);
-			EasyTracker.getInstance(context).send(
-					MapBuilder.createEvent("ui_action", "button_press",
-							"unlock", Long.valueOf(1)).build());
+			MyTracker.fireButtonPressedEvent(UserActivity.this, "unlock");
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -204,14 +209,6 @@ public class UserActivity extends ActionBarActivity {
 		}// REQ_ENTER_PATTERN
 		}
 	}
-
-	// @Override
-	// public void onAttachedToWindow()
-	// {
-	// Log.i("TESTE", "onAttachedToWindow");
-	// this.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD);
-	// super.onAttachedToWindow();
-	// }
 
 	private final BroadcastReceiver bcr = new BroadcastReceiver() {
 		@Override
