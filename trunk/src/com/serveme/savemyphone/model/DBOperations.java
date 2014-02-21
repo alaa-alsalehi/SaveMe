@@ -23,7 +23,7 @@ public class DBOperations {
 	private PrefEditor pe;
 	private static DBOperations dboperations;
 	private static Set<Launcher> whitelist; // for user and admin activity - for view -
-	private Set<Launcher> whitelistPackages; // for service
+	private static Set<Launcher> whitelistPackages; // for service
 	private DBHandler dbhandler;
 	private Context context;
 	
@@ -134,6 +134,10 @@ public class DBOperations {
 		if(whitelist != null){
 			whitelist.clear();
 			whitelist = null;
+		}
+		if(whitelistPackages != null){
+			whitelistPackages.clear();
+			whitelistPackages = null;
 		}
 	}
 
