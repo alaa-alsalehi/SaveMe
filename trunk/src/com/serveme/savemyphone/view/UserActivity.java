@@ -40,7 +40,6 @@ public class UserActivity extends ActionBarActivity {
 	private final Context context = this;
 	private List<Launcher> appsinfolist;
 	private DBOperations db;
-	private PrefEditor pe;
 	private GridAdapter ga;
 	private GridView gridView;
 
@@ -53,15 +52,7 @@ public class UserActivity extends ActionBarActivity {
 		}
 		setContentView(R.layout.user_activity);
 		db = DBOperations.getInstance(context);
-		pe = new PrefEditor(UserActivity.this);
 		appsinfolist = new ArrayList<Launcher>();
-
-		if (pe.isSDCardMounted()) {
-			DBOperations.sdcard_mounted = true;
-		} else {
-			DBOperations.sdcard_mounted = false;
-		}
-
 		gridView = (GridView) findViewById(R.id.grid_view);
 		appsinfolist.addAll(db.getWhiteListApps());
 		ga = new GridAdapter(this, appsinfolist);
@@ -162,6 +153,7 @@ public class UserActivity extends ActionBarActivity {
 			switch (resultCode) {
 			case RESULT_OK:
 				// Log.v("result", "passed");
+				PrefEditor pe = new PrefEditor(UserActivity.this);
 				pe.updateStatus(0);
 				context.stopService(new Intent(context, AppsMonitor.class));
 				break;

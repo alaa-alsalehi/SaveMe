@@ -6,6 +6,8 @@ import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.Tracker;
 import com.serveme.analytics.AnalyticsExceptionParser;
+import com.serveme.savemyphone.preferences.PrefEditor;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -18,7 +20,7 @@ import android.util.Log;
 
 public class DBOperations {
 
-	public static boolean sdcard_mounted = true;
+	private PrefEditor pe;
 	private static DBOperations dboperations;
 	private static Set<Launcher> whitelist; // for user and admin activity - for view -
 	private Set<Launcher> whitelistPackages; // for service
@@ -28,6 +30,7 @@ public class DBOperations {
 	private DBOperations(Context context) {
 		this.context = context;
 		dbhandler = new DBHandler(context);
+		pe = new PrefEditor(context);
 	}
 
 	public static DBOperations getInstance(Context c) {
@@ -102,7 +105,7 @@ public class DBOperations {
 					null, null, null, null, DB_KEYS.KEY_PKGNAME);
 			// loop through all rows and add it to white list
 			if (cursor.moveToFirst()) {
-				if(sdcard_mounted){
+				if(pe.isSDCardMounted()){
 					Log.d("SDCard Receiver", "added");
 					do {
 						String packageName = cursor.getString((cursor.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
@@ -142,7 +145,7 @@ public class DBOperations {
 					null, null, null, null, DB_KEYS.KEY_PKGNAME);
 			// loop through all rows and add it to white list
 			if (cursor.moveToFirst()) {
-				if(sdcard_mounted){
+				if(pe.isSDCardMounted()){
 					do {
 						String packageName = cursor.getString((cursor.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
 						Launcher lanucher = new Launcher(packageName, null);

@@ -61,14 +61,6 @@ public class MainActivity extends ActionBarActivity {
 			checkPassCode();
 		}
 		setContentView(R.layout.main_activity);
-		PrefEditor pe = new PrefEditor(MainActivity.this);
-		Log.v("sdcard flag", pe.isSDCardMounted()+ "");
-		if (pe.isSDCardMounted()) {
-			DBOperations.sdcard_mounted = true;
-		} else {
-			DBOperations.sdcard_mounted = false;
-		}
-
 		AppsListAdapter adapter = new AppsListAdapter(this);
 		ListView listView = (ListView) findViewById(R.id.app_list);
 		LinearLayout headerLayout = createListHeader();

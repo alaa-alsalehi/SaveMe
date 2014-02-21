@@ -20,13 +20,11 @@ public class SDCardReceiver extends BroadcastReceiver {
 				|| action.equals(Intent.ACTION_MEDIA_BAD_REMOVAL)
 				|| action.equals(Intent.ACTION_MEDIA_SHARED)) {
 			pe.setSDCardMounted(false);
-			DBOperations.sdcard_mounted = false;
 			DBOperations.getInstance(context).reCreateWhiteList();
 			context.sendBroadcast(new Intent("refresh_white_list"));
 		} else if (action.equals(Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE)
 				|| action.equals(Intent.ACTION_MEDIA_MOUNTED)) {
 			pe.setSDCardMounted(true);
-			DBOperations.sdcard_mounted = true;
 			DBOperations.getInstance(context).reCreateWhiteList();
 			context.sendBroadcast(new Intent("refresh_white_list"));
 		}
