@@ -48,13 +48,14 @@
         </receiver>
         <receiver android:name="com.serveme.savemyphone.receivers.RemovePackageReceiver" >
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <action android:name="android.intent.action.PACKAGE_FULLY_REMOVED" />
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
         <receiver android:name="com.serveme.savemyphone.receivers.UpdatePackageReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_CHANGED" />
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
