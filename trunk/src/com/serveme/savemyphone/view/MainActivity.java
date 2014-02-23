@@ -29,7 +29,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Looper;
 import android.preference.PreferenceManager;
@@ -46,8 +45,10 @@ import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
 
+	private PrefEditor pe;
 	private DevicePolicyManager devicePolicyManager;
 	private ComponentName adminComponent;
+	private Authenticator auth;
 	private static final int REQ_ENTER_PATTERN = 2;
 
 	/** Called when the activity is first created. */
@@ -56,6 +57,7 @@ public class MainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		// Calling this to ensures that your application is properly initialized with default settings
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+		pe = new PrefEditor(MainActivity.this);
 		if (savedInstanceState == null) {
 			checkAdminAccess();
 			checkPassCode();
@@ -77,7 +79,6 @@ public class MainActivity extends ActionBarActivity {
 
 	protected LinearLayout createListHeader() {
 		TextView header = new TextView(this);
-//		header.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources().getDimension(R.dimen.apps_names));
 		header.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
 		header.setText(R.string.admin_list_header);
 		LinearLayout headerLayout = new LinearLayout(this);
@@ -115,8 +116,7 @@ public class MainActivity extends ActionBarActivity {
 		if (activecount) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage(R.string.activiate_lock_quesition);
-			builder.setPositiveButton(
-					getResources().getString(android.R.string.yes),
+			builder.setPositiveButton(getResources().getString(android.R.string.yes),
 					new DialogInterface.OnClickListener() {
 
 						public void onClick(DialogInterface dialog, int which) {
@@ -125,10 +125,8 @@ public class MainActivity extends ActionBarActivity {
 							finish();
 						}
 					});
-			builder.setNegativeButton(
-					getResources().getString(android.R.string.no),
+			builder.setNegativeButton(getResources().getString(android.R.string.no),
 					new DialogInterface.OnClickListener() {
-
 						public void onClick(DialogInterface dialog, int which) {
 							MyTracker.fireButtonPressedEvent(MainActivity.this, "Cancel_lock_dialog");
 							finish();
@@ -172,12 +170,6 @@ public class MainActivity extends ActionBarActivity {
 			lock();
 			MyTracker.fireButtonPressedEvent(MainActivity.this, "lock");
 			finish();
-			/*
-			 * Intent saveintent = new
-			 * Intent(getBaseContext(),PasswordEntryActivity.class);
-			 * startActivity(saveintent); context.startService(new
-			 * Intent(context, AppsMonitor.class)); finish();
-			 */
 			return true;
 		case R.id.action_settings:
 			Intent settingIntent = new Intent(this, SettingsActivity.class);
@@ -195,7 +187,6 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	protected void lock() {
-		PrefEditor pe = new PrefEditor(MainActivity.this);
 		pe.updateStatus(1);
 		Intent saveintent = new Intent(MainActivity.this, UserActivity.class);
 		startActivity(saveintent);
@@ -204,6 +195,7 @@ public class MainActivity extends ActionBarActivity {
 	private void checkAdminAccess() {
 		devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 		adminComponent = new ComponentName(MainActivity.this, AdminReciver.class);
+		auth = new Authenticator(MainActivity.this);
 		if (!devicePolicyManager.isAdminActive(adminComponent)) {
 			finish();
 			Intent intent = new Intent(this, AdminRequest.class);
@@ -213,18 +205,13 @@ public class MainActivity extends ActionBarActivity {
 
 	private void checkPassCode() {
 		if (devicePolicyManager.isAdminActive(adminComponent)) {
-			SharedPreferences mySharedPreferences = getSharedPreferences("mypref", Context.MODE_PRIVATE);
-			if (mySharedPreferences != null	&& mySharedPreferences.contains("saved_pattern")) {
-				if (getIntent() != null) {
-					if (!getIntent().getBooleanExtra("first_time", false)) {
-						// if(pattern){
-							new Checker(this).checkPattern(REQ_ENTER_PATTERN);
-						// }else{
+			if (pe.isPatternExist()) {
+				if (getIntent() == null || !getIntent().getBooleanExtra("first_time", false)) {
+					if(pe.getLockMethod().equals("pattern")){
+						auth.checkPattern(REQ_ENTER_PATTERN);
+					} else {
 
-						// }
 					}
-				} else {
-					new Checker(this).checkPattern(REQ_ENTER_PATTERN);
 				}
 			} else {
 				finish();

@@ -39,6 +39,18 @@ public class PrefEditor {
 		edit.putString("saved_pattern", String.copyValueOf(passCode)); 
 		edit.apply();	
 	}
+	
+	public void setTempPassword(String tempPass){
+		Editor edit = preferences.edit();
+		edit.putString("temp_pass", tempPass); 
+		edit.apply();	
+	}
+	
+	public void removeTempPassword(){
+		Editor edit = preferences.edit();
+		edit.remove("temp_pass"); 
+		edit.apply();	
+	}
 
 	public int getStatus() {
 		return preferences.getInt("status", 0);
@@ -48,10 +60,24 @@ public class PrefEditor {
 		return preferences.getBoolean("sdcardFlag", true);
 	}
 	
-	public String getSavedPattern(){
-		return preferences.getString("saved_pattern","null");
+	public String getLockMethod(){
+		return preferences.getString("lock_method", "password");
 	}
-
+	
+	public boolean isPatternExist(){
+		if (preferences != null	&& preferences.contains("saved_pattern")) {
+			return true;
+		} 
+		return false;
+	}
+	
+	public String getSavedPattern(){
+		return preferences.getString("saved_pattern",null);
+	}
+	
+	public String getTempPassword(){
+		return preferences.getString("temp_pass", null);
+	}
 
 
 }

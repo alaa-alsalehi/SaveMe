@@ -3,34 +3,19 @@
     <string name="app_name">Save Me</string>
     <string name="settings">Settings</string>
     <string name="apps">APPS</string>
-    
+    <string name="recovery_activity_title">Password Recovery</string>
+        
     <string name="action_unlock">Unlock</string>
     <string name="action_lock">Lock</string>
     <string name="action_help">Help</string>
-    
-
-    <string name="admin_button">Grant Admin Access</string>
 
     <string name="pattern_settings_category">Pattern options</string>
     <string name="change_pattern">Change Pattern</string>
     <string name="uninstall_settings_category">Uninstall</string>
     <string name="uninstall">Uninstall</string>
-    
-    <string name="lock_choice">"Choose your preferred lock"</string>
-    <string name="pattern">Pattern</string>
-    <string name="password">Password</string>
-        
-    <string name="setup_key">Set your lock key</string>
-    
+
     <string name="activiate_lock_quesition">Activiate Lock Mode?</string>
     <string name="admin_list_header">Choose allowed apps:</string>
     <string name="prevent_message">Unallowed app for use \nPlease wait to load Allowed list</string>
 
-    
-    <string name="lock_method">Lock Method</string>
-    <string-array name="lock_options">
-        <item>pattern</item>
-        <item>password</item>
-    </string-array>
-    
 </resources>

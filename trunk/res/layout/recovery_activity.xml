@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="88dp"
+        android:inputType="text"
+        android:ems="10">
+
+        <requestFocus />
+    </EditText>
+
+  <LinearLayout
+        android:id="@+id/buttons_pane"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editText"
+		android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:layout_margin="20dp"
+        android:weightSum="2" >
+
+      <Button
+          android:id="@+id/password"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="1.0"
+          android:text="@android:string/cancel" />
+        
+         <Button
+            android:id="@+id/pattern"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_weight="1.0"
+            android:text="@android:string/ok" />
+            
+    </LinearLayout>
+
+</RelativeLayout>

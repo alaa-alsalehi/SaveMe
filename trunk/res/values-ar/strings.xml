@@ -3,33 +3,19 @@
     <string name="app_name">Save Me</string>
     <string name="settings">الإعدادات</string>
     <string name="apps">التطبيقات</string>
-    
+    <string name="recovery_activity_title">إستعادة كلمة السر</string>
+        
     <string name="action_unlock">إلغاء الحماية</string>
     <string name="action_lock">تفعيل الحماية</string>
     <string name="action_help">المساعدة</string>
-    
-
-    <string name="admin_button">منح صلاحيات المدير</string>
 
     <string name="pattern_settings_category">خيارات النمط</string>
     <string name="change_pattern">تغيير النمط</string>
     <string name="uninstall_settings_category">إزالة التطبيق</string>
     <string name="uninstall">إزالة التطبيق</string>
-    
-    
-    <string name="lock_choice">"اختار نوع الحماية"</string>
-    <string name="pattern">نمط</string>
-    <string name="password">كلمة سر</string>
         
-    <string name="setup_key">اختر مفتاح القفل</string>
     <string name="activiate_lock_quesition">تفعيل وضع القفل؟</string>
     <string name="admin_list_header">اختار التطبيقات المسموحة:</string>
     <string name="prevent_message">تطبيق غير مسموح استخدامه \nالرجاء الانتظار حتى يتم تحميل قائمة البرامج المسموحة</string>
-    
-    <string name="lock_method">نوع القفل</string>
-    <string-array name="lock_options">
-        <item>نمط</item>
-        <item>كلمة سر</item>
-    </string-array>
-    
+ 
 </resources>

@@ -4,9 +4,6 @@ import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.google.analytics.tracking.android.EasyTracker;
-import com.google.analytics.tracking.android.MapBuilder;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.control.GridAdapter;
 import com.serveme.savemyphone.model.DBOperations;
@@ -37,7 +34,6 @@ public class UserActivity extends ActionBarActivity {
 
 	private static final int REQ_ENTER_PATTERN = 2;
 
-	private final Context context = this;
 	private List<Launcher> appsinfolist;
 	private DBOperations db;
 	private GridAdapter ga;
@@ -51,7 +47,7 @@ public class UserActivity extends ActionBarActivity {
 			requestWindowFeature(Window.FEATURE_NO_TITLE);
 		}
 		setContentView(R.layout.user_activity);
-		db = DBOperations.getInstance(context);
+		db = DBOperations.getInstance(UserActivity.this);
 		appsinfolist = new ArrayList<Launcher>();
 		gridView = (GridView) findViewById(R.id.grid_view);
 		appsinfolist.addAll(db.getWhiteListApps());
@@ -74,15 +70,11 @@ public class UserActivity extends ActionBarActivity {
 					Intent i = new Intent();
 					i.setAction(Intent.ACTION_MAIN);
 					i.addCategory(Intent.CATEGORY_LAUNCHER);
-					i.setClassName(launcher.getPackageName(),
-							launcher.getActivity());
+					i.setClassName(launcher.getPackageName(),launcher.getActivity());
 					startActivity(i);
-					EasyTracker.getInstance(context).send(
-							MapBuilder.createEvent("ui_action", "button_press",
-									"run_app", Long.valueOf(1)).build());
+					MyTracker.fireButtonPressedEvent(UserActivity.this, "run_app");
 				} catch (ActivityNotFoundException e) {
-					Toast.makeText(context, "Application not Installed",
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(UserActivity.this, "Application not Installed",Toast.LENGTH_LONG).show();
 				}
 			}
 		});
@@ -137,7 +129,7 @@ public class UserActivity extends ActionBarActivity {
 		// Handle item selection
 		switch (item.getItemId()) {
 		case R.id.action_unlock:
-			new Checker(this).checkPattern(REQ_ENTER_PATTERN);
+			new Authenticator(this).checkPattern(REQ_ENTER_PATTERN);
 			MyTracker.fireButtonPressedEvent(UserActivity.this, "unlock");
 			return true;
 		default:
@@ -155,7 +147,7 @@ public class UserActivity extends ActionBarActivity {
 				// Log.v("result", "passed");
 				PrefEditor pe = new PrefEditor(UserActivity.this);
 				pe.updateStatus(0);
-				context.stopService(new Intent(context, AppsMonitor.class));
+				UserActivity.this.stopService(new Intent(UserActivity.this, AppsMonitor.class));
 				break;
 			case RESULT_CANCELED:
 				// Log.v("result", "canceled");

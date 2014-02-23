@@ -101,6 +101,7 @@ public class AppsMonitor extends Service {
 				if (!db.getWhiteListPackages().contains(launcher)
 						&& !componentInfo.getPackageName().equals("android")
 						&& !componentInfo.getClassName().equals("com.serveme.savemyphone.view.UserActivity")
+						&& !componentInfo.getClassName().equals("com.serveme.savemyphone.view.RecoveryActivity")
 						&& !componentInfo.getClassName().equals("group.pals.android.lib.ui.lockpattern.LockPatternActivity")) {
 					// ActivityManager manager =
 					// (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
@@ -167,10 +168,7 @@ public class AppsMonitor extends Service {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		if (timer != null) {
-			timer.cancel();
-		}
-
+		if (timer != null) {timer.cancel();}
 		sendBroadcast(new Intent("finish_user_activity"));
 	}
 }

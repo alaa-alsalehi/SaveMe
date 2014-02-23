@@ -15,12 +15,14 @@ import android.widget.TextView;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.util.MyTracker;
+import com.serveme.savemyphone.view.Authenticator;
 
 public class PasswordRequest extends ActionBarActivity {
 
 	public static final int REQ_CREATE_PATTERN = 1;
 	public static final int REQ_CREATE_PASSWORD = 2;
 	private PrefEditor pe;
+	private Authenticator auth;
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -28,6 +30,7 @@ public class PasswordRequest extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.password_request);
 		pe = new PrefEditor(PasswordRequest.this);
+		auth = new Authenticator(PasswordRequest.this);
 		final TextView textView = (TextView) findViewById(R.id.textView);
 		textView.setText(R.string.password_request_help);
 		textView.setMovementMethod(ScrollingMovementMethod.getInstance());
@@ -56,8 +59,7 @@ public class PasswordRequest extends ActionBarActivity {
 		patternBtn.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				Intent intent = new Intent(LockPatternActivity.ACTION_CREATE_PATTERN, null, PasswordRequest.this, LockPatternActivity.class);
-				startActivityForResult(intent, REQ_CREATE_PATTERN);
+				auth.requestPatttern(REQ_CREATE_PATTERN);
 				MyTracker.fireButtonPressedEvent(PasswordRequest.this, "request_pattern");
 			}
 		});
