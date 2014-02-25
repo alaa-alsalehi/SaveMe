@@ -17,8 +17,8 @@ import android.view.View;
 import android.view.WindowManager;
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.model.Launcher;
-import com.serveme.savemyphone.view.AlertUtility;
 import com.serveme.savemyphone.view.UserActivity;
+import com.serveme.savemyphone.view.utils.AlertUtility;
 
 public class AppsMonitor extends Service {
 	private static final int UPDATE_INTERVAL = 200;
@@ -133,8 +133,7 @@ public class AppsMonitor extends Service {
 						getApplication().startActivity(saveintent);
 						setCurrentState(MobileState.UNALLOW_APP_STARTED_BY_ALLOW_APP);
 					} else {
-						Intent saveintent = new Intent(getBaseContext(),
-								UserActivity.class);
+						Intent saveintent = new Intent(getBaseContext(),UserActivity.class);
 						saveintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						getApplication().startActivity(saveintent);
 						// Log.d("test", "test");
