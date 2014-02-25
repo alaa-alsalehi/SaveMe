@@ -2,11 +2,8 @@ package com.serveme.savemyphone.view;
 
 import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
 
-import com.google.analytics.tracking.android.EasyTracker;
-import com.google.analytics.tracking.android.ExceptionReporter;
-import com.google.analytics.tracking.android.MapBuilder;
-import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.R;
+import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.receivers.AdminReciver;
 import com.serveme.savemyphone.util.MyTracker;
 import android.app.Activity;
@@ -19,15 +16,18 @@ import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 
 public class SettingsActivity extends PreferenceActivity implements
 		OnSharedPreferenceChangeListener {
 
-	public static final int REQ_CHANGE_PATTERN = 1;
-	public static final String KEY_LOCK_METHOD = "lock_method";
+	private static final int REQ_CHANGE_PATTERN = 1;
+	private static final String KEY_LOCK_METHOD = "lock_method";
+	private PrefEditor pe;
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -36,8 +36,10 @@ public class SettingsActivity extends PreferenceActivity implements
 		addPreferencesFromResource(R.xml.preferences);
 		//ListPreference lock_Preference = (ListPreference) findPreference(KEY_LOCK_METHOD);
 		//lock_Preference.setSummary(lock_Preference.getEntry());
+		pe = new PrefEditor(SettingsActivity.this);
 		Preference changePatternPreference = (Preference) findPreference("change_pattern");
-		Preference uninstallPref = (Preference) findPreference("uninstall");
+		CheckBoxPreference stealthModePreference = (CheckBoxPreference) findPreference("stealth_mode");
+		Preference uninstallPref = (Preference) findPreference("uninstall"); 
 		changePatternPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			
 			@Override
@@ -48,18 +50,30 @@ public class SettingsActivity extends PreferenceActivity implements
 				return true;
 			}
 		});
+		stealthModePreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+			
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				CheckBoxPreference cbPreference = (CheckBoxPreference) preference;
+				if(cbPreference.isChecked()){
+					pe.setStealthMode(false);
+					return false;
+				} else {
+					pe.setStealthMode(true);
+					return true;
+				}
+			}
+		});
+		
 		uninstallPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			public boolean onPreferenceClick(Preference preference) {
-				EasyTracker.getInstance(SettingsActivity.this).send(MapBuilder.createEvent("ui_action", "button_press",
-								"uninstall", Long.valueOf(1))
-								.build());
-				Context context = SettingsActivity.this; 
-				ComponentName devAdminReceiver = new ComponentName(context,	AdminReciver.class);
-				DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+				MyTracker.fireButtonPressedEvent(SettingsActivity.this, "uninstall");
+				ComponentName devAdminReceiver = new ComponentName(SettingsActivity.this,	AdminReciver.class);
+				DevicePolicyManager dpm = (DevicePolicyManager) SettingsActivity.this.getSystemService(Context.DEVICE_POLICY_SERVICE);
 				dpm.removeActiveAdmin(devAdminReceiver);
 				Intent intent = new Intent(Intent.ACTION_DELETE);
-				intent.setData(Uri.parse("package:" + context.getPackageName()));
-				context.startActivity(intent);
+				intent.setData(Uri.parse("package:" + SettingsActivity.this.getPackageName()));
+				SettingsActivity.this.startActivity(intent);
 				return true;
 			}
 		});
@@ -68,19 +82,13 @@ public class SettingsActivity extends PreferenceActivity implements
 		@Override
 	protected void onStart() {
 		super.onStart();
-		EasyTracker.getInstance(this).activityStart(this);
-		Thread.UncaughtExceptionHandler uncaughtExceptionHandler = Thread
-				.getDefaultUncaughtExceptionHandler();
-		if (uncaughtExceptionHandler instanceof ExceptionReporter) {
-			ExceptionReporter exceptionReporter = (ExceptionReporter) uncaughtExceptionHandler;
-			exceptionReporter
-					.setExceptionParser(new AnalyticsExceptionParser());
-		}
+		MyTracker.fireActivityStartEvent(SettingsActivity.this);
+		MyTracker.getUncaughtExceptionHandler();
 	}
 	
 	@Override
 	protected void onStop() {
-		EasyTracker.getInstance(this).activityStop(this);
+		MyTracker.fireActivityStopevent(SettingsActivity.this);
 		super.onStop();
 	}
 
@@ -88,16 +96,14 @@ public class SettingsActivity extends PreferenceActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-		getPreferenceScreen().getSharedPreferences()
-				.registerOnSharedPreferenceChangeListener(this);
+		getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void onPause() {
 		super.onPause();
-		getPreferenceScreen().getSharedPreferences()
-				.unregisterOnSharedPreferenceChangeListener(this);
+		getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
 	}
 
 	@Override

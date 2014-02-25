@@ -11,6 +11,8 @@ import com.serveme.savemyphone.model.Launcher;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.service.AppsMonitor;
 import com.serveme.savemyphone.util.MyTracker;
+import com.serveme.savemyphone.view.utils.Authenticator;
+
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
