@@ -2,8 +2,9 @@ package com.serveme.savemyphone.receivers;
 
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.service.AppsMonitor;
-import com.serveme.savemyphone.view.AlertUtility;
 import com.serveme.savemyphone.view.UserActivity;
+import com.serveme.savemyphone.view.utils.AlertUtility;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
