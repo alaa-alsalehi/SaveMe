@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.util.MyTracker;
-import com.serveme.savemyphone.view.Authenticator;
+import com.serveme.savemyphone.view.utils.Authenticator;
 
 public class PasswordRequest extends ActionBarActivity {
 
