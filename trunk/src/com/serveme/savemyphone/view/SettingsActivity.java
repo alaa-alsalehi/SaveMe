@@ -57,9 +57,11 @@ public class SettingsActivity extends PreferenceActivity implements
 				CheckBoxPreference cbPreference = (CheckBoxPreference) preference;
 				if(cbPreference.isChecked()){
 					pe.setStealthMode(false);
+					cbPreference.setChecked(false);
 					return false;
 				} else {
 					pe.setStealthMode(true);
+					cbPreference.setChecked(true);
 					return true;
 				}
 			}
