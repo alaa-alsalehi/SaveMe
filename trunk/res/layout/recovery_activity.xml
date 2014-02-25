@@ -3,43 +3,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <EditText
-        android:id="@+id/editText"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="88dp"
-        android:inputType="text"
-        android:ems="10">
+        android:layout_margin="10dp"
+        android:text="@string/recovery_activity_textview"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/textView"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:inputType="text" >
 
         <requestFocus />
     </EditText>
 
-  <LinearLayout
+    <LinearLayout
         android:id="@+id/buttons_pane"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/editText"
-		android:layout_centerHorizontal="true"
-        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
         android:layout_margin="20dp"
+        android:orientation="horizontal"
         android:weightSum="2" >
 
-      <Button
-          android:id="@+id/password"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_weight="1.0"
-          android:text="@android:string/cancel" />
-        
-         <Button
-            android:id="@+id/pattern"
-            android:layout_height="wrap_content"
+        <Button
+            android:id="@+id/cancel"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:text="@android:string/cancel" />
+
+        <Button
+            android:id="@+id/ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1.0"
             android:text="@android:string/ok" />
-            
     </LinearLayout>
 
 </RelativeLayout>

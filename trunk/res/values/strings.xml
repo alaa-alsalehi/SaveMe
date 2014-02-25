@@ -11,6 +11,7 @@
 
     <string name="pattern_settings_category">Pattern options</string>
     <string name="change_pattern">Change Pattern</string>
+    <string name="stealth_mode">Stealth Mode</string>
     <string name="uninstall_settings_category">Uninstall</string>
     <string name="uninstall">Uninstall</string>
 
@@ -18,4 +19,12 @@
     <string name="admin_list_header">Choose allowed apps:</string>
     <string name="prevent_message">Unallowed app for use \nPlease wait to load Allowed list</string>
 
+    <!-- forgot password mail -->
+    <string name="mail_subject">Recovery info for Save Me android app</string>
+    <string name="email_message_part1">"Hi,\n\nThis is your temporary password: "</string>
+    <string name="email_message_part2">"\n\nNote: You can use it to unlock Save Me while you didn't closed the recovery screen\nIn case you have closed the recovery screen you need to open it againt and wait until new temporary password sent to you!\nAfter that you can make a new pattern and continue to use your apps\n\nRegards\nServe Me Team"</string>
+	<string name="recovery_activity_textview">We will send a message to your email with a temporary password \nNote: if you close this screen, the older temporary password will become invalid</string>
+	<string name="recovery_activity_success_dialoge">Message has been sent to your email with a temporary password</string>
+	<string name="recovery_activity_failure_dialoge">Message sending failed .. check your internet connection then try again</string>
+	
 </resources>

@@ -15,6 +15,10 @@
         <Preference
             android:key="change_pattern"
             android:title="@string/change_pattern" />
+        <CheckBoxPreference 
+            android:key="stealth_mode"
+            android:title="@string/stealth_mode"
+            android:defaultValue="false"/>
     </PreferenceCategory>
     
     <PreferenceCategory
