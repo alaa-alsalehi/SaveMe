@@ -21,8 +21,7 @@ public class PrefEditor {
         edit.apply();
 	}
 	
-	public void setSDCardMounted(boolean flag) {
-	       
+	public void setSDCardMounted(boolean flag) {    
         Editor edit = preferences.edit();
         edit.putBoolean("sdcardFlag", flag);
         edit.apply();
@@ -38,6 +37,12 @@ public class PrefEditor {
 		Editor edit = preferences.edit();
 		edit.putString("saved_pattern", String.copyValueOf(passCode)); 
 		edit.apply();	
+	}
+	
+	public void setStealthMode(boolean isStealthModeEnables){
+		Editor edit = preferences.edit();
+	    edit.putBoolean("stealth_mode", isStealthModeEnables);
+	    edit.apply();
 	}
 	
 	public void setTempPassword(String tempPass){
@@ -73,6 +78,10 @@ public class PrefEditor {
 	
 	public String getSavedPattern(){
 		return preferences.getString("saved_pattern",null);
+	}
+	
+	public boolean isStealthModeEnabled(){
+		return preferences.getBoolean("stealth_mode", false);
 	}
 	
 	public String getTempPassword(){
