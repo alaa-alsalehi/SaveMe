@@ -237,8 +237,8 @@ public class MainActivity extends ActionBarActivity {
 				break;
 			case LockPatternActivity.RESULT_FORGOT_PATTERN:
 				finish();
-				ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-				am.killBackgroundProcesses(this.getPackageName());
+//				ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+//				am.killBackgroundProcesses(this.getPackageName());
 				break;
 			}
 
