@@ -5,13 +5,22 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 public class PrefEditor {
-	//public static final int ADMIN_PERMISSION_OK = 1;
-	//public static final int ADMIN_PERMISSION_IGNORED = 2;
 	
 	SharedPreferences preferences;
 	
 	public PrefEditor(Context context){
 		 preferences = context.getSharedPreferences("mypref", Context.MODE_PRIVATE);
+	}
+	
+	public boolean isNewUser(){
+		if(preferences.contains("installed")){
+			return false;
+		} else {
+			Editor edit = preferences.edit();
+	        edit.putBoolean("installed", true);
+	        edit.apply();
+	        return true;
+		}
 	}
 	
 	public void updateStatus(int status) {

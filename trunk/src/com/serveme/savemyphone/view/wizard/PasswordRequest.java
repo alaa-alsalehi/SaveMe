@@ -12,25 +12,31 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.ads.ac;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.util.MyTracker;
+import com.serveme.savemyphone.view.utils.ActivitiesController;
 import com.serveme.savemyphone.view.utils.Authenticator;
 
 public class PasswordRequest extends ActionBarActivity {
 
 	public static final int REQ_CREATE_PATTERN = 1;
 	public static final int REQ_CREATE_PASSWORD = 2;
-	private PrefEditor pe;
+	
+	private ActivitiesController ac;
 	private Authenticator auth;
+	private PrefEditor pe;
 	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.password_request);
-		pe = new PrefEditor(PasswordRequest.this);
+		ac = new ActivitiesController(PasswordRequest.this);
 		auth = new Authenticator(PasswordRequest.this);
+		pe = new PrefEditor(PasswordRequest.this);
 		final TextView textView = (TextView) findViewById(R.id.textView);
 		textView.setText(R.string.password_request_help);
 		textView.setMovementMethod(ScrollingMovementMethod.getInstance());
@@ -90,10 +96,7 @@ public class PasswordRequest extends ActionBarActivity {
 					pe.setPattern(passCode);
 				break;
 			}
-			
-			Intent intent = new Intent(PasswordRequest.this, HelpActivity.class);
-			intent.putExtra("first_time", true);
-			startActivity(intent); 
+			ac.getActivitiesFlow();
 			finish();
 			MyTracker.fireButtonPressedEvent(PasswordRequest.this, "request_pattern_done");
 			

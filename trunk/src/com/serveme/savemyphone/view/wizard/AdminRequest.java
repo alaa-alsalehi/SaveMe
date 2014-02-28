@@ -16,16 +16,20 @@ import android.widget.TextView;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.receivers.AdminReciver;
 import com.serveme.savemyphone.util.MyTracker;
+import com.serveme.savemyphone.view.utils.ActivitiesController;
 
 public class AdminRequest extends ActionBarActivity {
 
 	private final int REQUEST_ENABLE = 1;
+	
+	private ActivitiesController ac;
 	private DevicePolicyManager devicePolicyManager;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.guide_activity);
+		ac = new ActivitiesController(AdminRequest.this);
 		final TextView textView = (TextView) findViewById(R.id.textView);
 		textView.setText(R.string.lock_permission_request_help);
 		textView.setMovementMethod(ScrollingMovementMethod.getInstance());
@@ -47,8 +51,7 @@ public class AdminRequest extends ActionBarActivity {
 				} else {
 					finish();			
 					devicePolicyManager.lockNow(); //·· √ﬂœ „‰ √‰ «·„” Œœ„ ÂÊ ’«Õ» «·ÃÂ«“
-					Intent intent = new Intent(AdminRequest.this, PasswordRequest.class);
-					startActivity(intent);
+					ac.getActivitiesFlow();
 				}
 			}
 		});

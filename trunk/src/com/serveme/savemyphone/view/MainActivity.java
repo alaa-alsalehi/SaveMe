@@ -4,9 +4,7 @@ package com.serveme.savemyphone.view;
 
 import org.codechimp.apprater.AppRater;
 import org.codechimp.apprater.InCorrectMarketException;
-
 import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
-
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
 import com.serveme.ads.AdMobListener;
@@ -14,18 +12,11 @@ import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.control.AppsListAdapter;
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.preferences.PrefEditor;
-import com.serveme.savemyphone.receivers.AdminReciver;
 import com.serveme.savemyphone.util.MyTracker;
+import com.serveme.savemyphone.view.utils.ActivitiesController;
 import com.serveme.savemyphone.view.utils.Authenticator;
-import com.serveme.savemyphone.view.wizard.AdminRequest;
 import com.serveme.savemyphone.view.wizard.HelpActivity;
-import com.serveme.savemyphone.view.wizard.PasswordRequest;
-
-import android.app.ActivityManager;
 import android.app.AlertDialog;
-import android.app.admin.DevicePolicyManager;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -44,9 +35,8 @@ import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
 
+	private ActivitiesController ac;
 	private PrefEditor pe;
-	private DevicePolicyManager devicePolicyManager;
-	private ComponentName adminComponent;
 	private Authenticator auth;
 	private static final int REQ_ENTER_PATTERN = 2;
 
@@ -56,17 +46,28 @@ public class MainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		// Calling this to ensures that your application is properly initialized with default settings
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+		ac = new ActivitiesController(MainActivity.this);
 		pe = new PrefEditor(MainActivity.this);
+		auth = new Authenticator(MainActivity.this);
 		if (savedInstanceState == null) {
-			checkAdminAccess();
-			checkPassCode();
+			ac.getActivitiesFlow();
 		}
+		
+		if (getIntent() == null || !getIntent().getBooleanExtra("first_time",	false)) {
+			if (pe.getLockMethod().equals("pattern")) {
+				auth.checkPattern(REQ_ENTER_PATTERN);
+			} else {
+
+			}
+		}
+		
 		setContentView(R.layout.main_activity);
 		AppsListAdapter adapter = new AppsListAdapter(this);
 		ListView listView = (ListView) findViewById(R.id.app_list);
 		LinearLayout headerLayout = createListHeader();
 		listView.addHeaderView(headerLayout);
 		listView.setAdapter(adapter);
+		listView.setSmoothScrollbarEnabled(false);
 		adsStuff();
 
 		try {
@@ -92,7 +93,6 @@ public class MainActivity extends ActionBarActivity {
 	private void adsStuff() {
 		final AdView adView = (AdView) findViewById(R.id.adView);
 		// Create the adView
-
 		adView.setGravity(Gravity.CENTER);
 		adView.setAdListener(new AdMobListener(this));
 		// Initiate a generic request to load it with an ad
@@ -192,34 +192,7 @@ public class MainActivity extends ActionBarActivity {
 		startActivity(saveintent);
 	}
 
-	private void checkAdminAccess() {
-		devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-		adminComponent = new ComponentName(MainActivity.this, AdminReciver.class);
-		auth = new Authenticator(MainActivity.this);
-		if (!devicePolicyManager.isAdminActive(adminComponent)) {
-			finish();
-			Intent intent = new Intent(this, AdminRequest.class);
-			startActivity(intent);
-		}
-	}
-
-	private void checkPassCode() {
-		if (devicePolicyManager.isAdminActive(adminComponent)) {
-			if (pe.isPatternExist()) {
-				if (getIntent() == null || !getIntent().getBooleanExtra("first_time", false)) {
-					if(pe.getLockMethod().equals("pattern")){
-						auth.checkPattern(REQ_ENTER_PATTERN);
-					} else {
-
-					}
-				}
-			} else {
-				finish();
-				Intent intent = new Intent(MainActivity.this, PasswordRequest.class);
-				startActivity(intent);
-			}
-		}
-	}
+	
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -237,8 +210,6 @@ public class MainActivity extends ActionBarActivity {
 				break;
 			case LockPatternActivity.RESULT_FORGOT_PATTERN:
 				finish();
-//				ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-//				am.killBackgroundProcesses(this.getPackageName());
 				break;
 			}
 
