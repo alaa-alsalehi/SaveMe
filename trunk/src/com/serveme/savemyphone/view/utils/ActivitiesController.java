@@ -2,7 +2,6 @@ package com.serveme.savemyphone.view.utils;
 
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.receivers.AdminReciver;
-import com.serveme.savemyphone.view.MainActivity;
 import com.serveme.savemyphone.view.wizard.AdminRequest;
 import com.serveme.savemyphone.view.wizard.HelpActivity;
 import com.serveme.savemyphone.view.wizard.PasswordRequest;
@@ -45,6 +44,14 @@ public class ActivitiesController {
 			Intent intent = new Intent(activity, HelpActivity.class);
 			intent.putExtra("first_time", true);
 			activity.startActivity(intent); 
+		} else {
+			if (activity.getIntent() == null || !activity.getIntent().getBooleanExtra("first_time",	false)) {
+				if (pe.getLockMethod().equals("pattern")) {
+					auth.checkPattern(REQ_ENTER_PATTERN);
+				} else {
+
+				}
+			}
 		}
 	}
 

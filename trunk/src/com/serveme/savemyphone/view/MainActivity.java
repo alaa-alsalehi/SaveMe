@@ -14,7 +14,6 @@ import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.util.MyTracker;
 import com.serveme.savemyphone.view.utils.ActivitiesController;
-import com.serveme.savemyphone.view.utils.Authenticator;
 import com.serveme.savemyphone.view.wizard.HelpActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -37,7 +36,6 @@ public class MainActivity extends ActionBarActivity {
 
 	private ActivitiesController ac;
 	private PrefEditor pe;
-	private Authenticator auth;
 	private static final int REQ_ENTER_PATTERN = 2;
 
 	/** Called when the activity is first created. */
@@ -48,19 +46,9 @@ public class MainActivity extends ActionBarActivity {
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 		ac = new ActivitiesController(MainActivity.this);
 		pe = new PrefEditor(MainActivity.this);
-		auth = new Authenticator(MainActivity.this);
 		if (savedInstanceState == null) {
 			ac.getActivitiesFlow();
 		}
-		
-		if (getIntent() == null || !getIntent().getBooleanExtra("first_time",	false)) {
-			if (pe.getLockMethod().equals("pattern")) {
-				auth.checkPattern(REQ_ENTER_PATTERN);
-			} else {
-
-			}
-		}
-		
 		setContentView(R.layout.main_activity);
 		AppsListAdapter adapter = new AppsListAdapter(this);
 		ListView listView = (ListView) findViewById(R.id.app_list);
