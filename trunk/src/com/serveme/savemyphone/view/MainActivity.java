@@ -31,6 +31,7 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -42,7 +43,8 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// Calling this to ensures that your application is properly initialized with default settings
+		// Calling this to ensures that your application is properly initialized
+		// with default settings
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 		ac = new ActivitiesController(MainActivity.this);
 		pe = new PrefEditor(MainActivity.this);
@@ -50,6 +52,13 @@ public class MainActivity extends ActionBarActivity {
 			ac.getActivitiesFlow();
 		}
 		setContentView(R.layout.main_activity);
+		if (getIntent().getBooleanExtra("first_time", false)) {
+			Toast.makeText(this, "test", Toast.LENGTH_LONG).show();
+			intialize();
+		}
+	}
+
+	protected void intialize() {
 		AppsListAdapter adapter = new AppsListAdapter(this);
 		ListView listView = (ListView) findViewById(R.id.app_list);
 		LinearLayout headerLayout = createListHeader();
@@ -70,9 +79,12 @@ public class MainActivity extends ActionBarActivity {
 		header.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
 		header.setText(R.string.admin_list_header);
 		LinearLayout headerLayout = new LinearLayout(this);
-		headerLayout.setBackgroundColor(getResources().getColor(R.color.listview_header));
-//		int padding = (int) ConverterUtil.convertDpToPixel(15, this);
-		int padding = (int) TypedValue.applyDimension (TypedValue.COMPLEX_UNIT_DIP, 15, getResources().getDisplayMetrics());
+		headerLayout.setBackgroundColor(getResources().getColor(
+				R.color.listview_header));
+		// int padding = (int) ConverterUtil.convertDpToPixel(15, this);
+		int padding = (int) TypedValue.applyDimension(
+				TypedValue.COMPLEX_UNIT_DIP, 15, getResources()
+						.getDisplayMetrics());
 		headerLayout.setPadding(padding, padding, padding, padding);
 		headerLayout.addView(header);
 		return headerLayout;
@@ -103,19 +115,23 @@ public class MainActivity extends ActionBarActivity {
 		if (activecount) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage(R.string.activiate_lock_quesition);
-			builder.setPositiveButton(getResources().getString(android.R.string.yes),
+			builder.setPositiveButton(
+					getResources().getString(android.R.string.yes),
 					new DialogInterface.OnClickListener() {
 
 						public void onClick(DialogInterface dialog, int which) {
 							lock();
-							MyTracker.fireButtonPressedEvent(MainActivity.this, "Ok_lock_dialog");
+							MyTracker.fireButtonPressedEvent(MainActivity.this,
+									"Ok_lock_dialog");
 							finish();
 						}
 					});
-			builder.setNegativeButton(getResources().getString(android.R.string.no),
+			builder.setNegativeButton(
+					getResources().getString(android.R.string.no),
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
-							MyTracker.fireButtonPressedEvent(MainActivity.this, "Cancel_lock_dialog");
+							MyTracker.fireButtonPressedEvent(MainActivity.this,
+									"Cancel_lock_dialog");
 							finish();
 						}
 					});
@@ -137,9 +153,9 @@ public class MainActivity extends ActionBarActivity {
 		MyTracker.fireActivityStopevent(MainActivity.this);
 		super.onStop();
 	}
-	
+
 	@Override
-	protected void onDestroy(){
+	protected void onDestroy() {
 		super.onDestroy();
 	}
 
@@ -168,7 +184,7 @@ public class MainActivity extends ActionBarActivity {
 			Intent helpIntent = new Intent(this, HelpActivity.class);
 			startActivity(helpIntent);
 			MyTracker.fireButtonPressedEvent(MainActivity.this, "help");
-			return true;			
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -180,8 +196,6 @@ public class MainActivity extends ActionBarActivity {
 		startActivity(saveintent);
 	}
 
-	
-
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
@@ -189,6 +203,7 @@ public class MainActivity extends ActionBarActivity {
 			switch (resultCode) {
 			case RESULT_OK:
 				Log.v("result", "passed");
+				intialize();
 				break;
 			case RESULT_CANCELED:
 				finish();
