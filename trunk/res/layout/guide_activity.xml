@@ -6,35 +6,43 @@
     android:orientation="vertical"
     tools:context=".HelpActivity" >
 
-	<TextView
-		android:id="@+id/textView"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignParentTop="true"
-		android:layout_centerHorizontal="true"
-		android:layout_above="@+id/buttons_pane"
-		android:gravity="center_horizontal"
-		android:textAlignment="gravity"
-		android:bufferType="spannable"
-		android:lineSpacingMultiplier="1.4"
-		android:layout_margin="10dp"
-		android:textAppearance="?android:attr/textAppearanceLarge" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttons_pane"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp" >
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:textAlignment="gravity"
+            android:bufferType="spannable"
+            android:lineSpacingMultiplier="1.4"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_margin="10dp" />
+        
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/buttons_pane"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-		android:layout_centerHorizontal="true"
-        android:orientation="horizontal"
-        android:layout_margin="10dp" >
-        
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:orientation="horizontal" >
+
         <Button
             android:id="@+id/btn"
-            android:layout_height="wrap_content"
             android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:text="@android:string/ok" />
-            
     </LinearLayout>
-    
+
 </RelativeLayout>
