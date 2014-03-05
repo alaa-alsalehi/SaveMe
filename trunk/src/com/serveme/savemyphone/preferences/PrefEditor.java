@@ -54,6 +54,13 @@ public class PrefEditor {
 	    edit.apply();
 	}
 	
+	
+	public void setRecoveryEmail(String email){
+		Editor edit = preferences.edit();
+	    edit.putString("recovery_email", email);
+	    edit.apply();
+	}
+	
 	public void setTempPassword(String tempPass){
 		Editor edit = preferences.edit();
 		edit.putString("temp_pass", tempPass); 
@@ -91,6 +98,18 @@ public class PrefEditor {
 	
 	public boolean isStealthModeEnabled(){
 		return preferences.getBoolean("stealth_mode", false);
+	}
+	
+	public boolean isEmailExist(){
+		if (preferences != null	&& preferences.contains("recovery_email")) {
+			return true;
+		} 
+		return false;
+	}
+	
+	public String getRecoveryEmail(){
+		return preferences.getString("recovery_email",null);
+		
 	}
 	
 	public String getTempPassword(){

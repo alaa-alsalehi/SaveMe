@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Layout;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -29,9 +30,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -53,7 +54,6 @@ public class MainActivity extends ActionBarActivity {
 		}
 		setContentView(R.layout.main_activity);
 		if (getIntent().getBooleanExtra("first_time", false)) {
-			Toast.makeText(this, "test", Toast.LENGTH_LONG).show();
 			intialize();
 		}
 	}
@@ -78,13 +78,17 @@ public class MainActivity extends ActionBarActivity {
 		TextView header = new TextView(this);
 		header.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
 		header.setText(R.string.admin_list_header);
+		String direction = getResources().getString(R.string.direction);
+		if (direction.equals("right")) {
+			header.setGravity(Gravity.RIGHT);
+		} else {
+			header.setGravity(Gravity.LEFT);
+		}
 		LinearLayout headerLayout = new LinearLayout(this);
-		headerLayout.setBackgroundColor(getResources().getColor(
-				R.color.listview_header));
+		header.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+		headerLayout.setBackgroundColor(getResources().getColor(R.color.listview_header));
 		// int padding = (int) ConverterUtil.convertDpToPixel(15, this);
-		int padding = (int) TypedValue.applyDimension(
-				TypedValue.COMPLEX_UNIT_DIP, 15, getResources()
-						.getDisplayMetrics());
+		int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, getResources().getDisplayMetrics());
 		headerLayout.setPadding(padding, padding, padding, padding);
 		headerLayout.addView(header);
 		return headerLayout;

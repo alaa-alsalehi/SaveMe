@@ -20,6 +20,8 @@
     <string name="prevent_message">Unallowed app for use \nPlease wait to load Allowed list</string>
 
     <!-- forgot password mail -->
+    <string name="email_request_textview">We need this to help you to recover password in case you forget your password or pattern</string>
+    <string name="confirm">Confirm</string>
     <string name="mail_subject">Recovery info for Save Me android app</string>
     <string name="email_message_part1">"Hi,\n\nThis is your temporary password: "</string>
     <string name="email_message_part2">"\n\nNote: You can use it to unlock Save Me while you didn't closed the recovery screen\nIn case you have closed the recovery screen you need to open it againt and wait until new temporary password sent to you!\nAfter that you can make a new pattern and continue to use your apps\n\nRegards\nServe Me Team"</string>

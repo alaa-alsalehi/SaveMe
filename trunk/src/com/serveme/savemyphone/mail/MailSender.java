@@ -2,14 +2,12 @@ package com.serveme.savemyphone.mail;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
-
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.serveme.savemyphone.R;
+import com.serveme.savemyphone.preferences.PrefEditor;
 
 
 public class MailSender extends AsyncTask<String, Integer, Boolean> {
@@ -54,7 +52,7 @@ public class MailSender extends AsyncTask<String, Integer, Boolean> {
 		mail.setFrom("serveme.ps@gmail.com");
 		mail.setUser("serveme.ps");
 		mail.setPass("#$^JF56Za7@1");
-		mail.setTo(getAccountNames());
+		mail.setTo(new String[]{new PrefEditor(context).getRecoveryEmail()});
 		mail.setSubject(context.getResources().getString(R.string.mail_subject));
 		mail.setBody(context.getResources().getString(R.string.email_message_part1) + generated_code + context.getResources().getString(R.string.email_message_part2));
 
@@ -69,13 +67,4 @@ public class MailSender extends AsyncTask<String, Integer, Boolean> {
 		}
 	}
 
-	private String[] getAccountNames() {
-		AccountManager mAccountManager = AccountManager.get(context);
-		Account[] accounts = mAccountManager.getAccountsByType("com.google");
-		String[] names = new String[accounts.length];
-		for (int i = 0; i < names.length; i++) {
-			names[i] = accounts[i].name;
-		}
-		return names;
-	}
 }

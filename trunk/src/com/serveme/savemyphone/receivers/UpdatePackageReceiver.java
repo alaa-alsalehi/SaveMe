@@ -5,14 +5,12 @@ import java.util.List;
 
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.model.Launcher;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.util.Log;
+
 
 public class UpdatePackageReceiver extends BroadcastReceiver {
 
@@ -22,19 +20,16 @@ public class UpdatePackageReceiver extends BroadcastReceiver {
 		Uri data = intent.getData();
 		if (data != null) {
 			String packageName = data.getEncodedSchemeSpecificPart();
-			Log.d("test", "package update " + packageName);
 			int counter = dbOperations.getLaunchersCount(packageName);
 			if (counter != 0) {
 				Intent in = new Intent(Intent.ACTION_MAIN);
 				in.addCategory(Intent.CATEGORY_LAUNCHER);
 				in.setPackage(packageName);
-				List<ResolveInfo> aList = context.getPackageManager()
-						.queryIntentActivities(in, 0);
+				List<ResolveInfo> aList = context.getPackageManager().queryIntentActivities(in, 0);
 				if (counter == aList.size()) {
 					ArrayList<Launcher> newLaunchers = new ArrayList<Launcher>();
 					for (ResolveInfo resolveInfo : aList) {
-						Launcher launcher = new Launcher(packageName,
-								resolveInfo.activityInfo.name);
+						Launcher launcher = new Launcher(packageName, resolveInfo.activityInfo.name);
 						newLaunchers.add(launcher);
 					}
 					dbOperations.replaceApp(newLaunchers);

@@ -5,6 +5,7 @@ import com.serveme.savemyphone.receivers.AdminReciver;
 import com.serveme.savemyphone.view.wizard.AdminRequest;
 import com.serveme.savemyphone.view.wizard.HelpActivity;
 import com.serveme.savemyphone.view.wizard.PasswordRequest;
+import com.serveme.savemyphone.view.wizard.RecoveryEmailRequest;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
@@ -38,6 +39,10 @@ public class ActivitiesController {
 		} else if (!pe.isPatternExist()) {
 			activity.finish();
 			Intent intent = new Intent(activity, PasswordRequest.class);
+			activity.startActivity(intent);
+		}else if(!pe.isEmailExist()){
+			activity.finish();
+			Intent intent = new Intent(activity, RecoveryEmailRequest.class);
 			activity.startActivity(intent);
 		} else if (pe.isNewUser()){
 			activity.finish();

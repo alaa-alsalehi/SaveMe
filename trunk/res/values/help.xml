@@ -12,7 +12,7 @@
     <string name="create_pattern">Create Pattern</string>
     <string name="create_password">Create Password</string>
     <string name="lock_method_chooser_activity_title">Lock Method</string>
-    <string name="password_request_help">Please choose your preferred lock method, You will need this to move form Restricted Mode to Full Access mode.\nNote: this lock private to SaveMe app and not the device lock.\nCaution: this lock irrecovable and forget it may prevent you from using your mobile</string>
+    <string name="password_request_help">Please choose your preferred lock method, You will need this to move form Restricted Mode to Full Access mode.\nNote: this lock private to SaveMe app and not the device lock.</string>
 
     <string name="help">Help</string>
     

@@ -77,8 +77,7 @@ public class AdminRequest extends ActionBarActivity {
 			if (resultCode == Activity.RESULT_OK) {
 				finish();			
 				devicePolicyManager.lockNow(); //·· √ﬂœ „‰ √‰ «·„” Œœ„ ÂÊ ’«Õ» «·ÃÂ«“
-				Intent intent = new Intent(AdminRequest.this, PasswordRequest.class);
-				startActivity(intent);
+				ac.getActivitiesFlow();
 				MyTracker.fireButtonPressedEvent(AdminRequest.this, "admin_permission_done");
 			} else {
 				MyTracker.fireButtonPressedEvent(AdminRequest.this, "admin_permission_cancelled");

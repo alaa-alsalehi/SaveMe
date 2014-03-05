@@ -16,10 +16,12 @@
     <string name="uninstall">إزالة التطبيق</string>
         
     <string name="activiate_lock_quesition">تفعيل وضع القفل؟</string>
-    <string name="admin_list_header">اختار التطبيقات المسموحة:</string>
+    <string name="admin_list_header">اختر التطبيقات المسموحة:</string>
     <string name="prevent_message">تطبيق غير مسموح استخدامه \nالرجاء الانتظار حتى يتم تحميل قائمة البرامج المسموحة</string>
  
-      <!-- forgot password mail -->
+    <!-- forgot password mail -->
+    <string name="email_request_textview">يحتاج تطبيق Save Me الإيميل الخاص بك لمساعدتك في إسترجاع كلمة السر أو النمط الخاص بك في حال نسيانه</string>
+    <string name="confirm">تأكيد</string>
     <string name="mail_subject">معلومات إستعادة فك القفل الخاص بتطبيق Save ME</string>
     <string name="email_message_part1">"مرحباً,\n\nهذه هي كلمة السر المؤقتة الخاصة بك: "</string>
     <string name="email_message_part2">"\n\ملاحظة: يمكنك إستخدامها طالما أنك لم تقم بإغلاق شاشة إستعادة القفل \nفي حال قمت بالفعل بإغلاق شاشة إستعادة فك القفل يجب عليك القيام بفتحها مرة أخرى وإنتظار وصول كلمة السر المؤقتة الجديدة!\nبعد ذلك يمكنك إنشاء فك قفل جديد والإستمرار في إستخدام التطبيق\n\nمع تحيات\nفريق عمل التطبيق "</string>

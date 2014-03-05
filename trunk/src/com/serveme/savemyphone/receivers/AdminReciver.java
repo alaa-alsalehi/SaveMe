@@ -19,7 +19,7 @@ public class AdminReciver extends DeviceAdminReceiver {
     
     @Override
     public CharSequence onDisableRequested(Context context, Intent intent) {
-        return "";
+        return "This app will not work if you disable admin persmission";
     }
 
     @Override
