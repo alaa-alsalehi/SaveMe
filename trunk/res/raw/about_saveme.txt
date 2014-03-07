@@ -1,28 +1,40 @@
 How many times given your mobile to friend supposing he is seeing movie and surprised he is posting on your social account?
 How many times given your phone to your child to play his favorite game and surprised he is doing international call?
-how many times given your mobile to brother to doing call and surprised he is checking your email address?
+How many times given your mobile to brother to doing call and surprised he is checking your email address?
+Are you a parent who want to control your child/children activities on tablet device?
 
-Unfortunately you may be unable to refuse giving your phone to your friends or you may be embarrassed but the of violating your privacy still annoying you
-you maybe unable to prevent your kid from using your mobile to play his favorite game but the idea of deleting your data or making a call by mistake is a big problem for you !
+You maybe unable to refuse giving your phone to your friends or you may be embarrassed but still afraid they  violating your privacy.
+You maybe unable to prevent your kid / kids from using your mobile to play his favorite game but the idea of deleting your data or making a call by mistake is a big problem for you !
+You maybe unable to prevent your child / children form using their tablet but you want to do parental control on apps they used.
+You maybe want to prevent your kid / kids from using inappropriate apps but you want them to read books.
+You want the others to use your phone but without answer your calls.
 From here, our application idea arose
-This application will give you the ability to control your mobile, save your privacy and manage your apps as you want
+This application will give you the ability to control your mobile, save your privacy , doing all kind of parental controls ,no one can answer calls except you , finally manage the apps appear to the others as you want.
 
 
-How to use Save Me
-1- Activate admin permission
+How to use Save Me?
+1- Activate administrator permission
+Note: we ask for this permission to be sure you are the owner of the device.
 2- Unlock your device and continue
 3- Choose your pattern to lock your device
 -these three steps for first time only-
 4- choose app/apps you want friend/family/child to see or use -all apps disabled on start-
 5- click on lock button to enter protected mode
 6- Now you can see the allowed apps and you can not use others
-5- Finally give yor phone to friend/family/child and have productivity privacy, love and make your child happy
+7- Finally give your phone to friend/family/child and have productivity privacy, love and make your child happy
+
+Features:
+1- Control apps shows for others
+2- Disallow home button
+3- Disallow back button
+4- Prevent disallowed apps to run even form notification bar or allowed apps
+5- Pattern for the device
 
 Note:
-If one of the allowed apps tried to open unallowed app do not worry, our app will take care of this issue
+If one of the allowed apps tried to open disallowed app do not worry, our app will take care of this issue.
 
 keywords:
-LG g2 , guest mode, care kids, app lock, kid lock
+LG g2 , guest mode, care kids, app lock, kid lock ,private mode
 
 Twitter:
 https://twitter.com/servemecom

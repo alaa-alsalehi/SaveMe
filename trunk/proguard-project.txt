@@ -165,3 +165,9 @@ public static <fields>;
 -keepnames class * implements android.os.Parcelable {
     public static final ** CREATOR;
 }
+
+#to handle mail library
+-dontwarn java.awt.**,javax.security.**,java.beans.**
+
+-keep class javax.** {*;}
+-keep class com.sun.** {*;}

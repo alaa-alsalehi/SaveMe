@@ -53,7 +53,8 @@ public class MainActivity extends ActionBarActivity {
 			ac.getActivitiesFlow();
 		}
 		setContentView(R.layout.main_activity);
-		if (getIntent().getBooleanExtra("first_time", false)) {
+		if (getIntent().getBooleanExtra("first_time", false)
+				|| savedInstanceState != null) {
 			intialize();
 		}
 	}
@@ -85,10 +86,14 @@ public class MainActivity extends ActionBarActivity {
 			header.setGravity(Gravity.LEFT);
 		}
 		LinearLayout headerLayout = new LinearLayout(this);
-		header.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-		headerLayout.setBackgroundColor(getResources().getColor(R.color.listview_header));
+		header.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
+				LayoutParams.MATCH_PARENT));
+		headerLayout.setBackgroundColor(getResources().getColor(
+				R.color.listview_header));
 		// int padding = (int) ConverterUtil.convertDpToPixel(15, this);
-		int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, getResources().getDisplayMetrics());
+		int padding = (int) TypedValue.applyDimension(
+				TypedValue.COMPLEX_UNIT_DIP, 15, getResources()
+						.getDisplayMetrics());
 		headerLayout.setPadding(padding, padding, padding, padding);
 		headerLayout.addView(header);
 		return headerLayout;

@@ -6,6 +6,10 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.Tracker;
+import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.preferences.PrefEditor;
 
@@ -59,10 +63,20 @@ public class MailSender extends AsyncTask<String, Integer, Boolean> {
 		try {
 			return mail.send();
 		} catch (AddressException e) {
-			e.printStackTrace();
+			Tracker tracker = EasyTracker.getInstance(context);
+			tracker.send(MapBuilder
+					.createException(
+							new AnalyticsExceptionParser().getDescription(
+									Thread.currentThread().toString(),
+									e), false).build());
 			return false;
 		} catch (MessagingException e) {
-			e.printStackTrace();
+			Tracker tracker = EasyTracker.getInstance(context);
+			tracker.send(MapBuilder
+					.createException(
+							new AnalyticsExceptionParser().getDescription(
+									Thread.currentThread().toString(),
+									e), false).build());
 			return false;
 		}
 	}
