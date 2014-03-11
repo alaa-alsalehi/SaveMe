@@ -108,13 +108,7 @@ public class MainActivity extends ActionBarActivity {
 		final AdRequest adRequest = new AdRequest();
 		adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
 		// adRequest.addTestDevice("8E7864D6D7911778659788D0B39F99E8");
-		Thread thread = new Thread(new Runnable() {
-			public void run() {
-				Looper.prepare();
-				adView.loadAd(adRequest);
-			}
-		});
-		thread.start();
+		adView.loadAd(adRequest);
 	}
 
 	@Override
