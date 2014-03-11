@@ -4357,6 +4357,7 @@ com.serveme.savemyphone.view.SettingsActivity:
     private static final java.lang.String KEY_LOCK_METHOD
 com.serveme.savemyphone.view.UserActivity:
     private static final int REQ_ENTER_PATTERN
+    private static final java.lang.String MY_INTERSTITIAL_UNIT_ID
 com.serveme.savemyphone.view.utils.ActivitiesController:
     private static final int REQ_ENTER_PATTERN
 com.serveme.savemyphone.view.utils.AlertUtility:

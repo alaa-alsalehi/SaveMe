@@ -10252,26 +10252,28 @@ com.serveme.savemyphone.service.AppsMonitor -> com.serveme.savemyphone.service.A
     com.serveme.savemyphone.model.DBOperations db -> d
     int counter -> a
     android.os.Handler handler -> e
-    com.serveme.savemyphone.service.AppsMonitor$MobileState currentState -> f
-    com.serveme.savemyphone.service.AppsMonitor$MobileState previousState -> g
-    41:41:android.os.IBinder onBind(android.content.Intent) -> onBind
-    47:87:int onStartCommand(android.content.Intent,int,int) -> onStartCommand
-    92:160:void doGetRunningApp() -> a
-    163:165:void setCurrentState(com.serveme.savemyphone.service.AppsMonitor$MobileState) -> a
-    169:172:void onDestroy() -> onDestroy
-    36:36:com.serveme.savemyphone.service.AppsMonitor$MobileState access$0(com.serveme.savemyphone.service.AppsMonitor) -> a
-    162:162:void access$1(com.serveme.savemyphone.service.AppsMonitor,com.serveme.savemyphone.service.AppsMonitor$MobileState) -> a
-    26:26:android.app.ActivityManager access$2(com.serveme.savemyphone.service.AppsMonitor) -> b
-    27:27:com.serveme.savemyphone.model.DBOperations access$3(com.serveme.savemyphone.service.AppsMonitor) -> c
-    30:30:android.os.Handler access$4(com.serveme.savemyphone.service.AppsMonitor) -> d
-    36:36:void access$5(com.serveme.savemyphone.service.AppsMonitor,com.serveme.savemyphone.service.AppsMonitor$MobileState) -> b
+    android.view.View view -> f
+    com.serveme.savemyphone.service.AppsMonitor$MobileState currentState -> g
+    com.serveme.savemyphone.service.AppsMonitor$MobileState previousState -> h
+    46:46:android.os.IBinder onBind(android.content.Intent) -> onBind
+    52:93:int onStartCommand(android.content.Intent,int,int) -> onStartCommand
+    98:202:void doGetRunningApp() -> a
+    205:208:void setCurrentState(com.serveme.savemyphone.service.AppsMonitor$MobileState) -> a
+    212:226:void onDestroy() -> onDestroy
+    35:35:android.view.View access$0(com.serveme.savemyphone.service.AppsMonitor) -> a
+    41:41:com.serveme.savemyphone.service.AppsMonitor$MobileState access$1(com.serveme.savemyphone.service.AppsMonitor) -> b
+    204:204:void access$2(com.serveme.savemyphone.service.AppsMonitor,com.serveme.savemyphone.service.AppsMonitor$MobileState) -> a
+    30:30:android.app.ActivityManager access$3(com.serveme.savemyphone.service.AppsMonitor) -> c
+    31:31:com.serveme.savemyphone.model.DBOperations access$4(com.serveme.savemyphone.service.AppsMonitor) -> d
+    34:34:android.os.Handler access$5(com.serveme.savemyphone.service.AppsMonitor) -> e
 com.serveme.savemyphone.service.AppsMonitor$1 -> com.serveme.savemyphone.service.a:
-    com.serveme.savemyphone.service.AppsMonitor this$0 -> a
-    android.view.WindowManager$LayoutParams val$param -> b
-    60:83:void handleMessage(android.os.Message) -> handleMessage
+    android.widget.Toast toast -> a
+    com.serveme.savemyphone.service.AppsMonitor this$0 -> b
+    android.view.WindowManager$LayoutParams val$param -> c
+    66:89:void handleMessage(android.os.Message) -> handleMessage
 com.serveme.savemyphone.service.AppsMonitor$2 -> com.serveme.savemyphone.service.b:
     com.serveme.savemyphone.service.AppsMonitor this$0 -> a
-    96:158:void run() -> run
+    102:200:void run() -> run
 com.serveme.savemyphone.service.AppsMonitor$MobileState -> com.serveme.savemyphone.service.c:
     com.serveme.savemyphone.service.AppsMonitor$MobileState START_APP -> a
     com.serveme.savemyphone.service.AppsMonitor$MobileState ALLOW_APP -> b
@@ -10279,8 +10281,9 @@ com.serveme.savemyphone.service.AppsMonitor$MobileState -> com.serveme.savemypho
     com.serveme.savemyphone.service.AppsMonitor$MobileState ANDROID -> d
     com.serveme.savemyphone.service.AppsMonitor$MobileState USER_ACTIVITY -> e
     com.serveme.savemyphone.service.AppsMonitor$MobileState UNALLOW_APP_STARTED_BY_ALLOW_APP -> f
-    com.serveme.savemyphone.service.AppsMonitor$MobileState ALERT_MESSAGE -> g
-    com.serveme.savemyphone.service.AppsMonitor$MobileState[] ENUM$VALUES -> h
+    com.serveme.savemyphone.service.AppsMonitor$MobileState START_ALERT_MESSAGE -> g
+    com.serveme.savemyphone.service.AppsMonitor$MobileState END_ALERT_MESSAGE -> h
+    com.serveme.savemyphone.service.AppsMonitor$MobileState[] ENUM$VALUES -> i
     1:1:com.serveme.savemyphone.service.AppsMonitor$MobileState[] values() -> values
     1:1:com.serveme.savemyphone.service.AppsMonitor$MobileState valueOf(java.lang.String) -> valueOf
 com.serveme.savemyphone.util.MyTracker -> com.serveme.savemyphone.e.a:
@@ -10294,26 +10297,21 @@ com.serveme.savemyphone.view.MainActivity -> com.serveme.savemyphone.view.MainAc
     46:60:void onCreate(android.os.Bundle) -> onCreate
     63:76:void intialize() -> h
     79:99:android.widget.LinearLayout createListHeader() -> i
-    103:118:void adsStuff() -> k
-    122:151:void onBackPressed() -> onBackPressed
-    155:158:void onStart() -> onStart
-    162:164:void onStop() -> onStop
-    168:169:void onDestroy() -> onDestroy
-    173:175:boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
-    181:198:boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-    203:206:void lock() -> j
-    210:242:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    103:112:void adsStuff() -> k
+    116:145:void onBackPressed() -> onBackPressed
+    149:152:void onStart() -> onStart
+    156:158:void onStop() -> onStop
+    162:163:void onDestroy() -> onDestroy
+    167:169:boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    175:192:boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
+    197:200:void lock() -> j
+    204:236:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
 com.serveme.savemyphone.view.MainActivity$1 -> com.serveme.savemyphone.view.a:
     com.serveme.savemyphone.view.MainActivity this$0 -> a
-    com.google.ads.AdView val$adView -> b
-    com.google.ads.AdRequest val$adRequest -> c
-    113:115:void run() -> run
+    126:130:void onClick(android.content.DialogInterface,int) -> onClick
 com.serveme.savemyphone.view.MainActivity$2 -> com.serveme.savemyphone.view.b:
     com.serveme.savemyphone.view.MainActivity this$0 -> a
-    132:136:void onClick(android.content.DialogInterface,int) -> onClick
-com.serveme.savemyphone.view.MainActivity$3 -> com.serveme.savemyphone.view.c:
-    com.serveme.savemyphone.view.MainActivity this$0 -> a
-    142:145:void onClick(android.content.DialogInterface,int) -> onClick
+    136:139:void onClick(android.content.DialogInterface,int) -> onClick
 com.serveme.savemyphone.view.RecoveryActivity -> com.serveme.savemyphone.view.RecoveryActivity:
     com.serveme.savemyphone.preferences.PrefEditor pe -> a
     com.serveme.savemyphone.view.utils.Authenticator auth -> b
@@ -10322,14 +10320,14 @@ com.serveme.savemyphone.view.RecoveryActivity -> com.serveme.savemyphone.view.Re
     86:104:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
     25:25:com.serveme.savemyphone.preferences.PrefEditor access$0(com.serveme.savemyphone.view.RecoveryActivity) -> a
     26:26:com.serveme.savemyphone.view.utils.Authenticator access$1(com.serveme.savemyphone.view.RecoveryActivity) -> b
-com.serveme.savemyphone.view.RecoveryActivity$1 -> com.serveme.savemyphone.view.d:
+com.serveme.savemyphone.view.RecoveryActivity$1 -> com.serveme.savemyphone.view.c:
     com.serveme.savemyphone.view.RecoveryActivity this$0 -> a
     android.widget.EditText val$input -> b
     48:58:void onClick(android.view.View) -> onClick
-com.serveme.savemyphone.view.RecoveryActivity$2 -> com.serveme.savemyphone.view.e:
+com.serveme.savemyphone.view.RecoveryActivity$2 -> com.serveme.savemyphone.view.d:
     com.serveme.savemyphone.view.RecoveryActivity this$0 -> a
     65:66:void onClick(android.view.View) -> onClick
-com.serveme.savemyphone.view.RecoveryActivity$SessionIdentifierGenerator -> com.serveme.savemyphone.view.f:
+com.serveme.savemyphone.view.RecoveryActivity$SessionIdentifierGenerator -> com.serveme.savemyphone.view.e:
     java.security.SecureRandom random -> b
     com.serveme.savemyphone.view.RecoveryActivity this$0 -> a
     74:74:java.lang.String nextSessionId() -> a
@@ -10343,13 +10341,13 @@ com.serveme.savemyphone.view.SettingsActivity -> com.serveme.savemyphone.view.Se
     115:122:void onSharedPreferenceChanged(android.content.SharedPreferences,java.lang.String) -> onSharedPreferenceChanged
     126:140:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
     30:30:com.serveme.savemyphone.preferences.PrefEditor access$0(com.serveme.savemyphone.view.SettingsActivity) -> a
-com.serveme.savemyphone.view.SettingsActivity$1 -> com.serveme.savemyphone.view.g:
+com.serveme.savemyphone.view.SettingsActivity$1 -> com.serveme.savemyphone.view.f:
     com.serveme.savemyphone.view.SettingsActivity this$0 -> a
     47:50:boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
-com.serveme.savemyphone.view.SettingsActivity$2 -> com.serveme.savemyphone.view.h:
+com.serveme.savemyphone.view.SettingsActivity$2 -> com.serveme.savemyphone.view.g:
     com.serveme.savemyphone.view.SettingsActivity this$0 -> a
     57:65:boolean onPreferenceChange(android.preference.Preference,java.lang.Object) -> onPreferenceChange
-com.serveme.savemyphone.view.SettingsActivity$3 -> com.serveme.savemyphone.view.i:
+com.serveme.savemyphone.view.SettingsActivity$3 -> com.serveme.savemyphone.view.h:
     com.serveme.savemyphone.view.SettingsActivity this$0 -> a
     72:79:boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
 com.serveme.savemyphone.view.UserActivity -> com.serveme.savemyphone.view.UserActivity:
@@ -10357,30 +10355,36 @@ com.serveme.savemyphone.view.UserActivity -> com.serveme.savemyphone.view.UserAc
     com.serveme.savemyphone.model.DBOperations db -> p
     com.serveme.savemyphone.control.GridAdapter ga -> q
     android.widget.GridView gridView -> r
-    android.content.BroadcastReceiver bcr -> s
-    android.content.BroadcastReceiver refreshList -> t
-    47:84:void onCreate(android.os.Bundle) -> onCreate
-    88:89:void onPause() -> onPause
-    93:95:void onResume() -> onResume
-    99:102:void onStart() -> onStart
-    106:108:void onStop() -> onStop
-    112:115:void onDestroy() -> onDestroy
-    120:120:void onBackPressed() -> onBackPressed
-    124:126:boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
-    132:138:boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-    145:180:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
-    39:39:java.util.List access$0(com.serveme.savemyphone.view.UserActivity) -> a
-    40:40:com.serveme.savemyphone.model.DBOperations access$1(com.serveme.savemyphone.view.UserActivity) -> b
-    41:41:com.serveme.savemyphone.control.GridAdapter access$2(com.serveme.savemyphone.view.UserActivity) -> c
-com.serveme.savemyphone.view.UserActivity$1 -> com.serveme.savemyphone.view.j:
+    com.google.ads.InterstitialAd interstitial -> s
+    android.content.BroadcastReceiver bcr -> t
+    android.content.BroadcastReceiver refreshList -> u
+    56:97:void onCreate(android.os.Bundle) -> onCreate
+    101:102:void onPause() -> onPause
+    106:108:void onResume() -> onResume
+    112:115:void onStart() -> onStart
+    119:121:void onStop() -> onStop
+    125:128:void onDestroy() -> onDestroy
+    133:133:void onBackPressed() -> onBackPressed
+    137:139:boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    145:151:boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
+    158:204:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    227:227:void onDismissScreen(com.google.ads.Ad) -> onDismissScreen
+    233:233:void onFailedToReceiveAd(com.google.ads.Ad,com.google.ads.AdRequest$ErrorCode) -> onFailedToReceiveAd
+    239:239:void onLeaveApplication(com.google.ads.Ad) -> onLeaveApplication
+    245:245:void onPresentScreen(com.google.ads.Ad) -> onPresentScreen
+    249:253:void onReceiveAd(com.google.ads.Ad) -> onReceiveAd
+    47:47:java.util.List access$0(com.serveme.savemyphone.view.UserActivity) -> a
+    48:48:com.serveme.savemyphone.model.DBOperations access$1(com.serveme.savemyphone.view.UserActivity) -> b
+    49:49:com.serveme.savemyphone.control.GridAdapter access$2(com.serveme.savemyphone.view.UserActivity) -> c
+com.serveme.savemyphone.view.UserActivity$1 -> com.serveme.savemyphone.view.i:
     com.serveme.savemyphone.view.UserActivity this$0 -> a
-    185:186:void onReceive(android.content.Context,android.content.Intent) -> onReceive
-com.serveme.savemyphone.view.UserActivity$2 -> com.serveme.savemyphone.view.k:
+    209:210:void onReceive(android.content.Context,android.content.Intent) -> onReceive
+com.serveme.savemyphone.view.UserActivity$2 -> com.serveme.savemyphone.view.j:
     com.serveme.savemyphone.view.UserActivity this$0 -> a
-    192:196:void onReceive(android.content.Context,android.content.Intent) -> onReceive
-com.serveme.savemyphone.view.UserActivity$3 -> com.serveme.savemyphone.view.l:
+    216:220:void onReceive(android.content.Context,android.content.Intent) -> onReceive
+com.serveme.savemyphone.view.UserActivity$3 -> com.serveme.savemyphone.view.k:
     com.serveme.savemyphone.view.UserActivity this$0 -> a
-    71:81:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+    80:94:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 com.serveme.savemyphone.view.utils.ActivitiesController -> com.serveme.savemyphone.view.a.a:
     android.app.Activity activity -> a
     android.app.admin.DevicePolicyManager devicePolicyManager -> b
