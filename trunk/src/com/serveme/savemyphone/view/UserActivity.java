@@ -4,6 +4,12 @@ import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.ads.Ad;
+import com.google.ads.AdListener;
+import com.google.ads.AdRequest;
+import com.google.ads.AdRequest.ErrorCode;
+import com.google.ads.InterstitialAd;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.control.GridAdapter;
 import com.serveme.savemyphone.model.DBOperations;
@@ -32,15 +38,18 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
-public class UserActivity extends ActionBarActivity {
+public class UserActivity extends ActionBarActivity implements AdListener {
 
 	private static final int REQ_ENTER_PATTERN = 2;
+
+	private static final String MY_INTERSTITIAL_UNIT_ID = "2ac0657dacb4406b";
 
 	private List<Launcher> appsinfolist;
 	private DBOperations db;
 	private GridAdapter ga;
 	private GridView gridView;
 
+	private InterstitialAd interstitial;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -72,11 +81,15 @@ public class UserActivity extends ActionBarActivity {
 					Intent i = new Intent();
 					i.setAction(Intent.ACTION_MAIN);
 					i.addCategory(Intent.CATEGORY_LAUNCHER);
-					i.setClassName(launcher.getPackageName(),launcher.getActivity());
+					i.setClassName(launcher.getPackageName(),
+							launcher.getActivity());
 					startActivity(i);
-					MyTracker.fireButtonPressedEvent(UserActivity.this, "run_app");
+					MyTracker.fireButtonPressedEvent(UserActivity.this,
+							"run_app");
 				} catch (ActivityNotFoundException e) {
-					Toast.makeText(UserActivity.this, "Application not Installed",Toast.LENGTH_LONG).show();
+					Toast.makeText(UserActivity.this,
+							"Application not Installed", Toast.LENGTH_LONG)
+							.show();
 				}
 			}
 		});
@@ -149,7 +162,18 @@ public class UserActivity extends ActionBarActivity {
 				// Log.v("result", "passed");
 				PrefEditor pe = new PrefEditor(UserActivity.this);
 				pe.updateStatus(0);
-				UserActivity.this.stopService(new Intent(UserActivity.this, AppsMonitor.class));
+				UserActivity.this.stopService(new Intent(UserActivity.this,
+						AppsMonitor.class));
+				// Create the interstitial
+				interstitial = new InterstitialAd(this, MY_INTERSTITIAL_UNIT_ID);
+
+				// Create ad request
+				AdRequest adRequest = new AdRequest();
+
+				// Begin loading your interstitial
+				interstitial.loadAd(adRequest);
+				interstitial.setAdListener(this);
+
 				break;
 			case RESULT_CANCELED:
 				// Log.v("result", "canceled");
@@ -195,5 +219,37 @@ public class UserActivity extends ActionBarActivity {
 			Log.v("recived", "recived");
 		}
 	};
+
+	@Override
+	public void onDismissScreen(Ad arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onFailedToReceiveAd(Ad arg0, ErrorCode arg1) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onLeaveApplication(Ad arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onPresentScreen(Ad arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onReceiveAd(Ad arg0) {
+		if (interstitial != null) {
+			interstitial.show();
+		}
+
+	}
 
 }
