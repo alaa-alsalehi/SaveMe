@@ -10255,25 +10255,26 @@ com.serveme.savemyphone.service.AppsMonitor -> com.serveme.savemyphone.service.A
     android.view.View view -> f
     com.serveme.savemyphone.service.AppsMonitor$MobileState currentState -> g
     com.serveme.savemyphone.service.AppsMonitor$MobileState previousState -> h
-    46:46:android.os.IBinder onBind(android.content.Intent) -> onBind
-    52:93:int onStartCommand(android.content.Intent,int,int) -> onStartCommand
-    98:202:void doGetRunningApp() -> a
-    205:208:void setCurrentState(com.serveme.savemyphone.service.AppsMonitor$MobileState) -> a
-    212:226:void onDestroy() -> onDestroy
-    35:35:android.view.View access$0(com.serveme.savemyphone.service.AppsMonitor) -> a
-    41:41:com.serveme.savemyphone.service.AppsMonitor$MobileState access$1(com.serveme.savemyphone.service.AppsMonitor) -> b
-    204:204:void access$2(com.serveme.savemyphone.service.AppsMonitor,com.serveme.savemyphone.service.AppsMonitor$MobileState) -> a
-    30:30:android.app.ActivityManager access$3(com.serveme.savemyphone.service.AppsMonitor) -> c
-    31:31:com.serveme.savemyphone.model.DBOperations access$4(com.serveme.savemyphone.service.AppsMonitor) -> d
-    34:34:android.os.Handler access$5(com.serveme.savemyphone.service.AppsMonitor) -> e
+    50:50:android.os.IBinder onBind(android.content.Intent) -> onBind
+    56:127:int onStartCommand(android.content.Intent,int,int) -> onStartCommand
+    132:240:void doGetRunningApp() -> a
+    243:246:void setCurrentState(com.serveme.savemyphone.service.AppsMonitor$MobileState) -> a
+    250:264:void onDestroy() -> onDestroy
+    39:39:android.view.View access$0(com.serveme.savemyphone.service.AppsMonitor) -> a
+    45:45:com.serveme.savemyphone.service.AppsMonitor$MobileState access$1(com.serveme.savemyphone.service.AppsMonitor) -> b
+    46:46:com.serveme.savemyphone.service.AppsMonitor$MobileState access$2(com.serveme.savemyphone.service.AppsMonitor) -> c
+    242:242:void access$3(com.serveme.savemyphone.service.AppsMonitor,com.serveme.savemyphone.service.AppsMonitor$MobileState) -> a
+    34:34:android.app.ActivityManager access$4(com.serveme.savemyphone.service.AppsMonitor) -> d
+    35:35:com.serveme.savemyphone.model.DBOperations access$5(com.serveme.savemyphone.service.AppsMonitor) -> e
+    38:38:android.os.Handler access$6(com.serveme.savemyphone.service.AppsMonitor) -> f
 com.serveme.savemyphone.service.AppsMonitor$1 -> com.serveme.savemyphone.service.a:
     android.widget.Toast toast -> a
     com.serveme.savemyphone.service.AppsMonitor this$0 -> b
     android.view.WindowManager$LayoutParams val$param -> c
-    66:89:void handleMessage(android.os.Message) -> handleMessage
+    70:123:void handleMessage(android.os.Message) -> handleMessage
 com.serveme.savemyphone.service.AppsMonitor$2 -> com.serveme.savemyphone.service.b:
     com.serveme.savemyphone.service.AppsMonitor this$0 -> a
-    102:200:void run() -> run
+    136:238:void run() -> run
 com.serveme.savemyphone.service.AppsMonitor$MobileState -> com.serveme.savemyphone.service.c:
     com.serveme.savemyphone.service.AppsMonitor$MobileState START_APP -> a
     com.serveme.savemyphone.service.AppsMonitor$MobileState ALLOW_APP -> b

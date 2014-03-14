@@ -18,6 +18,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.Tracker;
+import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.model.Launcher;
@@ -68,7 +72,24 @@ public class AppsMonitor extends Service {
 				if (msg.what == 0) {
 					synchronized (view) {
 						if (currentState == MobileState.UNALLOW_APP) {
-							wmgr.addView(view, param);
+							try {
+								wmgr.addView(view, param);
+							} catch (Exception e) {
+								Tracker tracker = EasyTracker
+										.getInstance(AppsMonitor.this);
+								tracker.send(MapBuilder
+										.createException(
+												new AnalyticsExceptionParser()
+														.getDescription(
+																Thread.currentThread()
+																		.toString()
+																		+ " "
+																		+ previousState
+																		+ " "
+																		+ currentState,
+																e), false)
+										.build());
+							}
 							toast.show();
 							setCurrentState(MobileState.START_ALERT_MESSAGE);
 						}
@@ -80,7 +101,20 @@ public class AppsMonitor extends Service {
 								setCurrentState(MobileState.END_ALERT_MESSAGE);
 								wmgr.removeView(view);
 							} catch (Exception e) {
-								// TODO: handle exception
+								Tracker tracker = EasyTracker
+										.getInstance(AppsMonitor.this);
+								tracker.send(MapBuilder
+										.createException(
+												new AnalyticsExceptionParser()
+														.getDescription(
+																Thread.currentThread()
+																		.toString()
+																		+ " "
+																		+ previousState
+																		+ " "
+																		+ currentState,
+																e), false)
+										.build());
 							}
 						}
 					}
@@ -151,7 +185,11 @@ public class AppsMonitor extends Service {
 								| Intent.FLAG_ACTIVITY_NEW_TASK);
 						getApplication().startActivity(saveintent);
 						synchronized (view) {
-							setCurrentState(MobileState.UNALLOW_APP_STARTED_BY_ALLOW_APP);
+							if (currentState == MobileState.START_ALERT_MESSAGE) {
+								handler.sendEmptyMessage(0);
+							} else {
+								setCurrentState(MobileState.UNALLOW_APP_STARTED_BY_ALLOW_APP);
+							}
 						}
 					} else {
 						Intent saveintent = new Intent(getBaseContext(),
