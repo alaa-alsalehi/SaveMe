@@ -92,8 +92,7 @@ public class PrefEditor {
 		if (preferences != null && preferences.contains("pass_code")) {
 			if (preferences.getString("pass_code", null) != null) {
 				Editor edit = preferences.edit();
-				edit.putString("saved_pattern",
-						preferences.getString("pass_code", null));
+				edit.putString("saved_pattern",	preferences.getString("pass_code", null));
 				edit.apply();
 				return true;
 			}
