@@ -138,6 +138,8 @@ public class AppsMonitor extends Service {
 				ComponentName componentInfo = taskInfo.get(0).topActivity;
 				Launcher launcher = new Launcher(
 						componentInfo.getPackageName(), null);
+				Log.d("state", previousState + " " + currentState.toString()
+						+ " " + componentInfo.getClassName());
 				// Log.d("test", taskInfo.get(1).baseActivity.toString());
 				// Log.d("activity", taskInfo.get(1).topActivity.toString());
 				if (!db.getWhiteListPackages().contains(launcher)
@@ -186,8 +188,9 @@ public class AppsMonitor extends Service {
 						getApplication().startActivity(saveintent);
 						synchronized (view) {
 							if (currentState == MobileState.START_ALERT_MESSAGE) {
+
+							} else if (currentState != MobileState.UNALLOW_APP_STARTED_BY_ALLOW_APP) {
 								handler.sendEmptyMessage(0);
-							} else {
 								setCurrentState(MobileState.UNALLOW_APP_STARTED_BY_ALLOW_APP);
 							}
 						}
@@ -242,7 +245,6 @@ public class AppsMonitor extends Service {
 	private void setCurrentState(MobileState newState) {
 		previousState = currentState;
 		currentState = newState;
-		Log.d("state", currentState.toString());
 	}
 
 	@Override
@@ -252,6 +254,8 @@ public class AppsMonitor extends Service {
 			timer.cancel();
 		}
 		sendBroadcast(new Intent("finish_user_activity"));
+		handler.removeMessages(0);
+		handler.removeMessages(1);
 		// ≈“«·… «·‘«‘… «·„”«⁄œ… ·÷„«‰ ⁄œ„ ÊÃÊœ „‘«ﬂ·
 		final WindowManager wmgr = (WindowManager) getApplicationContext()
 				.getSystemService(Context.WINDOW_SERVICE);
