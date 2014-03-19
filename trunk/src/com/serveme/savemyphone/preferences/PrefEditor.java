@@ -3,6 +3,7 @@ package com.serveme.savemyphone.preferences;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.Log;
 
 public class PrefEditor {
 
@@ -86,13 +87,17 @@ public class PrefEditor {
 	}
 
 	public boolean isPatternExist() {
+		Log.d("lock method", getLockMethod());
 		if (preferences != null && preferences.contains("saved_pattern")) {
+			if (getLockMethod().equals("password"))
+				setLockMethod("pattern");
 			return true;
 		}
 		if (preferences != null && preferences.contains("pass_code")) {
 			if (preferences.getString("pass_code", null) != null) {
 				Editor edit = preferences.edit();
 				edit.putString("saved_pattern",	preferences.getString("pass_code", null));
+				setLockMethod("pattern");
 				edit.apply();
 				return true;
 			}
