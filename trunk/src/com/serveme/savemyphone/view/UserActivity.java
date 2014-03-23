@@ -27,7 +27,6 @@ import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -216,7 +215,6 @@ public class UserActivity extends ActionBarActivity implements AdListener {
 			appsinfolist.clear();
 			appsinfolist.addAll(db.getWhiteListApps());
 			ga.notifyDataSetInvalidated();
-			Log.v("recived", "recived");
 		}
 	};
 

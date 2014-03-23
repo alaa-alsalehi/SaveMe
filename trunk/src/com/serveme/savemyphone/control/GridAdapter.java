@@ -16,7 +16,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +63,6 @@ public class GridAdapter extends BaseAdapter {
 		} else {
 			txtView = (TextView) convertView;
 		}
-		Log.d("position", "position "+ position);
 		ActivityInfo appinfo = null;
 		try {
 			Launcher launcher = aList.get(position);

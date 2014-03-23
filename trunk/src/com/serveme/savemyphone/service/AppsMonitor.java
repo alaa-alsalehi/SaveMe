@@ -13,7 +13,6 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -138,8 +137,6 @@ public class AppsMonitor extends Service {
 				ComponentName componentInfo = taskInfo.get(0).topActivity;
 				Launcher launcher = new Launcher(
 						componentInfo.getPackageName(), null);
-				Log.d("state", previousState + " " + currentState.toString()
-						+ " " + componentInfo.getClassName());
 				// Log.d("test", taskInfo.get(1).baseActivity.toString());
 				// Log.d("activity", taskInfo.get(1).topActivity.toString());
 				if (!db.getWhiteListPackages().contains(launcher)
