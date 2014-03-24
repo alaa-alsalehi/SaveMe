@@ -1,10 +1,9 @@
 package com.serveme.savemyphone.view;
 
 import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
-
 import java.math.BigInteger;
 import java.security.SecureRandom;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -68,10 +67,11 @@ public class RecoveryActivity extends Activity {
 	}
 
 	public final class SessionIdentifierGenerator {
+		@SuppressLint("TrulyRandom")
 		private SecureRandom random = new SecureRandom();
 
 		public String nextSessionId() {
-			return new BigInteger(130, random).toString(32);
+			return new BigInteger(60, random).toString(32);
 		}
 	}
 	
