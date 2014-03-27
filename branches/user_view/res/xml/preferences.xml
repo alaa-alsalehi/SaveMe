@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!--
+         <ListPreference
+        android:key="lock_method"
+        android:title="@string/lock_method"
+        android:dialogTitle="@string/lock_choice"
+        android:entries="@array/lock_options"
+        android:entryValues="@array/lock_options"
+        android:defaultValue="pattern" />
+    -->
+    <PreferenceCategory
+        android:title="@string/pattern_settings_category" >
+        <Preference
+            android:key="change_pattern"
+            android:title="@string/change_pattern" />
+        <CheckBoxPreference 
+            android:key="stealth_mode"
+            android:title="@string/stealth_mode"
+            android:defaultValue="false"/>
+    </PreferenceCategory>
+    
+    <PreferenceCategory
+        android:title="@string/uninstall_settings_category" >
+        <Preference
+            android:key="uninstall"
+            android:title="@string/uninstall" />
+    </PreferenceCategory>
+
+    <!--
+    <Preference android:title="test" >
+	    <intent android:action="com.serveme.savemyphone.view.UninstallActivity" />
+	</Preference>
+    -->
+
+</PreferenceScreen>
