@@ -35,60 +35,57 @@ public class UserView extends FrameLayout {
 
 	public UserView(Context context) {
 		super(context);
-		// TODO Auto-generated constructor stub
+		intialize();
 	}
 
 	public UserView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		// TODO Auto-generated constructor stub
+		intialize();
 	}
 
 	public UserView(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
-		// TODO Auto-generated constructor stub
+		intialize();
+	}
+
+	public void intialize() {
+		LayoutInflater inflater = LayoutInflater.from(getContext());
+		View view = inflater.inflate(R.layout.user_activity, this, true);
+		db = DBOperations.getInstance(getContext());
+		appsinfolist = new ArrayList<Launcher>();
+		gridView = (GridView) view.findViewById(R.id.grid_view);
+		appsinfolist.addAll(db.getWhiteListApps());
+		ga = new GridAdapter(getContext(), appsinfolist);
+		gridView.setAdapter(ga);
+		gridView.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
+		gridView.setNumColumns(GridView.AUTO_FIT);
+
+		gridView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View v,
+					int position, long id) {
+				try {
+					Launcher launcher = appsinfolist.get(position);
+					Intent i = new Intent();
+					i.setAction(Intent.ACTION_MAIN);
+					i.addCategory(Intent.CATEGORY_LAUNCHER);
+					i.setClassName(launcher.getPackageName(),
+							launcher.getActivity());
+					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					getContext().startActivity(i);
+					Log.d("test", "test");
+					MyTracker.fireButtonPressedEvent(getContext(), "run_app");
+				} catch (ActivityNotFoundException e) {
+					Toast.makeText(getContext(), "Application not Installed",
+							Toast.LENGTH_LONG).show();
+				}
+			}
+		});
 	}
 
 	@Override
 	protected void onAttachedToWindow() {
 		super.onAttachedToWindow();
-		View view=findViewById(R.id.grid_layout);
-		
-		if (view == null) {
-			LayoutInflater inflater = LayoutInflater.from(getContext());
-			view = inflater.inflate(R.layout.user_activity, this, true);
-			db = DBOperations.getInstance(getContext());
-			appsinfolist = new ArrayList<Launcher>();
-			gridView = (GridView) view.findViewById(R.id.grid_view);
-			appsinfolist.addAll(db.getWhiteListApps());
-			ga = new GridAdapter(getContext(), appsinfolist);
-			gridView.setAdapter(ga);
-			gridView.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
-			gridView.setNumColumns(GridView.AUTO_FIT);
-
-			gridView.setOnItemClickListener(new OnItemClickListener() {
-				@Override
-				public void onItemClick(AdapterView<?> parent, View v,
-						int position, long id) {
-					try {
-						Launcher launcher = appsinfolist.get(position);
-						Intent i = new Intent();
-						i.setAction(Intent.ACTION_MAIN);
-						i.addCategory(Intent.CATEGORY_LAUNCHER);
-						i.setClassName(launcher.getPackageName(),
-								launcher.getActivity());
-						i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-						getContext().startActivity(i);
-						Log.d("test", "test");
-						MyTracker.fireButtonPressedEvent(getContext(),
-								"run_app");
-					} catch (ActivityNotFoundException e) {
-						Toast.makeText(getContext(),
-								"Application not Installed", Toast.LENGTH_LONG)
-								.show();
-					}
-				}
-			});
-		}
 		getContext().registerReceiver(refreshList,
 				new IntentFilter("refresh_white_list"));
 	}
