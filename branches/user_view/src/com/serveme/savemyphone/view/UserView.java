@@ -21,8 +21,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -81,11 +83,23 @@ public class UserView extends FrameLayout {
 				}
 			}
 		});
+		ImageButton unlock=(ImageButton) view.findViewById(R.id.unlock);
+		unlock.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent userActivityIntent=new Intent(getContext(),UserActivity.class);
+				userActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				getContext().startActivity(userActivityIntent);				
+			}
+		});
 	}
 
 	@Override
 	protected void onAttachedToWindow() {
 		super.onAttachedToWindow();
+		ga.notifyDataSetChanged();
+		MyTracker.getUncaughtExceptionHandler();
 		getContext().registerReceiver(refreshList,
 				new IntentFilter("refresh_white_list"));
 	}

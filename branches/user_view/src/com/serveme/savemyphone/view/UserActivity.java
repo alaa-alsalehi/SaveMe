@@ -44,92 +44,14 @@ public class UserActivity extends ActionBarActivity implements AdListener {
 
 	private static final String MY_INTERSTITIAL_UNIT_ID = "2ac0657dacb4406b";
 
-	private List<Launcher> appsinfolist;
-	private DBOperations db;
-	private GridAdapter ga;
-	private GridView gridView;
-
 	private InterstitialAd interstitial;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-			requestWindowFeature(Window.FEATURE_NO_TITLE);
-		}
 		setContentView(R.layout.user_activity);
-		db = DBOperations.getInstance(UserActivity.this);
-		appsinfolist = new ArrayList<Launcher>();
-		gridView = (GridView) findViewById(R.id.grid_view);
-		appsinfolist.addAll(db.getWhiteListApps());
-		ga = new GridAdapter(this, appsinfolist);
-		gridView.setAdapter(ga);
-		gridView.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
-		gridView.setNumColumns(GridView.AUTO_FIT);
-
-		registerReceiver(bcr, new IntentFilter("finish_user_activity"));
-		registerReceiver(refreshList, new IntentFilter("refresh_white_list"));
-
-		startService(new Intent(this, AppsMonitor.class));
-
-		gridView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View v,
-					int position, long id) {
-				try {
-					Launcher launcher = appsinfolist.get(position);
-					Intent i = new Intent();
-					i.setAction(Intent.ACTION_MAIN);
-					i.addCategory(Intent.CATEGORY_LAUNCHER);
-					i.setClassName(launcher.getPackageName(),
-							launcher.getActivity());
-					startActivity(i);
-					MyTracker.fireButtonPressedEvent(UserActivity.this,
-							"run_app");
-				} catch (ActivityNotFoundException e) {
-					Toast.makeText(UserActivity.this,
-							"Application not Installed", Toast.LENGTH_LONG)
-							.show();
-				}
-			}
-		});
-
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		ga.notifyDataSetChanged();
-	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
-		MyTracker.fireActivityStartEvent(UserActivity.this);
-		MyTracker.getUncaughtExceptionHandler();
-	}
-
-	@Override
-	protected void onStop() {
-		MyTracker.fireActivityStopevent(UserActivity.this);
-		super.onStop();
-	}
-
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		unregisterReceiver(bcr);
-		unregisterReceiver(refreshList);
-	}
-
-	@Override
-	public void onBackPressed() {
-		// your code.
+		new Authenticator(this).checkPattern(REQ_ENTER_PATTERN);
+		MyTracker.fireButtonPressedEvent(UserActivity.this, "unlock");
 	}
 
 	@Override
@@ -144,8 +66,7 @@ public class UserActivity extends ActionBarActivity implements AdListener {
 		// Handle item selection
 		switch (item.getItemId()) {
 		case R.id.action_unlock:
-			new Authenticator(this).checkPattern(REQ_ENTER_PATTERN);
-			MyTracker.fireButtonPressedEvent(UserActivity.this, "unlock");
+
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -157,6 +78,7 @@ public class UserActivity extends ActionBarActivity implements AdListener {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
 		case REQ_ENTER_PATTERN: {
+			finish();
 			switch (resultCode) {
 			case RESULT_OK:
 				// Log.v("result", "passed");
@@ -207,16 +129,6 @@ public class UserActivity extends ActionBarActivity implements AdListener {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			UserActivity.this.finish();
-		}
-	};
-
-	private final BroadcastReceiver refreshList = new BroadcastReceiver() {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			appsinfolist.clear();
-			appsinfolist.addAll(db.getWhiteListApps());
-			ga.notifyDataSetInvalidated();
-			Log.v("recived", "recived");
 		}
 	};
 

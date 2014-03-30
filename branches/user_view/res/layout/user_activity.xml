@@ -1,29 +1,30 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/grid_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@android:style/Theme.Translucent" >
+    android:orientation="vertical" >
+
+    <include layout="@layout/action_bar"  android:layout_width="w" android:layout_height="wrap_content"/>
 
     <GridView
         android:id="@+id/grid_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:alwaysDrawnWithCache="true"
+        android:background="@android:color/transparent"
+        android:clipChildren="true"
         android:columnWidth="@dimen/col_width"
         android:gravity="center"
-        android:numColumns="auto_fit"
-        android:paddingRight="5dp"
-        android:paddingLeft="5dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:verticalSpacing="@dimen/grid_vspace"
         android:horizontalSpacing="@dimen/grid_hspace"
-        android:stretchMode="columnWidth"
+        android:numColumns="auto_fit"
+        android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="10dp"
         android:scrollingCache="true"
         android:smoothScrollbar="true"
-        android:clipChildren="true"
-        android:background="@android:color/transparent"
-        android:alwaysDrawnWithCache="true"
-        style="@android:style/Theme.Translucent" >
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="@dimen/grid_vspace" >
     </GridView>
 
-</FrameLayout>
+</LinearLayout>
