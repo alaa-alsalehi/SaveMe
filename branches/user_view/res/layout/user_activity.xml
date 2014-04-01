@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <include layout="@layout/action_bar"  android:layout_width="w" android:layout_height="wrap_content"/>
+    <include layout="@layout/action_bar"  android:layout_width="match_parent"  android:layout_height="@dimen/abc_action_bar_default_height"/>
 
     <GridView
         android:id="@+id/grid_view"
