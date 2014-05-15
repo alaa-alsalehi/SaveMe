@@ -12,6 +12,7 @@ import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.control.AppsListAdapter;
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.preferences.PrefEditor;
+import com.serveme.savemyphone.service.AppsMonitor;
 import com.serveme.savemyphone.util.MyTracker;
 import com.serveme.savemyphone.view.utils.ActivitiesController;
 import com.serveme.savemyphone.view.wizard.HelpActivity;
@@ -21,6 +22,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
@@ -192,8 +194,8 @@ public class MainActivity extends ActionBarActivity {
 
 	protected void lock() {
 		pe.updateStatus(1);
-		Intent saveintent = new Intent(MainActivity.this, UserActivity.class);
-		startActivity(saveintent);
+		Intent saveintent = new Intent(MainActivity.this, AppsMonitor.class);
+		startService(saveintent);
 	}
 
 	@Override
@@ -202,6 +204,7 @@ public class MainActivity extends ActionBarActivity {
 		case REQ_ENTER_PATTERN: {
 			switch (resultCode) {
 			case RESULT_OK:
+				Log.v("result", "passed");
 				intialize();
 				break;
 			case RESULT_CANCELED:

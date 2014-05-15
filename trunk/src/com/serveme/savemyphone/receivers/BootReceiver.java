@@ -19,9 +19,6 @@ public class BootReceiver extends BroadcastReceiver {
 		if (new PrefEditor(context).getStatus() == 1) {
 			if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)
 					|| intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
-				Intent saveintent = new Intent(context, UserActivity.class);
-				saveintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				context.startActivity(saveintent);
 				context.startService(new Intent(context, AppsMonitor.class));
 			} else {
 			}

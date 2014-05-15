@@ -1,6 +1,5 @@
 package com.serveme.savemyphone.control;
 
-
 import java.util.List;
 
 import com.google.analytics.tracking.android.EasyTracker;
@@ -16,6 +15,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,23 +51,30 @@ public class GridAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		TextView txtView;
-		if (convertView == null) { // if it's not recycled, initialize some attributes
+		if (convertView == null) { // if it's not recycled, initialize some
+									// attributes
 			txtView = new TextView(context);
 			txtView.setTextColor(Color.WHITE);
 			txtView.setShadowLayer(5, 1, 1, Color.BLACK);
 			txtView.setGravity(Gravity.CENTER_HORIZONTAL);
 			txtView.setLines(2); // to make all text view in the same size
-			int padding = context.getResources().getDimensionPixelSize(R.dimen.grid_item_padding);
+			int padding = context.getResources().getDimensionPixelSize(
+					R.dimen.grid_item_padding);
 			txtView.setPadding(0, padding, 0, 0);
 			txtView.setCompoundDrawablePadding(10);
 		} else {
 			txtView = (TextView) convertView;
 		}
+		Log.d("position", "position "+ position);
 		ActivityInfo appinfo = null;
 		try {
 			Launcher launcher = aList.get(position);
-			appinfo = context.getPackageManager().getActivityInfo(new ComponentName(launcher.getPackageName(), launcher.getActivity()),	PackageManager.GET_META_DATA);
+			appinfo = context.getPackageManager().getActivityInfo(
+					new ComponentName(launcher.getPackageName(),
+							launcher.getActivity()),
+					PackageManager.GET_META_DATA);
 			txtView.setText(appinfo.loadLabel((context.getPackageManager())));
+			
 			Drawable img = appinfo.loadIcon(context.getPackageManager());
 			// GridView gridview = (GridView) parent;
 			// img.setBounds(0, 0, (int)(gridview.getColumnWidth()/2),
@@ -92,8 +99,9 @@ public class GridAdapter extends BaseAdapter {
 							new AnalyticsExceptionParser().getDescription(
 									Thread.currentThread().toString(),
 									nameNotFoundException), false).build());
+		} catch (OutOfMemoryError e) {// large images
+			// TODO: handle exception
 		}
-
 		return txtView;
 	}
 }

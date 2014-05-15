@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -137,6 +138,8 @@ public class AppsMonitor extends Service {
 				ComponentName componentInfo = taskInfo.get(0).topActivity;
 				Launcher launcher = new Launcher(
 						componentInfo.getPackageName(), null);
+				Log.d("state", previousState + " " + currentState.toString()
+						+ " " + componentInfo.getClassName());
 				// Log.d("test", taskInfo.get(1).baseActivity.toString());
 				// Log.d("activity", taskInfo.get(1).topActivity.toString());
 				if (!db.getWhiteListPackages().contains(launcher)
@@ -176,13 +179,7 @@ public class AppsMonitor extends Service {
 						// startActivity(intent);
 						// ≈–« ﬂ«‰ √”«” «·⁄„·Ì… »—‰«„Ã „”„ÊÕ ›ÌÂ ÌÃ» «·⁄Êœ… ≈·Ï
 						// «·»—‰«„Ã «·√’·Ì
-						Intent saveintent = AppsMonitor.this
-								.getPackageManager().getLaunchIntentForPackage(
-										taskInfo.get(0).baseActivity
-												.getPackageName());
-						saveintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-								| Intent.FLAG_ACTIVITY_NEW_TASK);
-						getApplication().startActivity(saveintent);
+
 						synchronized (view) {
 							if (currentState == MobileState.START_ALERT_MESSAGE) {
 
@@ -192,10 +189,6 @@ public class AppsMonitor extends Service {
 							}
 						}
 					} else {
-						Intent saveintent = new Intent(getBaseContext(),
-								UserActivity.class);
-						saveintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-						getApplication().startActivity(saveintent);
 						// Log.d("test", "test");
 						synchronized (view) {
 							if (currentState == MobileState.START_ALERT_MESSAGE) {

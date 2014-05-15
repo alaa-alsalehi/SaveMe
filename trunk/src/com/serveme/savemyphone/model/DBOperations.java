@@ -17,6 +17,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build.VERSION;
+import android.util.Log;
 
 public class DBOperations {
 
@@ -133,6 +134,7 @@ public class DBOperations {
 
 	public Set<Launcher> getWhiteListApps() {
 		if (whitelist == null) {
+			Log.v("whitelist", "created againt!");
 			whitelist = new HashSet<Launcher>();
 			SQLiteDatabase database = dbhandler.getReadableDatabase();
 			Cursor cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null,
@@ -140,6 +142,7 @@ public class DBOperations {
 			// loop through all rows and add it to white list
 			if (cursor.moveToFirst()) {
 				if (pe.isSDCardMounted()) {
+					Log.d("SDCard Receiver", "added");
 					do {
 						String packageName = cursor.getString((cursor
 								.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
@@ -147,8 +150,10 @@ public class DBOperations {
 								.getColumnIndexOrThrow(DB_KEYS.KEY_ACTIVITY)));
 						Launcher lanucher = new Launcher(packageName, activity);
 						whitelist.add(lanucher);
+						Log.v("package", packageName);
 					} while (cursor.moveToNext());
 				} else {
+					Log.d("SDCard Receiver", "removed");
 					do {
 						String packageName = cursor.getString((cursor
 								.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));

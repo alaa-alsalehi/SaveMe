@@ -27,7 +27,7 @@ import android.widget.ToggleButton;
 public class AppsListAdapter extends BaseAdapter {
 
 	private Context context;
-	//private final ImageLoader imageloader = new ImageLoader();
+	// private final ImageLoader imageloader = new ImageLoader();
 	private List<ResolveInfo> aList = null;
 	private Set<Launcher> whitelist = null;
 	private static boolean[] status;
@@ -43,10 +43,14 @@ public class AppsListAdapter extends BaseAdapter {
 		whitelist = db.getWhiteListApps(); // allowed applications
 		status = new boolean[aList.size()]; // to keep enable/disable status
 		inflater = LayoutInflater.from(context);
-		Collections.sort(aList,new ResolveInfo.DisplayNameComparator(context.getPackageManager()));
+		Collections.sort(
+				aList,
+				new ResolveInfo.DisplayNameComparator(context
+						.getPackageManager()));
 		for (Iterator<ResolveInfo> it = aList.iterator(); it.hasNext();) {
 			ResolveInfo rinfo = it.next();
-			if (rinfo.activityInfo.packageName.equals("com.serveme.savemyphone")) {
+			if (rinfo.activityInfo.packageName
+					.equals("com.serveme.savemyphone")) {
 				it.remove();
 			}
 		}
@@ -72,7 +76,8 @@ public class AppsListAdapter extends BaseAdapter {
 	public View getView(final int position, View convertView, ViewGroup parent) {
 
 		final ResolveInfo appinfo = aList.get(position);
-		final Launcher launcher = new Launcher(appinfo.activityInfo.packageName, appinfo.activityInfo.name);
+		final Launcher launcher = new Launcher(
+				appinfo.activityInfo.packageName, appinfo.activityInfo.name);
 
 		// more performance for ListView to use Holder Pattern
 		ViewHolder viewHolder;
@@ -83,7 +88,8 @@ public class AppsListAdapter extends BaseAdapter {
 			viewHolder = new ViewHolder();
 			viewHolder.name = (TextView) convertView.findViewById(R.id.name);
 			viewHolder.icon = (ImageView) convertView.findViewById(R.id.icon);
-			viewHolder.tg = (ToggleButton) convertView.findViewById(R.id.enable_disable);
+			viewHolder.tg = (ToggleButton) convertView
+					.findViewById(R.id.enable_disable);
 			convertView.setTag(viewHolder); // first you set Tag to get it later
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
@@ -111,13 +117,21 @@ public class AppsListAdapter extends BaseAdapter {
 			}
 		});
 
-		viewHolder.name.setText(appinfo.loadLabel((context.getPackageManager())));
-		Drawable img = appinfo.loadIcon(context.getPackageManager());
-    	int imagesize = (int) context.getResources().getDimension(R.dimen.image_size);
-		img.setBounds(0, 0, imagesize, imagesize);
-		 viewHolder.icon.setImageDrawable(img);
-		//imageloader.load(viewHolder.icon, appinfo, context);
-		if (whitelist.contains(launcher)) {	status[position] = true; }
+		viewHolder.name
+				.setText(appinfo.loadLabel((context.getPackageManager())));
+		try {
+			Drawable img = appinfo.loadIcon(context.getPackageManager());
+			int imagesize = (int) context.getResources().getDimension(
+					R.dimen.image_size);
+			img.setBounds(0, 0, imagesize, imagesize);
+			viewHolder.icon.setImageDrawable(img);
+		} catch (OutOfMemoryError e) {//large images
+			// TODO: handle exception
+		}
+		// imageloader.load(viewHolder.icon, appinfo, context);
+		if (whitelist.contains(launcher)) {
+			status[position] = true;
+		}
 		viewHolder.tg.setChecked(status[position]);
 
 		return convertView;
