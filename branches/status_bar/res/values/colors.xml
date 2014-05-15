@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <color name="actionbar_background">#FF274A5E</color>
+    <color name="actionbar_tab">#FF274A5E</color>
+    <color name="listview_header">#77274A5E</color>
+</resources>
