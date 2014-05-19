@@ -1,9 +1,6 @@
 package com.serveme.savemyphone.view;
 
 import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
-import java.math.BigInteger;
-import java.security.SecureRandom;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.mail.CodeVerifier;
 import com.serveme.savemyphone.mail.MailSender;
@@ -28,7 +25,6 @@ public class RecoveryActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.recovery_activity);
-		MailSender m = new MailSender(RecoveryActivity.this);
 
 		final EditText input = (EditText) findViewById(R.id.editText);
 		final Button okBtn = (Button) findViewById(R.id.ok);
@@ -50,6 +46,12 @@ public class RecoveryActivity extends Activity {
 				finish();
 			}
 		});
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		new MailSender(RecoveryActivity.this);
 	}
 
 	public void changePassword() {
