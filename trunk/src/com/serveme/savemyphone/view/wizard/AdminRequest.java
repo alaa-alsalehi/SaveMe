@@ -21,10 +21,9 @@ import com.serveme.savemyphone.view.utils.ActivitiesController;
 public class AdminRequest extends ActionBarActivity {
 
 	private final int REQUEST_ENABLE = 1;
-	
+
 	private ActivitiesController ac;
-	private DevicePolicyManager devicePolicyManager;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,19 +37,28 @@ public class AdminRequest extends ActionBarActivity {
 		grantPermissionButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-				ComponentName adminComponent = new ComponentName(AdminRequest.this, AdminReciver.class);
-				MyTracker.fireButtonPressedEvent(AdminRequest.this, "request_admin_permission");
+				DevicePolicyManager devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+				ComponentName adminComponent = new ComponentName(
+						AdminRequest.this, AdminReciver.class);
+				MyTracker.fireButtonPressedEvent(AdminRequest.this,
+						"request_admin_permission");
 				if (!devicePolicyManager.isAdminActive(adminComponent)) {
-					Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
-					intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN,	adminComponent);
-					intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, getResources().getString(R.string.lock_permission_request));
-					intent.putExtra("force-locked",	DeviceAdminInfo.USES_POLICY_FORCE_LOCK);
+					Intent intent = new Intent(
+							DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+					intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN,
+							adminComponent);
+					intent.putExtra(
+							DevicePolicyManager.EXTRA_ADD_EXPLANATION,
+							getResources().getString(
+									R.string.lock_permission_request));
+					intent.putExtra("force-locked",
+							DeviceAdminInfo.USES_POLICY_FORCE_LOCK);
 					intent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
 					startActivityForResult(intent, REQUEST_ENABLE);
 				} else {
-					finish();			
-					devicePolicyManager.lockNow(); //·· √ﬂœ „‰ √‰ «·„” Œœ„ ÂÊ ’«Õ» «·ÃÂ«“
+					finish();
+					devicePolicyManager.lockNow(); // ·· √ﬂœ „‰ √‰ «·„” Œœ„ ÂÊ
+													// ’«Õ» «·ÃÂ«“
 					ac.getActivitiesFlow();
 				}
 			}
@@ -75,12 +83,16 @@ public class AdminRequest extends ActionBarActivity {
 		switch (requestCode) {
 		case REQUEST_ENABLE:
 			if (resultCode == Activity.RESULT_OK) {
-				finish();			
-				devicePolicyManager.lockNow(); //·· √ﬂœ „‰ √‰ «·„” Œœ„ ÂÊ ’«Õ» «·ÃÂ«“
+				finish();
+				DevicePolicyManager devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+				devicePolicyManager.lockNow(); // ·· √ﬂœ „‰ √‰ «·„” Œœ„ ÂÊ ’«Õ»
+												// «·ÃÂ«“
 				ac.getActivitiesFlow();
-				MyTracker.fireButtonPressedEvent(AdminRequest.this, "admin_permission_done");
+				MyTracker.fireButtonPressedEvent(AdminRequest.this,
+						"admin_permission_done");
 			} else {
-				MyTracker.fireButtonPressedEvent(AdminRequest.this, "admin_permission_cancelled");
+				MyTracker.fireButtonPressedEvent(AdminRequest.this,
+						"admin_permission_cancelled");
 			}
 			return;
 		}
