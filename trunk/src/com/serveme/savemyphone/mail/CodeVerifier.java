@@ -26,35 +26,47 @@ import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.service.AppsMonitor;
 import com.serveme.savemyphone.view.RecoveryActivity;
+import com.serveme.savemyphone.view.utils.Authenticator;
 
-public class MailSender implements Response.Listener<String>,
+public class CodeVerifier implements Response.Listener<String>,
 		Response.ErrorListener {
 
 	private RecoveryActivity recoveryActivity;
 
-	public MailSender(RecoveryActivity recoveryActivity) {
+	public CodeVerifier(RecoveryActivity recoveryActivity, String code) {
 		this.recoveryActivity = recoveryActivity;
 		RequestQueue mRequestQueue;
 
 		mRequestQueue = Volley.newRequestQueue(recoveryActivity);
 		String email = new PrefEditor(recoveryActivity).getRecoveryEmail();
 		StringRequest jr = new StringRequest(Request.Method.GET,
-				"http://saveme-verfication.appspot.com/GetConfirmationCode?email="
-						+ email, this, this);
+				"http://saveme-verfication.appspot.com/VerifyConfirmationCode?email="
+						+ email + "&code=" + code, this, this);
 
 		mRequestQueue.add(jr);
 	}
 
 	@Override
 	public void onResponse(String result) {
-		Toast.makeText(recoveryActivity, result, Toast.LENGTH_LONG).show();
+		String message = null;
+		if (result.equals("success")) {
+			message = recoveryActivity.getResources().getString(
+					R.string.recovery_activity_success_dialoge);
+			recoveryActivity.changePassword();
+		} else if (result.equals("fail")) {
+			message = recoveryActivity.getResources().getString(
+					R.string.recovery_activity_failure_dialoge);
+		} else {
+			message = "Oooops " + result;
+		}
+
+		Toast.makeText(recoveryActivity, message, Toast.LENGTH_LONG).show();
 	}
 
 	@Override
 	public void onErrorResponse(VolleyError error) {
 		Toast.makeText(recoveryActivity, R.string.network_failure,
 				Toast.LENGTH_LONG).show();
-		recoveryActivity.finish();
 		Tracker tracker = EasyTracker.getInstance(recoveryActivity);
 		tracker.send(MapBuilder.createException(
 				new AnalyticsExceptionParser().getDescription(Thread

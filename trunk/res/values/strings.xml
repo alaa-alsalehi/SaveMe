@@ -26,7 +26,8 @@
     <string name="email_message_part1">"Hi,\n\nThis is your temporary password: "</string>
     <string name="email_message_part2">"\n\nNote: You can use it to unlock Save Me while you didn't closed the recovery screen\nIn case you have closed the recovery screen you need to open it againt and wait until new temporary password sent to you!\nAfter that you can make a new pattern and continue to use your apps\n\nRegards\nServe Me Team"</string>
 	<string name="recovery_activity_textview">We will send a message to your email with a temporary password \nNote: if you close this screen, the older temporary password will become invalid</string>
-	<string name="recovery_activity_success_dialoge">Message has been sent to your email with a temporary password</string>
-	<string name="recovery_activity_failure_dialoge">Message sending failed .. check your internet connection then try again</string>
+	<string name="recovery_activity_success_dialoge">Right Code enter Your pattern</string>
+	<string name="recovery_activity_failure_dialoge">Error 1: verify code is wrong please check your email and reenter the code</string>
+	<string name="network_failure">Error 2: Message sending failed .. check your internet connection then try again</string>
 	
 </resources>

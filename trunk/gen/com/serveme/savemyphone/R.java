@@ -1335,6 +1335,7 @@ containing a value of this type.
         public static final int lock_permission_request_help=0x7f07002c;
         public static final int lock_permission_title=0x7f07002b;
         public static final int mail_subject=0x7f070047;
+        public static final int network_failure=0x7f07004d;
         public static final int no_thanks=0x7f070012;
         public static final int password_request_help=0x7f070034;
         public static final int pattern_settings_category=0x7f07003d;
