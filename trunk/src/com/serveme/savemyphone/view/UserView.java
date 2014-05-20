@@ -93,24 +93,14 @@ public class UserView extends FrameLayout {
 	@Override
 	protected void onAttachedToWindow() {
 		super.onAttachedToWindow();
-		ga.notifyDataSetChanged();
+		appsinfolist.clear();
+		appsinfolist.addAll(db.getWhiteListApps());
+		ga.notifyDataSetInvalidated();
 		MyTracker.getUncaughtExceptionHandler();
-		getContext().registerReceiver(refreshList,
-				new IntentFilter("refresh_white_list"));
 	}
 
 	@Override
 	protected void onDetachedFromWindow() {
 		super.onDetachedFromWindow();
-		getContext().unregisterReceiver(refreshList);
 	}
-
-	private final BroadcastReceiver refreshList = new BroadcastReceiver() {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			appsinfolist.clear();
-			appsinfolist.addAll(db.getWhiteListApps());
-			ga.notifyDataSetInvalidated();
-		}
-	};
 }
