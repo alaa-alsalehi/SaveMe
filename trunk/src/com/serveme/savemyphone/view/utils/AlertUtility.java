@@ -1,17 +1,12 @@
 package com.serveme.savemyphone.view.utils;
 
-import com.serveme.savemyphone.R;
-import com.serveme.savemyphone.view.UserView;
-
-import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.PixelFormat;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
-import android.widget.TextView;
+
+import com.serveme.savemyphone.view.UserView;
 
 public class AlertUtility {
 

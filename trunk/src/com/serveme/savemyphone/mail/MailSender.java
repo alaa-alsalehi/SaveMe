@@ -1,30 +1,19 @@
 package com.serveme.savemyphone.mail;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
-
-import org.json.JSONObject;
-
-import android.content.Context;
-import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.Tracker;
-
 import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.preferences.PrefEditor;
-import com.serveme.savemyphone.service.AppsMonitor;
 import com.serveme.savemyphone.view.RecoveryActivity;
 
 public class MailSender implements Response.Listener<String>,

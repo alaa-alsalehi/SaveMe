@@ -73,6 +73,9 @@ android.support.v4.view.ViewPager$LayoutParams
 android.support.v4.view.ViewPager$LayoutParams: ViewPager$LayoutParams(android.content.Context,android.util.AttributeSet)
 android.support.v4.view.ViewPager$SavedState
 android.support.v4.view.ViewPager$SavedState: android.os.Parcelable$Creator CREATOR
+android.support.v4.widget.ContentLoadingProgressBar
+android.support.v4.widget.ContentLoadingProgressBar: ContentLoadingProgressBar(android.content.Context)
+android.support.v4.widget.ContentLoadingProgressBar: ContentLoadingProgressBar(android.content.Context,android.util.AttributeSet)
 android.support.v4.widget.DrawerLayout
 android.support.v4.widget.DrawerLayout: DrawerLayout(android.content.Context)
 android.support.v4.widget.DrawerLayout: DrawerLayout(android.content.Context,android.util.AttributeSet)
@@ -885,6 +888,15 @@ android.support.v7.widget.SearchView$SearchAutoComplete: SearchView$SearchAutoCo
 android.support.v7.widget.SearchView$SearchAutoComplete: SearchView$SearchAutoComplete(android.content.Context,android.util.AttributeSet,int)
 android.support.v7.widget.SearchView$SearchAutoComplete: void setSearchView(android.support.v7.widget.SearchView)
 android.support.v7.widget.SearchView$SearchAutoComplete: void setThreshold(int)
+com.android.volley.Request$Priority: com.android.volley.Request$Priority[] values()
+com.android.volley.Request$Priority: com.android.volley.Request$Priority valueOf(java.lang.String)
+com.android.volley.toolbox.NetworkImageView
+com.android.volley.toolbox.NetworkImageView: NetworkImageView(android.content.Context)
+com.android.volley.toolbox.NetworkImageView: NetworkImageView(android.content.Context,android.util.AttributeSet)
+com.android.volley.toolbox.NetworkImageView: NetworkImageView(android.content.Context,android.util.AttributeSet,int)
+com.android.volley.toolbox.NetworkImageView: void setImageUrl(java.lang.String,com.android.volley.toolbox.ImageLoader)
+com.android.volley.toolbox.NetworkImageView: void setDefaultImageResId(int)
+com.android.volley.toolbox.NetworkImageView: void setErrorImageResId(int)
 com.google.ads.Ad
 com.google.ads.Ad: boolean isReady()
 com.google.ads.Ad: void loadAd(com.google.ads.AdRequest)
@@ -3317,7 +3329,9 @@ com.serveme.savemyphone.R$id: int alp_textview_info
 com.serveme.savemyphone.R$id: int alp_view_lock_pattern
 com.serveme.savemyphone.R$id: int alp_viewgroup_footer
 com.serveme.savemyphone.R$id: int always
+com.serveme.savemyphone.R$id: int app_icon
 com.serveme.savemyphone.R$id: int app_list
+com.serveme.savemyphone.R$id: int app_name
 com.serveme.savemyphone.R$id: int beginning
 com.serveme.savemyphone.R$id: int btn
 com.serveme.savemyphone.R$id: int buttons_pane
@@ -3334,6 +3348,7 @@ com.serveme.savemyphone.R$id: int enable_disable
 com.serveme.savemyphone.R$id: int end
 com.serveme.savemyphone.R$id: int expand_activities_button
 com.serveme.savemyphone.R$id: int expanded_menu
+com.serveme.savemyphone.R$id: int grid_layout
 com.serveme.savemyphone.R$id: int grid_view
 com.serveme.savemyphone.R$id: int home
 com.serveme.savemyphone.R$id: int homeAsUp
@@ -3375,6 +3390,7 @@ com.serveme.savemyphone.R$id: int tabMode
 com.serveme.savemyphone.R$id: int textView
 com.serveme.savemyphone.R$id: int title
 com.serveme.savemyphone.R$id: int top_action_bar
+com.serveme.savemyphone.R$id: int unlock
 com.serveme.savemyphone.R$id: int up
 com.serveme.savemyphone.R$id: int useLogo
 com.serveme.savemyphone.R$id: int withText
@@ -3406,6 +3422,7 @@ com.serveme.savemyphone.R$layout: int abc_list_menu_item_radio
 com.serveme.savemyphone.R$layout: int abc_popup_menu_item_layout
 com.serveme.savemyphone.R$layout: int abc_search_dropdown_item_icons_2line
 com.serveme.savemyphone.R$layout: int abc_search_view
+com.serveme.savemyphone.R$layout: int action_bar
 com.serveme.savemyphone.R$layout: int alp_lock_pattern_activity
 com.serveme.savemyphone.R$layout: int alp_lock_pattern_activity_land
 com.serveme.savemyphone.R$layout: int alp_lock_pattern_view
@@ -3482,6 +3499,7 @@ com.serveme.savemyphone.R$string: int lock_permission_request
 com.serveme.savemyphone.R$string: int lock_permission_request_help
 com.serveme.savemyphone.R$string: int lock_permission_title
 com.serveme.savemyphone.R$string: int mail_subject
+com.serveme.savemyphone.R$string: int network_failure
 com.serveme.savemyphone.R$string: int no_thanks
 com.serveme.savemyphone.R$string: int password_request_help
 com.serveme.savemyphone.R$string: int pattern_settings_category
@@ -3777,6 +3795,10 @@ com.serveme.savemyphone.view.SettingsActivity
 com.serveme.savemyphone.view.SettingsActivity: SettingsActivity()
 com.serveme.savemyphone.view.UserActivity
 com.serveme.savemyphone.view.UserActivity: UserActivity()
+com.serveme.savemyphone.view.UserView
+com.serveme.savemyphone.view.UserView: UserView(android.content.Context)
+com.serveme.savemyphone.view.UserView: UserView(android.content.Context,android.util.AttributeSet)
+com.serveme.savemyphone.view.UserView: UserView(android.content.Context,android.util.AttributeSet,int)
 com.serveme.savemyphone.view.wizard.AdminRequest
 com.serveme.savemyphone.view.wizard.AdminRequest: AdminRequest()
 com.serveme.savemyphone.view.wizard.HelpActivity

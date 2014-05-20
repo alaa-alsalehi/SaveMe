@@ -22,7 +22,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
@@ -204,7 +203,6 @@ public class MainActivity extends ActionBarActivity {
 		case REQ_ENTER_PATTERN: {
 			switch (resultCode) {
 			case RESULT_OK:
-				Log.v("result", "passed");
 				intialize();
 				break;
 			case RESULT_CANCELED:

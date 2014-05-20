@@ -3,30 +3,26 @@ package com.serveme.savemyphone.view;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.serveme.savemyphone.R;
-import com.serveme.savemyphone.control.GridAdapter;
-import com.serveme.savemyphone.model.DBOperations;
-import com.serveme.savemyphone.model.Launcher;
-import com.serveme.savemyphone.service.AppsMonitor;
-import com.serveme.savemyphone.util.MyTracker;
-
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
+
+import com.serveme.savemyphone.R;
+import com.serveme.savemyphone.control.GridAdapter;
+import com.serveme.savemyphone.model.DBOperations;
+import com.serveme.savemyphone.model.Launcher;
+import com.serveme.savemyphone.util.MyTracker;
 
 public class UserView extends FrameLayout {
 
@@ -75,7 +71,6 @@ public class UserView extends FrameLayout {
 							launcher.getActivity());
 					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					getContext().startActivity(i);
-					Log.d("test", "test");
 					MyTracker.fireButtonPressedEvent(getContext(), "run_app");
 				} catch (ActivityNotFoundException e) {
 					Toast.makeText(getContext(), "Application not Installed",
@@ -116,7 +111,6 @@ public class UserView extends FrameLayout {
 			appsinfolist.clear();
 			appsinfolist.addAll(db.getWhiteListApps());
 			ga.notifyDataSetInvalidated();
-			Log.v("recived", "recived");
 		}
 	};
 }

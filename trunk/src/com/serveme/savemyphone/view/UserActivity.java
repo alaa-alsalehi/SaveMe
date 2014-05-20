@@ -1,9 +1,12 @@
 package com.serveme.savemyphone.view;
 
 import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.google.ads.Ad;
 import com.google.ads.AdListener;
@@ -11,32 +14,10 @@ import com.google.ads.AdRequest;
 import com.google.ads.AdRequest.ErrorCode;
 import com.google.ads.InterstitialAd;
 import com.serveme.savemyphone.R;
-import com.serveme.savemyphone.control.GridAdapter;
-import com.serveme.savemyphone.model.DBOperations;
-import com.serveme.savemyphone.model.Launcher;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.service.AppsMonitor;
 import com.serveme.savemyphone.util.MyTracker;
 import com.serveme.savemyphone.view.utils.Authenticator;
-
-import android.content.ActivityNotFoundException;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.GridView;
 
 public class UserActivity extends ActionBarActivity implements AdListener {
 
@@ -124,13 +105,6 @@ public class UserActivity extends ActionBarActivity implements AdListener {
 		}// REQ_ENTER_PATTERN
 		}
 	}
-
-	private final BroadcastReceiver bcr = new BroadcastReceiver() {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			UserActivity.this.finish();
-		}
-	};
 
 	@Override
 	public void onDismissScreen(Ad arg0) {
