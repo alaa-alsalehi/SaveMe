@@ -27,7 +27,7 @@ import com.serveme.savemyphone.model.Launcher;
 import com.serveme.savemyphone.view.utils.AlertUtility;
 
 public class AppsMonitor extends Service {
-	private static final int UPDATE_INTERVAL = 200;
+	private static final int UPDATE_INTERVAL = 39;
 	private Timer timer = new Timer();
 	private ActivityManager am;
 	private DBOperations db;
@@ -60,8 +60,8 @@ public class AppsMonitor extends Service {
 		final WindowManager.LayoutParams param = AlertUtility.getParam();
 		view = AlertUtility.getView(AppsMonitor.this);
 		handler = new Handler() {
-			Toast toast = Toast.makeText(AppsMonitor.this,
-					R.string.prevent_message, Toast.LENGTH_LONG);
+			// Toast toast = Toast.makeText(AppsMonitor.this,
+			// R.string.prevent_message, Toast.LENGTH_LONG);
 
 			@Override
 			public void handleMessage(Message msg) {
@@ -88,7 +88,7 @@ public class AppsMonitor extends Service {
 																e), false)
 										.build());
 							}
-							toast.show();
+							// toast.show();
 							setCurrentState(MobileState.START_ALERT_MESSAGE);
 						}
 					}
