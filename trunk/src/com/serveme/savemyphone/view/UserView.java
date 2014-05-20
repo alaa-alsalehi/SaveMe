@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.ActivityNotFoundException;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
