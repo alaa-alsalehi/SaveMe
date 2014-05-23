@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.serveme.savemyphone"
     android:permission="android.permission.RECEIVE_BOOT_COMPLETED"
-    android:versionCode="17"
+    android:versionCode="18"
     android:versionName="2.2.2" android:installLocation="internalOnly">
 
     <!-- Minimum and target SDK -->
