@@ -3160,6 +3160,7 @@ com.serveme.savemyphone.R$color: int abc_search_url_text_pressed
 com.serveme.savemyphone.R$color: int abc_search_url_text_selected
 com.serveme.savemyphone.R$color: int actionbar_background
 com.serveme.savemyphone.R$color: int actionbar_tab
+com.serveme.savemyphone.R$color: int actionbar_user_background
 com.serveme.savemyphone.R$color: int alp_pattern_path_dark
 com.serveme.savemyphone.R$color: int alp_pattern_path_light
 com.serveme.savemyphone.R$color: int listview_header

@@ -3,7 +3,7 @@
     package="com.serveme.savemyphone"
     android:permission="android.permission.RECEIVE_BOOT_COMPLETED"
     android:versionCode="17"
-    android:versionName="2.2.1" android:installLocation="internalOnly">
+    android:versionName="2.2.2" android:installLocation="internalOnly">
 
     <!-- Minimum and target SDK -->
     <uses-sdk

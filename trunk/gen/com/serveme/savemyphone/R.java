@@ -839,15 +839,16 @@ containing a value of this type.
         public static final int ga_reportUncaughtExceptions=0x7f0a000a;
     }
     public static final class color {
-        public static final int abc_search_url_text_holo=0x7f0b0008;
+        public static final int abc_search_url_text_holo=0x7f0b0009;
         public static final int abc_search_url_text_normal=0x7f0b0000;
         public static final int abc_search_url_text_pressed=0x7f0b0002;
         public static final int abc_search_url_text_selected=0x7f0b0001;
         public static final int actionbar_background=0x7f0b0005;
-        public static final int actionbar_tab=0x7f0b0006;
+        public static final int actionbar_tab=0x7f0b0007;
+        public static final int actionbar_user_background=0x7f0b0006;
         public static final int alp_pattern_path_dark=0x7f0b0004;
         public static final int alp_pattern_path_light=0x7f0b0003;
-        public static final int listview_header=0x7f0b0007;
+        public static final int listview_header=0x7f0b0008;
     }
     public static final class dimen {
         /**  Default height of an action bar. 
