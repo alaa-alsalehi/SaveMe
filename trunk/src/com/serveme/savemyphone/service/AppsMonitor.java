@@ -15,7 +15,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Toast;
+//import android.widget.Toast;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
@@ -175,7 +175,13 @@ public class AppsMonitor extends Service {
 						// startActivity(intent);
 						// ≈–« ﬂ«‰ √”«” «·⁄„·Ì… »—‰«„Ã „”„ÊÕ ›ÌÂ ÌÃ» «·⁄Êœ… ≈·Ï
 						// «·»—‰«„Ã «·√’·Ì
-
+						Intent saveintent = AppsMonitor.this
+								.getPackageManager().getLaunchIntentForPackage(
+										taskInfo.get(0).baseActivity
+												.getPackageName());
+						saveintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+								| Intent.FLAG_ACTIVITY_NEW_TASK);
+						getApplication().startActivity(saveintent);
 						synchronized (view) {
 							if (currentState == MobileState.START_ALERT_MESSAGE) {
 
