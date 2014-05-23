@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 
 import com.serveme.savemyphone.model.DBOperations;
 
@@ -19,7 +18,6 @@ public class RemovePackageReceiver extends BroadcastReceiver {
 			dbOperations.deleteApp(packageName);
 			dbOperations.reCreateWhiteList();
 		}
-		Log.d("intent", intent.getBooleanExtra(Intent.EXTRA_REPLACING, false)+" intent");
 	}
 
 }
