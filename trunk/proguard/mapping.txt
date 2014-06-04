@@ -10827,28 +10827,28 @@ com.serveme.savemyphone.service.AppsMonitor -> com.serveme.savemyphone.service.A
     com.serveme.savemyphone.model.DBOperations db -> d
     int counter -> a
     android.os.Handler handler -> e
-    android.view.View view -> f
-    com.serveme.savemyphone.service.AppsMonitor$MobileState currentState -> g
-    com.serveme.savemyphone.service.AppsMonitor$MobileState previousState -> h
-    48:48:android.os.IBinder onBind(android.content.Intent) -> onBind
-    54:125:int onStartCommand(android.content.Intent,int,int) -> onStartCommand
-    130:235:void doGetRunningApp() -> a
-    238:240:void setCurrentState(com.serveme.savemyphone.service.AppsMonitor$MobileState) -> a
-    244:260:void onDestroy() -> onDestroy
-    37:37:android.view.View access$0(com.serveme.savemyphone.service.AppsMonitor) -> a
+    com.serveme.savemyphone.service.AppsMonitor$MobileState currentState -> f
+    com.serveme.savemyphone.service.AppsMonitor$MobileState previousState -> g
+    47:47:android.os.IBinder onBind(android.content.Intent) -> onBind
+    52:125:int onStartCommand(android.content.Intent,int,int) -> onStartCommand
+    130:236:void doGetRunningApp() -> a
+    239:241:void setCurrentState(com.serveme.savemyphone.service.AppsMonitor$MobileState) -> a
+    245:262:void onDestroy() -> onDestroy
+    42:42:com.serveme.savemyphone.service.AppsMonitor$MobileState access$0(com.serveme.savemyphone.service.AppsMonitor) -> a
     43:43:com.serveme.savemyphone.service.AppsMonitor$MobileState access$1(com.serveme.savemyphone.service.AppsMonitor) -> b
-    44:44:com.serveme.savemyphone.service.AppsMonitor$MobileState access$2(com.serveme.savemyphone.service.AppsMonitor) -> c
-    237:237:void access$3(com.serveme.savemyphone.service.AppsMonitor,com.serveme.savemyphone.service.AppsMonitor$MobileState) -> a
-    32:32:android.app.ActivityManager access$4(com.serveme.savemyphone.service.AppsMonitor) -> d
-    33:33:com.serveme.savemyphone.model.DBOperations access$5(com.serveme.savemyphone.service.AppsMonitor) -> e
-    36:36:android.os.Handler access$6(com.serveme.savemyphone.service.AppsMonitor) -> f
+    238:238:void access$2(com.serveme.savemyphone.service.AppsMonitor,com.serveme.savemyphone.service.AppsMonitor$MobileState) -> a
+    32:32:android.app.ActivityManager access$3(com.serveme.savemyphone.service.AppsMonitor) -> c
+    33:33:com.serveme.savemyphone.model.DBOperations access$4(com.serveme.savemyphone.service.AppsMonitor) -> d
+    36:36:android.os.Handler access$5(com.serveme.savemyphone.service.AppsMonitor) -> e
 com.serveme.savemyphone.service.AppsMonitor$1 -> com.serveme.savemyphone.service.a:
     com.serveme.savemyphone.service.AppsMonitor this$0 -> a
-    android.view.WindowManager$LayoutParams val$param -> b
-    68:121:void handleMessage(android.os.Message) -> handleMessage
+    android.view.View val$view -> b
+    android.view.WindowManager$LayoutParams val$param -> c
+    67:121:void handleMessage(android.os.Message) -> handleMessage
 com.serveme.savemyphone.service.AppsMonitor$2 -> com.serveme.savemyphone.service.b:
     com.serveme.savemyphone.service.AppsMonitor this$0 -> a
-    134:233:void run() -> run
+    android.view.View val$view -> b
+    135:234:void run() -> run
 com.serveme.savemyphone.service.AppsMonitor$MobileState -> com.serveme.savemyphone.service.c:
     com.serveme.savemyphone.service.AppsMonitor$MobileState START_APP -> a
     com.serveme.savemyphone.service.AppsMonitor$MobileState ALLOW_APP -> b
@@ -10955,8 +10955,8 @@ com.serveme.savemyphone.view.utils.ActivitiesController -> com.serveme.savemypho
     35:61:void getActivitiesFlow() -> a
 com.serveme.savemyphone.view.utils.AlertUtility -> com.serveme.savemyphone.view.a.b:
     android.view.View thisView -> a
-    16:22:android.view.WindowManager$LayoutParams getParam() -> a
-    26:31:android.view.View getView(android.content.Context) -> a
+    17:23:android.view.WindowManager$LayoutParams getParam() -> a
+    27:31:android.view.View getView(android.content.Context) -> a
 com.serveme.savemyphone.view.utils.Authenticator -> com.serveme.savemyphone.view.a.c:
     android.app.Activity context -> a
     com.serveme.savemyphone.preferences.PrefEditor pe -> b

@@ -34,7 +34,6 @@ public class AppsMonitor extends Service {
 	// private ComponentName lastallowedapp;
 	int counter = 1;
 	private Handler handler;
-	private View view;
 
 	private enum MobileState {
 		START_APP, ALLOW_APP, UNALLOW_APP, ANDROID, USER_ACTIVITY, UNALLOW_APP_STARTED_BY_ALLOW_APP, START_ALERT_MESSAGE, END_ALERT_MESSAGE
@@ -48,7 +47,6 @@ public class AppsMonitor extends Service {
 		return null;
 	}
 
-	@SuppressLint("HandlerLeak")
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		currentState = MobileState.USER_ACTIVITY;
@@ -58,7 +56,8 @@ public class AppsMonitor extends Service {
 		// view = LayoutInflater.from(AppsMonitor.this).inflate(
 		// R.layout.password_request, null);
 		final WindowManager.LayoutParams param = AlertUtility.getParam();
-		view = AlertUtility.getView(AppsMonitor.this);
+		final View view = AlertUtility.getView(AppsMonitor.this);
+
 		handler = new Handler() {
 			// Toast toast = Toast.makeText(AppsMonitor.this,
 			// R.string.prevent_message, Toast.LENGTH_LONG);
@@ -70,6 +69,7 @@ public class AppsMonitor extends Service {
 				if (msg.what == 0) {
 					synchronized (view) {
 						if (currentState == MobileState.UNALLOW_APP) {
+
 							try {
 								wmgr.addView(view, param);
 							} catch (Exception e) {
@@ -95,8 +95,8 @@ public class AppsMonitor extends Service {
 				} else if (msg.what == 1) {
 					synchronized (view) {
 						if (currentState == MobileState.START_ALERT_MESSAGE) {
+							setCurrentState(MobileState.END_ALERT_MESSAGE);
 							try {
-								setCurrentState(MobileState.END_ALERT_MESSAGE);
 								wmgr.removeView(view);
 							} catch (Exception e) {
 								Tracker tracker = EasyTracker
@@ -127,6 +127,7 @@ public class AppsMonitor extends Service {
 	}
 
 	private void doGetRunningApp() {
+		final View view = AlertUtility.getView(AppsMonitor.this);
 		timer.scheduleAtFixedRate(new TimerTask() {
 
 			public void run() {
@@ -249,6 +250,7 @@ public class AppsMonitor extends Service {
 		handler.removeMessages(0);
 		handler.removeMessages(1);
 		// ≈“«·… «·‘«‘… «·„”«⁄œ… ·÷„«‰ ⁄œ„ ÊÃÊœ „‘«ﬂ·
+		final View view = AlertUtility.getView(AppsMonitor.this);
 		final WindowManager wmgr = (WindowManager) getApplicationContext()
 				.getSystemService(Context.WINDOW_SERVICE);
 		try {

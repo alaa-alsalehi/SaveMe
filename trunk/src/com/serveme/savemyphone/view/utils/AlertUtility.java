@@ -1,6 +1,7 @@
 package com.serveme.savemyphone.view.utils;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -26,10 +27,8 @@ public class AlertUtility {
 		if (thisView == null) {
 			UserView view = new UserView(context);
 			thisView = view;
-			return view;
-		} else {
-			return thisView;
 		}
+		return thisView;
 	}
 
 }

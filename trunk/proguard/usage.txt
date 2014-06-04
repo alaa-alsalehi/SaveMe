@@ -4566,7 +4566,7 @@ com.serveme.savemyphone.view.UserActivity:
 com.serveme.savemyphone.view.utils.ActivitiesController:
     private static final int REQ_ENTER_PATTERN
 com.serveme.savemyphone.view.utils.AlertUtility:
-    11:11:public AlertUtility()
+    12:12:public AlertUtility()
 com.serveme.savemyphone.view.wizard.PasswordRequest:
     public static final int REQ_CREATE_PATTERN
     public static final int REQ_CREATE_PASSWORD
