@@ -10715,7 +10715,7 @@ com.serveme.ads.AdMobListener -> com.serveme.a.a:
     42:42:void onPresentScreen(com.google.ads.Ad) -> onPresentScreen
     46:50:void onReceiveAd(com.google.ads.Ad) -> onReceiveAd
 com.serveme.analytics.AnalyticsExceptionParser -> com.serveme.b.a:
-    21:53:java.lang.String getDescription(java.lang.String,java.lang.Throwable) -> a
+    19:52:java.lang.String getDescription(java.lang.String,java.lang.Throwable) -> a
 com.serveme.app.AnalyticsApplication -> com.serveme.app.AnalyticsApplication:
     13:15:void onCreate() -> onCreate
     18:32:void changeExceptionParser(android.content.Context) -> a
