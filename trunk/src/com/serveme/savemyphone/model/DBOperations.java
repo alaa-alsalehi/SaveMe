@@ -132,78 +132,95 @@ public class DBOperations {
 	}
 
 	public Set<Launcher> getWhiteListApps() {
-		if (whitelist == null) {
-			whitelist = new HashSet<Launcher>();
-			SQLiteDatabase database = dbhandler.getReadableDatabase();
-			Cursor cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null,
-					null, null, null, null, DB_KEYS.KEY_PKGNAME);
-			// loop through all rows and add it to white list
-			if (cursor.moveToFirst()) {
-				if (pe.isSDCardMounted()) {
-					do {
-						String packageName = cursor.getString((cursor
-								.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
-						String activity = cursor.getString((cursor
-								.getColumnIndexOrThrow(DB_KEYS.KEY_ACTIVITY)));
-						Launcher lanucher = new Launcher(packageName, activity);
-						whitelist.add(lanucher);
-					} while (cursor.moveToNext());
-				} else {
-					do {
-						String packageName = cursor.getString((cursor
-								.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
-						String activity = cursor.getString((cursor
-								.getColumnIndexOrThrow(DB_KEYS.KEY_ACTIVITY)));
-						if (!isInstalledOnSdCard(context, packageName)) {
+		synchronized (whitelist) {// Â–Â «·‰ﬁÿ… ÷—Ê—Ì… ﬂÊ‰‰« ‰ﬁÊ„ »«· ⁄«„· „⁄
+									// Â–« «·ﬂÊœ Ê«·ﬂÊœ ›Ì Õ–› «·»—«„Ã „‰ √ﬂÀ—
+									// „‰ ŒÌÿ
+			if (whitelist == null) {
+				whitelist = new HashSet<Launcher>();
+				SQLiteDatabase database = dbhandler.getReadableDatabase();
+				Cursor cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null,
+						null, null, null, null, DB_KEYS.KEY_PKGNAME);
+				// loop through all rows and add it to white list
+				if (cursor.moveToFirst()) {
+					if (pe.isSDCardMounted()) {
+						do {
+							String packageName = cursor
+									.getString((cursor
+											.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
+							String activity = cursor
+									.getString((cursor
+											.getColumnIndexOrThrow(DB_KEYS.KEY_ACTIVITY)));
 							Launcher lanucher = new Launcher(packageName,
 									activity);
 							whitelist.add(lanucher);
-						}
-					} while (cursor.moveToNext());
+						} while (cursor.moveToNext());
+					} else {
+						do {
+							String packageName = cursor
+									.getString((cursor
+											.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
+							String activity = cursor
+									.getString((cursor
+											.getColumnIndexOrThrow(DB_KEYS.KEY_ACTIVITY)));
+							if (!isInstalledOnSdCard(context, packageName)) {
+								Launcher lanucher = new Launcher(packageName,
+										activity);
+								whitelist.add(lanucher);
+							}
+						} while (cursor.moveToNext());
+					}
 				}
+				database.close();
 			}
-			database.close();
 		}
 		return whitelist;
 	}
 
 	public void reCreateWhiteList() {
-		if (whitelist != null) {
-			whitelist.clear();
-			whitelist = null;
-		}
-		if(whitelistPackages != null){
-			whitelistPackages.clear();
-			whitelistPackages = null;
+		synchronized (whitelist) {
+			if (whitelist != null) {
+				whitelist.clear();
+				whitelist = null;
+			}
+			if (whitelistPackages != null) {
+				whitelistPackages.clear();
+				whitelistPackages = null;
+			}
 		}
 	}
 
 	public Set<Launcher> getWhiteListPackages() {
-		if (whitelistPackages == null) {
-			whitelistPackages = new HashSet<Launcher>();
-			SQLiteDatabase database = dbhandler.getReadableDatabase();
-			Cursor cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null,
-					null, null, null, null, DB_KEYS.KEY_PKGNAME);
-			// loop through all rows and add it to white list
-			if (cursor.moveToFirst()) {
-				if(pe.isSDCardMounted()){
-					do {
-						String packageName = cursor.getString((cursor.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
-						Launcher lanucher = new Launcher(packageName, null);
-						whitelistPackages.add(lanucher);
-					} while (cursor.moveToNext());
-				} else {
-					do {
-						String packageName = cursor.getString((cursor
-								.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
-						if (!isInstalledOnSdCard(context, packageName)) {
+		synchronized (whitelist) {
+			if (whitelistPackages == null) {
+				whitelistPackages = new HashSet<Launcher>();
+				SQLiteDatabase database = dbhandler.getReadableDatabase();
+				Cursor cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null,
+						null, null, null, null, DB_KEYS.KEY_PKGNAME);
+				// loop through all rows and add it to white list
+				if (cursor.moveToFirst()) {
+					if (pe.isSDCardMounted()) {
+						do {
+							String packageName = cursor
+									.getString((cursor
+											.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
 							Launcher lanucher = new Launcher(packageName, null);
 							whitelistPackages.add(lanucher);
-						}
-					} while (cursor.moveToNext());
+						} while (cursor.moveToNext());
+					} else {
+						do {
+							String packageName = cursor
+									.getString((cursor
+											.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
+							if (!isInstalledOnSdCard(context, packageName)) {
+								Launcher lanucher = new Launcher(packageName,
+										null);
+								whitelistPackages.add(lanucher);
+							}
+						} while (cursor.moveToNext());
+					}
 				}
+				database.close();
 			}
-			database.close();
 		}
 		return whitelistPackages;
 	}
