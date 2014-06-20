@@ -5,9 +5,10 @@ import java.util.List;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.Tracker;
-import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.model.Launcher;
+import com.serveme.savemyphone.view.utils.AnalyticsExceptionParser;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ActivityInfo;

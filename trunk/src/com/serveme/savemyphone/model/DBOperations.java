@@ -3,11 +3,12 @@ package com.serveme.savemyphone.model;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.Tracker;
-import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.preferences.PrefEditor;
+import com.serveme.savemyphone.view.utils.AnalyticsExceptionParser;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -132,7 +133,7 @@ public class DBOperations {
 	}
 
 	public Set<Launcher> getWhiteListApps() {
-		synchronized (whitelist) {// Â–Â «·‰ﬁÿ… ÷—Ê—Ì… ﬂÊ‰‰« ‰ﬁÊ„ »«· ⁄«„· „⁄
+//		synchronized (whitelist) {// Â–Â «·‰ﬁÿ… ÷—Ê—Ì… ﬂÊ‰‰« ‰ﬁÊ„ »«· ⁄«„· „⁄
 									// Â–« «·ﬂÊœ Ê«·ﬂÊœ ›Ì Õ–› «·»—«„Ã „‰ √ﬂÀ—
 									// „‰ ŒÌÿ
 			if (whitelist == null) {
@@ -172,7 +173,7 @@ public class DBOperations {
 				}
 				database.close();
 			}
-		}
+//		}
 		return whitelist;
 	}
 

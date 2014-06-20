@@ -17,14 +17,15 @@ import android.view.View;
 import android.view.WindowManager;
 //import android.widget.Toast;
 
+
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.Tracker;
-import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.model.Launcher;
 import com.serveme.savemyphone.view.utils.AlertUtility;
+import com.serveme.savemyphone.view.utils.AnalyticsExceptionParser;
 
 public class AppsMonitor extends Service {
 	private static final int UPDATE_INTERVAL = 39;

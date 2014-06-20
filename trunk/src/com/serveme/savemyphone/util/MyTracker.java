@@ -6,7 +6,7 @@ import android.content.Context;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.ExceptionReporter;
 import com.google.analytics.tracking.android.MapBuilder;
-import com.serveme.analytics.AnalyticsExceptionParser;
+import com.serveme.savemyphone.view.utils.AnalyticsExceptionParser;
 
 
 public class MyTracker {

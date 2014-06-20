@@ -4,10 +4,11 @@ package com.serveme.savemyphone.view;
 
 import org.codechimp.apprater.AppRater;
 import org.codechimp.apprater.InCorrectMarketException;
+
 import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
+
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
-import com.serveme.ads.AdMobListener;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.control.AppsListAdapter;
 import com.serveme.savemyphone.model.DBOperations;
@@ -15,7 +16,9 @@ import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.service.AppsMonitor;
 import com.serveme.savemyphone.util.MyTracker;
 import com.serveme.savemyphone.view.utils.ActivitiesController;
+import com.serveme.savemyphone.view.utils.AdMobListener;
 import com.serveme.savemyphone.view.wizard.HelpActivity;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;

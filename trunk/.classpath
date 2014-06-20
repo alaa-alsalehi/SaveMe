@@ -8,5 +8,9 @@
 	<classpathentry exported="true" kind="lib" path="libs/java-mail/activation.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/java-mail/additionnal.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/java-mail/mail.jar"/>
+	<classpathentry kind="lib" path="libs/libGoogleAnalyticsServices.jar"/>
+	<classpathentry kind="lib" path="libs/volley.jar"/>
+	<classpathentry kind="lib" path="libs/GoogleAdMobAdsSdk-6.3.1.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/android-support-v7-appcompat"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

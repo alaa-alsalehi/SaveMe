@@ -19,21 +19,21 @@ public final class R {
 		public static final int aosp_drawable_indicator_code_lock_point_area_normal = 0x7f01006f;
 	}
 	public static final class bool {
-		public static final int alp_is_large_screen = 0x7f0a0006;
-		public static final int alp_pkey_display_stealth_mode_default = 0x7f0a0008;
-		public static final int alp_pkey_sys_auto_save_pattern_default = 0x7f0a0007;
+		public static final int alp_is_large_screen = 0x7f080006;
+		public static final int alp_pkey_display_stealth_mode_default = 0x7f080008;
+		public static final int alp_pkey_sys_auto_save_pattern_default = 0x7f080007;
 	}
 	public static final class color {
-		public static final int alp_pattern_path_dark = 0x7f0b0004;
-		public static final int alp_pattern_path_light = 0x7f0b0003;
+		public static final int alp_pattern_path_dark = 0x7f090004;
+		public static final int alp_pattern_path_light = 0x7f090003;
 	}
 	public static final class dimen {
-		public static final int alp_lockpatternview_size = 0x7f0c0011;
-		public static final int alp_separator_size = 0x7f0c0012;
-		public static final int aosp_dialog_fixed_height_major = 0x7f0c0015;
-		public static final int aosp_dialog_fixed_height_minor = 0x7f0c0016;
-		public static final int aosp_dialog_fixed_width_major = 0x7f0c0013;
-		public static final int aosp_dialog_fixed_width_minor = 0x7f0c0014;
+		public static final int alp_lockpatternview_size = 0x7f0a0011;
+		public static final int alp_separator_size = 0x7f0a0012;
+		public static final int aosp_dialog_fixed_height_major = 0x7f0a0015;
+		public static final int aosp_dialog_fixed_height_minor = 0x7f0a0016;
+		public static final int aosp_dialog_fixed_width_major = 0x7f0a0013;
+		public static final int aosp_dialog_fixed_width_minor = 0x7f0a0014;
 	}
 	public static final class drawable {
 		public static final int alp_btn_code_lock_default_holo_dark = 0x7f020058;
@@ -56,16 +56,16 @@ public final class R {
 		public static final int vertex = 0x7f02006d;
 	}
 	public static final class id {
-		public static final int alp_button_cancel = 0x7f090042;
-		public static final int alp_button_confirm = 0x7f090043;
-		public static final int alp_textview_info = 0x7f09003f;
-		public static final int alp_view_lock_pattern = 0x7f090041;
-		public static final int alp_viewgroup_footer = 0x7f090040;
+		public static final int alp_button_cancel = 0x7f070042;
+		public static final int alp_button_confirm = 0x7f070043;
+		public static final int alp_textview_info = 0x7f07003f;
+		public static final int alp_view_lock_pattern = 0x7f070041;
+		public static final int alp_viewgroup_footer = 0x7f070040;
 	}
 	public static final class integer {
-		public static final int alp_pkey_display_captcha_wired_dots_default = 0x7f0d0003;
-		public static final int alp_pkey_display_max_retry_default = 0x7f0d0002;
-		public static final int alp_pkey_display_min_wired_dots_default = 0x7f0d0001;
+		public static final int alp_pkey_display_captcha_wired_dots_default = 0x7f0b0003;
+		public static final int alp_pkey_display_max_retry_default = 0x7f0b0002;
+		public static final int alp_pkey_display_min_wired_dots_default = 0x7f0b0001;
 	}
 	public static final class layout {
 		public static final int alp_lock_pattern_activity = 0x7f030018;
@@ -76,45 +76,45 @@ public final class R {
 		public static final int alp_pmsg_connect_x_dots = 0x7f0e0000;
 	}
 	public static final class string {
-		public static final int alp_cmd_confirm = 0x7f07001a;
-		public static final int alp_cmd_continue = 0x7f07001b;
-		public static final int alp_cmd_forgot_pattern = 0x7f07001c;
-		public static final int alp_cmd_retry = 0x7f07001d;
-		public static final int alp_lockscreen_access_pattern_cell_added = 0x7f07001e;
-		public static final int alp_lockscreen_access_pattern_cleared = 0x7f07001f;
-		public static final int alp_lockscreen_access_pattern_detected = 0x7f070020;
-		public static final int alp_lockscreen_access_pattern_start = 0x7f070021;
-		public static final int alp_msg_connect_4dots = 0x7f070022;
-		public static final int alp_msg_draw_an_unlock_pattern = 0x7f070023;
-		public static final int alp_msg_draw_pattern_to_unlock = 0x7f070024;
-		public static final int alp_msg_pattern_recorded = 0x7f070025;
-		public static final int alp_msg_redraw_pattern_to_confirm = 0x7f070026;
-		public static final int alp_msg_release_finger_when_done = 0x7f070027;
-		public static final int alp_msg_try_again = 0x7f070028;
-		public static final int alp_msg_your_new_unlock_pattern = 0x7f070029;
-		public static final int alp_pkey_display_captcha_wired_dots = 0x7f070019;
-		public static final int alp_pkey_display_max_retry = 0x7f070018;
-		public static final int alp_pkey_display_min_wired_dots = 0x7f070017;
-		public static final int alp_pkey_display_stealth_mode = 0x7f070016;
-		public static final int alp_pkey_sys_auto_save_pattern = 0x7f070014;
-		public static final int alp_pkey_sys_encrypter_class = 0x7f070015;
-		public static final int alp_pkey_sys_pattern = 0x7f070013;
+		public static final int alp_cmd_confirm = 0x7f0c001a;
+		public static final int alp_cmd_continue = 0x7f0c001b;
+		public static final int alp_cmd_forgot_pattern = 0x7f0c001c;
+		public static final int alp_cmd_retry = 0x7f0c001d;
+		public static final int alp_lockscreen_access_pattern_cell_added = 0x7f0c001e;
+		public static final int alp_lockscreen_access_pattern_cleared = 0x7f0c001f;
+		public static final int alp_lockscreen_access_pattern_detected = 0x7f0c0020;
+		public static final int alp_lockscreen_access_pattern_start = 0x7f0c0021;
+		public static final int alp_msg_connect_4dots = 0x7f0c0022;
+		public static final int alp_msg_draw_an_unlock_pattern = 0x7f0c0023;
+		public static final int alp_msg_draw_pattern_to_unlock = 0x7f0c0024;
+		public static final int alp_msg_pattern_recorded = 0x7f0c0025;
+		public static final int alp_msg_redraw_pattern_to_confirm = 0x7f0c0026;
+		public static final int alp_msg_release_finger_when_done = 0x7f0c0027;
+		public static final int alp_msg_try_again = 0x7f0c0028;
+		public static final int alp_msg_your_new_unlock_pattern = 0x7f0c0029;
+		public static final int alp_pkey_display_captcha_wired_dots = 0x7f0c0019;
+		public static final int alp_pkey_display_max_retry = 0x7f0c0018;
+		public static final int alp_pkey_display_min_wired_dots = 0x7f0c0017;
+		public static final int alp_pkey_display_stealth_mode = 0x7f0c0016;
+		public static final int alp_pkey_sys_auto_save_pattern = 0x7f0c0014;
+		public static final int alp_pkey_sys_encrypter_class = 0x7f0c0015;
+		public static final int alp_pkey_sys_pattern = 0x7f0c0013;
 	}
 	public static final class style {
-		public static final int AOSP_DialogWindowTitle = 0x7f080091;
-		public static final int Alp_BaseThemeHelper_Dark = 0x7f080086;
-		public static final int Alp_BaseThemeHelper_Dialog_Dark = 0x7f08008c;
-		public static final int Alp_BaseThemeHelper_Dialog_Light = 0x7f08008f;
-		public static final int Alp_BaseThemeHelper_Light = 0x7f080089;
-		public static final int Alp_BaseTheme_Dark = 0x7f080085;
-		public static final int Alp_BaseTheme_Dialog_Dark = 0x7f08008b;
-		public static final int Alp_BaseTheme_Dialog_Light = 0x7f08008e;
-		public static final int Alp_BaseTheme_Light = 0x7f080088;
-		public static final int Alp_Theme_Dark = 0x7f080087;
-		public static final int Alp_Theme_Dialog_Dark = 0x7f08008d;
-		public static final int Alp_Theme_Dialog_Light = 0x7f080090;
-		public static final int Alp_Theme_Light = 0x7f08008a;
-		public static final int alp_button_bar_button_style = 0x7f080093;
-		public static final int alp_button_bar_style = 0x7f080092;
+		public static final int AOSP_DialogWindowTitle = 0x7f0d008f;
+		public static final int Alp_BaseThemeHelper_Dark = 0x7f0d0084;
+		public static final int Alp_BaseThemeHelper_Dialog_Dark = 0x7f0d008a;
+		public static final int Alp_BaseThemeHelper_Dialog_Light = 0x7f0d008d;
+		public static final int Alp_BaseThemeHelper_Light = 0x7f0d0087;
+		public static final int Alp_BaseTheme_Dark = 0x7f0d0083;
+		public static final int Alp_BaseTheme_Dialog_Dark = 0x7f0d0089;
+		public static final int Alp_BaseTheme_Dialog_Light = 0x7f0d008c;
+		public static final int Alp_BaseTheme_Light = 0x7f0d0086;
+		public static final int Alp_Theme_Dark = 0x7f0d0085;
+		public static final int Alp_Theme_Dialog_Dark = 0x7f0d008b;
+		public static final int Alp_Theme_Dialog_Light = 0x7f0d008e;
+		public static final int Alp_Theme_Light = 0x7f0d0088;
+		public static final int alp_button_bar_button_style = 0x7f0d0091;
+		public static final int alp_button_bar_style = 0x7f0d0090;
 	}
 }

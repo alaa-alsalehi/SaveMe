@@ -11,10 +11,10 @@ import com.android.volley.toolbox.Volley;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.Tracker;
-import com.serveme.analytics.AnalyticsExceptionParser;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.view.RecoveryActivity;
+import com.serveme.savemyphone.view.utils.AnalyticsExceptionParser;
 
 public class MailSender implements Response.Listener<String>,
 		Response.ErrorListener {
