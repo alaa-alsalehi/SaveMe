@@ -1,5 +1,6 @@
 package com.serveme.savemyphone.control;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -102,11 +103,14 @@ public class AppsListAdapter extends BaseAdapter {
 			viewHolder = new ViewHolder();
 			viewHolder.name = (TextView) convertView.findViewById(R.id.name);
 			viewHolder.icon = (ImageView) convertView.findViewById(R.id.icon);
-			viewHolder.tg = (ToggleButton) convertView
-					.findViewById(R.id.enable_disable);
+			viewHolder.tg = (ToggleButton) convertView.findViewById(R.id.enable_disable);
 			convertView.setTag(viewHolder); // first you set Tag to get it later
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
+		}
+		
+		if(viewHolder.imgLoader != null){
+			viewHolder.imgLoader.cancel(true);
 		}
 
 		viewHolder.tg.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -131,18 +135,15 @@ public class AppsListAdapter extends BaseAdapter {
 			}
 		});
 
-		viewHolder.name
-				.setText(appinfo.loadLabel((context.getPackageManager())));
-		try {
-			Drawable img = appinfo.loadIcon(context.getPackageManager());
-			int imagesize = (int) context.getResources().getDimension(
-					R.dimen.image_size);
-			img.setBounds(0, 0, imagesize, imagesize);
-			viewHolder.icon.setImageDrawable(img);
-		} catch (OutOfMemoryError e) {//large images
-			// TODO: handle exception
-		}
-		// imageloader.load(viewHolder.icon, appinfo, context);
+		viewHolder.name.setText(appinfo.loadLabel((context.getPackageManager())));
+		
+		ImageView appicon = viewHolder.icon;
+		appicon.setImageDrawable(null);
+		
+
+		viewHolder.imgLoader = new ImageLoader(context, appicon);
+		viewHolder.imgLoader.execute(appinfo);
+		
 		if (whitelist.contains(launcher)) {
 			status[position] = true;
 		}
@@ -155,11 +156,33 @@ public class AppsListAdapter extends BaseAdapter {
 		public TextView name;
 		public ImageView icon;
 		public ToggleButton tg;
+		public ImageLoader imgLoader;
 	}
 	
 	public void updateList(List<ResolveInfo> result){
 		appsList.addAll(result);
 		this.notifyDataSetChanged();
 	}
+	
+	private class ImageLoader extends AsyncTask<ResolveInfo, Integer, Drawable> {
+		private Context con;
+		private ImageView imageView;
+		 
+	    public ImageLoader(Context con, ImageView imageView) {
+	    	this.imageView = imageView;
+	    	this.con = con;
+	    }
+	    
+	     protected Drawable doInBackground(ResolveInfo... appinfo) {
+	    	Drawable img = appinfo[0].loadIcon(con.getPackageManager());
+	 		int imagesize = (int) con.getResources().getDimension(R.dimen.image_size);
+	 		img.setBounds(0, 0, imagesize, imagesize);
+	    	return img;
+	     }
+
+	     protected void onPostExecute(Drawable img) {
+	    	 imageView.setImageDrawable(img);
+	     }
+	 }
 
 }
