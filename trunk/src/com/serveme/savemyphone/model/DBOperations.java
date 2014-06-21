@@ -26,6 +26,7 @@ public class DBOperations {
 	private static Set<Launcher> whitelist; // for user and admin activity - for
 											// view -
 	private static Set<Launcher> whitelistPackages; // for service
+	private static Object dummyForSynch = new Object();
 	private DBHandler dbhandler;
 	private Context context;
 
@@ -133,7 +134,7 @@ public class DBOperations {
 	}
 
 	public Set<Launcher> getWhiteListApps() {
-//		synchronized (whitelist) {// Â–Â «·‰ﬁÿ… ÷—Ê—Ì… ﬂÊ‰‰« ‰ﬁÊ„ »«· ⁄«„· „⁄
+		synchronized (dummyForSynch) {// Â–Â «·‰ﬁÿ… ÷—Ê—Ì… ﬂÊ‰‰« ‰ﬁÊ„ »«· ⁄«„· „⁄
 									// Â–« «·ﬂÊœ Ê«·ﬂÊœ ›Ì Õ–› «·»—«„Ã „‰ √ﬂÀ—
 									// „‰ ŒÌÿ
 			if (whitelist == null) {
@@ -173,12 +174,12 @@ public class DBOperations {
 				}
 				database.close();
 			}
-//		}
+		}
 		return whitelist;
 	}
 
 	public void reCreateWhiteList() {
-		synchronized (whitelist) {
+		synchronized (dummyForSynch) {
 			if (whitelist != null) {
 				whitelist.clear();
 				whitelist = null;
@@ -191,7 +192,7 @@ public class DBOperations {
 	}
 
 	public Set<Launcher> getWhiteListPackages() {
-		synchronized (whitelist) {
+		synchronized (dummyForSynch) {
 			if (whitelistPackages == null) {
 				whitelistPackages = new HashSet<Launcher>();
 				SQLiteDatabase database = dbhandler.getReadableDatabase();
