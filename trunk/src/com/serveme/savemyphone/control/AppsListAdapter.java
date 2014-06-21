@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.provider.ContactsContract.CommonDataKinds.Im;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -139,7 +140,6 @@ public class AppsListAdapter extends BaseAdapter {
 		
 		ImageView appicon = viewHolder.icon;
 		appicon.setImageDrawable(null);
-		
 
 		viewHolder.imgLoader = new ImageLoader(context, appicon);
 		viewHolder.imgLoader.execute(appinfo);
@@ -166,23 +166,32 @@ public class AppsListAdapter extends BaseAdapter {
 	
 	private class ImageLoader extends AsyncTask<ResolveInfo, Integer, Drawable> {
 		private Context con;
-		private ImageView imageView;
+		private WeakReference<ImageView> wrimageView;
 		 
 	    public ImageLoader(Context con, ImageView imageView) {
-	    	this.imageView = imageView;
+	    	this.wrimageView = new WeakReference<ImageView>(imageView);
 	    	this.con = con;
 	    }
 	    
 	     protected Drawable doInBackground(ResolveInfo... appinfo) {
-	    	Drawable img = appinfo[0].loadIcon(con.getPackageManager());
-	 		int imagesize = (int) con.getResources().getDimension(R.dimen.image_size);
-	 		img.setBounds(0, 0, imagesize, imagesize);
+	    	Drawable img = null;
+//			if(imageView.getDrawingCache() != null) {
+//	    		img = con.getResources().getDrawable(R.drawable.ic_launcher);
+			    img = appinfo[0].loadIcon(con.getPackageManager());
+			 	int imagesize = (int) con.getResources().getDimension(R.dimen.image_size);
+			 	img.setBounds(0, 0, imagesize, imagesize);
+//			} else {
+//				
+//			}
+	     
 	    	return img;
 	     }
-
+	     
 	     protected void onPostExecute(Drawable img) {
-	    	 imageView.setImageDrawable(img);
+	        ImageView imageView = wrimageView.get();
+	        imageView.setImageDrawable(img);
 	     }
+
 	 }
 
 }
