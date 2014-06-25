@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.ActivityNotFoundException;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -95,10 +97,23 @@ public class UserView extends FrameLayout {
 		appsinfolist.addAll(db.getWhiteListApps());
 		ga.notifyDataSetInvalidated();
 		MyTracker.getUncaughtExceptionHandler();
+		// ÕœÌÀ «·ﬁ«∆„… ›Ì Õ«·  €ÌÌ— Ê÷⁄ SDCard
+		getContext().registerReceiver(refreshList,
+				new IntentFilter("refresh_white_list"));
 	}
 
 	@Override
 	protected void onDetachedFromWindow() {
 		super.onDetachedFromWindow();
+		getContext().unregisterReceiver(refreshList);
 	}
+
+	private final BroadcastReceiver refreshList = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			appsinfolist.clear();
+			appsinfolist.addAll(db.getWhiteListApps());
+			ga.notifyDataSetInvalidated();
+		}
+	};
 }
