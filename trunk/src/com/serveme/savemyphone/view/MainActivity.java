@@ -67,17 +67,11 @@ public class MainActivity extends ActionBarActivity {
 		listView.setSmoothScrollbarEnabled(true);
 		listView.setAdapter(adapter);
 		adsStuff();
-		
-		new AsyncTask<String, Integer, Void>() {
-		     protected Void doInBackground(String... urls) {
-		    	try {
-		 			AppRater.app_launched(MainActivity.this);
-		 		} catch (InCorrectMarketException e) {
+	   	try {
+ 			AppRater.app_launched(MainActivity.this);
+ 		} catch (InCorrectMarketException e) {
 
-		 		}
-				return null; 
-		     }
-		 }.execute("");;
+ 		}
 	}
 
 	protected LinearLayout createListHeader() {
