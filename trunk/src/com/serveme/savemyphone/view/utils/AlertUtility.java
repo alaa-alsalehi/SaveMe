@@ -1,6 +1,9 @@
 package com.serveme.savemyphone.view.utils;
 
+import java.io.IOException;
+
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -26,6 +29,20 @@ public class AlertUtility {
 		if (thisView == null) {
 			UserView view = new UserView(context);
 			thisView = view;
+		}
+		SharedPreferences preferences = thisView.getContext()
+				.getSharedPreferences("mypref", Context.MODE_PRIVATE);
+		try {
+			thisView.setBackground(BackgroundUtility
+					.getBitmapDrawableFromAsset(
+							thisView.getContext(),
+							preferences.getString("background",
+									"background/"
+											+ thisView.getContext().getAssets()
+													.list("background")[0])));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 		return thisView;
 	}

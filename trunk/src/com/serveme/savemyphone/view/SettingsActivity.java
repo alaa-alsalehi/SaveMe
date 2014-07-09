@@ -21,11 +21,13 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
+import android.util.Log;
 
 public class SettingsActivity extends PreferenceActivity implements
 		OnSharedPreferenceChangeListener {
 
 	private static final int REQ_CHANGE_PATTERN = 1;
+	private static final int REQ_CHANGE_BACKGROUND = 2;
 	private static final String KEY_LOCK_METHOD = "lock_method";
 	private PrefEditor pe;
 
@@ -34,60 +36,88 @@ public class SettingsActivity extends PreferenceActivity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences);
-		//ListPreference lock_Preference = (ListPreference) findPreference(KEY_LOCK_METHOD);
-		//lock_Preference.setSummary(lock_Preference.getEntry());
+		// ListPreference lock_Preference = (ListPreference)
+		// findPreference(KEY_LOCK_METHOD);
+		// lock_Preference.setSummary(lock_Preference.getEntry());
 		pe = new PrefEditor(SettingsActivity.this);
 		Preference changePatternPreference = (Preference) findPreference("change_pattern");
 		CheckBoxPreference stealthModePreference = (CheckBoxPreference) findPreference("stealth_mode");
-		Preference uninstallPref = (Preference) findPreference("uninstall"); 
-		changePatternPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				Intent intent = new Intent(LockPatternActivity.ACTION_CREATE_PATTERN, null, SettingsActivity.this, LockPatternActivity.class);
-				startActivityForResult(intent, REQ_CHANGE_PATTERN);
-				MyTracker.fireButtonPressedEvent(SettingsActivity.this, "request_change_pattern");
-				return true;
-			}
-		});
-		stealthModePreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-			
-			@Override
-			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				CheckBoxPreference cbPreference = (CheckBoxPreference) preference;
-				if(cbPreference.isChecked()){
-					pe.setStealthMode(false);
-					cbPreference.setChecked(false);
-					return false;
-				} else {
-					pe.setStealthMode(true);
-					cbPreference.setChecked(true);
-					return true;
-				}
-			}
-		});
-		
-		uninstallPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			public boolean onPreferenceClick(Preference preference) {
-				MyTracker.fireButtonPressedEvent(SettingsActivity.this, "uninstall");
-				ComponentName devAdminReceiver = new ComponentName(SettingsActivity.this,	AdminReciver.class);
-				DevicePolicyManager dpm = (DevicePolicyManager) SettingsActivity.this.getSystemService(Context.DEVICE_POLICY_SERVICE);
-				dpm.removeActiveAdmin(devAdminReceiver);
-				Intent intent = new Intent(Intent.ACTION_DELETE);
-				intent.setData(Uri.parse("package:" + SettingsActivity.this.getPackageName()));
-				SettingsActivity.this.startActivity(intent);
-				return true;
-			}
-		});
+		Preference uninstallPref = (Preference) findPreference("uninstall");
+		changePatternPreference
+				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+
+					@Override
+					public boolean onPreferenceClick(Preference preference) {
+						Intent intent = new Intent(
+								LockPatternActivity.ACTION_CREATE_PATTERN,
+								null, SettingsActivity.this,
+								LockPatternActivity.class);
+						startActivityForResult(intent, REQ_CHANGE_PATTERN);
+						MyTracker.fireButtonPressedEvent(SettingsActivity.this,
+								"request_change_pattern");
+						return true;
+					}
+				});
+		stealthModePreference
+				.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+					@Override
+					public boolean onPreferenceChange(Preference preference,
+							Object newValue) {
+						CheckBoxPreference cbPreference = (CheckBoxPreference) preference;
+						if (cbPreference.isChecked()) {
+							pe.setStealthMode(false);
+							cbPreference.setChecked(false);
+							return false;
+						} else {
+							pe.setStealthMode(true);
+							cbPreference.setChecked(true);
+							return true;
+						}
+					}
+				});
+
+		uninstallPref
+				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+					public boolean onPreferenceClick(Preference preference) {
+						MyTracker.fireButtonPressedEvent(SettingsActivity.this,
+								"uninstall");
+						ComponentName devAdminReceiver = new ComponentName(
+								SettingsActivity.this, AdminReciver.class);
+						DevicePolicyManager dpm = (DevicePolicyManager) SettingsActivity.this
+								.getSystemService(Context.DEVICE_POLICY_SERVICE);
+						dpm.removeActiveAdmin(devAdminReceiver);
+						Intent intent = new Intent(Intent.ACTION_DELETE);
+						intent.setData(Uri.parse("package:"
+								+ SettingsActivity.this.getPackageName()));
+						SettingsActivity.this.startActivity(intent);
+						return true;
+					}
+				});
+
+		Preference changeBackgroundPreference = (Preference) findPreference("change_background");
+		changeBackgroundPreference
+				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+
+					@Override
+					public boolean onPreferenceClick(Preference preference) {
+						Intent intent = new Intent(SettingsActivity.this,
+								BackGroundActivity.class);
+						startActivityForResult(intent, REQ_CHANGE_BACKGROUND);
+						MyTracker.fireButtonPressedEvent(SettingsActivity.this,
+								"request_change_pattern");
+						return true;
+					}
+				});
 	}
-	
-		@Override
+
+	@Override
 	protected void onStart() {
 		super.onStart();
 		MyTracker.fireActivityStartEvent(SettingsActivity.this);
 		MyTracker.getUncaughtExceptionHandler();
 	}
-	
+
 	@Override
 	protected void onStop() {
 		MyTracker.fireActivityStopevent(SettingsActivity.this);
@@ -98,14 +128,16 @@ public class SettingsActivity extends PreferenceActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-		getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+		getPreferenceScreen().getSharedPreferences()
+				.registerOnSharedPreferenceChangeListener(this);
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void onPause() {
 		super.onPause();
-		getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+		getPreferenceScreen().getSharedPreferences()
+				.unregisterOnSharedPreferenceChangeListener(this);
 	}
 
 	@Override
@@ -120,22 +152,35 @@ public class SettingsActivity extends PreferenceActivity implements
 
 		}
 	}
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		switch (requestCode) {
-			case REQ_CHANGE_PATTERN:
-				if (resultCode == Activity.RESULT_OK) {
-					char[] passCode = data.getCharArrayExtra(LockPatternActivity.EXTRA_PATTERN);
-					SharedPreferences preferences = getSharedPreferences("mypref", Context.MODE_PRIVATE);
-					Editor edit = preferences.edit();
-					edit.putString("saved_pattern", String.copyValueOf(passCode)); 
-					edit.apply();
-					MyTracker.fireButtonPressedEvent(SettingsActivity.this, "change_pattern_done");
-				} 
+		case REQ_CHANGE_PATTERN:
+			if (resultCode == Activity.RESULT_OK) {
+				char[] passCode = data
+						.getCharArrayExtra(LockPatternActivity.EXTRA_PATTERN);
+				SharedPreferences preferences = getSharedPreferences("mypref",
+						Context.MODE_PRIVATE);
+				Editor edit = preferences.edit();
+				edit.putString("saved_pattern", String.copyValueOf(passCode));
+				edit.apply();
+				MyTracker.fireButtonPressedEvent(SettingsActivity.this,
+						"change_pattern_done");
+			}
 			break;
-
+		case REQ_CHANGE_BACKGROUND:
+			if (resultCode == Activity.RESULT_OK) {
+				String background = data.getStringExtra("background");
+				Log.d("choosed3", background);
+				SharedPreferences preferences = getSharedPreferences("mypref",
+						Context.MODE_PRIVATE);
+				Editor edit = preferences.edit();
+				edit.putString("background", background);
+				edit.apply();
+			}
+			break;
 		}
 	}
 }

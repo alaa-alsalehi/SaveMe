@@ -8,12 +8,17 @@
     <string name="action_unlock">إلغاء الحماية</string>
     <string name="action_lock">تفعيل الحماية</string>
     <string name="action_help">المساعدة</string>
+    
+    <string name="done">تم</string>
 
     <string name="pattern_settings_category">خيارات النمط</string>
     <string name="change_pattern">تغيير النمط</string>
     <string name="stealth_mode">الوضع غير المرئي</string>
     <string name="uninstall_settings_category">إزالة التطبيق</string>
     <string name="uninstall">إزالة التطبيق</string>
+    
+    <string name="background_categeroy">خيارات الخلفية</string>
+    <string name="change_background">تغيير الخلفية</string>
         
     <string name="activiate_lock_quesition">تفعيل وضع القفل؟</string>
     <string name="admin_list_header">اختر التطبيقات المسموحة:</string>

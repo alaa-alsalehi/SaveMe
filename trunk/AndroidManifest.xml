@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.serveme.savemyphone"
+    android:installLocation="internalOnly"
     android:permission="android.permission.RECEIVE_BOOT_COMPLETED"
     android:versionCode="21"
-    android:versionName="2.2.5" android:installLocation="internalOnly">
+    android:versionName="2.2.5" >
 
     <!-- Minimum and target SDK -->
     <uses-sdk
@@ -16,19 +17,20 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
-	
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
 
-        <!-- <meta-data android:name="com.google.android.gms.version"
-           android:value="@integer/google_play_services_version" />-->
-        
-        
+        <!--
+           <meta-data android:name="com.google.android.gms.version"
+           android:value="@integer/google_play_services_version" />
+        -->
+
+
         <!-- services -->
         <service
             android:name="com.serveme.savemyphone.service.AppsMonitor"
@@ -47,6 +49,7 @@
             <meta-data
                 android:name="android.app.device_admin"
                 android:resource="@xml/required_policies" />
+
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
                 <action android:name="android.app.action.DEVICE_ADMIN_DISABLED" />
@@ -55,10 +58,12 @@
         <receiver android:name="com.serveme.savemyphone.receivers.RemovePackageReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_FULLY_REMOVED" />
+
                 <data android:scheme="package" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
@@ -66,21 +71,22 @@
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_CHANGED" />
                 <action android:name="android.intent.action.PACKAGE_REPLACED" />
+
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
         <receiver android:name="com.serveme.savemyphone.receivers.SDCardReceiver" >
-		    <intent-filter>
-		        <action android:name="android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE"/>
-		        <action android:name="android.intent.action.EXTERNAL_APPLICATIONS_UNAVAILABLE"/>
-		        <action android:name="android.intent.ACTION_MEDIA_BAD_REMOVAL" />
-		        <action android:name="android.intent.action.MEDIA_REMOVED" />
-		        <action android:name="android.intent.action.ACTION_MEDIA_SHARED" />
-		        <action android:name="android.intent.action.MEDIA_UNMOUNTED"/>
-		        <action android:name="android.intent.action.MEDIA_MOUNTED"/> 
-		    </intent-filter>
-		</receiver>
-		
+            <intent-filter>
+                <action android:name="android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE" />
+                <action android:name="android.intent.action.EXTERNAL_APPLICATIONS_UNAVAILABLE" />
+                <action android:name="android.intent.ACTION_MEDIA_BAD_REMOVAL" />
+                <action android:name="android.intent.action.MEDIA_REMOVED" />
+                <action android:name="android.intent.action.ACTION_MEDIA_SHARED" />
+                <action android:name="android.intent.action.MEDIA_UNMOUNTED" />
+                <action android:name="android.intent.action.MEDIA_MOUNTED" />
+            </intent-filter>
+        </receiver>
+
         <!-- activities -->
         <activity
             android:name="com.serveme.savemyphone.view.MainActivity"
@@ -89,22 +95,31 @@
             <meta-data
                 android:name="android.support.UI_OPTIONS"
                 android:value="splitActionBarWhenNarrow" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
+            android:name="com.serveme.savemyphone.view.BackGroundActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
             android:name="com.serveme.savemyphone.view.UserActivity"
             android:label="@string/apps"
-            android:launchMode="singleTask" android:theme="@style/UserActivity">
+            android:launchMode="singleTask"
+            android:theme="@style/UserActivity" >
         </activity>
         <activity
             android:name="com.serveme.savemyphone.view.wizard.AdminRequest"
             android:label="@string/lock_permission_title" />
-        <activity android:name="com.serveme.savemyphone.view.wizard.PasswordRequest"
+        <activity
+            android:name="com.serveme.savemyphone.view.wizard.PasswordRequest"
             android:label="@string/lock_method_chooser_activity_title" />
-        <activity android:name="com.serveme.savemyphone.view.wizard.HelpActivity"
+        <activity
+            android:name="com.serveme.savemyphone.view.wizard.HelpActivity"
             android:label="@string/help_activity_title" />
         <activity
             android:name="com.serveme.savemyphone.view.SettingsActivity"
@@ -112,10 +127,10 @@
         <activity
             android:name="com.serveme.savemyphone.view.wizard.RecoveryEmailRequest"
             android:label="@string/recovery_activity_title" />
-     	<activity
+        <activity
             android:name="com.serveme.savemyphone.view.RecoveryActivity"
-            android:windowSoftInputMode="stateAlwaysVisible"
-            android:label="@string/recovery_activity_title" />
+            android:label="@string/recovery_activity_title"
+            android:windowSoftInputMode="stateAlwaysVisible" />
 
         <!-- external activities -->
         <activity
@@ -130,7 +145,7 @@
             android:theme="@style/Alp.Theme.Dark" />
 
         <service android:name="com.google.analytics.tracking.android.CampaignTrackingService" />
-        
+
         <!-- analytics -->
         <receiver
             android:name="com.google.analytics.tracking.android.CampaignTrackingReceiver"
@@ -139,13 +154,12 @@
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
         </receiver>
-        
-         <activity
+
+        <activity
             android:name="com.google.ads.AdActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenLayout|screenSize|smallestScreenSize|uiMode"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-         
-       <activity
+        <activity
             android:name="com.noqoush.adfalcon.android.sdk.ADFBrowser"
             android:configChanges="keyboard|keyboardHidden|orientation|uiMode|screenLayout|screenSize|smallestScreenSize" />
         <activity

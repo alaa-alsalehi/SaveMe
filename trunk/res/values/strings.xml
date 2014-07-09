@@ -8,6 +8,8 @@
     <string name="action_unlock">Unlock</string>
     <string name="action_lock">Lock</string>
     <string name="action_help">Help</string>
+    
+    <string name="done">Done</string>
 
     <string name="pattern_settings_category">Pattern options</string>
     <string name="change_pattern">Change Pattern</string>
@@ -29,5 +31,7 @@
 	<string name="recovery_activity_success_dialoge">Right Code enter Your pattern</string>
 	<string name="recovery_activity_failure_dialoge">Error 1: verify code is wrong please check your email and reenter the code</string>
 	<string name="network_failure">Error 2: Message sending failed .. check your internet connection then try again</string>
+	<string name="background_categeroy">Background Options</string>
+	<string name="change_background">Change Background</string>
 	
 </resources>

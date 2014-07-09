@@ -1,5 +1,6 @@
 package com.serveme.savemyphone.view;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,7 @@ import com.serveme.savemyphone.control.GridAdapter;
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.model.Launcher;
 import com.serveme.savemyphone.util.MyTracker;
+import com.serveme.savemyphone.view.utils.BackgroundUtility;
 
 public class UserView extends FrameLayout {
 
@@ -78,14 +81,15 @@ public class UserView extends FrameLayout {
 				}
 			}
 		});
-		ImageButton unlock=(ImageButton) view.findViewById(R.id.unlock);
+		ImageButton unlock = (ImageButton) view.findViewById(R.id.unlock);
 		unlock.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				Intent userActivityIntent=new Intent(getContext(),UserActivity.class);
+				Intent userActivityIntent = new Intent(getContext(),
+						UserActivity.class);
 				userActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				getContext().startActivity(userActivityIntent);				
+				getContext().startActivity(userActivityIntent);
 			}
 		});
 	}
@@ -97,7 +101,7 @@ public class UserView extends FrameLayout {
 		appsinfolist.addAll(db.getWhiteListApps());
 		ga.notifyDataSetInvalidated();
 		MyTracker.getUncaughtExceptionHandler();
-		// ÕœÌÀ «·ﬁ«∆„… ›Ì Õ«·  €ÌÌ— Ê÷⁄ SDCard
+		//  ÕœÌÀ «·ﬁ«∆„… ›Ì Õ«·  €ÌÌ— Ê÷⁄ SDCard
 		getContext().registerReceiver(refreshList,
 				new IntentFilter("refresh_white_list"));
 	}
