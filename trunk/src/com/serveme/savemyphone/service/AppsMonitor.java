@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.Service;
 import android.content.ComponentName;
@@ -15,17 +14,15 @@ import android.os.IBinder;
 import android.os.Message;
 import android.view.View;
 import android.view.WindowManager;
-//import android.widget.Toast;
-
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.Tracker;
-import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.model.Launcher;
 import com.serveme.savemyphone.view.utils.AlertUtility;
 import com.serveme.savemyphone.view.utils.AnalyticsExceptionParser;
+//import android.widget.Toast;
 
 public class AppsMonitor extends Service {
 	private static final int UPDATE_INTERVAL = 39;
@@ -258,7 +255,14 @@ public class AppsMonitor extends Service {
 			if (view != null)
 				wmgr.removeView(view);
 		} catch (Exception e) {
-			// TODO: handle exception
+			Tracker tracker = EasyTracker.getInstance(AppsMonitor.this);
+			tracker.send(MapBuilder.createException(
+					new AnalyticsExceptionParser().getDescription(Thread
+							.currentThread().toString()
+							+ " "
+							+ previousState
+							+ " " + currentState + " Destroy error", e), false)
+					.build());
 		}
 	}
 }

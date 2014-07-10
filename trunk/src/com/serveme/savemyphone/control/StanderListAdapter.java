@@ -3,7 +3,12 @@ package com.serveme.savemyphone.control;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.Tracker;
 import com.serveme.savemyphone.R;
+import com.serveme.savemyphone.view.BackGroundActivity;
+import com.serveme.savemyphone.view.utils.AnalyticsExceptionParser;
 import com.serveme.savemyphone.view.utils.BackgroundUtility;
 
 import android.app.Activity;
@@ -47,7 +52,7 @@ public class StanderListAdapter extends BaseAdapter {
 				return BackgroundUtility.getSampledBitmapDrawableFromAsset(
 						context, "background/" + assets[position],
 						imageButton.getWidth(), imageButton.getHeight());
-			} else{
+			} else {
 				Log.d("problem", "problem");
 				return null;
 			}
@@ -76,8 +81,10 @@ public class StanderListAdapter extends BaseAdapter {
 		try {
 			assets = context.getAssets().list("background");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Tracker tracker = EasyTracker.getInstance(context);
+			tracker.send(MapBuilder.createException(
+					new AnalyticsExceptionParser().getDescription(Thread
+							.currentThread().toString(), e), false).build());
 		}
 	}
 
@@ -145,7 +152,6 @@ public class StanderListAdapter extends BaseAdapter {
 	}
 
 	public void setChoosedBacground(String choosedBacground) {
-		Log.d("choosed", choosedBacground);
 		this.choosedBacground = choosedBacground;
 	}
 

@@ -1,16 +1,9 @@
 package com.serveme.savemyphone.view;
 
 import java.io.IOException;
-import java.util.Iterator;
 
 import org.lucasr.twowayview.TwoWayView;
 import org.lucasr.twowayview.TwoWayView.Orientation;
-
-import com.serveme.savemyphone.R;
-import com.serveme.savemyphone.control.StanderListAdapter;
-import com.serveme.savemyphone.util.MyTracker;
-import com.serveme.savemyphone.view.utils.BackgroundUtility;
-import com.serveme.savemyphone.view.wizard.HelpActivity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,13 +13,21 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.Tracker;
+import com.serveme.savemyphone.R;
+import com.serveme.savemyphone.control.StanderListAdapter;
+import com.serveme.savemyphone.util.MyTracker;
+import com.serveme.savemyphone.view.utils.AnalyticsExceptionParser;
+import com.serveme.savemyphone.view.utils.BackgroundUtility;
 
 public class BackGroundActivity extends ActionBarActivity {
 	private StanderListAdapter adapter;
@@ -52,6 +53,7 @@ public class BackGroundActivity extends ActionBarActivity {
 			protected void onPreExecute() {
 				progress.setVisibility(View.VISIBLE);
 			}
+
 			@Override
 			protected Result doInBackground(Void... params) {
 				SharedPreferences preferences = getSharedPreferences("mypref",
@@ -87,9 +89,13 @@ public class BackGroundActivity extends ActionBarActivity {
 										BackGroundActivity.this, defaultValue);
 					}
 					return result;
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				} catch (IOException e) {
+					Tracker tracker = EasyTracker
+							.getInstance(BackGroundActivity.this);
+					tracker.send(MapBuilder.createException(
+							new AnalyticsExceptionParser().getDescription(
+									Thread.currentThread().toString(), e),
+							false).build());
 				}
 				return null;
 			}
@@ -121,7 +127,6 @@ public class BackGroundActivity extends ActionBarActivity {
 
 			Intent data = new Intent();
 			data.putExtra("background", adapter.getChoosedBacground());
-			Log.d("choosed2", data.toString());
 			setResult(Activity.RESULT_OK, data);
 			finish();
 			MyTracker.fireButtonPressedEvent(BackGroundActivity.this,

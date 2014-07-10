@@ -21,7 +21,6 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
-import android.util.Log;
 
 public class SettingsActivity extends PreferenceActivity implements
 		OnSharedPreferenceChangeListener {
@@ -173,7 +172,6 @@ public class SettingsActivity extends PreferenceActivity implements
 		case REQ_CHANGE_BACKGROUND:
 			if (resultCode == Activity.RESULT_OK) {
 				String background = data.getStringExtra("background");
-				Log.d("choosed3", background);
 				SharedPreferences preferences = getSharedPreferences("mypref",
 						Context.MODE_PRIVATE);
 				Editor edit = preferences.edit();

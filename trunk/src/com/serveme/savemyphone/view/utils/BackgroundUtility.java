@@ -3,13 +3,16 @@ package com.serveme.savemyphone.view.utils;
 import java.io.IOException;
 import java.io.InputStream;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.Tracker;
+
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
 
 public class BackgroundUtility {
 
@@ -23,7 +26,10 @@ public class BackgroundUtility {
 			istr = assetManager.open(filePath);
 			bitmap = BitmapFactory.decodeStream(istr);
 		} catch (IOException e) {
-			Log.d("message", e.getMessage());
+			Tracker tracker = EasyTracker.getInstance(context);
+			tracker.send(MapBuilder.createException(
+					new AnalyticsExceptionParser().getDescription(Thread
+							.currentThread().toString(), e), false).build());
 		}
 		BitmapDrawable bitmapDrawable = new BitmapDrawable(
 				context.getResources(), bitmap);
@@ -41,9 +47,13 @@ public class BackgroundUtility {
 		Bitmap bitmap = null;
 		try {
 			istr = assetManager.open(filePath);
-			bitmap = decodeSampledBitmapFrotmStream(istr, reqWidth, reqHeight);
+			bitmap = decodeSampledBitmapFrotmStream(context, istr, reqWidth,
+					reqHeight);
 		} catch (IOException e) {
-			Log.d("message", e.getMessage());
+			Tracker tracker = EasyTracker.getInstance(context);
+			tracker.send(MapBuilder.createException(
+					new AnalyticsExceptionParser().getDescription(Thread
+							.currentThread().toString(), e), false).build());
 		}
 		BitmapDrawable bitmapDrawable = new BitmapDrawable(
 				context.getResources(), bitmap);
@@ -75,7 +85,7 @@ public class BackgroundUtility {
 		return inSampleSize;
 	}
 
-	public static Bitmap decodeSampledBitmapFrotmStream(
+	public static Bitmap decodeSampledBitmapFrotmStream(Context context,
 			InputStream inputStream, int reqWidth, int reqHeight) {
 
 		// First decode with inJustDecodeBounds=true to check dimensions
@@ -86,8 +96,10 @@ public class BackgroundUtility {
 			if (inputStream.markSupported())
 				inputStream.reset();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Tracker tracker = EasyTracker.getInstance(context);
+			tracker.send(MapBuilder.createException(
+					new AnalyticsExceptionParser().getDescription(Thread
+							.currentThread().toString(), e), false).build());
 		}
 		// Calculate inSampleSize
 		options.inSampleSize = calculateInSampleSize(options, reqWidth,

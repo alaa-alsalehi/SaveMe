@@ -9,7 +9,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +24,6 @@ import com.serveme.savemyphone.control.GridAdapter;
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.model.Launcher;
 import com.serveme.savemyphone.util.MyTracker;
-import com.serveme.savemyphone.view.utils.BackgroundUtility;
 
 public class UserView extends FrameLayout {
 
