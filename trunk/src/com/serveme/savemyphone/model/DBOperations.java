@@ -58,6 +58,16 @@ public class DBOperations {
 		SQLiteDatabase database = dbhandler.getWritableDatabase();
 		database.insert(DB_KEYS.WHITE_LIST_TABLE, null, values);
 		database.close();
+		synchronized (dummyForSynch) {
+			if (whitelist != null) {
+				whitelist.add(launcher);
+			}
+			if (whitelistPackages != null) {
+				Launcher launcher2 = new Launcher(launcher.getPackageName(),
+						null);
+				whitelistPackages.add(launcher2);
+			}
+		}
 	}
 
 	public void deleteApp(String packageName) {
@@ -93,6 +103,16 @@ public class DBOperations {
 				+ " = ? and " + DB_KEYS.KEY_ACTIVITY + " = ?", new String[] {
 				launcher.getPackageName(), launcher.getActivity() });
 		database.close();
+		synchronized (dummyForSynch) {
+			if (whitelist != null) {
+				whitelist.remove(launcher);
+			}
+			if (whitelistPackages != null) {
+				Launcher launcher2 = new Launcher(launcher.getPackageName(),
+						null);
+				whitelistPackages.remove(launcher2);
+			}
+		}
 	}
 
 	public boolean isThereEnabledApps() {
@@ -134,9 +154,11 @@ public class DBOperations {
 	}
 
 	public Set<Launcher> getWhiteListApps() {
-		synchronized (dummyForSynch) {// Â–Â «·‰ﬁÿ… ÷—Ê—Ì… ﬂÊ‰‰« ‰ﬁÊ„ »«· ⁄«„· „⁄
-									// Â–« «·ﬂÊœ Ê«·ﬂÊœ ›Ì Õ–› «·»—«„Ã „‰ √ﬂÀ—
-									// „‰ ŒÌÿ
+		synchronized (dummyForSynch) {// Â–Â «·‰ﬁÿ… ÷—Ê—Ì… ﬂÊ‰‰« ‰ﬁÊ„ »«· ⁄«„·
+										// „⁄
+										// Â–« «·ﬂÊœ Ê«·ﬂÊœ ›Ì Õ–› «·»—«„Ã „‰
+										// √ﬂÀ—
+										// „‰ ŒÌÿ
 			if (whitelist == null) {
 				whitelist = new HashSet<Launcher>();
 				SQLiteDatabase database = dbhandler.getReadableDatabase();

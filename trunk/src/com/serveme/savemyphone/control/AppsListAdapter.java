@@ -123,13 +123,11 @@ public class AppsListAdapter extends BaseAdapter {
 					status[position] = true;
 					if (!whitelist.contains(launcher)) {
 						db.insertoApp(launcher);
-						whitelist.add(launcher);
 					}
 				} else {
 					status[position] = false;
 					if (whitelist.contains(launcher)) {
 						db.deleteLauncher(launcher);
-						whitelist.remove(launcher);
 					}
 				}
 				MyTracker.fireButtonPressedEvent(context, "enable_disable_app");
