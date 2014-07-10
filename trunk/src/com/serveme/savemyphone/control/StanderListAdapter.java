@@ -3,20 +3,10 @@ package com.serveme.savemyphone.control;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 
-import com.google.analytics.tracking.android.EasyTracker;
-import com.google.analytics.tracking.android.MapBuilder;
-import com.google.analytics.tracking.android.Tracker;
-import com.serveme.savemyphone.R;
-import com.serveme.savemyphone.view.BackGroundActivity;
-import com.serveme.savemyphone.view.utils.AnalyticsExceptionParser;
-import com.serveme.savemyphone.view.utils.BackgroundUtility;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,7 +14,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
+
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.Tracker;
+import com.serveme.savemyphone.R;
+import com.serveme.savemyphone.view.utils.AnalyticsExceptionParser;
+import com.serveme.savemyphone.view.utils.BackgroundUtility;
 
 public class StanderListAdapter extends BaseAdapter {
 	private String choosedBacground;
@@ -53,7 +49,6 @@ public class StanderListAdapter extends BaseAdapter {
 						context, "background/" + assets[position],
 						imageButton.getWidth(), imageButton.getHeight());
 			} else {
-				Log.d("problem", "problem");
 				return null;
 			}
 		}
@@ -141,7 +136,7 @@ public class StanderListAdapter extends BaseAdapter {
 						.getBitmapDrawableFromAsset(context, "background/"
 								+ assets[holder.position]);
 				setChoosedBacground("background/" + assets[holder.position]);
-				background.setBackground(bitmapDrawable);
+				background.setBackgroundDrawable(bitmapDrawable);
 			}
 		});
 		return convertView;

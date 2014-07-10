@@ -36,7 +36,7 @@ public class AlertUtility {
 		SharedPreferences preferences = thisView.getContext()
 				.getSharedPreferences("mypref", Context.MODE_PRIVATE);
 		try {
-			thisView.setBackground(BackgroundUtility
+			thisView.setBackgroundDrawable(BackgroundUtility
 					.getBitmapDrawableFromAsset(
 							thisView.getContext(),
 							preferences.getString("background",

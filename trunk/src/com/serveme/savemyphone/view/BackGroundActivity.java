@@ -17,8 +17,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
@@ -44,7 +44,7 @@ public class BackGroundActivity extends ActionBarActivity {
 		final TwoWayView imagesPreview = (TwoWayView) this
 				.findViewById(R.id.images_preview);
 		final ImageView backgroundView = (ImageView) findViewById(R.id.background_image);
-		final LinearLayout progress = (LinearLayout) findViewById(R.id.progress);
+		final FrameLayout progress = (FrameLayout) findViewById(R.id.progress);
 		adapter = new StanderListAdapter(this);
 		imagesPreview.setAdapter(adapter);
 		imagesPreview.setOrientation(Orientation.HORIZONTAL);
@@ -104,7 +104,7 @@ public class BackGroundActivity extends ActionBarActivity {
 			protected void onPostExecute(Result result) {
 				if (result != null) {
 					imagesPreview.setSelection(result.position);
-					backgroundView.setBackground(result.drawable);
+					backgroundView.setBackgroundDrawable(result.drawable);
 				}
 				progress.setVisibility(View.GONE);
 			}
