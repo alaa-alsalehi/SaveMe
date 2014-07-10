@@ -1327,6 +1327,7 @@ containing a value of this type.
         public static final int change_background=0x7f0c0050;
         public static final int change_pattern=0x7f0c003f;
         public static final int confirm=0x7f0c0047;
+        public static final int control_notifications=0x7f0c0052;
         public static final int create_password=0x7f0c0032;
         public static final int create_pattern=0x7f0c0031;
         public static final int dialog_title=0x7f0c000e;
@@ -1352,6 +1353,7 @@ containing a value of this type.
         public static final int mail_subject=0x7f0c0048;
         public static final int network_failure=0x7f0c004e;
         public static final int no_thanks=0x7f0c0012;
+        public static final int notification_categeroy=0x7f0c0051;
         public static final int password_request_help=0x7f0c0034;
         public static final int pattern_settings_category=0x7f0c003e;
         public static final int prevent_message=0x7f0c0045;

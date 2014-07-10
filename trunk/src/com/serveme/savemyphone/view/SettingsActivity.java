@@ -15,6 +15,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
@@ -108,6 +109,22 @@ public class SettingsActivity extends PreferenceActivity implements
 						return true;
 					}
 				});
+		Preference controlNotificationsPreference = (Preference) findPreference("control_notifications");
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+			controlNotificationsPreference
+					.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+
+						@Override
+						public boolean onPreferenceClick(Preference preference) {
+							startActivity(new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
+							return true;
+						}
+					});
+		} else {
+			Preference controlNotificationsPreferenceCategoty = (Preference) findPreference("notifications_category");
+			getPreferenceScreen().removePreference(controlNotificationsPreferenceCategoty);
+			controlNotificationsPreference.setEnabled(false);
+		}
 	}
 
 	@Override

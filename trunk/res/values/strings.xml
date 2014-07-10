@@ -34,4 +34,7 @@
 	<string name="background_categeroy">Background Options</string>
 	<string name="change_background">Change Background</string>
 	
+	<string name="notification_categeroy">Notification Options</string>
+	<string name="control_notifications">Allow Control Notifications</string>
+	
 </resources>

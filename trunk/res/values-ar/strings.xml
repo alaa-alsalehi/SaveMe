@@ -35,4 +35,7 @@
 	<string name="recovery_activity_failure_dialoge">خطأ 1: فشلت عملية التحقق الرجاء التأكد من مطابقة الرمز المدخل للرمز المرسل على البريد الإلكتروني</string>
 	<string name="network_failure">خطأ 2: فشلت عملية الإرسال .. يرجى التحقق من إتصال الإنترنت لديك والمحاولة مرة أخرى</string>
 	
+	<string name="notification_categeroy">خيارات التنبيهات</string>
+	<string name="control_notifications">السماح بإزالة التنبيهات</string>
+	
 </resources>

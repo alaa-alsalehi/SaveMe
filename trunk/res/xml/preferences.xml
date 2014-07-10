@@ -8,25 +8,29 @@
         android:dialogTitle="@string/lock_choice"
         android:entries="@array/lock_options"
         android:entryValues="@array/lock_options"
-        android:defaultValue="pattern" />
+        android:defaultValue="pattern" />
     -->
-    <PreferenceCategory
-        android:title="@string/pattern_settings_category" >
+    <PreferenceCategory android:title="@string/pattern_settings_category" >
         <Preference
             android:key="change_pattern"
             android:title="@string/change_pattern" />
-        <CheckBoxPreference 
+
+        <CheckBoxPreference
+            android:defaultValue="false"
             android:key="stealth_mode"
-            android:title="@string/stealth_mode"
-            android:defaultValue="false"/>
-        
+            android:title="@string/stealth_mode" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/background_categeroy">
-        <Preference android:title="@string/change_background" android:key="change_background"/>
+    <PreferenceCategory android:title="@string/notification_categeroy" android:key="notifications_category" >
+        <Preference
+            android:key="control_notifications"
+            android:title="@string/control_notifications" />
     </PreferenceCategory>
-    
-    <PreferenceCategory
-        android:title="@string/uninstall_settings_category" >
+    <PreferenceCategory android:title="@string/background_categeroy" >
+        <Preference
+            android:key="change_background"
+            android:title="@string/change_background" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/uninstall_settings_category" >
         <Preference
             android:key="uninstall"
             android:title="@string/uninstall" />
@@ -35,7 +39,7 @@
     <!--
     <Preference android:title="test" >
 	    <intent android:action="com.serveme.savemyphone.view.UninstallActivity" />
-	</Preference>
+	</Preference>
     -->
 
 </PreferenceScreen>
