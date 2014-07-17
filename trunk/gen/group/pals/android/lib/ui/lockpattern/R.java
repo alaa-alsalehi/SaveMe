@@ -56,11 +56,11 @@ public final class R {
 		public static final int vertex = 0x7f02006d;
 	}
 	public static final class id {
-		public static final int alp_button_cancel = 0x7f070042;
-		public static final int alp_button_confirm = 0x7f070043;
-		public static final int alp_textview_info = 0x7f07003f;
-		public static final int alp_view_lock_pattern = 0x7f070041;
-		public static final int alp_viewgroup_footer = 0x7f070040;
+		public static final int alp_button_cancel = 0x7f070048;
+		public static final int alp_button_confirm = 0x7f070049;
+		public static final int alp_textview_info = 0x7f070045;
+		public static final int alp_view_lock_pattern = 0x7f070047;
+		public static final int alp_viewgroup_footer = 0x7f070046;
 	}
 	public static final class integer {
 		public static final int alp_pkey_display_captcha_wired_dots_default = 0x7f0b0003;
@@ -68,9 +68,9 @@ public final class R {
 		public static final int alp_pkey_display_min_wired_dots_default = 0x7f0b0001;
 	}
 	public static final class layout {
-		public static final int alp_lock_pattern_activity = 0x7f030018;
-		public static final int alp_lock_pattern_activity_land = 0x7f030019;
-		public static final int alp_lock_pattern_view = 0x7f03001a;
+		public static final int alp_lock_pattern_activity = 0x7f030019;
+		public static final int alp_lock_pattern_activity_land = 0x7f03001a;
+		public static final int alp_lock_pattern_view = 0x7f03001b;
 	}
 	public static final class plurals {
 		public static final int alp_pmsg_connect_x_dots = 0x7f0e0000;

@@ -28,6 +28,7 @@ public class SettingsActivity extends PreferenceActivity implements
 
 	private static final int REQ_CHANGE_PATTERN = 1;
 	private static final int REQ_CHANGE_BACKGROUND = 2;
+	private static final int REQ_CHANGE_LOCK_PATTERN = 3;
 	private static final String KEY_LOCK_METHOD = "lock_method";
 	private PrefEditor pe;
 
@@ -58,6 +59,7 @@ public class SettingsActivity extends PreferenceActivity implements
 						return true;
 					}
 				});
+
 		stealthModePreference
 				.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
@@ -74,6 +76,55 @@ public class SettingsActivity extends PreferenceActivity implements
 							cbPreference.setChecked(true);
 							return true;
 						}
+					}
+				});
+		CheckBoxPreference hideLockPreference = (CheckBoxPreference) findPreference("hide_lock");
+		SharedPreferences preferences = getSharedPreferences("mypref",
+				Context.MODE_PRIVATE);
+		if (preferences.getBoolean("hidden_lock_active", false)) {
+			hideLockPreference.setChecked(true);
+		} else {
+			hideLockPreference.setEnabled(false);
+		}
+		hideLockPreference
+				.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+					@Override
+					public boolean onPreferenceChange(Preference preference,
+							Object newValue) {
+						CheckBoxPreference cbPreference = (CheckBoxPreference) preference;
+						if (cbPreference.isChecked()) {
+							SharedPreferences preferences = getSharedPreferences(
+									"mypref", Context.MODE_PRIVATE);
+							Editor edit = preferences.edit();
+							edit.putBoolean("hidden_lock_active", false);
+							edit.apply();
+							cbPreference.setChecked(false);
+							cbPreference.setEnabled(false);
+							return false;
+						} else {
+							SharedPreferences preferences = getSharedPreferences(
+									"mypref", Context.MODE_PRIVATE);
+							Editor edit = preferences.edit();
+							edit.putBoolean("hidden_lock_active", true);
+							edit.apply();
+							cbPreference.setChecked(true);
+							return true;
+						}
+					}
+				});
+		Preference changeLockPatternPreference = (Preference) findPreference("change_lock_pattern");
+		changeLockPatternPreference
+				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+
+					@Override
+					public boolean onPreferenceClick(Preference preference) {
+						Intent intent = new Intent(SettingsActivity.this,
+								UnlockSettingsActivity.class);
+						startActivityForResult(intent, REQ_CHANGE_LOCK_PATTERN);
+						MyTracker.fireButtonPressedEvent(SettingsActivity.this,
+								"change_lock_pattern");
+						return true;
 					}
 				});
 
@@ -116,13 +167,15 @@ public class SettingsActivity extends PreferenceActivity implements
 
 						@Override
 						public boolean onPreferenceClick(Preference preference) {
-							startActivity(new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
+							startActivity(new Intent(
+									"android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
 							return true;
 						}
 					});
 		} else {
 			Preference controlNotificationsPreferenceCategoty = (Preference) findPreference("notifications_category");
-			getPreferenceScreen().removePreference(controlNotificationsPreferenceCategoty);
+			getPreferenceScreen().removePreference(
+					controlNotificationsPreferenceCategoty);
 			controlNotificationsPreference.setEnabled(false);
 		}
 	}
@@ -196,6 +249,15 @@ public class SettingsActivity extends PreferenceActivity implements
 				edit.apply();
 			}
 			break;
+		case REQ_CHANGE_LOCK_PATTERN:
+			if(resultCode==Activity.RESULT_OK){
+				CheckBoxPreference hideLockPreference = (CheckBoxPreference) findPreference("hide_lock");
+				//OnPreferenceChangeListener changelistener = hideLockPreference.getOnPreferenceChangeListener();
+				//hideLockPreference.setOnPreferenceChangeListener(null);
+				hideLockPreference.setEnabled(true);
+				hideLockPreference.setChecked(true);
+				
+			}
 		}
 	}
 }

@@ -8,7 +8,7 @@
         android:dialogTitle="@string/lock_choice"
         android:entries="@array/lock_options"
         android:entryValues="@array/lock_options"
-        android:defaultValue="pattern" />
+        android:defaultValue="pattern" />
     -->
     <PreferenceCategory android:title="@string/pattern_settings_category" >
         <Preference
@@ -20,7 +20,19 @@
             android:key="stealth_mode"
             android:title="@string/stealth_mode" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/notification_categeroy" android:key="notifications_category" >
+    <PreferenceCategory android:title="@string/hidden_settings_category" >
+        <Preference
+            android:key="change_lock_pattern"
+            android:title="@string/change_lock_pattern" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="hide_lock"
+            android:title="@string/hide_lock" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="notifications_category"
+        android:title="@string/notification_categeroy" >
         <Preference
             android:key="control_notifications"
             android:title="@string/control_notifications" />
@@ -39,7 +51,7 @@
     <!--
     <Preference android:title="test" >
 	    <intent android:action="com.serveme.savemyphone.view.UninstallActivity" />
-	</Preference>
+	</Preference>
     -->
 
 </PreferenceScreen>

@@ -1,6 +1,8 @@
 package com.serveme.savemyphone.view;
 
 import java.io.IOException;
+import java.lang.reflect.GenericArrayType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,16 +11,21 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.control.GridAdapter;
 import com.serveme.savemyphone.model.DBOperations;
@@ -31,6 +38,8 @@ public class UserView extends FrameLayout {
 	private DBOperations db;
 	private GridAdapter ga;
 	private GridView gridView;
+	private Launcher[] launchers;
+	private List<Launcher> currentLaunchers = new ArrayList<Launcher>();
 
 	public UserView(Context context) {
 		super(context);
@@ -79,7 +88,9 @@ public class UserView extends FrameLayout {
 				}
 			}
 		});
-		ImageButton unlock = (ImageButton) view.findViewById(R.id.unlock);
+
+		final ImageButton unlock = (ImageButton) view.findViewById(R.id.unlock);
+
 		unlock.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -97,6 +108,46 @@ public class UserView extends FrameLayout {
 		super.onAttachedToWindow();
 		appsinfolist.clear();
 		appsinfolist.addAll(db.getWhiteListApps());
+		currentLaunchers.clear();
+		final ImageButton unlock = (ImageButton) findViewById(R.id.unlock);
+		SharedPreferences preferences = getContext().getSharedPreferences(
+				"mypref", Context.MODE_PRIVATE);
+		boolean hiddenLock = preferences
+				.getBoolean("hidden_lock_active", false);
+		if (hiddenLock) {
+			unlock.setVisibility(View.GONE);
+			launchers = new Gson().fromJson(
+					preferences.getString("hidden_lock", null),
+					new GenericArrayType() {
+
+						@Override
+						public Type getGenericComponentType() {
+
+							return Launcher.class;
+						}
+					});
+			gridView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+				@Override
+				public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+						int position, long arg3) {
+					currentLaunchers.add(appsinfolist.get(position));
+					for (int i = 0; i < currentLaunchers.size(); i++) {
+						if (!launchers[i].equals(currentLaunchers.get(i))) {
+							currentLaunchers.clear();
+							return true;
+						}
+					}
+					if (currentLaunchers.size() == launchers.length) {
+						unlock.setVisibility(View.VISIBLE);
+					}
+					return true;
+				}
+			});
+		} else {
+			unlock.setVisibility(View.VISIBLE);
+			gridView.setOnItemClickListener(null);
+		}
 		ga.notifyDataSetInvalidated();
 		MyTracker.getUncaughtExceptionHandler();
 		// ÊÍÏíË ÇáÞÇÆãÉ Ýí ÍÇá ÊÛííÑ æÖÚ SDCard
@@ -108,6 +159,7 @@ public class UserView extends FrameLayout {
 	protected void onDetachedFromWindow() {
 		super.onDetachedFromWindow();
 		getContext().unregisterReceiver(refreshList);
+
 	}
 
 	private final BroadcastReceiver refreshList = new BroadcastReceiver() {
