@@ -127,7 +127,13 @@ public class SettingsActivity extends PreferenceActivity implements
 						return true;
 					}
 				});
-
+		
+		//≈Ìﬁ«› «·ﬁ›· «·„Œ›Ì „ƒﬁ «
+		if (true) {
+			Preference hiddenSettingsPreferenceCategoty = (Preference) findPreference("hidden_settings_category");
+			getPreferenceScreen().removePreference(
+					hiddenSettingsPreferenceCategoty);
+		}
 		uninstallPref
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 					public boolean onPreferenceClick(Preference preference) {
@@ -250,13 +256,14 @@ public class SettingsActivity extends PreferenceActivity implements
 			}
 			break;
 		case REQ_CHANGE_LOCK_PATTERN:
-			if(resultCode==Activity.RESULT_OK){
+			if (resultCode == Activity.RESULT_OK) {
 				CheckBoxPreference hideLockPreference = (CheckBoxPreference) findPreference("hide_lock");
-				//OnPreferenceChangeListener changelistener = hideLockPreference.getOnPreferenceChangeListener();
-				//hideLockPreference.setOnPreferenceChangeListener(null);
+				// OnPreferenceChangeListener changelistener =
+				// hideLockPreference.getOnPreferenceChangeListener();
+				// hideLockPreference.setOnPreferenceChangeListener(null);
 				hideLockPreference.setEnabled(true);
 				hideLockPreference.setChecked(true);
-				
+
 			}
 		}
 	}
