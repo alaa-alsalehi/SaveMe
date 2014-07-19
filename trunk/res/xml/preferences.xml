@@ -20,7 +20,7 @@
             android:key="stealth_mode"
             android:title="@string/stealth_mode" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/hidden_settings_category" >
+    <PreferenceCategory android:title="@string/hidden_settings_category" android:key="hidden_settings_category" >
         <Preference
             android:key="change_lock_pattern"
             android:title="@string/change_lock_pattern" />
