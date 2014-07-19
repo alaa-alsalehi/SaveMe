@@ -1,9 +1,12 @@
 package com.serveme.savemyphone.view;
 
 import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,7 +22,7 @@ import com.serveme.savemyphone.service.AppsMonitor;
 import com.serveme.savemyphone.util.MyTracker;
 import com.serveme.savemyphone.view.utils.Authenticator;
 
-public class UserActivity extends ActionBarActivity implements AdListener {
+public class UserActivity extends Activity implements AdListener {
 
 	private static final int REQ_ENTER_PATTERN = 2;
 
@@ -30,7 +33,10 @@ public class UserActivity extends ActionBarActivity implements AdListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.user_activity);
+		// setContentView(R.layout.user_activity);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			getActionBar().hide();
+		}
 		new Authenticator(this).checkPattern(REQ_ENTER_PATTERN);
 		MyTracker.fireButtonPressedEvent(UserActivity.this, "unlock");
 	}
@@ -59,7 +65,6 @@ public class UserActivity extends ActionBarActivity implements AdListener {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
 		case REQ_ENTER_PATTERN: {
-			finish();
 			switch (resultCode) {
 			case RESULT_OK:
 				// Log.v("result", "passed");
@@ -79,15 +84,14 @@ public class UserActivity extends ActionBarActivity implements AdListener {
 
 				break;
 			case RESULT_CANCELED:
-				// Log.v("result", "canceled");
-				break;
+
 			case LockPatternActivity.RESULT_FAILED:
-				// Log.v("result", "faild");
-				break;
+
 			case LockPatternActivity.RESULT_FORGOT_PATTERN:
 				// The user forgot the pattern and invoked your recovery
 				// Activity.
-				break;
+			default:
+				finish();
 			}
 
 			/*
@@ -134,8 +138,8 @@ public class UserActivity extends ActionBarActivity implements AdListener {
 	public void onReceiveAd(Ad arg0) {
 		if (interstitial != null) {
 			interstitial.show();
+			finish();
 		}
-
 	}
 
 }
