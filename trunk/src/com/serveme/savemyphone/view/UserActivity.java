@@ -37,6 +37,7 @@ public class UserActivity extends Activity implements AdListener {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 			getActionBar().hide();
 		}
+		
 		new Authenticator(this).checkPattern(REQ_ENTER_PATTERN);
 		MyTracker.fireButtonPressedEvent(UserActivity.this, "unlock");
 	}
@@ -73,16 +74,15 @@ public class UserActivity extends Activity implements AdListener {
 				UserActivity.this.stopService(new Intent(UserActivity.this,
 						AppsMonitor.class));
 				// Create the interstitial
-				interstitial = new InterstitialAd(this, MY_INTERSTITIAL_UNIT_ID);
+				//interstitial = new InterstitialAd(this, MY_INTERSTITIAL_UNIT_ID);
 
 				// Create ad request
-				AdRequest adRequest = new AdRequest();
+				//AdRequest adRequest = new AdRequest();
 
 				// Begin loading your interstitial
-				interstitial.loadAd(adRequest);
-				interstitial.setAdListener(this);
+				//interstitial.loadAd(adRequest);
+				//interstitial.setAdListener(this);
 
-				break;
 			case RESULT_CANCELED:
 
 			case LockPatternActivity.RESULT_FAILED:
@@ -92,7 +92,9 @@ public class UserActivity extends Activity implements AdListener {
 				// Activity.
 			default:
 				finish();
+				break;
 			}
+
 
 			/*
 			 * In any case, there's always a key EXTRA_RETRY_COUNT, which holds
@@ -118,8 +120,7 @@ public class UserActivity extends Activity implements AdListener {
 
 	@Override
 	public void onFailedToReceiveAd(Ad arg0, ErrorCode arg1) {
-		// TODO Auto-generated method stub
-
+		finish();
 	}
 
 	@Override
@@ -138,7 +139,6 @@ public class UserActivity extends Activity implements AdListener {
 	public void onReceiveAd(Ad arg0) {
 		if (interstitial != null) {
 			interstitial.show();
-			finish();
 		}
 	}
 
