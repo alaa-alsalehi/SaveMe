@@ -1,6 +1,8 @@
 package com.serveme.savemyphone.view.wizard;
 
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Spannable;
@@ -16,6 +18,7 @@ import android.widget.TextView.BufferType;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.util.MyTracker;
 import com.serveme.savemyphone.view.MainActivity;
+import com.serveme.savemyphone.view.UserLauncherActivity;
 
 public class HelpActivity extends ActionBarActivity {
 
@@ -40,12 +43,19 @@ public class HelpActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				if (getIntent() != null) {
 					if (getIntent().getBooleanExtra("first_time", false)) {
-						Intent intent = new Intent(HelpActivity.this, MainActivity.class);
+						Intent intent = new Intent(HelpActivity.this,
+								MainActivity.class);
 						intent.putExtra("first_time", true);
 						startActivity(intent);
+						getPackageManager().setComponentEnabledSetting(
+								new ComponentName(HelpActivity.this,
+										UserLauncherActivity.class),
+								PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+								PackageManager.DONT_KILL_APP);
 					}
 				}
-				MyTracker.fireButtonPressedEvent(HelpActivity.this,	"finish_wizard");
+				MyTracker.fireButtonPressedEvent(HelpActivity.this,
+						"finish_wizard");
 				finish();
 			}
 		});
@@ -58,14 +68,18 @@ public class HelpActivity extends ActionBarActivity {
 			throw new UnknownError();
 		}
 		SpannableStringBuilder ssb = new SpannableStringBuilder(useHelp);
-		ImageSpan imageSpan = new ImageSpan(HelpActivity.this, R.drawable.lock,	ImageSpan.ALIGN_BASELINE);
-		ssb.setSpan(imageSpan, index, index + 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		ImageSpan imageSpan = new ImageSpan(HelpActivity.this, R.drawable.lock,
+				ImageSpan.ALIGN_BASELINE);
+		ssb.setSpan(imageSpan, index, index + 3,
+				Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		index = useHelp.indexOf("{2}");
 		if (index < 0) {
 			throw new UnknownError();
 		}
-		imageSpan = new ImageSpan(HelpActivity.this, R.drawable.unlock,	ImageSpan.ALIGN_BASELINE);
-		ssb.setSpan(imageSpan, index, index + 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		imageSpan = new ImageSpan(HelpActivity.this, R.drawable.unlock,
+				ImageSpan.ALIGN_BASELINE);
+		ssb.setSpan(imageSpan, index, index + 3,
+				Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		textView.setText(ssb, BufferType.SPANNABLE);
 	}
 

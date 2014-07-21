@@ -2,6 +2,7 @@ package com.serveme.savemyphone.view.utils;
 
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.receivers.AdminReciver;
+import com.serveme.savemyphone.view.UserLauncherActivity;
 import com.serveme.savemyphone.view.wizard.AdminRequest;
 import com.serveme.savemyphone.view.wizard.HelpActivity;
 import com.serveme.savemyphone.view.wizard.PasswordRequest;
@@ -12,11 +13,12 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 
 public class ActivitiesController {
 
 	private static final int REQ_ENTER_PATTERN = 2;
-	
+
 	private Activity activity;
 	private DevicePolicyManager devicePolicyManager;
 	private ComponentName adminComponent;
@@ -25,7 +27,8 @@ public class ActivitiesController {
 
 	public ActivitiesController(Activity activity) {
 		this.activity = activity;
-		devicePolicyManager = (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
+		devicePolicyManager = (DevicePolicyManager) activity
+				.getSystemService(Context.DEVICE_POLICY_SERVICE);
 		adminComponent = new ComponentName(activity, AdminReciver.class);
 		auth = new Authenticator(activity);
 		pe = new PrefEditor(activity);
@@ -40,17 +43,24 @@ public class ActivitiesController {
 			activity.finish();
 			Intent intent = new Intent(activity, PasswordRequest.class);
 			activity.startActivity(intent);
-		}else if(!pe.isEmailExist()){
+		} else if (!pe.isEmailExist()) {
 			activity.finish();
 			Intent intent = new Intent(activity, RecoveryEmailRequest.class);
 			activity.startActivity(intent);
-		} else if (pe.isNewUser()){
+		} else if (pe.isNewUser()) {
+			activity.getPackageManager().setComponentEnabledSetting(
+					new ComponentName(activity,
+							UserLauncherActivity.class),
+					PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+					PackageManager.DONT_KILL_APP);
 			activity.finish();
 			Intent intent = new Intent(activity, HelpActivity.class);
 			intent.putExtra("first_time", true);
-			activity.startActivity(intent); 
+			activity.startActivity(intent);
 		} else {
-			if (activity.getIntent() == null || !activity.getIntent().getBooleanExtra("first_time",	false)) {
+			if (activity.getIntent() == null
+					|| !activity.getIntent().getBooleanExtra("first_time",
+							false)) {
 				if (pe.getLockMethod().equals("pattern")) {
 					auth.checkPattern(REQ_ENTER_PATTERN);
 				} else {

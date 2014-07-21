@@ -20,8 +20,10 @@ import com.serveme.savemyphone.view.utils.AdMobListener;
 import com.serveme.savemyphone.view.wizard.HelpActivity;
 
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
@@ -45,7 +47,8 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// Calling this to ensures that your application is properly initialized with default settings
+		// Calling this to ensures that your application is properly initialized
+		// with default settings
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 		ac = new ActivitiesController(MainActivity.this);
 		pe = new PrefEditor(MainActivity.this);
@@ -53,7 +56,8 @@ public class MainActivity extends ActionBarActivity {
 			ac.getActivitiesFlow();
 		}
 		setContentView(R.layout.main_activity);
-		if (getIntent().getBooleanExtra("first_time", false)|| savedInstanceState != null) {
+		if (getIntent().getBooleanExtra("first_time", false)
+				|| savedInstanceState != null) {
 			intialize();
 		}
 	}
@@ -66,11 +70,11 @@ public class MainActivity extends ActionBarActivity {
 		listView.setSmoothScrollbarEnabled(true);
 		listView.setAdapter(adapter);
 		adsStuff();
-	   	try {
- 			AppRater.app_launched(MainActivity.this);
- 		} catch (InCorrectMarketException e) {
+		try {
+			AppRater.app_launched(MainActivity.this);
+		} catch (InCorrectMarketException e) {
 
- 		}
+		}
 	}
 
 	protected LinearLayout createListHeader() {
@@ -108,8 +112,6 @@ public class MainActivity extends ActionBarActivity {
 		// adRequest.addTestDevice("8E7864D6D7911778659788D0B39F99E8");
 		adView.loadAd(adRequest);
 	}
-	
-	
 
 	@Override
 	public void onBackPressed() {
