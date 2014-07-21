@@ -26,7 +26,7 @@ public class UserActivity extends Activity implements AdListener {
 
 	private static final int REQ_ENTER_PATTERN = 2;
 
-	private static final String MY_INTERSTITIAL_UNIT_ID = "2ac0657dacb4406b";
+	private static final String MY_INTERSTITIAL_UNIT_ID = "ca-app-pub-5487351232333966/9316100059 ";
 
 	private InterstitialAd interstitial;
 
