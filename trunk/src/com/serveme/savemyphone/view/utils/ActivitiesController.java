@@ -48,11 +48,11 @@ public class ActivitiesController {
 			Intent intent = new Intent(activity, RecoveryEmailRequest.class);
 			activity.startActivity(intent);
 		} else if (pe.isNewUser()) {
-			activity.getPackageManager().setComponentEnabledSetting(
+			/*activity.getPackageManager().setComponentEnabledSetting(
 					new ComponentName(activity,
 							UserLauncherActivity.class),
 					PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-					PackageManager.DONT_KILL_APP);
+					PackageManager.DONT_KILL_APP);*/
 			activity.finish();
 			Intent intent = new Intent(activity, HelpActivity.class);
 			intent.putExtra("first_time", true);

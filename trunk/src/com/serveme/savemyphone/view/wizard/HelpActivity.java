@@ -47,11 +47,11 @@ public class HelpActivity extends ActionBarActivity {
 								MainActivity.class);
 						intent.putExtra("first_time", true);
 						startActivity(intent);
-						getPackageManager().setComponentEnabledSetting(
+						/*getPackageManager().setComponentEnabledSetting(
 								new ComponentName(HelpActivity.this,
 										UserLauncherActivity.class),
 								PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-								PackageManager.DONT_KILL_APP);
+								PackageManager.DONT_KILL_APP);*/
 					}
 				}
 				MyTracker.fireButtonPressedEvent(HelpActivity.this,
