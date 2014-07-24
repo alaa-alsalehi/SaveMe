@@ -505,11 +505,16 @@ android.support.v4.util.ArrayMap:
 android.support.v4.util.AtomicFile
 android.support.v4.util.ContainerHelpers:
     19:19:ContainerHelpers()
-    29:29:public static int idealLongArraySize(int)
-    65:80:static int binarySearch(long[],int,long)
 android.support.v4.util.DebugUtils:
     25:25:public DebugUtils()
-android.support.v4.util.LongSparseArray
+android.support.v4.util.LongSparseArray:
+    96:96:public java.lang.Object get(long)
+    105:110:public java.lang.Object get(long,java.lang.Object)
+    132:133:public void remove(long)
+    139:143:public void removeAt(int)
+    283:287:public int indexOfKey(long)
+    299:307:public int indexOfValue(java.lang.Object)
+    330:357:public void append(long,java.lang.Object)
 android.support.v4.util.LruCache
 android.support.v4.util.SimpleArrayMap:
     private static final boolean DEBUG
@@ -524,11 +529,8 @@ android.support.v4.util.SparseArrayCompat:
     85:90:public java.lang.Object get(int,java.lang.Object)
     98:106:public void delete(int)
     112:113:public void remove(int)
-    119:123:public void removeAt(int)
     132:136:public void removeAtRange(int,int)
-    172:216:public void put(int,java.lang.Object)
     263:268:public void setValueAt(int,java.lang.Object)
-    276:280:public int indexOfKey(int)
     294:302:public int indexOfValue(java.lang.Object)
     325:352:public void append(int,java.lang.Object)
 android.support.v4.util.TimeUtils
@@ -719,11 +721,9 @@ android.support.v4.view.ViewCompat:
     public static final int MEASURED_STATE_TOO_SMALL
     34:534:public ViewCompat()
     585:585:public static boolean canScrollVertically(android.view.View,int)
-    614:615:public static void setOverScrollMode(android.view.View,int)
     651:652:public static void onPopulateAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent)
     684:685:public static void onInitializeAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent)
     720:721:public static void onInitializeAccessibilityNodeInfo(android.view.View,android.support.v4.view.accessibility.AccessibilityNodeInfoCompat)
-    747:747:public static boolean hasTransientState(android.view.View)
     758:759:public static void setHasTransientState(android.view.View,boolean)
     820:821:public static void postOnAnimationDelayed(android.view.View,java.lang.Runnable,long)
     872:872:public static boolean performAccessibilityAction(android.view.View,int,android.os.Bundle)
@@ -740,11 +740,9 @@ android.support.v4.view.ViewCompat:
     1188:1189:public void setAccessibilityLiveRegion(android.view.View,int)
 android.support.v4.view.ViewCompat$BaseViewCompatImpl:
     239:239:public boolean canScrollVertically(android.view.View,int)
-    246:246:public void setOverScrollMode(android.view.View,int)
     252:252:public void onPopulateAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent)
     255:255:public void onInitializeAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent)
     258:258:public void onInitializeAccessibilityNodeInfo(android.view.View,android.support.v4.view.accessibility.AccessibilityNodeInfoCompat)
-    261:261:public boolean hasTransientState(android.view.View)
     265:265:public void setHasTransientState(android.view.View,boolean)
     276:277:public void postOnAnimationDelayed(android.view.View,java.lang.Runnable,long)
     288:288:public boolean performAccessibilityAction(android.view.View,int,android.os.Bundle)
@@ -759,8 +757,6 @@ android.support.v4.view.ViewCompat$BaseViewCompatImpl:
     352:352:public int getMeasuredState(android.view.View)
     357:357:public int getAccessibilityLiveRegion(android.view.View)
     363:363:public void setAccessibilityLiveRegion(android.view.View,int)
-android.support.v4.view.ViewCompat$GBViewCompatImpl:
-    380:381:public void setOverScrollMode(android.view.View,int)
 android.support.v4.view.ViewCompat$HCViewCompatImpl:
     391:391:public float getAlpha(android.view.View)
     411:411:public int resolveSizeAndState(int,int,int)
@@ -773,7 +769,6 @@ android.support.v4.view.ViewCompat$ICSViewCompatImpl:
     442:443:public void onInitializeAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent)
     446:447:public void onInitializeAccessibilityNodeInfo(android.view.View,android.support.v4.view.accessibility.AccessibilityNodeInfoCompat)
 android.support.v4.view.ViewCompat$JBViewCompatImpl:
-    457:457:public boolean hasTransientState(android.view.View)
     461:462:public void setHasTransientState(android.view.View,boolean)
     477:478:public void postOnAnimationDelayed(android.view.View,java.lang.Runnable,long)
     489:489:public boolean performAccessibilityAction(android.view.View,int,android.os.Bundle)
@@ -787,11 +782,9 @@ android.support.v4.view.ViewCompat$KitKatViewCompatImpl:
     542:543:public void setAccessibilityLiveRegion(android.view.View,int)
 android.support.v4.view.ViewCompat$ViewCompatImpl:
     public abstract boolean canScrollVertically(android.view.View,int)
-    public abstract void setOverScrollMode(android.view.View,int)
     public abstract void onInitializeAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent)
     public abstract void onPopulateAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent)
     public abstract void onInitializeAccessibilityNodeInfo(android.view.View,android.support.v4.view.accessibility.AccessibilityNodeInfoCompat)
-    public abstract boolean hasTransientState(android.view.View)
     public abstract void setHasTransientState(android.view.View,boolean)
     public abstract void postOnAnimationDelayed(android.view.View,java.lang.Runnable,long)
     public abstract boolean performAccessibilityAction(android.view.View,int,android.os.Bundle)
@@ -810,7 +803,6 @@ android.support.v4.view.ViewCompatEclairMr1:
     22:22:ViewCompatEclairMr1()
 android.support.v4.view.ViewCompatGingerbread:
     21:21:ViewCompatGingerbread()
-    27:28:public static void setOverScrollMode(android.view.View,int)
 android.support.v4.view.ViewCompatHC:
     23:23:ViewCompatHC()
     29:29:public static float getAlpha(android.view.View)
@@ -826,7 +818,6 @@ android.support.v4.view.ViewCompatICS:
     50:51:public static void onInitializeAccessibilityNodeInfo(android.view.View,java.lang.Object)
 android.support.v4.view.ViewCompatJB:
     26:26:ViewCompatJB()
-    29:29:public static boolean hasTransientState(android.view.View)
     33:34:public static void setHasTransientState(android.view.View,boolean)
     50:51:public static void postOnAnimationDelayed(android.view.View,java.lang.Runnable,long)
     62:62:public static boolean performAccessibilityAction(android.view.View,int,android.os.Bundle)
@@ -1327,17 +1318,8 @@ android.support.v4.widget.DrawerLayout:
 android.support.v4.widget.DrawerLayout$LayoutParams:
     1509:1511:public DrawerLayout$LayoutParams(int,int,int)
 android.support.v4.widget.DrawerLayout$SimpleDrawerListener
-android.support.v4.widget.EdgeEffectCompat:
-    204:204:public boolean onAbsorb(int)
-android.support.v4.widget.EdgeEffectCompat$BaseEdgeEffectImpl:
-    82:82:public boolean onAbsorb(java.lang.Object,int)
-android.support.v4.widget.EdgeEffectCompat$EdgeEffectIcsImpl:
-    116:116:public boolean onAbsorb(java.lang.Object,int)
-android.support.v4.widget.EdgeEffectCompat$EdgeEffectImpl:
-    public abstract boolean onAbsorb(java.lang.Object,int)
 android.support.v4.widget.EdgeEffectCompatIcs:
     28:28:EdgeEffectCompatIcs()
-    57:58:public static boolean onAbsorb(java.lang.Object,int)
 android.support.v4.widget.ExploreByTouchHelper
 android.support.v4.widget.ExploreByTouchHelper$1
 android.support.v4.widget.ExploreByTouchHelper$ExploreByTouchNodeProvider
@@ -3197,6 +3179,167 @@ com.google.android.gms.analytics.internal.IAnalyticsService$Stub:
 com.google.android.gms.analytics.internal.IAnalyticsService$Stub$Proxy:
     87:87:public java.lang.String getInterfaceDescriptor()
 com.google.android.gms.common.util.VisibleForTesting
+com.google.gson.DefaultDateTypeAdapter
+com.google.gson.FieldAttributes:
+    53:53:public java.lang.Class getDeclaringClass()
+    60:60:public java.lang.String getName()
+    80:80:public java.lang.reflect.Type getDeclaredType()
+    100:100:public java.lang.Class getDeclaredClass()
+    111:111:public java.lang.annotation.Annotation getAnnotation(java.lang.Class)
+    121:121:public java.util.Collection getAnnotations()
+    135:135:public boolean hasModifier(int)
+    146:146:java.lang.Object get(java.lang.Object)
+    155:155:boolean isSynthetic()
+com.google.gson.Gson:
+    static final boolean DEFAULT_JSON_NON_EXECUTABLE
+    private static final java.lang.String JSON_NON_EXECUTABLE_PREFIX
+    415:418:public com.google.gson.JsonElement toJsonTree(java.lang.Object)
+    438:440:public com.google.gson.JsonElement toJsonTree(java.lang.Object,java.lang.reflect.Type)
+    499:504:public void toJson(java.lang.Object,java.lang.Appendable)
+    642:643:public java.lang.Object fromJson(java.lang.String,java.lang.Class)
+    693:696:public java.lang.Object fromJson(java.io.Reader,java.lang.Class)
+    792:793:public java.lang.Object fromJson(com.google.gson.JsonElement,java.lang.Class)
+    816:819:public java.lang.Object fromJson(com.google.gson.JsonElement,java.lang.reflect.Type)
+com.google.gson.Gson$2:
+    132:132:public java.lang.Object deserialize(com.google.gson.JsonElement,java.lang.reflect.Type)
+com.google.gson.Gson$3:
+    138:138:public com.google.gson.JsonElement serialize(java.lang.Object)
+    141:141:public com.google.gson.JsonElement serialize(java.lang.Object,java.lang.reflect.Type)
+com.google.gson.GsonBuilder
+com.google.gson.JsonArray:
+    61:62:public void addAll(com.google.gson.JsonArray)
+    70:70:public int size()
+    92:92:public com.google.gson.JsonElement get(int)
+    154:157:public java.math.BigDecimal getAsBigDecimal()
+    171:174:public java.math.BigInteger getAsBigInteger()
+    187:190:public float getAsFloat()
+    227:230:public byte getAsByte()
+    235:238:public char getAsCharacter()
+    251:254:public short getAsShort()
+com.google.gson.JsonDeserializationContext:
+    public abstract java.lang.Object deserialize(com.google.gson.JsonElement,java.lang.reflect.Type)
+com.google.gson.JsonDeserializer
+com.google.gson.JsonElement:
+    130:133:public com.google.gson.JsonNull getAsJsonNull()
+    211:211:public float getAsFloat()
+    251:251:public byte getAsByte()
+    265:265:public char getAsCharacter()
+    279:279:public java.math.BigDecimal getAsBigDecimal()
+    293:293:public java.math.BigInteger getAsBigInteger()
+    306:306:public short getAsShort()
+com.google.gson.JsonIOException:
+    private static final long serialVersionUID
+    33:34:public JsonIOException(java.lang.String,java.lang.Throwable)
+com.google.gson.JsonObject:
+    68:68:public com.google.gson.JsonElement remove(java.lang.String)
+    79:80:public void addProperty(java.lang.String,java.lang.String)
+    90:91:public void addProperty(java.lang.String,java.lang.Number)
+    101:102:public void addProperty(java.lang.String,java.lang.Boolean)
+    112:113:public void addProperty(java.lang.String,java.lang.Character)
+    122:122:private com.google.gson.JsonElement createJsonElement(java.lang.Object)
+    142:142:public boolean has(java.lang.String)
+    152:156:public com.google.gson.JsonElement get(java.lang.String)
+    166:166:public com.google.gson.JsonPrimitive getAsJsonPrimitive(java.lang.String)
+    176:176:public com.google.gson.JsonArray getAsJsonArray(java.lang.String)
+    186:186:public com.google.gson.JsonObject getAsJsonObject(java.lang.String)
+com.google.gson.JsonParseException:
+    static final long serialVersionUID
+com.google.gson.JsonParser
+com.google.gson.JsonPrimitive:
+    74:76:public JsonPrimitive(java.lang.Character)
+    84:86:JsonPrimitive(java.lang.Object)
+    199:199:public java.math.BigDecimal getAsBigDecimal()
+    210:210:public java.math.BigInteger getAsBigInteger()
+    222:222:public float getAsFloat()
+    244:244:public short getAsShort()
+    260:260:public byte getAsByte()
+    265:265:public char getAsCharacter()
+com.google.gson.JsonSerializationContext:
+    public abstract com.google.gson.JsonElement serialize(java.lang.Object)
+    public abstract com.google.gson.JsonElement serialize(java.lang.Object,java.lang.reflect.Type)
+com.google.gson.JsonSerializer
+com.google.gson.JsonStreamParser
+com.google.gson.JsonSyntaxException:
+    private static final long serialVersionUID
+com.google.gson.LongSerializationPolicy:
+    public abstract com.google.gson.JsonElement serialize(java.lang.Long)
+com.google.gson.LongSerializationPolicy$1:
+    36:36:public com.google.gson.JsonElement serialize(java.lang.Long)
+com.google.gson.LongSerializationPolicy$2:
+    47:47:public com.google.gson.JsonElement serialize(java.lang.Long)
+com.google.gson.TreeTypeAdapter
+com.google.gson.TreeTypeAdapter$1
+com.google.gson.TreeTypeAdapter$SingleTypeFactory
+com.google.gson.TypeAdapter:
+    140:142:final void toJson(java.io.Writer,java.lang.Object)
+    185:185:public final com.google.gson.TypeAdapter nullSafe()
+    213:215:final java.lang.String toJson(java.lang.Object)
+    226:231:final com.google.gson.JsonElement toJsonTree(java.lang.Object)
+    252:254:final java.lang.Object fromJson(java.io.Reader)
+    266:266:final java.lang.Object fromJson(java.lang.String)
+    276:280:final java.lang.Object fromJsonTree(com.google.gson.JsonElement)
+com.google.gson.TypeAdapter$1
+com.google.gson.internal.$Gson$Preconditions:
+    32:32:public $Gson$Preconditions()
+com.google.gson.internal.$Gson$Types:
+    45:45:private $Gson$Types()
+com.google.gson.internal.$Gson$Types$GenericArrayTypeImpl:
+    private static final long serialVersionUID
+com.google.gson.internal.$Gson$Types$ParameterizedTypeImpl:
+    private static final long serialVersionUID
+com.google.gson.internal.$Gson$Types$WildcardTypeImpl:
+    private static final long serialVersionUID
+com.google.gson.internal.Excluder:
+    private static final double IGNORE_VERSIONS
+    70:72:public com.google.gson.internal.Excluder withVersion(double)
+    76:81:public varargs com.google.gson.internal.Excluder withModifiers(int[])
+    85:87:public com.google.gson.internal.Excluder disableInnerClassSerialization()
+    91:93:public com.google.gson.internal.Excluder excludeFieldsWithoutExposeAnnotation()
+    98:108:public com.google.gson.internal.Excluder withExclusionStrategy(com.google.gson.ExclusionStrategy,boolean,boolean)
+com.google.gson.internal.Pair
+com.google.gson.internal.Primitives:
+    33:33:private Primitives()
+    81:81:public static boolean isWrapperType(java.lang.reflect.Type)
+    97:99:public static java.lang.Class wrap(java.lang.Class)
+    114:116:public static java.lang.Class unwrap(java.lang.Class)
+com.google.gson.internal.Streams:
+    35:78:public Streams()
+    40:59:public static com.google.gson.JsonElement parse(com.google.gson.stream.JsonReader)
+com.google.gson.internal.bind.JsonTreeReader:
+    53:55:public JsonTreeReader(com.google.gson.JsonElement)
+com.google.gson.internal.bind.JsonTreeWriter:
+    163:167:public com.google.gson.stream.JsonWriter value(double)
+    192:192:public void flush()
+com.google.gson.internal.bind.TypeAdapters:
+    56:56:private TypeAdapters()
+    722:722:public static com.google.gson.TypeAdapterFactory newFactory(com.google.gson.reflect.TypeToken,com.google.gson.TypeAdapter)
+com.google.gson.internal.bind.TypeAdapters$21:
+    private static final java.lang.String YEAR
+    private static final java.lang.String MONTH
+    private static final java.lang.String DAY_OF_MONTH
+    private static final java.lang.String HOUR_OF_DAY
+    private static final java.lang.String MINUTE
+    private static final java.lang.String SECOND
+com.google.gson.internal.bind.TypeAdapters$25
+com.google.gson.reflect.TypeToken:
+    112:112:public boolean isAssignableFrom(java.lang.Class)
+    123:140:public boolean isAssignableFrom(java.lang.reflect.Type)
+    153:153:public boolean isAssignableFrom(com.google.gson.reflect.TypeToken)
+    161:178:private static boolean isAssignableFrom(java.lang.reflect.Type,java.lang.reflect.GenericArrayType)
+    188:231:private static boolean isAssignableFrom(java.lang.reflect.Type,java.lang.reflect.ParameterizedType,java.util.Map)
+    240:250:private static boolean typeEquals(java.lang.reflect.ParameterizedType,java.lang.reflect.ParameterizedType,java.util.Map)
+    257:265:private static varargs java.lang.AssertionError buildUnexpectedTypeError(java.lang.reflect.Type,java.lang.Class[])
+    273:273:private static boolean matches(java.lang.reflect.Type,java.lang.reflect.Type,java.util.Map)
+com.google.gson.stream.JsonReader:
+    private static final java.lang.String TRUE
+    private static final java.lang.String FALSE
+com.google.gson.stream.JsonWriter:
+    407:413:public com.google.gson.stream.JsonWriter value(double)
+    456:457:public void flush()
+com.google.gson.stream.MalformedJsonException:
+    private static final long serialVersionUID
+    33:37:public MalformedJsonException(java.lang.String,java.lang.Throwable)
+    39:43:public MalformedJsonException(java.lang.Throwable)
 com.google.tagmanager.AdvertiserIdMacro
 com.google.tagmanager.AdvertisingTrackingEnabledMacro
 com.google.tagmanager.AdwordsClickReferrerListener:
@@ -4504,23 +4647,6 @@ com.noqoush.adfalcon.android.sdk.x:
     157:158:public void c(boolean)
     247:247:public com.noqoush.adfalcon.android.sdk.ADFView n()
     254:255:public void b(com.noqoush.adfalcon.android.sdk.ADFView)
-com.serveme.analytics.R
-com.serveme.analytics.R$drawable
-com.serveme.analytics.R$string
-com.serveme.analytics.R$style
-com.serveme.androidmodification.BaseExpandableListAdapter
-com.serveme.androidmodification.CursorFilter
-com.serveme.androidmodification.CursorFilter$CursorFilterClient
-com.serveme.androidmodification.CursorTreeAdapter
-com.serveme.androidmodification.CursorTreeAdapter$MyCursorHelper
-com.serveme.androidmodification.CursorTreeAdapter$MyCursorHelper$MyContentObserver
-com.serveme.androidmodification.CursorTreeAdapter$MyCursorHelper$MyDataSetObserver
-com.serveme.androidmodification.DataSetObservable
-com.serveme.androidmodification.ResourceCursorTreeAdapter
-com.serveme.androidmodification.SimpleCursorTreeAdapter
-com.serveme.androidmodification.SimpleCursorTreeAdapter$ViewBinder
-com.serveme.exception.util.ExceptionUtil:
-    6:6:public ExceptionUtil()
 com.serveme.savemyphone.BuildConfig
 com.serveme.savemyphone.R
 com.serveme.savemyphone.R$anim
@@ -4539,6 +4665,8 @@ com.serveme.savemyphone.R$string
 com.serveme.savemyphone.R$style
 com.serveme.savemyphone.R$styleable
 com.serveme.savemyphone.R$xml
+com.serveme.savemyphone.control.StanderListAdapter$ImageLoader:
+    37:37:public int getPosition()
 com.serveme.savemyphone.mail.Mail
 com.serveme.savemyphone.model.DBHandler:
     private static final int DATABASE_VERSION
@@ -4559,6 +4687,8 @@ com.serveme.savemyphone.view.RecoveryActivity:
     public static final int REQ_CREATE_PATTERN
 com.serveme.savemyphone.view.SettingsActivity:
     private static final int REQ_CHANGE_PATTERN
+    private static final int REQ_CHANGE_BACKGROUND
+    private static final int REQ_CHANGE_LOCK_PATTERN
     private static final java.lang.String KEY_LOCK_METHOD
 com.serveme.savemyphone.view.UserActivity:
     private static final int REQ_ENTER_PATTERN
@@ -4566,7 +4696,11 @@ com.serveme.savemyphone.view.UserActivity:
 com.serveme.savemyphone.view.utils.ActivitiesController:
     private static final int REQ_ENTER_PATTERN
 com.serveme.savemyphone.view.utils.AlertUtility:
-    12:12:public AlertUtility()
+    17:17:public AlertUtility()
+com.serveme.savemyphone.view.utils.BackgroundUtility:
+    17:17:public BackgroundUtility()
+com.serveme.savemyphone.view.utils.ExceptionUtil:
+    6:6:public ExceptionUtil()
 com.serveme.savemyphone.view.wizard.PasswordRequest:
     public static final int REQ_CREATE_PATTERN
     public static final int REQ_CREATE_PASSWORD
@@ -4719,3 +4853,42 @@ org.codechimp.apprater.R:
     9:9:public R()
 org.codechimp.apprater.R$string:
     10:10:public R$string()
+org.lucasr.twowayview.R:
+    9:9:public R()
+org.lucasr.twowayview.R$styleable:
+    10:10:public R$styleable()
+org.lucasr.twowayview.TwoWayView:
+    private static final java.lang.String LOGTAG
+    private static final int NO_POSITION
+    private static final int INVALID_POINTER
+    private static final int TOUCH_MODE_REST
+    private static final int TOUCH_MODE_DOWN
+    private static final int TOUCH_MODE_TAP
+    private static final int TOUCH_MODE_DONE_WAITING
+    private static final int TOUCH_MODE_DRAGGING
+    private static final int TOUCH_MODE_FLINGING
+    private static final int TOUCH_MODE_OVERSCROLL
+    private static final int TOUCH_MODE_UNKNOWN
+    private static final int TOUCH_MODE_ON
+    private static final int TOUCH_MODE_OFF
+    private static final int LAYOUT_NORMAL
+    private static final int LAYOUT_FORCE_TOP
+    private static final int LAYOUT_SET_SELECTION
+    private static final int LAYOUT_FORCE_BOTTOM
+    private static final int LAYOUT_SPECIFIC
+    private static final int LAYOUT_SYNC
+    private static final int LAYOUT_MOVE_SELECTION
+    private static final int SYNC_SELECTED_POSITION
+    private static final int SYNC_FIRST_POSITION
+    private static final int SYNC_MAX_DURATION_MILLIS
+    private static final int CHECK_POSITION_SEARCH_DISTANCE
+    private static final float MAX_SCROLL_FACTOR
+    private static final int MIN_SCROLL_PREVIEW_PIXELS
+    731:740:public void clearChoices()
+    3687:3688:public void scrollBy(int)
+org.lucasr.twowayview.TwoWayView$OnScrollListener:
+    public static final int SCROLL_STATE_IDLE
+    public static final int SCROLL_STATE_TOUCH_SCROLL
+    public static final int SCROLL_STATE_FLING
+org.lucasr.twowayview.TwoWayView$RecycleBin:
+    6031:6042:void reclaimScrapViews(java.util.List)

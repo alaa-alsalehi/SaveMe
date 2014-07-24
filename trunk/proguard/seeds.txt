@@ -2953,6 +2953,14 @@ com.google.analytics.tracking.android.Logger$LogLevel: com.google.analytics.trac
 com.google.analytics.tracking.android.Logger$LogLevel: com.google.analytics.tracking.android.Logger$LogLevel valueOf(java.lang.String)
 com.google.android.gms.analytics.internal.Command
 com.google.android.gms.analytics.internal.Command: android.os.Parcelable$Creator CREATOR
+com.google.gson.FieldNamingPolicy: com.google.gson.FieldNamingPolicy[] values()
+com.google.gson.FieldNamingPolicy: com.google.gson.FieldNamingPolicy valueOf(java.lang.String)
+com.google.gson.LongSerializationPolicy: com.google.gson.LongSerializationPolicy[] values()
+com.google.gson.LongSerializationPolicy: com.google.gson.LongSerializationPolicy valueOf(java.lang.String)
+com.google.gson.stream.JsonScope: com.google.gson.stream.JsonScope[] values()
+com.google.gson.stream.JsonScope: com.google.gson.stream.JsonScope valueOf(java.lang.String)
+com.google.gson.stream.JsonToken: com.google.gson.stream.JsonToken[] values()
+com.google.gson.stream.JsonToken: com.google.gson.stream.JsonToken valueOf(java.lang.String)
 com.google.tagmanager.Container$RefreshFailure: com.google.tagmanager.Container$RefreshFailure[] values()
 com.google.tagmanager.Container$RefreshFailure: com.google.tagmanager.Container$RefreshFailure valueOf(java.lang.String)
 com.google.tagmanager.Container$RefreshType: com.google.tagmanager.Container$RefreshType[] values()
@@ -3017,11 +3025,6 @@ com.noqoush.adfalcon.android.sdk.images.a: com.noqoush.adfalcon.android.sdk.imag
 com.noqoush.adfalcon.android.sdk.images.a: com.noqoush.adfalcon.android.sdk.images.a valueOf(java.lang.String)
 com.noqoush.adfalcon.android.sdk.w$a: com.noqoush.adfalcon.android.sdk.w$a[] values()
 com.noqoush.adfalcon.android.sdk.w$a: com.noqoush.adfalcon.android.sdk.w$a valueOf(java.lang.String)
-com.serveme.analytics.R$drawable: int ic_launcher
-com.serveme.analytics.R$string: int app_name
-com.serveme.analytics.R$style: int AppBaseTheme
-com.serveme.analytics.R$style: int AppTheme
-com.serveme.app.AnalyticsApplication
 com.serveme.savemyphone.R$anim: int abc_fade_in
 com.serveme.savemyphone.R$anim: int abc_fade_out
 com.serveme.savemyphone.R$anim: int abc_slide_in_bottom
@@ -3315,6 +3318,7 @@ com.serveme.savemyphone.R$id: int action_bar_root
 com.serveme.savemyphone.R$id: int action_bar_subtitle
 com.serveme.savemyphone.R$id: int action_bar_title
 com.serveme.savemyphone.R$id: int action_context_bar
+com.serveme.savemyphone.R$id: int action_done
 com.serveme.savemyphone.R$id: int action_help
 com.serveme.savemyphone.R$id: int action_lock
 com.serveme.savemyphone.R$id: int action_menu_divider
@@ -3333,12 +3337,17 @@ com.serveme.savemyphone.R$id: int always
 com.serveme.savemyphone.R$id: int app_icon
 com.serveme.savemyphone.R$id: int app_list
 com.serveme.savemyphone.R$id: int app_name
+com.serveme.savemyphone.R$id: int background_image
+com.serveme.savemyphone.R$id: int barrier
 com.serveme.savemyphone.R$id: int beginning
 com.serveme.savemyphone.R$id: int btn
 com.serveme.savemyphone.R$id: int buttons_pane
 com.serveme.savemyphone.R$id: int cancel
 com.serveme.savemyphone.R$id: int checkbox
 com.serveme.savemyphone.R$id: int collapseActionView
+com.serveme.savemyphone.R$id: int confirm
+com.serveme.savemyphone.R$id: int controls
+com.serveme.savemyphone.R$id: int controls_con
 com.serveme.savemyphone.R$id: int default_activity_button
 com.serveme.savemyphone.R$id: int dialog
 com.serveme.savemyphone.R$id: int disableHome
@@ -3351,11 +3360,14 @@ com.serveme.savemyphone.R$id: int expand_activities_button
 com.serveme.savemyphone.R$id: int expanded_menu
 com.serveme.savemyphone.R$id: int grid_layout
 com.serveme.savemyphone.R$id: int grid_view
+com.serveme.savemyphone.R$id: int hidden_lock_title
 com.serveme.savemyphone.R$id: int home
 com.serveme.savemyphone.R$id: int homeAsUp
 com.serveme.savemyphone.R$id: int icon
 com.serveme.savemyphone.R$id: int ifRoom
 com.serveme.savemyphone.R$id: int image
+com.serveme.savemyphone.R$id: int images_preview
+com.serveme.savemyphone.R$id: int item
 com.serveme.savemyphone.R$id: int layout1
 com.serveme.savemyphone.R$id: int linear
 com.serveme.savemyphone.R$id: int listMode
@@ -3368,6 +3380,8 @@ com.serveme.savemyphone.R$id: int normal
 com.serveme.savemyphone.R$id: int ok
 com.serveme.savemyphone.R$id: int password
 com.serveme.savemyphone.R$id: int pattern
+com.serveme.savemyphone.R$id: int progress
+com.serveme.savemyphone.R$id: int progressBar1
 com.serveme.savemyphone.R$id: int progress_circular
 com.serveme.savemyphone.R$id: int progress_horizontal
 com.serveme.savemyphone.R$id: int radio
@@ -3386,6 +3400,7 @@ com.serveme.savemyphone.R$id: int showCustom
 com.serveme.savemyphone.R$id: int showHome
 com.serveme.savemyphone.R$id: int showTitle
 com.serveme.savemyphone.R$id: int split_action_bar
+com.serveme.savemyphone.R$id: int stander_list_item_imageView
 com.serveme.savemyphone.R$id: int submit_area
 com.serveme.savemyphone.R$id: int tabMode
 com.serveme.savemyphone.R$id: int textView
@@ -3424,9 +3439,13 @@ com.serveme.savemyphone.R$layout: int abc_popup_menu_item_layout
 com.serveme.savemyphone.R$layout: int abc_search_dropdown_item_icons_2line
 com.serveme.savemyphone.R$layout: int abc_search_view
 com.serveme.savemyphone.R$layout: int action_bar
+com.serveme.savemyphone.R$layout: int activity_unlock_settings
+com.serveme.savemyphone.R$layout: int activity_user_launcher
 com.serveme.savemyphone.R$layout: int alp_lock_pattern_activity
 com.serveme.savemyphone.R$layout: int alp_lock_pattern_activity_land
 com.serveme.savemyphone.R$layout: int alp_lock_pattern_view
+com.serveme.savemyphone.R$layout: int background_activity
+com.serveme.savemyphone.R$layout: int background_item
 com.serveme.savemyphone.R$layout: int guide_activity
 com.serveme.savemyphone.R$layout: int item_layout
 com.serveme.savemyphone.R$layout: int main_activity
@@ -3435,7 +3454,9 @@ com.serveme.savemyphone.R$layout: int recovery_activity
 com.serveme.savemyphone.R$layout: int support_simple_spinner_dropdown_item
 com.serveme.savemyphone.R$layout: int user_activity
 com.serveme.savemyphone.R$menu: int admin
+com.serveme.savemyphone.R$menu: int background
 com.serveme.savemyphone.R$menu: int user
+com.serveme.savemyphone.R$menu: int user_launcher
 com.serveme.savemyphone.R$plurals: int alp_pmsg_connect_x_dots
 com.serveme.savemyphone.R$raw: int about_saveme
 com.serveme.savemyphone.R$string: int abc_action_bar_home_description
@@ -3453,6 +3474,7 @@ com.serveme.savemyphone.R$string: int abc_shareactionprovider_share_with
 com.serveme.savemyphone.R$string: int abc_shareactionprovider_share_with_application
 com.serveme.savemyphone.R$string: int action_help
 com.serveme.savemyphone.R$string: int action_lock
+com.serveme.savemyphone.R$string: int action_settings
 com.serveme.savemyphone.R$string: int action_unlock
 com.serveme.savemyphone.R$string: int activiate_lock_quesition
 com.serveme.savemyphone.R$string: int admin_list_header
@@ -3481,19 +3503,30 @@ com.serveme.savemyphone.R$string: int alp_pkey_sys_encrypter_class
 com.serveme.savemyphone.R$string: int alp_pkey_sys_pattern
 com.serveme.savemyphone.R$string: int app_name
 com.serveme.savemyphone.R$string: int apps
+com.serveme.savemyphone.R$string: int background_categeroy
+com.serveme.savemyphone.R$string: int cancel
+com.serveme.savemyphone.R$string: int change_background
+com.serveme.savemyphone.R$string: int change_lock_pattern
 com.serveme.savemyphone.R$string: int change_pattern
 com.serveme.savemyphone.R$string: int confirm
+com.serveme.savemyphone.R$string: int continu
+com.serveme.savemyphone.R$string: int control_notifications
 com.serveme.savemyphone.R$string: int create_password
 com.serveme.savemyphone.R$string: int create_pattern
 com.serveme.savemyphone.R$string: int dialog_title
 com.serveme.savemyphone.R$string: int direction
+com.serveme.savemyphone.R$string: int done
 com.serveme.savemyphone.R$string: int email_message_part1
 com.serveme.savemyphone.R$string: int email_message_part2
 com.serveme.savemyphone.R$string: int email_request_textview
 com.serveme.savemyphone.R$string: int ga_trackingId
 com.serveme.savemyphone.R$string: int grant_permission
+com.serveme.savemyphone.R$string: int hello_world
 com.serveme.savemyphone.R$string: int help
 com.serveme.savemyphone.R$string: int help_activity_title
+com.serveme.savemyphone.R$string: int hidden_lock_message
+com.serveme.savemyphone.R$string: int hidden_settings_category
+com.serveme.savemyphone.R$string: int hide_lock
 com.serveme.savemyphone.R$string: int later
 com.serveme.savemyphone.R$string: int lock_method_chooser_activity_title
 com.serveme.savemyphone.R$string: int lock_permission_request
@@ -3502,6 +3535,7 @@ com.serveme.savemyphone.R$string: int lock_permission_title
 com.serveme.savemyphone.R$string: int mail_subject
 com.serveme.savemyphone.R$string: int network_failure
 com.serveme.savemyphone.R$string: int no_thanks
+com.serveme.savemyphone.R$string: int notification_categeroy
 com.serveme.savemyphone.R$string: int password_request_help
 com.serveme.savemyphone.R$string: int pattern_settings_category
 com.serveme.savemyphone.R$string: int prevent_message
@@ -3511,11 +3545,16 @@ com.serveme.savemyphone.R$string: int recovery_activity_failure_dialoge
 com.serveme.savemyphone.R$string: int recovery_activity_success_dialoge
 com.serveme.savemyphone.R$string: int recovery_activity_textview
 com.serveme.savemyphone.R$string: int recovery_activity_title
+com.serveme.savemyphone.R$string: int repeat_hidden_lock_message
 com.serveme.savemyphone.R$string: int settings
 com.serveme.savemyphone.R$string: int stealth_mode
+com.serveme.savemyphone.R$string: int step
+com.serveme.savemyphone.R$string: int title_activity_unlock_settings
+com.serveme.savemyphone.R$string: int title_activity_user_launcher
 com.serveme.savemyphone.R$string: int uninstall
 com.serveme.savemyphone.R$string: int uninstall_settings_category
 com.serveme.savemyphone.R$string: int usage_help_text
+com.serveme.savemyphone.R$string: int wrong_hidden_lock
 com.serveme.savemyphone.R$style: int AOSP_DialogWindowTitle
 com.serveme.savemyphone.R$style: int Alp_BaseTheme_Dark
 com.serveme.savemyphone.R$style: int Alp_BaseTheme_Dialog_Dark
@@ -3768,12 +3807,85 @@ com.serveme.savemyphone.R$styleable: int Theme_listChoiceBackgroundIndicator
 com.serveme.savemyphone.R$styleable: int Theme_panelMenuListTheme
 com.serveme.savemyphone.R$styleable: int Theme_panelMenuListWidth
 com.serveme.savemyphone.R$styleable: int Theme_popupMenuStyle
+com.serveme.savemyphone.R$styleable: int[] TwoWayView
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_alpha
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_background
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_choiceMode
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_clickable
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_contentDescription
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_drawSelectorOnTop
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_drawingCacheQuality
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_duplicateParentState
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_fadeScrollbars
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_fadingEdge
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_fadingEdgeLength
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_filterTouchesWhenObscured
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_fitsSystemWindows
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_focusable
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_focusableInTouchMode
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_hapticFeedbackEnabled
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_id
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_isScrollContainer
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_keepScreenOn
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_layerType
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_layoutDirection
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_listSelector
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_longClickable
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_minHeight
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_minWidth
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_nextFocusDown
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_nextFocusForward
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_nextFocusLeft
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_nextFocusRight
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_nextFocusUp
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_onClick
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_orientation
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_overScrollMode
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_padding
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_paddingBottom
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_paddingEnd
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_paddingLeft
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_paddingRight
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_paddingStart
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_paddingTop
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_requiresFadingEdge
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_rotation
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_rotationX
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_rotationY
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_saveEnabled
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_scaleX
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_scaleY
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_scrollX
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_scrollY
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_scrollbarAlwaysDrawHorizontalTrack
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_scrollbarAlwaysDrawVerticalTrack
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_scrollbarDefaultDelayBeforeFade
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_scrollbarFadeDuration
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_scrollbarSize
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_scrollbarStyle
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_scrollbarThumbHorizontal
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_scrollbarThumbVertical
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_scrollbarTrackHorizontal
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_scrollbarTrackVertical
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_scrollbars
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_soundEffectsEnabled
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_tag
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_textAlignment
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_textDirection
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_transformPivotX
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_transformPivotY
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_translationX
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_translationY
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_verticalScrollbarPosition
+com.serveme.savemyphone.R$styleable: int TwoWayView_android_visibility
 com.serveme.savemyphone.R$styleable: int[] View
 com.serveme.savemyphone.R$styleable: int View_android_focusable
 com.serveme.savemyphone.R$styleable: int View_paddingEnd
 com.serveme.savemyphone.R$styleable: int View_paddingStart
 com.serveme.savemyphone.R$xml: int preferences
 com.serveme.savemyphone.R$xml: int required_policies
+com.serveme.savemyphone.control.NotificationObserver
+com.serveme.savemyphone.control.NotificationObserver: NotificationObserver()
 com.serveme.savemyphone.receivers.AdminReciver
 com.serveme.savemyphone.receivers.AdminReciver: AdminReciver()
 com.serveme.savemyphone.receivers.BootReceiver
@@ -3788,14 +3900,20 @@ com.serveme.savemyphone.service.AppsMonitor
 com.serveme.savemyphone.service.AppsMonitor: AppsMonitor()
 com.serveme.savemyphone.service.AppsMonitor$MobileState: com.serveme.savemyphone.service.AppsMonitor$MobileState[] values()
 com.serveme.savemyphone.service.AppsMonitor$MobileState: com.serveme.savemyphone.service.AppsMonitor$MobileState valueOf(java.lang.String)
+com.serveme.savemyphone.view.BackGroundActivity
+com.serveme.savemyphone.view.BackGroundActivity: BackGroundActivity()
 com.serveme.savemyphone.view.MainActivity
 com.serveme.savemyphone.view.MainActivity: MainActivity()
 com.serveme.savemyphone.view.RecoveryActivity
 com.serveme.savemyphone.view.RecoveryActivity: RecoveryActivity()
 com.serveme.savemyphone.view.SettingsActivity
 com.serveme.savemyphone.view.SettingsActivity: SettingsActivity()
+com.serveme.savemyphone.view.UnlockSettingsActivity
+com.serveme.savemyphone.view.UnlockSettingsActivity: UnlockSettingsActivity()
 com.serveme.savemyphone.view.UserActivity
 com.serveme.savemyphone.view.UserActivity: UserActivity()
+com.serveme.savemyphone.view.UserLauncherActivity
+com.serveme.savemyphone.view.UserLauncherActivity: UserLauncherActivity()
 com.serveme.savemyphone.view.UserView
 com.serveme.savemyphone.view.UserView: UserView(android.content.Context)
 com.serveme.savemyphone.view.UserView: UserView(android.content.Context,android.util.AttributeSet)
@@ -7609,3 +7727,128 @@ org.codechimp.apprater.R$string: int later
 org.codechimp.apprater.R$string: int no_thanks
 org.codechimp.apprater.R$string: int rate
 org.codechimp.apprater.R$string: int rate_message
+org.lucasr.twowayview.R$styleable: int[] TwoWayView
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_alpha
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_background
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_choiceMode
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_clickable
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_contentDescription
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_drawSelectorOnTop
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_drawingCacheQuality
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_duplicateParentState
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_fadeScrollbars
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_fadingEdge
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_fadingEdgeLength
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_filterTouchesWhenObscured
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_fitsSystemWindows
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_focusable
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_focusableInTouchMode
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_hapticFeedbackEnabled
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_id
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_isScrollContainer
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_keepScreenOn
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_layerType
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_layoutDirection
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_listSelector
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_longClickable
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_minHeight
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_minWidth
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_nextFocusDown
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_nextFocusForward
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_nextFocusLeft
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_nextFocusRight
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_nextFocusUp
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_onClick
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_orientation
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_overScrollMode
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_padding
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_paddingBottom
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_paddingEnd
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_paddingLeft
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_paddingRight
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_paddingStart
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_paddingTop
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_requiresFadingEdge
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_rotation
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_rotationX
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_rotationY
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_saveEnabled
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_scaleX
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_scaleY
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_scrollX
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_scrollY
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_scrollbarAlwaysDrawHorizontalTrack
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_scrollbarAlwaysDrawVerticalTrack
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_scrollbarDefaultDelayBeforeFade
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_scrollbarFadeDuration
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_scrollbarSize
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_scrollbarStyle
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_scrollbarThumbHorizontal
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_scrollbarThumbVertical
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_scrollbarTrackHorizontal
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_scrollbarTrackVertical
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_scrollbars
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_soundEffectsEnabled
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_tag
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_textAlignment
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_textDirection
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_transformPivotX
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_transformPivotY
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_translationX
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_translationY
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_verticalScrollbarPosition
+org.lucasr.twowayview.R$styleable: int TwoWayView_android_visibility
+org.lucasr.twowayview.TwoWayView
+org.lucasr.twowayview.TwoWayView: TwoWayView(android.content.Context)
+org.lucasr.twowayview.TwoWayView: TwoWayView(android.content.Context,android.util.AttributeSet)
+org.lucasr.twowayview.TwoWayView: TwoWayView(android.content.Context,android.util.AttributeSet,int)
+org.lucasr.twowayview.TwoWayView: void setOrientation(org.lucasr.twowayview.TwoWayView$Orientation)
+org.lucasr.twowayview.TwoWayView: org.lucasr.twowayview.TwoWayView$Orientation getOrientation()
+org.lucasr.twowayview.TwoWayView: void setItemMargin(int)
+org.lucasr.twowayview.TwoWayView: int getItemMargin()
+org.lucasr.twowayview.TwoWayView: void setItemsCanFocus(boolean)
+org.lucasr.twowayview.TwoWayView: boolean getItemsCanFocus()
+org.lucasr.twowayview.TwoWayView: void setOnScrollListener(org.lucasr.twowayview.TwoWayView$OnScrollListener)
+org.lucasr.twowayview.TwoWayView: void setRecyclerListener(org.lucasr.twowayview.TwoWayView$RecyclerListener)
+org.lucasr.twowayview.TwoWayView: void setDrawSelectorOnTop(boolean)
+org.lucasr.twowayview.TwoWayView: void setSelector(int)
+org.lucasr.twowayview.TwoWayView: void setSelector(android.graphics.drawable.Drawable)
+org.lucasr.twowayview.TwoWayView: android.graphics.drawable.Drawable getSelector()
+org.lucasr.twowayview.TwoWayView: int getSelectedItemPosition()
+org.lucasr.twowayview.TwoWayView: long getSelectedItemId()
+org.lucasr.twowayview.TwoWayView: int getCheckedItemCount()
+org.lucasr.twowayview.TwoWayView: int getCheckedItemPosition()
+org.lucasr.twowayview.TwoWayView: android.util.SparseBooleanArray getCheckedItemPositions()
+org.lucasr.twowayview.TwoWayView: long[] getCheckedItemIds()
+org.lucasr.twowayview.TwoWayView: void setItemChecked(int,boolean)
+org.lucasr.twowayview.TwoWayView: org.lucasr.twowayview.TwoWayView$ChoiceMode getChoiceMode()
+org.lucasr.twowayview.TwoWayView: void setChoiceMode(org.lucasr.twowayview.TwoWayView$ChoiceMode)
+org.lucasr.twowayview.TwoWayView: android.widget.ListAdapter getAdapter()
+org.lucasr.twowayview.TwoWayView: void setAdapter(android.widget.ListAdapter)
+org.lucasr.twowayview.TwoWayView: int getFirstVisiblePosition()
+org.lucasr.twowayview.TwoWayView: int getLastVisiblePosition()
+org.lucasr.twowayview.TwoWayView: int getCount()
+org.lucasr.twowayview.TwoWayView: void setOverScrollMode(int)
+org.lucasr.twowayview.TwoWayView: int getMaxScrollAmount()
+org.lucasr.twowayview.TwoWayView: int getArrowScrollPreviewLength()
+org.lucasr.twowayview.TwoWayView: float getCurrVelocity()
+org.lucasr.twowayview.TwoWayView: void setSelectedPositionInt(int)
+org.lucasr.twowayview.TwoWayView: void setSelectionInt(int)
+org.lucasr.twowayview.TwoWayView: void setNextSelectedPositionInt(int)
+org.lucasr.twowayview.TwoWayView: android.view.View getSelectedView()
+org.lucasr.twowayview.TwoWayView: void setSelection(int)
+org.lucasr.twowayview.TwoWayView: void setSelectionFromOffset(int,int)
+org.lucasr.twowayview.TwoWayView: android.view.ContextMenu$ContextMenuInfo getContextMenuInfo()
+org.lucasr.twowayview.TwoWayView: void setEmptyView(android.view.View)
+org.lucasr.twowayview.TwoWayView: void setFocusable(boolean)
+org.lucasr.twowayview.TwoWayView: void setFocusableInTouchMode(boolean)
+org.lucasr.twowayview.TwoWayView: void setAdapter(android.widget.Adapter)
+org.lucasr.twowayview.TwoWayView: android.widget.Adapter getAdapter()
+org.lucasr.twowayview.TwoWayView$ChoiceMode: org.lucasr.twowayview.TwoWayView$ChoiceMode[] values()
+org.lucasr.twowayview.TwoWayView$ChoiceMode: org.lucasr.twowayview.TwoWayView$ChoiceMode valueOf(java.lang.String)
+org.lucasr.twowayview.TwoWayView$LayoutParams
+org.lucasr.twowayview.TwoWayView$LayoutParams: TwoWayView$LayoutParams(android.content.Context,android.util.AttributeSet)
+org.lucasr.twowayview.TwoWayView$Orientation: org.lucasr.twowayview.TwoWayView$Orientation[] values()
+org.lucasr.twowayview.TwoWayView$Orientation: org.lucasr.twowayview.TwoWayView$Orientation valueOf(java.lang.String)
+org.lucasr.twowayview.TwoWayView$SavedState
+org.lucasr.twowayview.TwoWayView$SavedState: android.os.Parcelable$Creator CREATOR

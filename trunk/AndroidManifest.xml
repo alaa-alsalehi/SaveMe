@@ -3,8 +3,8 @@
     package="com.serveme.savemyphone"
     android:installLocation="internalOnly"
     android:permission="android.permission.RECEIVE_BOOT_COMPLETED"
-    android:versionCode="21"
-    android:versionName="2.2.5" >
+    android:versionCode="22"
+    android:versionName="2.3" >
 
     <!-- Minimum and target SDK -->
     <uses-sdk
@@ -27,7 +27,7 @@
 
         <!--
            <meta-data android:name="com.google.android.gms.version"
-           android:value="@integer/google_play_services_version" />
+           android:value="@integer/google_play_services_version" />
         -->
 
 
@@ -183,6 +183,15 @@
         <activity
             android:name="com.serveme.savemyphone.view.UnlockSettingsActivity"
             android:label="@string/title_activity_unlock_settings" >
+        </activity>
+        <activity android:enabled="false"
+            android:name="com.serveme.savemyphone.view.UserLauncherActivity"
+            android:label="@string/title_activity_user_launcher" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
