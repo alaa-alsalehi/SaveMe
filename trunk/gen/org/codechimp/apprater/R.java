@@ -8,11 +8,11 @@ package org.codechimp.apprater;
 
 public final class R {
 	public static final class string {
-		public static final int app_name = 0x7f0c000d;
-		public static final int dialog_title = 0x7f0c000e;
-		public static final int later = 0x7f0c0011;
-		public static final int no_thanks = 0x7f0c0012;
-		public static final int rate = 0x7f0c0010;
-		public static final int rate_message = 0x7f0c000f;
+		public static final int app_name = 0x7f090028;
+		public static final int dialog_title = 0x7f090029;
+		public static final int later = 0x7f09002c;
+		public static final int no_thanks = 0x7f09002d;
+		public static final int rate = 0x7f09002b;
+		public static final int rate_message = 0x7f09002a;
 	}
 }

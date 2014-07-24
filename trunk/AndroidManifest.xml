@@ -27,7 +27,7 @@
 
         <!--
            <meta-data android:name="com.google.android.gms.version"
-           android:value="@integer/google_play_services_version" />
+           android:value="@integer/google_play_services_version" />
         -->
 
 
@@ -163,8 +163,12 @@
             </intent-filter>
         </receiver>
 
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
         <activity
-            android:name="com.google.ads.AdActivity"
+            android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenLayout|screenSize|smallestScreenSize|uiMode"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
@@ -184,8 +188,9 @@
             android:name="com.serveme.savemyphone.view.UnlockSettingsActivity"
             android:label="@string/title_activity_unlock_settings" >
         </activity>
-        <activity android:enabled="false"
+        <activity
             android:name="com.serveme.savemyphone.view.UserLauncherActivity"
+            android:enabled="false"
             android:label="@string/title_activity_user_launcher" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

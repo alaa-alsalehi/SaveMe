@@ -7,8 +7,8 @@ import org.codechimp.apprater.InCorrectMarketException;
 
 import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
 
-import com.google.ads.AdRequest;
-import com.google.ads.AdView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.control.AppsListAdapter;
 import com.serveme.savemyphone.model.DBOperations;
@@ -104,11 +104,11 @@ public class MainActivity extends ActionBarActivity {
 	private void adsStuff() {
 		final AdView adView = (AdView) findViewById(R.id.adView);
 		// Create the adView
-		adView.setGravity(Gravity.CENTER);
+		// adView.setGravity(Gravity.CENTER);
 		adView.setAdListener(new AdMobListener(this));
 		// Initiate a generic request to load it with an ad
-		final AdRequest adRequest = new AdRequest();
-		adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
+		final AdRequest adRequest = new AdRequest.Builder().addTestDevice(
+				AdRequest.DEVICE_ID_EMULATOR).build();
 		// adRequest.addTestDevice("8E7864D6D7911778659788D0B39F99E8");
 		adView.loadAd(adRequest);
 	}
@@ -160,7 +160,23 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	@Override
+	protected void onPause() {
+		final AdView adView = (AdView) findViewById(R.id.adView);
+		adView.pause();
+		super.onPause();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		final AdView adView = (AdView) findViewById(R.id.adView);
+		adView.resume();
+	}
+
+	@Override
 	protected void onDestroy() {
+		final AdView adView = (AdView) findViewById(R.id.adView);
+		adView.destroy();
 		super.onDestroy();
 	}
 

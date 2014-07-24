@@ -11,18 +11,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.google.ads.Ad;
-import com.google.ads.AdListener;
-import com.google.ads.AdRequest;
-import com.google.ads.AdRequest.ErrorCode;
-import com.google.ads.InterstitialAd;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.service.AppsMonitor;
 import com.serveme.savemyphone.util.MyTracker;
 import com.serveme.savemyphone.view.utils.Authenticator;
 
-public class UserActivity extends Activity implements AdListener {
+public class UserActivity extends Activity {
 
 	private static final int REQ_ENTER_PATTERN = 2;
 
@@ -37,7 +35,7 @@ public class UserActivity extends Activity implements AdListener {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 			getActionBar().hide();
 		}
-		
+
 		new Authenticator(this).checkPattern(REQ_ENTER_PATTERN);
 		MyTracker.fireButtonPressedEvent(UserActivity.this, "unlock");
 	}
@@ -74,14 +72,27 @@ public class UserActivity extends Activity implements AdListener {
 				UserActivity.this.stopService(new Intent(UserActivity.this,
 						AppsMonitor.class));
 				// Create the interstitial
-				//interstitial = new InterstitialAd(this, MY_INTERSTITIAL_UNIT_ID);
-
+				/*interstitial = new InterstitialAd(this);
+				interstitial.setAdUnitId(MY_INTERSTITIAL_UNIT_ID);
 				// Create ad request
-				//AdRequest adRequest = new AdRequest();
+				AdRequest adRequest = new AdRequest.Builder().build();
 
 				// Begin loading your interstitial
-				//interstitial.loadAd(adRequest);
-				//interstitial.setAdListener(this);
+				interstitial.loadAd(adRequest);
+				interstitial.setAdListener(new AdListener() {
+					@Override
+					public void onAdFailedToLoad(int errorCode) {
+						// TODO Auto-generated method stub
+						finish();
+					}
+
+					@Override
+					public void onAdLoaded() {
+						if (interstitial != null) {
+							interstitial.show();
+						}
+					}
+				});*/
 
 			case RESULT_CANCELED:
 
@@ -94,7 +105,6 @@ public class UserActivity extends Activity implements AdListener {
 				finish();
 				break;
 			}
-
 
 			/*
 			 * In any case, there's always a key EXTRA_RETRY_COUNT, which holds
@@ -109,36 +119,6 @@ public class UserActivity extends Activity implements AdListener {
 
 			break;
 		}// REQ_ENTER_PATTERN
-		}
-	}
-
-	@Override
-	public void onDismissScreen(Ad arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onFailedToReceiveAd(Ad arg0, ErrorCode arg1) {
-		finish();
-	}
-
-	@Override
-	public void onLeaveApplication(Ad arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onPresentScreen(Ad arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onReceiveAd(Ad arg0) {
-		if (interstitial != null) {
-			interstitial.show();
 		}
 	}
 
