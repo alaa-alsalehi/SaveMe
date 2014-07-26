@@ -13,6 +13,8 @@
     <string name="change_pattern">Change Pattern</string>
     <string name="stealth_mode">Stealth Mode</string>
     <string name="hidden_settings_category">Lock Options</string>
+    <string name="fast_lock_settings_category">Fast Lock</string>
+    <string name="fast_lock">Fast Lock</string>
     <string name="hide_lock">Hide Lock</string>
     <string name="change_lock_pattern">Change Show Lock Pattern</string>
     <string name="uninstall_settings_category">Uninstall</string>
@@ -43,7 +45,6 @@
     <string name="wrong_hidden_lock">You enter a wrong lock reenter the lock</string>
     <string name="hidden_lock_message">Do a series of long click on icons</string>
     <string name="repeat_hidden_lock_message">Repeat long clicks on the same icons</string>
-    <string name="title_activity_user_launcher">Safe Mode</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_user_launcher">Fast Lock -Save Me</string>
 
 </resources>

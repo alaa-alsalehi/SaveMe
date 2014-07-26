@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
+import android.util.Log;
 
 public class SettingsActivity extends PreferenceActivity implements
 		OnSharedPreferenceChangeListener {
@@ -113,6 +115,45 @@ public class SettingsActivity extends PreferenceActivity implements
 						}
 					}
 				});
+		CheckBoxPreference fastLockPreference = (CheckBoxPreference) findPreference("fast_lock");
+
+		/*
+		 * if (preferences.getBoolean("hidden_lock_active", false)) {
+		 * hideLockPreference.setChecked(true); } else {
+		 * hideLockPreference.setEnabled(false); }
+		 */
+		fastLockPreference
+				.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+					@Override
+					public boolean onPreferenceChange(Preference preference,
+							Object newValue) {
+						Log.d("change", newValue + "");
+						CheckBoxPreference cbPreference = (CheckBoxPreference) preference;
+						if ((Boolean) newValue) {
+							getPackageManager()
+									.setComponentEnabledSetting(
+											new ComponentName(
+													SettingsActivity.this,
+													UserLauncherActivity.class),
+											PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+											PackageManager.DONT_KILL_APP);
+							cbPreference.setChecked(true);
+							return true;
+						} else {
+
+							getPackageManager()
+									.setComponentEnabledSetting(
+											new ComponentName(
+													SettingsActivity.this,
+													UserLauncherActivity.class),
+											PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+											PackageManager.DONT_KILL_APP);
+							cbPreference.setChecked(false);
+							return false;
+						}
+					}
+				});
 		Preference changeLockPatternPreference = (Preference) findPreference("change_lock_pattern");
 		changeLockPatternPreference
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -127,8 +168,8 @@ public class SettingsActivity extends PreferenceActivity implements
 						return true;
 					}
 				});
-		
-		//≈Ìﬁ«› «·ﬁ›· «·„Œ›Ì „ƒﬁ «
+
+		// ≈Ìﬁ«› «·ﬁ›· «·„Œ›Ì „ƒﬁ «
 		if (true) {
 			Preference hiddenSettingsPreferenceCategoty = (Preference) findPreference("hidden_settings_category");
 			getPreferenceScreen().removePreference(

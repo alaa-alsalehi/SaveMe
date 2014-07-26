@@ -12,6 +12,8 @@
     <string name="change_pattern">تغيير النمط</string>
     <string name="stealth_mode">الوضع غير المرئي</string>
     <string name="hidden_settings_category">خيارات القفل</string>
+    <string name="fast_lock_settings_category">القفل السريع</string>
+    <string name="fast_lock">القفل السريع</string>
     <string name="hide_lock">إخفاء القفل</string>
     <string name="change_lock_pattern">تغيير نمط إظهار القفل</string>
     <string name="uninstall_settings_category">إزالة التطبيق</string>

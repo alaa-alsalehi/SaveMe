@@ -1501,10 +1501,10 @@ containing a value of this type.
         public static final int abc_shareactionprovider_share_with_application=0x7f090026;
         public static final int action_help=0x7f090057;
         public static final int action_lock=0x7f090056;
-        public static final int action_settings=0x7f090072;
+        public static final int action_settings=0x7f090074;
         public static final int action_unlock=0x7f090055;
-        public static final int activiate_lock_quesition=0x7f090061;
-        public static final int admin_list_header=0x7f090062;
+        public static final int activiate_lock_quesition=0x7f090063;
+        public static final int admin_list_header=0x7f090064;
         public static final int alp_cmd_confirm=0x7f090035;
         public static final int alp_cmd_continue=0x7f090036;
         public static final int alp_cmd_forgot_pattern=0x7f090037;
@@ -1553,10 +1553,10 @@ containing a value of this type.
         [CHAR LIMIT=70] 
          */
         public static final int auth_client_using_bad_version_title=0x7f090014;
-        public static final int background_categeroy=0x7f09006d;
-        public static final int cancel=0x7f090073;
-        public static final int change_background=0x7f09006e;
-        public static final int change_lock_pattern=0x7f09005e;
+        public static final int background_categeroy=0x7f09006f;
+        public static final int cancel=0x7f090075;
+        public static final int change_background=0x7f090070;
+        public static final int change_lock_pattern=0x7f090060;
         public static final int change_pattern=0x7f09005a;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
@@ -1629,30 +1629,32 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f090013;
-        public static final int confirm=0x7f090065;
-        public static final int continu=0x7f090074;
-        public static final int control_notifications=0x7f090070;
+        public static final int confirm=0x7f090067;
+        public static final int continu=0x7f090076;
+        public static final int control_notifications=0x7f090072;
         public static final int create_password=0x7f09004d;
         public static final int create_pattern=0x7f09004c;
         public static final int dialog_title=0x7f090029;
         public static final int direction=0x7f090051;
         public static final int done=0x7f090058;
-        public static final int email_message_part1=0x7f090067;
-        public static final int email_message_part2=0x7f090068;
+        public static final int email_message_part1=0x7f090069;
+        public static final int email_message_part2=0x7f09006a;
         /**  forgot password mail 
  forgot password mail 
          */
-        public static final int email_request_textview=0x7f090064;
+        public static final int email_request_textview=0x7f090066;
+        public static final int fast_lock=0x7f09005e;
+        public static final int fast_lock_settings_category=0x7f09005d;
         /**  Replace placeholder ID with your tracking ID 
          */
         public static final int ga_trackingId=0x7f090045;
         public static final int grant_permission=0x7f090048;
-        public static final int hello_world=0x7f09007a;
+        public static final int hello_world=0x7f09007c;
         public static final int help=0x7f090050;
         public static final int help_activity_title=0x7f09004a;
-        public static final int hidden_lock_message=0x7f090077;
+        public static final int hidden_lock_message=0x7f090079;
         public static final int hidden_settings_category=0x7f09005c;
-        public static final int hide_lock=0x7f09005d;
+        public static final int hide_lock=0x7f09005f;
         public static final int later=0x7f09002c;
         /**  Location client code resources (prefix with location_client) 
          */
@@ -1661,29 +1663,29 @@ containing a value of this type.
         public static final int lock_permission_request=0x7f090049;
         public static final int lock_permission_request_help=0x7f090047;
         public static final int lock_permission_title=0x7f090046;
-        public static final int mail_subject=0x7f090066;
-        public static final int network_failure=0x7f09006c;
+        public static final int mail_subject=0x7f090068;
+        public static final int network_failure=0x7f09006e;
         public static final int no_thanks=0x7f09002d;
-        public static final int notification_categeroy=0x7f09006f;
+        public static final int notification_categeroy=0x7f090071;
         public static final int password_request_help=0x7f09004f;
         public static final int pattern_settings_category=0x7f090059;
-        public static final int prevent_message=0x7f090063;
+        public static final int prevent_message=0x7f090065;
         public static final int rate=0x7f09002b;
         public static final int rate_message=0x7f09002a;
-        public static final int recovery_activity_failure_dialoge=0x7f09006b;
-        public static final int recovery_activity_success_dialoge=0x7f09006a;
-        public static final int recovery_activity_textview=0x7f090069;
+        public static final int recovery_activity_failure_dialoge=0x7f09006d;
+        public static final int recovery_activity_success_dialoge=0x7f09006c;
+        public static final int recovery_activity_textview=0x7f09006b;
         public static final int recovery_activity_title=0x7f090054;
-        public static final int repeat_hidden_lock_message=0x7f090078;
+        public static final int repeat_hidden_lock_message=0x7f09007a;
         public static final int settings=0x7f090052;
         public static final int stealth_mode=0x7f09005b;
-        public static final int step=0x7f090075;
-        public static final int title_activity_unlock_settings=0x7f090071;
-        public static final int title_activity_user_launcher=0x7f090079;
-        public static final int uninstall=0x7f090060;
-        public static final int uninstall_settings_category=0x7f09005f;
+        public static final int step=0x7f090077;
+        public static final int title_activity_unlock_settings=0x7f090073;
+        public static final int title_activity_user_launcher=0x7f09007b;
+        public static final int uninstall=0x7f090062;
+        public static final int uninstall_settings_category=0x7f090061;
         public static final int usage_help_text=0x7f09004b;
-        public static final int wrong_hidden_lock=0x7f090076;
+        public static final int wrong_hidden_lock=0x7f090078;
     }
     public static final class style {
         public static final int AOSP_DialogWindowTitle=0x7f0d008f;
