@@ -146,7 +146,7 @@ public class UserView extends FrameLayout {
 			});
 		} else {
 			unlock.setVisibility(View.VISIBLE);
-			gridView.setOnItemClickListener(null);
+			gridView.setOnItemLongClickListener(null);
 		}
 		ga.notifyDataSetInvalidated();
 		MyTracker.getUncaughtExceptionHandler();
