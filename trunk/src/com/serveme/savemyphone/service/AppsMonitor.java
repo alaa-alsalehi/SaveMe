@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -22,6 +23,7 @@ import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.model.Launcher;
 import com.serveme.savemyphone.view.utils.AlertUtility;
 import com.serveme.savemyphone.view.utils.AnalyticsExceptionParser;
+
 //import android.widget.Toast;
 
 public class AppsMonitor extends Service {
@@ -32,6 +34,10 @@ public class AppsMonitor extends Service {
 	// private ComponentName lastallowedapp;
 	int counter = 1;
 	private Handler handler;
+	// Â–« «·„ €Ì— · Œ·Ì’ «·»—‰«„Ã „‰ «·„Â„«  «·›⁄«·… ›Ì «·„ƒﬁ  timer
+	// »ÕÌÀ Ì÷„‰ ⁄œ„ »ﬁ«¡Â« »⁄œ ≈Ìﬁ«› «·Œœ„…
+	// ÕÌÀ √‰ œ«·… «·≈·€«¡ ·«  ·€Ì «·„Â«„ «·›⁄«·…
+	private volatile boolean stopped;
 
 	private enum MobileState {
 		START_APP, ALLOW_APP, UNALLOW_APP, ANDROID, USER_ACTIVITY, UNALLOW_APP_STARTED_BY_ALLOW_APP, START_ALERT_MESSAGE, END_ALERT_MESSAGE
@@ -64,53 +70,51 @@ public class AppsMonitor extends Service {
 			public void handleMessage(Message msg) {
 				final WindowManager wmgr = (WindowManager) getApplicationContext()
 						.getSystemService(Context.WINDOW_SERVICE);
-				if (msg.what == 0) {
-					synchronized (view) {
-						if (currentState == MobileState.UNALLOW_APP) {
+				if (!stopped) {
+					if (msg.what == 0) {
+						synchronized (view) {
+							if (currentState == MobileState.UNALLOW_APP) {
 
-							try {
-								wmgr.addView(view, param);
-							} catch (Exception e) {
-								Tracker tracker = EasyTracker
-										.getInstance(AppsMonitor.this);
-								tracker.send(MapBuilder
-										.createException(
-												new AnalyticsExceptionParser()
-														.getDescription(
-																Thread.currentThread()
-																		.toString()
-																		+ " "
-																		+ previousState
-																		+ " "
-																		+ currentState,
-																e), false)
-										.build());
+								try {
+									wmgr.addView(view, param);
+								} catch (Exception e) {
+									Tracker tracker = EasyTracker
+											.getInstance(AppsMonitor.this);
+									tracker.send(MapBuilder.createException(
+											new AnalyticsExceptionParser()
+													.getDescription(Thread
+															.currentThread()
+															.toString()
+															+ " "
+															+ previousState
+															+ " "
+															+ currentState, e),
+											false).build());
+								}
+								// toast.show();
+								setCurrentState(MobileState.START_ALERT_MESSAGE);
 							}
-							// toast.show();
-							setCurrentState(MobileState.START_ALERT_MESSAGE);
 						}
-					}
-				} else if (msg.what == 1) {
-					synchronized (view) {
-						if (currentState == MobileState.START_ALERT_MESSAGE) {
-							setCurrentState(MobileState.END_ALERT_MESSAGE);
-							try {
-								wmgr.removeView(view);
-							} catch (Exception e) {
-								Tracker tracker = EasyTracker
-										.getInstance(AppsMonitor.this);
-								tracker.send(MapBuilder
-										.createException(
-												new AnalyticsExceptionParser()
-														.getDescription(
-																Thread.currentThread()
-																		.toString()
-																		+ " "
-																		+ previousState
-																		+ " "
-																		+ currentState,
-																e), false)
-										.build());
+					} else if (msg.what == 1) {
+						synchronized (view) {
+							if (currentState == MobileState.START_ALERT_MESSAGE) {
+								setCurrentState(MobileState.END_ALERT_MESSAGE);
+								try {
+									wmgr.removeView(view);
+								} catch (Exception e) {
+									Tracker tracker = EasyTracker
+											.getInstance(AppsMonitor.this);
+									tracker.send(MapBuilder.createException(
+											new AnalyticsExceptionParser()
+													.getDescription(Thread
+															.currentThread()
+															.toString()
+															+ " "
+															+ previousState
+															+ " "
+															+ currentState, e),
+											false).build());
+								}
 							}
 						}
 					}
@@ -129,14 +133,11 @@ public class AppsMonitor extends Service {
 		timer.scheduleAtFixedRate(new TimerTask() {
 
 			public void run() {
-
 				List<ActivityManager.RunningTaskInfo> taskInfo = am
-						.getRunningTasks(2);
+						.getRunningTasks(1);
 				ComponentName componentInfo = taskInfo.get(0).topActivity;
 				Launcher launcher = new Launcher(
 						componentInfo.getPackageName(), null);
-				// Log.d("test", taskInfo.get(1).baseActivity.toString());
-				// Log.d("activity", taskInfo.get(1).topActivity.toString());
 				if (!db.getWhiteListPackages().contains(launcher)
 						&& !componentInfo.getPackageName().equals("android")
 						&& !componentInfo.getClassName().equals(
@@ -228,7 +229,6 @@ public class AppsMonitor extends Service {
 						}
 					}
 				}
-
 			}
 		}, 1, UPDATE_INTERVAL);
 	}
@@ -244,6 +244,7 @@ public class AppsMonitor extends Service {
 		if (timer != null) {
 			timer.cancel();
 		}
+		stopped = true;
 		sendBroadcast(new Intent("finish_user_activity"));
 		handler.removeMessages(0);
 		handler.removeMessages(1);
