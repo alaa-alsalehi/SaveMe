@@ -150,7 +150,7 @@ public class MainActivity extends ActionBarActivity {
 	protected void onStart() {
 		super.onStart();
 		MyTracker.fireActivityStartEvent(MainActivity.this);
-		MyTracker.getUncaughtExceptionHandler();
+		MyTracker.setUncaughtExceptionHandler(this);
 	}
 
 	@Override
@@ -165,7 +165,7 @@ public class MainActivity extends ActionBarActivity {
 		adView.pause();
 		super.onPause();
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();

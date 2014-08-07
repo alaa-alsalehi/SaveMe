@@ -231,7 +231,7 @@ public class SettingsActivity extends PreferenceActivity implements
 	protected void onStart() {
 		super.onStart();
 		MyTracker.fireActivityStartEvent(SettingsActivity.this);
-		MyTracker.getUncaughtExceptionHandler();
+		MyTracker.setUncaughtExceptionHandler(this);
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package com.serveme.savemyphone.view;
 
-import java.io.IOException;
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -13,13 +12,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageButton;
@@ -149,7 +146,7 @@ public class UserView extends FrameLayout {
 			gridView.setOnItemLongClickListener(null);
 		}
 		ga.notifyDataSetInvalidated();
-		MyTracker.getUncaughtExceptionHandler();
+		MyTracker.setUncaughtExceptionHandler(getContext());
 		//  ÕœÌÀ «·ﬁ«∆„… ›Ì Õ«·  €ÌÌ— Ê÷⁄ SDCard
 		getContext().registerReceiver(refreshList,
 				new IntentFilter("refresh_white_list"));
