@@ -69,7 +69,7 @@ public class AdminRequest extends ActionBarActivity {
 	protected void onStart() {
 		super.onStart();
 		MyTracker.fireActivityStartEvent(AdminRequest.this);
-		MyTracker.getUncaughtExceptionHandler();
+		MyTracker.setUncaughtExceptionHandler(this);
 	}
 
 	@Override

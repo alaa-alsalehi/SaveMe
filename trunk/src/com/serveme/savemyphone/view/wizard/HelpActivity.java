@@ -87,7 +87,7 @@ public class HelpActivity extends ActionBarActivity {
 	protected void onStart() {
 		super.onStart();
 		MyTracker.fireActivityStartEvent(HelpActivity.this);
-		MyTracker.getUncaughtExceptionHandler();
+		MyTracker.setUncaughtExceptionHandler(this);
 	}
 
 	@Override

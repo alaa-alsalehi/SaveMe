@@ -74,7 +74,7 @@ public class PasswordRequest extends ActionBarActivity {
 	protected void onStart() {
 		super.onStart();
 		MyTracker.fireActivityStartEvent(PasswordRequest.this);
-		MyTracker.getUncaughtExceptionHandler();
+		MyTracker.setUncaughtExceptionHandler(this);
 	}
 ;
 	@Override
