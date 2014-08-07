@@ -21,21 +21,26 @@ public class Launcher {
 	public boolean equals(Object o) {
 		if (o instanceof Launcher) {
 			Launcher launcher = (Launcher) o;
-			String myActivityPath = getPackageName() + " " + getActivity();
-			String otherActivityPath = launcher.getPackageName() + " " + launcher.getActivity();
-			return myActivityPath.equals(otherActivityPath);
+			StringBuilder myActivityPath = new StringBuilder();
+			myActivityPath.append(getPackageName()).append(getActivity());
+			StringBuilder otherActivityPath = new StringBuilder();
+			otherActivityPath.append(launcher.getPackageName()).append(
+					launcher.getActivity());
+			return myActivityPath.toString().equals(otherActivityPath.toString());
 		} else
 			return false;
 	}
 
 	@Override
 	public int hashCode() {
-		String myActivityPath = getPackageName() + " " + getActivity();
-		return myActivityPath.hashCode();
+		StringBuilder builder = new StringBuilder();
+		builder.append(getPackageName()).append(getActivity());
+		return builder.toString().hashCode();
 	}
 
 	@Override
 	public String toString() {
-		return "Package Name " + getPackageName() + " Activity " + getActivity();
+		return "Package Name " + getPackageName() + " Activity "
+				+ getActivity();
 	}
 }
