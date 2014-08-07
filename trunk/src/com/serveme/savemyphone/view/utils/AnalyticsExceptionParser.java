@@ -3,10 +3,7 @@ package com.serveme.savemyphone.view.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.util.Log;
-
 import com.google.analytics.tracking.android.ExceptionParser;
-
 
 public class AnalyticsExceptionParser implements ExceptionParser {
 
@@ -43,13 +40,14 @@ public class AnalyticsExceptionParser implements ExceptionParser {
 				builder.append("... " + djvuCounter + " more\n");
 				djvuCounter = 0;
 			}
-			builder.append("caused by: ");
+			builder.append("caused by:");
 		}
-		builder.delete(builder.lastIndexOf("\n"), builder.length());// delete
-																	// last
-																	// caused
-																	// by:
-		Log.d("stackMethod", builder.toString());
+		int lastIndexOf = builder.lastIndexOf("\n");
+		if (lastIndexOf != -1 && lastIndexOf != builder.length())
+			builder.delete(lastIndexOf, builder.length());// delete
+															// last
+															// caused
+															// by:
 		return "Thread: " + threadName + ", ExceptionStack: "
 				+ builder.toString();
 	}
