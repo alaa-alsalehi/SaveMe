@@ -48,28 +48,33 @@ public class AppsListAdapter extends BaseAdapter {
 		inflater = LayoutInflater.from(context);
 		appsList = new ArrayList<ResolveInfo>();
 		new AsyncTask<String, Integer, List<ResolveInfo>>() {
-		     protected List<ResolveInfo> doInBackground(String... urls) {
-		    	Intent in = new Intent(Intent.ACTION_MAIN);
-		 		in.addCategory(Intent.CATEGORY_LAUNCHER);
-		 		List<ResolveInfo> aList = context.getPackageManager().queryIntentActivities(in, 0);
-		 		status = new boolean[aList.size()]; // to keep enable/disable status
-		 		Log.v("count", aList.size()+"");
-		 		db = DBOperations.getInstance(context);
+			protected List<ResolveInfo> doInBackground(String... urls) {
+				Intent in = new Intent(Intent.ACTION_MAIN);
+				in.addCategory(Intent.CATEGORY_LAUNCHER);
+				List<ResolveInfo> aList = context.getPackageManager()
+						.queryIntentActivities(in, 0);
+				status = new boolean[aList.size()]; // to keep enable/disable
+													// status
+				Log.v("count", aList.size() + "");
+				db = DBOperations.getInstance(context);
 				whitelist = db.getWhiteListApps(); // allowed applications
-				Collections.sort(aList,	new ResolveInfo.DisplayNameComparator(context.getPackageManager()));
+				Collections.sort(aList, new ResolveInfo.DisplayNameComparator(
+						context.getPackageManager()));
 				for (Iterator<ResolveInfo> it = aList.iterator(); it.hasNext();) {
 					ResolveInfo rinfo = it.next();
-					if (rinfo.activityInfo.packageName.equals("com.serveme.savemyphone")) {
+					if (rinfo.activityInfo.packageName
+							.equals("com.serveme.savemyphone")) {
 						it.remove();
 					}
 				}
-				return aList; 
-		     }
-		     @Override
-		     protected void onPostExecute(List<ResolveInfo> result) {
-			    	updateList(result);
-		     }
-		 }.execute("");
+				return aList;
+			}
+
+			@Override
+			protected void onPostExecute(List<ResolveInfo> result) {
+				updateList(result);
+			}
+		}.execute("");
 	}
 
 	@Override
@@ -104,13 +109,14 @@ public class AppsListAdapter extends BaseAdapter {
 			viewHolder = new ViewHolder();
 			viewHolder.name = (TextView) convertView.findViewById(R.id.name);
 			viewHolder.icon = (ImageView) convertView.findViewById(R.id.icon);
-			viewHolder.tg = (ToggleButton) convertView.findViewById(R.id.enable_disable);
+			viewHolder.tg = (ToggleButton) convertView
+					.findViewById(R.id.enable_disable);
 			convertView.setTag(viewHolder); // first you set Tag to get it later
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-		
-		if(viewHolder.imgLoader != null){
+
+		if (viewHolder.imgLoader != null) {
 			viewHolder.imgLoader.cancel(true);
 		}
 
@@ -134,14 +140,15 @@ public class AppsListAdapter extends BaseAdapter {
 			}
 		});
 
-		viewHolder.name.setText(appinfo.loadLabel((context.getPackageManager())));
-		
+		viewHolder.name
+				.setText(appinfo.loadLabel((context.getPackageManager())));
+
 		ImageView appicon = viewHolder.icon;
 		appicon.setImageDrawable(null);
 
 		viewHolder.imgLoader = new ImageLoader(context, appicon);
 		viewHolder.imgLoader.execute(appinfo);
-		
+
 		if (whitelist.contains(launcher)) {
 			status[position] = true;
 		}
@@ -156,40 +163,42 @@ public class AppsListAdapter extends BaseAdapter {
 		public ToggleButton tg;
 		public ImageLoader imgLoader;
 	}
-	
-	public void updateList(List<ResolveInfo> result){
+
+	public void updateList(List<ResolveInfo> result) {
 		appsList.addAll(result);
 		this.notifyDataSetChanged();
 	}
-	
+
 	private class ImageLoader extends AsyncTask<ResolveInfo, Integer, Drawable> {
 		private Context con;
 		private WeakReference<ImageView> wrimageView;
-		 
-	    public ImageLoader(Context con, ImageView imageView) {
-	    	this.wrimageView = new WeakReference<ImageView>(imageView);
-	    	this.con = con;
-	    }
-	    
-	     protected Drawable doInBackground(ResolveInfo... appinfo) {
-	    	Drawable img = null;
-//			if(imageView.getDrawingCache() != null) {
-//	    		img = con.getResources().getDrawable(R.drawable.ic_launcher);
-			    img = appinfo[0].loadIcon(con.getPackageManager());
-			 	int imagesize = (int) con.getResources().getDimension(R.dimen.image_size);
-			 	img.setBounds(0, 0, imagesize, imagesize);
-//			} else {
-//				
-//			}
-	     
-	    	return img;
-	     }
-	     
-	     protected void onPostExecute(Drawable img) {
-	        ImageView imageView = wrimageView.get();
-	        imageView.setImageDrawable(img);
-	     }
 
-	 }
+		public ImageLoader(Context con, ImageView imageView) {
+			this.wrimageView = new WeakReference<ImageView>(imageView);
+			this.con = con;
+		}
+
+		protected Drawable doInBackground(ResolveInfo... appinfo) {
+			Drawable img = null;
+			// if(imageView.getDrawingCache() != null) {
+			// img = con.getResources().getDrawable(R.drawable.ic_launcher);
+			img = appinfo[0].loadIcon(con.getPackageManager());
+			int imagesize = (int) con.getResources().getDimension(
+					R.dimen.image_size);
+			img.setBounds(0, 0, imagesize, imagesize);
+			// } else {
+			//
+			// }
+
+			return img;
+		}
+
+		protected void onPostExecute(Drawable img) {
+			ImageView imageView = wrimageView.get();
+			if (imageView != null)
+				imageView.setImageDrawable(img);
+		}
+
+	}
 
 }
