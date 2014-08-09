@@ -1649,7 +1649,6 @@ containing a value of this type.
          */
         public static final int ga_trackingId=0x7f090045;
         public static final int grant_permission=0x7f090048;
-        public static final int hello_world=0x7f09007c;
         public static final int help=0x7f090050;
         public static final int help_activity_title=0x7f09004a;
         public static final int hidden_lock_message=0x7f090079;

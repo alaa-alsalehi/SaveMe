@@ -7480,7 +7480,7 @@ com.serveme.savemyphone.service.AppsMonitor:
     private static final int UPDATE_INTERVAL
 com.serveme.savemyphone.util.ConverterUtil
 com.serveme.savemyphone.util.MyTracker:
-    12:12:public MyTracker()
+    14:14:public MyTracker()
 com.serveme.savemyphone.view.MainActivity:
     private static final int REQ_ENTER_PATTERN
 com.serveme.savemyphone.view.RecoveryActivity:

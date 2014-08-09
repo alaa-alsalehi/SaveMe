@@ -2392,9 +2392,10 @@ com.serveme.savemyphone.R$string: int done
 com.serveme.savemyphone.R$string: int email_message_part1
 com.serveme.savemyphone.R$string: int email_message_part2
 com.serveme.savemyphone.R$string: int email_request_textview
+com.serveme.savemyphone.R$string: int fast_lock
+com.serveme.savemyphone.R$string: int fast_lock_settings_category
 com.serveme.savemyphone.R$string: int ga_trackingId
 com.serveme.savemyphone.R$string: int grant_permission
-com.serveme.savemyphone.R$string: int hello_world
 com.serveme.savemyphone.R$string: int help
 com.serveme.savemyphone.R$string: int help_activity_title
 com.serveme.savemyphone.R$string: int hidden_lock_message
