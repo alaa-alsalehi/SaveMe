@@ -256,14 +256,6 @@ public class AppsMonitor extends Service {
 			if (view != null)
 				wmgr.removeView(view);
 		} catch (Exception e) {
-			Tracker tracker = EasyTracker.getInstance(AppsMonitor.this);
-			tracker.send(MapBuilder.createException(
-					new AnalyticsExceptionParser().getDescription(Thread
-							.currentThread().toString()
-							+ " "
-							+ previousState
-							+ " " + currentState + " Destroy error", e), false)
-					.build());
 		}
 	}
 }
