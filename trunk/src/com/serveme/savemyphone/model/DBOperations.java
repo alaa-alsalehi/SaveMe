@@ -75,6 +75,7 @@ public class DBOperations {
 		database.delete(DB_KEYS.WHITE_LIST_TABLE, DB_KEYS.KEY_PKGNAME + " = ?",
 				new String[] { packageName });
 		database.close();
+		reCreateWhiteList();
 	}
 
 	public void replaceApp(ArrayList<Launcher> newLaunchers) {
@@ -90,6 +91,7 @@ public class DBOperations {
 				values.put(DB_KEYS.KEY_ACTIVITY, launcher.getActivity());
 				database.insert(DB_KEYS.WHITE_LIST_TABLE, null, values);
 			}
+			reCreateWhiteList();
 			database.setTransactionSuccessful();
 		} finally {
 			database.endTransaction();

@@ -33,10 +33,8 @@ public class UpdatePackageReceiver extends BroadcastReceiver {
 						newLaunchers.add(launcher);
 					}
 					dbOperations.replaceApp(newLaunchers);
-					dbOperations.reCreateWhiteList();
 				} else {
 					dbOperations.deleteApp(packageName);
-					dbOperations.reCreateWhiteList();
 				}
 			}
 		}

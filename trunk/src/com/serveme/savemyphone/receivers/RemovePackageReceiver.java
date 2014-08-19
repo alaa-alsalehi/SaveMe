@@ -16,7 +16,6 @@ public class RemovePackageReceiver extends BroadcastReceiver {
 		if (data != null && !intent.getBooleanExtra(Intent.EXTRA_REPLACING, false)) {
 			String packageName = data.getEncodedSchemeSpecificPart();
 			dbOperations.deleteApp(packageName);
-			dbOperations.reCreateWhiteList();
 		}
 	}
 
