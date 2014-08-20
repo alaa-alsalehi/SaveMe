@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.database.DataSetObserver;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +38,29 @@ public class UserView extends FrameLayout {
 	private GridView gridView;
 	private Launcher[] launchers;
 	private List<Launcher> currentLaunchers = new ArrayList<Launcher>();
+	// „”ƒÊ· ⁄‰  ÕœÌÀ «·»—«„Ã
+	// Õ Ï Ê≈‰ ﬂ«‰ «·»—‰«„Ã Ì⁄„· Õ«·Ì«
+	DataSetObserver dataSetObserver = new DataSetObserver() {
+		@Override
+		public void onChanged() {
+			super.onChanged();
+			if (ga != null) {
+				appsinfolist.clear();
+				appsinfolist.addAll(db.getWhiteListApps());
+				ga.notifyDataSetChanged();
+			}
+		}
+
+		public void onInvalidated() {
+			super.onInvalidated();
+			if (ga != null) {
+				appsinfolist.clear();
+				appsinfolist.addAll(db.getWhiteListApps());
+				ga.notifyDataSetInvalidated();
+			}
+
+		}
+	};
 
 	public UserView(Context context) {
 		super(context);
@@ -105,6 +129,7 @@ public class UserView extends FrameLayout {
 		super.onAttachedToWindow();
 		appsinfolist.clear();
 		appsinfolist.addAll(db.getWhiteListApps());
+		db.registerObserver(dataSetObserver);
 		currentLaunchers.clear();
 		final ImageButton unlock = (ImageButton) findViewById(R.id.unlock);
 		SharedPreferences preferences = getContext().getSharedPreferences(
@@ -156,7 +181,7 @@ public class UserView extends FrameLayout {
 	protected void onDetachedFromWindow() {
 		super.onDetachedFromWindow();
 		getContext().unregisterReceiver(refreshList);
-
+		db.unregisterObserver(dataSetObserver);
 	}
 
 	private final BroadcastReceiver refreshList = new BroadcastReceiver() {

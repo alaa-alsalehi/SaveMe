@@ -2,6 +2,7 @@ package com.serveme.savemyphone.model;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import com.google.analytics.tracking.android.EasyTracker;
@@ -16,10 +17,12 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
+import android.database.DataSetObservable;
+import android.database.Observable;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build.VERSION;
 
-public class DBOperations {
+public class DBOperations extends DataSetObservable{
 
 	private PrefEditor pe;
 	private static DBOperations dboperations;
@@ -29,6 +32,7 @@ public class DBOperations {
 	private static Object dummyForSynch = new Object();
 	private DBHandler dbhandler;
 	private Context context;
+	
 
 	private DBOperations(Context context) {
 		this.context = context;
@@ -67,6 +71,7 @@ public class DBOperations {
 						null);
 				whitelistPackages.add(launcher2);
 			}
+			notifyChanged();
 		}
 	}
 
@@ -76,6 +81,7 @@ public class DBOperations {
 				new String[] { packageName });
 		database.close();
 		reCreateWhiteList();
+		notifyChanged();
 	}
 
 	public void replaceApp(ArrayList<Launcher> newLaunchers) {
@@ -92,6 +98,7 @@ public class DBOperations {
 				database.insert(DB_KEYS.WHITE_LIST_TABLE, null, values);
 			}
 			reCreateWhiteList();
+			notifyChanged();
 			database.setTransactionSuccessful();
 		} finally {
 			database.endTransaction();
@@ -114,6 +121,7 @@ public class DBOperations {
 						null);
 				whitelistPackages.remove(launcher2);
 			}
+			notifyChanged();
 		}
 	}
 
@@ -162,7 +170,7 @@ public class DBOperations {
 										// √ﬂÀ—
 										// „‰ ŒÌÿ
 			if (whitelist == null) {
-				whitelist = new HashSet<Launcher>();
+				whitelist = new LinkedHashSet<Launcher>();
 				SQLiteDatabase database = dbhandler.getReadableDatabase();
 				Cursor cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null,
 						null, null, null, null, DB_KEYS.KEY_PKGNAME);
@@ -218,7 +226,7 @@ public class DBOperations {
 	public Set<Launcher> getWhiteListPackages() {
 		synchronized (dummyForSynch) {
 			if (whitelistPackages == null) {
-				whitelistPackages = new HashSet<Launcher>();
+				whitelistPackages = new LinkedHashSet<Launcher>();
 				SQLiteDatabase database = dbhandler.getReadableDatabase();
 				Cursor cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null,
 						null, null, null, null, DB_KEYS.KEY_PKGNAME);
