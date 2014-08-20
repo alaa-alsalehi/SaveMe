@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -246,16 +245,18 @@ public class AppsMonitor extends Service {
 		}
 		stopped = true;
 		sendBroadcast(new Intent("finish_user_activity"));
+		final View view = AlertUtility.getView(AppsMonitor.this);
 		handler.removeMessages(0);
 		handler.removeMessages(1);
 		// ≈“«·… «·‘«‘… «·„”«⁄œ… ·÷„«‰ ⁄œ„ ÊÃÊœ „‘«ﬂ·
-		final View view = AlertUtility.getView(AppsMonitor.this);
 		final WindowManager wmgr = (WindowManager) getApplicationContext()
 				.getSystemService(Context.WINDOW_SERVICE);
-		try {
-			if (view != null)
-				wmgr.removeView(view);
-		} catch (Exception e) {
+		synchronized (view) {
+			try {
+				if (view != null)
+					wmgr.removeView(view);
+			} catch (Exception e) {
+			}
 		}
 	}
 }
