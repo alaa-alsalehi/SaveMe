@@ -17901,17 +17901,17 @@ com.serveme.savemyphone.model.DBOperations -> com.serveme.savemyphone.b.b:
     java.lang.Object dummyForSynch -> e
     com.serveme.savemyphone.model.DBHandler dbhandler -> f
     android.content.Context context -> g
-    40:40:com.serveme.savemyphone.model.DBOperations getInstance(android.content.Context) -> a
-    45:51:int getLaunchersCount(java.lang.String) -> a
-    55:71:void insertoApp(com.serveme.savemyphone.model.Launcher) -> a
-    74:78:void deleteApp(java.lang.String) -> b
-    81:98:void replaceApp(java.util.ArrayList) -> a
-    101:116:void deleteLauncher(com.serveme.savemyphone.model.Launcher) -> b
-    119:153:boolean isThereEnabledApps() -> a
-    157:200:java.util.Set getWhiteListApps() -> b
-    204:214:void reCreateWhiteList() -> c
-    217:249:java.util.Set getWhiteListPackages() -> d
-    255:287:boolean isInstalledOnSdCard(android.content.Context,java.lang.String) -> a
+    44:44:com.serveme.savemyphone.model.DBOperations getInstance(android.content.Context) -> a
+    49:55:int getLaunchersCount(java.lang.String) -> a
+    59:76:void insertoApp(com.serveme.savemyphone.model.Launcher) -> a
+    79:85:void deleteApp(java.lang.String) -> b
+    88:107:void replaceApp(java.util.ArrayList) -> a
+    110:126:void deleteLauncher(com.serveme.savemyphone.model.Launcher) -> b
+    129:163:boolean isThereEnabledApps() -> a
+    167:210:java.util.Set getWhiteListApps() -> b
+    214:224:void reCreateWhiteList() -> c
+    227:259:java.util.Set getWhiteListPackages() -> d
+    265:297:boolean isInstalledOnSdCard(android.content.Context,java.lang.String) -> a
 com.serveme.savemyphone.model.Launcher -> com.serveme.savemyphone.b.c:
     java.lang.String packageName -> a
     java.lang.String activity -> b
@@ -17945,11 +17945,11 @@ com.serveme.savemyphone.receivers.AdminReciver -> com.serveme.savemyphone.receiv
 com.serveme.savemyphone.receivers.BootReceiver -> com.serveme.savemyphone.receivers.BootReceiver:
     15:22:void onReceive(android.content.Context,android.content.Intent) -> onReceive
 com.serveme.savemyphone.receivers.RemovePackageReceiver -> com.serveme.savemyphone.receivers.RemovePackageReceiver:
-    14:21:void onReceive(android.content.Context,android.content.Intent) -> onReceive
+    14:20:void onReceive(android.content.Context,android.content.Intent) -> onReceive
 com.serveme.savemyphone.receivers.SDCardReceiver -> com.serveme.savemyphone.receivers.SDCardReceiver:
     15:31:void onReceive(android.content.Context,android.content.Intent) -> onReceive
 com.serveme.savemyphone.receivers.UpdatePackageReceiver -> com.serveme.savemyphone.receivers.UpdatePackageReceiver:
-    19:43:void onReceive(android.content.Context,android.content.Intent) -> onReceive
+    19:41:void onReceive(android.content.Context,android.content.Intent) -> onReceive
 com.serveme.savemyphone.service.AppsMonitor -> com.serveme.savemyphone.service.AppsMonitor:
     java.util.Timer timer -> b
     android.app.ActivityManager am -> c
@@ -17959,27 +17959,27 @@ com.serveme.savemyphone.service.AppsMonitor -> com.serveme.savemyphone.service.A
     boolean stopped -> f
     com.serveme.savemyphone.service.AppsMonitor$MobileState currentState -> g
     com.serveme.savemyphone.service.AppsMonitor$MobileState previousState -> h
-    51:51:android.os.IBinder onBind(android.content.Intent) -> onBind
-    56:127:int onStartCommand(android.content.Intent,int,int) -> onStartCommand
-    132:234:void doGetRunningApp() -> a
-    237:239:void setCurrentState(com.serveme.savemyphone.service.AppsMonitor$MobileState) -> a
-    243:268:void onDestroy() -> onDestroy
-    40:40:boolean access$0(com.serveme.savemyphone.service.AppsMonitor) -> a
-    46:46:com.serveme.savemyphone.service.AppsMonitor$MobileState access$1(com.serveme.savemyphone.service.AppsMonitor) -> b
-    47:47:com.serveme.savemyphone.service.AppsMonitor$MobileState access$2(com.serveme.savemyphone.service.AppsMonitor) -> c
-    236:236:void access$3(com.serveme.savemyphone.service.AppsMonitor,com.serveme.savemyphone.service.AppsMonitor$MobileState) -> a
-    32:32:android.app.ActivityManager access$4(com.serveme.savemyphone.service.AppsMonitor) -> d
-    33:33:com.serveme.savemyphone.model.DBOperations access$5(com.serveme.savemyphone.service.AppsMonitor) -> e
-    36:36:android.os.Handler access$6(com.serveme.savemyphone.service.AppsMonitor) -> f
+    50:50:android.os.IBinder onBind(android.content.Intent) -> onBind
+    55:126:int onStartCommand(android.content.Intent,int,int) -> onStartCommand
+    131:233:void doGetRunningApp() -> a
+    236:238:void setCurrentState(com.serveme.savemyphone.service.AppsMonitor$MobileState) -> a
+    242:261:void onDestroy() -> onDestroy
+    39:39:boolean access$0(com.serveme.savemyphone.service.AppsMonitor) -> a
+    45:45:com.serveme.savemyphone.service.AppsMonitor$MobileState access$1(com.serveme.savemyphone.service.AppsMonitor) -> b
+    46:46:com.serveme.savemyphone.service.AppsMonitor$MobileState access$2(com.serveme.savemyphone.service.AppsMonitor) -> c
+    235:235:void access$3(com.serveme.savemyphone.service.AppsMonitor,com.serveme.savemyphone.service.AppsMonitor$MobileState) -> a
+    31:31:android.app.ActivityManager access$4(com.serveme.savemyphone.service.AppsMonitor) -> d
+    32:32:com.serveme.savemyphone.model.DBOperations access$5(com.serveme.savemyphone.service.AppsMonitor) -> e
+    35:35:android.os.Handler access$6(com.serveme.savemyphone.service.AppsMonitor) -> f
 com.serveme.savemyphone.service.AppsMonitor$1 -> com.serveme.savemyphone.service.a:
     com.serveme.savemyphone.service.AppsMonitor this$0 -> a
     android.view.View val$view -> b
     android.view.WindowManager$LayoutParams val$param -> c
-    71:123:void handleMessage(android.os.Message) -> handleMessage
+    70:122:void handleMessage(android.os.Message) -> handleMessage
 com.serveme.savemyphone.service.AppsMonitor$2 -> com.serveme.savemyphone.service.b:
     com.serveme.savemyphone.service.AppsMonitor this$0 -> a
     android.view.View val$view -> b
-    136:232:void run() -> run
+    135:231:void run() -> run
 com.serveme.savemyphone.service.AppsMonitor$MobileState -> com.serveme.savemyphone.service.c:
     com.serveme.savemyphone.service.AppsMonitor$MobileState START_APP -> a
     com.serveme.savemyphone.service.AppsMonitor$MobileState ALLOW_APP -> b
@@ -18128,37 +18128,42 @@ com.serveme.savemyphone.view.UserLauncherActivity -> com.serveme.savemyphone.vie
     28:29:boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
     33:38:void lock() -> a
 com.serveme.savemyphone.view.UserView -> com.serveme.savemyphone.view.UserView:
-    java.util.List appsinfolist -> a
-    com.serveme.savemyphone.model.DBOperations db -> b
-    com.serveme.savemyphone.control.GridAdapter ga -> c
-    android.widget.GridView gridView -> d
-    com.serveme.savemyphone.model.Launcher[] launchers -> e
-    java.util.List currentLaunchers -> f
-    android.content.BroadcastReceiver refreshList -> g
-    57:101:void intialize() -> a
-    105:153:void onAttachedToWindow() -> onAttachedToWindow
-    157:160:void onDetachedFromWindow() -> onDetachedFromWindow
-    34:34:java.util.List access$0(com.serveme.savemyphone.view.UserView) -> a
-    35:35:com.serveme.savemyphone.model.DBOperations access$1(com.serveme.savemyphone.view.UserView) -> b
-    36:36:com.serveme.savemyphone.control.GridAdapter access$2(com.serveme.savemyphone.view.UserView) -> c
-    39:39:java.util.List access$3(com.serveme.savemyphone.view.UserView) -> d
-    38:38:com.serveme.savemyphone.model.Launcher[] access$4(com.serveme.savemyphone.view.UserView) -> e
+    java.util.List appsinfolist -> b
+    com.serveme.savemyphone.model.DBOperations db -> c
+    com.serveme.savemyphone.control.GridAdapter ga -> d
+    android.widget.GridView gridView -> e
+    com.serveme.savemyphone.model.Launcher[] launchers -> f
+    java.util.List currentLaunchers -> g
+    android.database.DataSetObserver dataSetObserver -> a
+    android.content.BroadcastReceiver refreshList -> h
+    81:126:void intialize() -> a
+    130:179:void onAttachedToWindow() -> onAttachedToWindow
+    183:186:void onDetachedFromWindow() -> onDetachedFromWindow
+    37:37:com.serveme.savemyphone.control.GridAdapter access$0(com.serveme.savemyphone.view.UserView) -> a
+    35:35:java.util.List access$1(com.serveme.savemyphone.view.UserView) -> b
+    36:36:com.serveme.savemyphone.model.DBOperations access$2(com.serveme.savemyphone.view.UserView) -> c
+    40:40:java.util.List access$3(com.serveme.savemyphone.view.UserView) -> d
+    39:39:com.serveme.savemyphone.model.Launcher[] access$4(com.serveme.savemyphone.view.UserView) -> e
 com.serveme.savemyphone.view.UserView$1 -> com.serveme.savemyphone.view.r:
     com.serveme.savemyphone.view.UserView this$0 -> a
-    165:168:void onReceive(android.content.Context,android.content.Intent) -> onReceive
+    46:52:void onChanged() -> onChanged
+    55:62:void onInvalidated() -> onInvalidated
 com.serveme.savemyphone.view.UserView$2 -> com.serveme.savemyphone.view.s:
     com.serveme.savemyphone.view.UserView this$0 -> a
-    73:86:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+    191:194:void onReceive(android.content.Context,android.content.Intent) -> onReceive
 com.serveme.savemyphone.view.UserView$3 -> com.serveme.savemyphone.view.t:
     com.serveme.savemyphone.view.UserView this$0 -> a
-    95:99:void onClick(android.view.View) -> onClick
+    96:111:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 com.serveme.savemyphone.view.UserView$4 -> com.serveme.savemyphone.view.u:
     com.serveme.savemyphone.view.UserView this$0 -> a
-    123:123:java.lang.reflect.Type getGenericComponentType() -> getGenericComponentType
+    120:124:void onClick(android.view.View) -> onClick
 com.serveme.savemyphone.view.UserView$5 -> com.serveme.savemyphone.view.v:
     com.serveme.savemyphone.view.UserView this$0 -> a
+    149:149:java.lang.reflect.Type getGenericComponentType() -> getGenericComponentType
+com.serveme.savemyphone.view.UserView$6 -> com.serveme.savemyphone.view.w:
+    com.serveme.savemyphone.view.UserView this$0 -> a
     android.widget.ImageButton val$unlock -> b
-    131:141:boolean onItemLongClick(android.widget.AdapterView,android.view.View,int,long) -> onItemLongClick
+    157:167:boolean onItemLongClick(android.widget.AdapterView,android.view.View,int,long) -> onItemLongClick
 com.serveme.savemyphone.view.utils.ActivitiesController -> com.serveme.savemyphone.view.a.a:
     android.app.Activity activity -> a
     android.app.admin.DevicePolicyManager devicePolicyManager -> b

@@ -3,8 +3,8 @@
     package="com.serveme.savemyphone"
     android:installLocation="internalOnly"
     android:permission="android.permission.RECEIVE_BOOT_COMPLETED"
-    android:versionCode="25"
-    android:versionName="2.3.3" >
+    android:versionCode="26"
+    android:versionName="2.3.4" >
 
     <!-- Minimum and target SDK -->
     <uses-sdk
