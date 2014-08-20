@@ -93,8 +93,8 @@ public class UserView extends FrameLayout {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v,
 					int position, long id) {
+				Launcher launcher = appsinfolist.get(position);
 				try {
-					Launcher launcher = appsinfolist.get(position);
 					Intent i = new Intent();
 					i.setAction(Intent.ACTION_MAIN);
 					i.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -106,6 +106,7 @@ public class UserView extends FrameLayout {
 				} catch (ActivityNotFoundException e) {
 					Toast.makeText(getContext(), "Application not Installed",
 							Toast.LENGTH_LONG).show();
+					db.deleteLauncher(launcher);
 				}
 			}
 		});
