@@ -63,12 +63,15 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	protected void intialize() {
-		AppsListAdapter adapter = new AppsListAdapter(this);
 		ListView listView = (ListView) findViewById(R.id.app_list);
-		LinearLayout headerLayout = createListHeader();
-		listView.addHeaderView(headerLayout);
-		listView.setSmoothScrollbarEnabled(true);
-		listView.setAdapter(adapter);
+		if (listView.getHeaderViewsCount() == 0) {
+			AppsListAdapter adapter = new AppsListAdapter(this);
+
+			LinearLayout headerLayout = createListHeader();
+			listView.addHeaderView(headerLayout);
+			listView.setSmoothScrollbarEnabled(true);
+			listView.setAdapter(adapter);
+		}
 		adsStuff();
 		try {
 			AppRater.app_launched(MainActivity.this);
