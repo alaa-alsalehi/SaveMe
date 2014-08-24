@@ -46,5 +46,6 @@
     <string name="hidden_lock_message">Do a series of long click on icons</string>
     <string name="repeat_hidden_lock_message">Repeat long clicks on the same icons</string>
     <string name="title_activity_user_launcher">Fast Lock -Save Me</string>
+    <string name="title_activity_uninstall">UninstallActivity</string>
 
 </resources>

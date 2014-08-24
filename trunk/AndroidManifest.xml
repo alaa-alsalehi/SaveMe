@@ -200,12 +200,10 @@
         </activity>
         <activity
             android:name="com.serveme.savemyphone.view.BaseActivity"
-            android:label="@string/title_activity_base"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
             android:name="com.serveme.savemyphone.view.WaitingActivity"
-            android:label="@string/title_activity_waiting"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
