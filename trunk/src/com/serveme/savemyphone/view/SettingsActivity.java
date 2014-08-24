@@ -6,6 +6,8 @@ import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.receivers.AdminReciver;
 import com.serveme.savemyphone.util.MyTracker;
+import com.serveme.savemyphone.util.Utility;
+
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -178,17 +180,7 @@ public class SettingsActivity extends PreferenceActivity implements
 		uninstallPref
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 					public boolean onPreferenceClick(Preference preference) {
-						MyTracker.fireButtonPressedEvent(SettingsActivity.this,
-								"uninstall");
-						ComponentName devAdminReceiver = new ComponentName(
-								SettingsActivity.this, AdminReciver.class);
-						DevicePolicyManager dpm = (DevicePolicyManager) SettingsActivity.this
-								.getSystemService(Context.DEVICE_POLICY_SERVICE);
-						dpm.removeActiveAdmin(devAdminReceiver);
-						Intent intent = new Intent(Intent.ACTION_DELETE);
-						intent.setData(Uri.parse("package:"
-								+ SettingsActivity.this.getPackageName()));
-						SettingsActivity.this.startActivity(intent);
+						Utility.uninstallSaveMe(SettingsActivity.this);
 						return true;
 					}
 				});
