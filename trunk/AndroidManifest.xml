@@ -3,8 +3,8 @@
     package="com.serveme.savemyphone"
     android:installLocation="internalOnly"
     android:permission="android.permission.RECEIVE_BOOT_COMPLETED"
-    android:versionCode="26"
-    android:versionName="2.3.4" >
+    android:versionCode="27"
+    android:versionName="2.3.5" >
 
     <!-- Minimum and target SDK -->
     <uses-sdk
@@ -27,7 +27,7 @@
 
         <!--
            <meta-data android:name="com.google.android.gms.version"
-           android:value="@integer/google_play_services_version" />
+           android:value="@integer/google_play_services_version" />
         -->
 
 
@@ -197,6 +197,20 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.serveme.savemyphone.view.BaseActivity"
+            android:label="@string/title_activity_base"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.serveme.savemyphone.view.WaitingActivity"
+            android:label="@string/title_activity_waiting"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.serveme.savemyphone.view.UninstallActivity"
+            android:label="@string/title_activity_uninstall" >
         </activity>
     </application>
 

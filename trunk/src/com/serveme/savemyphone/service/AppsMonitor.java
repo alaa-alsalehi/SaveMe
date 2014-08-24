@@ -12,12 +12,14 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.Tracker;
+import com.serveme.savemyphone.view.BaseActivity;
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.model.Launcher;
 import com.serveme.savemyphone.view.utils.AlertUtility;
@@ -137,13 +139,18 @@ public class AppsMonitor extends Service {
 				ComponentName componentInfo = taskInfo.get(0).topActivity;
 				Launcher launcher = new Launcher(
 						componentInfo.getPackageName(), null);
+				Log.d("app", currentState + componentInfo.toString());
 				if (!db.getWhiteListPackages().contains(launcher)
 						&& !componentInfo.getPackageName().equals("android")
-						&& !componentInfo.getClassName().equals(
-								"com.serveme.savemyphone.view.UserActivity")
+						&& !componentInfo
+								.getClassName()
+								.equals("com.serveme.savemyphone.view.UserActivity")
 						&& !componentInfo
 								.getClassName()
 								.equals("com.serveme.savemyphone.view.RecoveryActivity")
+						&& !componentInfo
+								.getClassName()
+								.equals("com.serveme.savemyphone.view.WaitingActivity")
 						&& !componentInfo
 								.getClassName()
 								.equals("group.pals.android.lib.ui.lockpattern.LockPatternActivity")) {
@@ -174,13 +181,13 @@ public class AppsMonitor extends Service {
 						// startActivity(intent);
 						// ≈–« ﬂ«‰ √”«” «·⁄„·Ì… »—‰«„Ã „”„ÊÕ ›ÌÂ ÌÃ» «·⁄Êœ… ≈·Ï
 						// «·»—‰«„Ã «·√’·Ì
-						Intent saveintent = AppsMonitor.this
-								.getPackageManager().getLaunchIntentForPackage(
-										taskInfo.get(0).baseActivity
-												.getPackageName());
-						saveintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-								| Intent.FLAG_ACTIVITY_NEW_TASK);
-						getApplication().startActivity(saveintent);
+						Intent i = new Intent(AppsMonitor.this,
+								BaseActivity.class);
+						i.putExtra("package", componentInfo.getPackageName());
+						i.putExtra("activity", componentInfo.getClassName());
+						i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+								| Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(i);
 						synchronized (view) {
 							if (currentState == MobileState.START_ALERT_MESSAGE) {
 

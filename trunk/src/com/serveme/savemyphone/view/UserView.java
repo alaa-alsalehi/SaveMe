@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.serveme.savemyphone.R;
+import com.serveme.savemyphone.view.BaseActivity;
 import com.serveme.savemyphone.control.GridAdapter;
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.model.Launcher;
@@ -95,12 +96,10 @@ public class UserView extends FrameLayout {
 					int position, long id) {
 				Launcher launcher = appsinfolist.get(position);
 				try {
-					Intent i = new Intent();
-					i.setAction(Intent.ACTION_MAIN);
-					i.addCategory(Intent.CATEGORY_LAUNCHER);
-					i.setClassName(launcher.getPackageName(),
-							launcher.getActivity());
-					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					Intent i = new Intent(getContext(), BaseActivity.class);
+					i.putExtra("package", launcher.getPackageName());
+					i.putExtra("activity", launcher.getActivity());
+					i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					getContext().startActivity(i);
 					MyTracker.fireButtonPressedEvent(getContext(), "run_app");
 				} catch (ActivityNotFoundException e) {
