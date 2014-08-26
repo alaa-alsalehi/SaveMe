@@ -9,6 +9,7 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ComponentInfo;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -46,6 +47,7 @@ public class AppsMonitor extends Service {
 
 	private volatile MobileState currentState;
 	private volatile MobileState previousState;
+	private ComponentName currentApp;
 
 	@Override
 	public IBinder onBind(Intent arg0) {
@@ -136,22 +138,35 @@ public class AppsMonitor extends Service {
 			public void run() {
 				List<ActivityManager.RunningTaskInfo> taskInfo = am
 						.getRunningTasks(1);
-				ComponentName componentInfo = taskInfo.get(0).topActivity;
-				Launcher launcher = new Launcher(
-						componentInfo.getPackageName(), null);
-				Log.d("app", currentState + componentInfo.toString());
+				ComponentName topActivity = taskInfo.get(0).topActivity;
+				ComponentName baseActivity = taskInfo.get(0).baseActivity;// «·»—‰«„Ã
+				// «·√’·Ì
+				if (currentApp == null
+						|| currentApp.getPackageName() == null
+						|| !currentApp.getPackageName().equals(
+								baseActivity.getPackageName())) {
+					Log.d("change app",
+							"replace "
+									+ (currentApp == null ? " null "
+											: currentApp.toString())
+									+ " by "
+									+ (baseActivity == null ? " null "
+											: baseActivity.getPackageName()));
+					currentApp = baseActivity;
+				}
+				Launcher launcher = new Launcher(topActivity.getPackageName(),
+						null);
+
 				if (!db.getWhiteListPackages().contains(launcher)
-						&& !componentInfo.getPackageName().equals("android")
-						&& !componentInfo
-								.getClassName()
-								.equals("com.serveme.savemyphone.view.UserActivity")
-						&& !componentInfo
+						&& !topActivity.getPackageName().equals("android")
+						&& !topActivity.getClassName().equals(
+								"com.serveme.savemyphone.view.UserActivity")
+						&& !topActivity
 								.getClassName()
 								.equals("com.serveme.savemyphone.view.RecoveryActivity")
-						&& !componentInfo
-								.getClassName()
-								.equals("com.serveme.savemyphone.view.WaitingActivity")
-						&& !componentInfo
+						&& !topActivity.getClassName().equals(
+								"com.serveme.savemyphone.view.WaitingActivity")
+						&& !topActivity
 								.getClassName()
 								.equals("group.pals.android.lib.ui.lockpattern.LockPatternActivity")) {
 					// ActivityManager manager =
@@ -168,10 +183,8 @@ public class AppsMonitor extends Service {
 					 * componentInfo = taskInfo.get(0).baseActivity; launcher =
 					 * new Launcher( componentInfo.getPackageName(), null);
 					 */
-					componentInfo = taskInfo.get(0).baseActivity;// «·»—‰«„Ã
-																	// «·√’·Ì
-					launcher = new Launcher(componentInfo.getPackageName(),
-							null);
+
+					launcher = new Launcher(baseActivity.getPackageName(), null);
 					if (db.getWhiteListPackages().contains(launcher)) {
 						// Intent intent = new Intent(Intent.ACTION_MAIN);
 						// intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
@@ -183,8 +196,8 @@ public class AppsMonitor extends Service {
 						// «·»—‰«„Ã «·√’·Ì
 						Intent i = new Intent(AppsMonitor.this,
 								BaseActivity.class);
-						i.putExtra("package", componentInfo.getPackageName());
-						i.putExtra("activity", componentInfo.getClassName());
+						i.putExtra("package", baseActivity.getPackageName());
+						i.putExtra("activity", baseActivity.getClassName());
 						i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 								| Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						startActivity(i);
@@ -208,7 +221,7 @@ public class AppsMonitor extends Service {
 						}
 					}
 					//
-				} else if (componentInfo.getPackageName().equals("android")) {
+				} else if (topActivity.getPackageName().equals("android")) {
 					// lastallowedapp = taskInfo.get(0).topActivity;
 					synchronized (view) {
 						if (currentState != MobileState.START_ALERT_MESSAGE) {
@@ -217,7 +230,7 @@ public class AppsMonitor extends Service {
 							handler.sendEmptyMessage(1);
 						}
 					}
-				} else if (componentInfo.getClassName().equals(
+				} else if (topActivity.getClassName().equals(
 						"com.serveme.savemyphone.view.UserActivity")) {
 					synchronized (view) {
 						if (currentState == MobileState.START_ALERT_MESSAGE) {
