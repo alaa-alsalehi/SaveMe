@@ -22,7 +22,7 @@ import android.database.Observable;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build.VERSION;
 
-public class DBOperations extends DataSetObservable{
+public class DBOperations extends DataSetObservable {
 
 	private PrefEditor pe;
 	private static DBOperations dboperations;
@@ -32,7 +32,6 @@ public class DBOperations extends DataSetObservable{
 	private static Object dummyForSynch = new Object();
 	private DBHandler dbhandler;
 	private Context context;
-	
 
 	private DBOperations(Context context) {
 		this.context = context;
@@ -46,12 +45,40 @@ public class DBOperations extends DataSetObservable{
 	}
 
 	public int getLaunchersCount(String packageName) {
-		SQLiteDatabase database = dbhandler.getReadableDatabase();
-		Cursor cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null,
-				DB_KEYS.KEY_PKGNAME + " = ?", new String[] { packageName },
-				null, null, null);
-		int count = cursor.getCount();
-		database.close();
+		SQLiteDatabase database = null;
+		Cursor cursor = null;
+		int count = 0;
+		try {
+			database = dbhandler.getReadableDatabase();
+			cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null,
+					DB_KEYS.KEY_PKGNAME + " = ?", new String[] { packageName },
+					null, null, null);
+			count = cursor.getCount();
+			database.close();
+		} finally {
+			if (cursor != null && !cursor.isClosed()) {
+				try {
+					cursor.close();
+				} catch (Exception exception) {
+					Tracker tracker = EasyTracker.getInstance(context);
+					tracker.send(MapBuilder.createException(
+							new AnalyticsExceptionParser().getDescription(
+									Thread.currentThread().toString(),
+									exception), false).build());
+				}
+			}
+			if (database != null && database.isOpen()) {
+				try {
+					database.close();
+				} catch (Exception exception) {
+					Tracker tracker = EasyTracker.getInstance(context);
+					tracker.send(MapBuilder.createException(
+							new AnalyticsExceptionParser().getDescription(
+									Thread.currentThread().toString(),
+									exception), false).build());
+				}
+			}
+		}
 		return count;
 	}
 
@@ -59,9 +86,23 @@ public class DBOperations extends DataSetObservable{
 		ContentValues values = new ContentValues();
 		values.put(DB_KEYS.KEY_PKGNAME, launcher.getPackageName());
 		values.put(DB_KEYS.KEY_ACTIVITY, launcher.getActivity());
-		SQLiteDatabase database = dbhandler.getWritableDatabase();
-		database.insert(DB_KEYS.WHITE_LIST_TABLE, null, values);
-		database.close();
+		SQLiteDatabase database = null;
+		try {
+			database = dbhandler.getWritableDatabase();
+			database.insert(DB_KEYS.WHITE_LIST_TABLE, null, values);
+		} finally {
+			if (database != null && database.isOpen()) {
+				try {
+					database.close();
+				} catch (Exception exception) {
+					Tracker tracker = EasyTracker.getInstance(context);
+					tracker.send(MapBuilder.createException(
+							new AnalyticsExceptionParser().getDescription(
+									Thread.currentThread().toString(),
+									exception), false).build());
+				}
+			}
+		}
 		synchronized (dummyForSynch) {
 			if (whitelist != null) {
 				whitelist.add(launcher);
@@ -76,10 +117,24 @@ public class DBOperations extends DataSetObservable{
 	}
 
 	public void deleteApp(String packageName) {
-		SQLiteDatabase database = dbhandler.getWritableDatabase();
-		database.delete(DB_KEYS.WHITE_LIST_TABLE, DB_KEYS.KEY_PKGNAME + " = ?",
-				new String[] { packageName });
-		database.close();
+		SQLiteDatabase database = null;
+		try {
+			database = dbhandler.getWritableDatabase();
+			database.delete(DB_KEYS.WHITE_LIST_TABLE, DB_KEYS.KEY_PKGNAME
+					+ " = ?", new String[] { packageName });
+		} finally {
+			if (database != null && database.isOpen()) {
+				try {
+					database.close();
+				} catch (Exception exception) {
+					Tracker tracker = EasyTracker.getInstance(context);
+					tracker.send(MapBuilder.createException(
+							new AnalyticsExceptionParser().getDescription(
+									Thread.currentThread().toString(),
+									exception), false).build());
+				}
+			}
+		}
 		reCreateWhiteList();
 		notifyChanged();
 	}
@@ -102,16 +157,43 @@ public class DBOperations extends DataSetObservable{
 			database.setTransactionSuccessful();
 		} finally {
 			database.endTransaction();
-			database.close();
+			if (database != null && database.isOpen()) {
+				try {
+					database.close();
+				} catch (Exception exception) {
+					Tracker tracker = EasyTracker.getInstance(context);
+					tracker.send(MapBuilder.createException(
+							new AnalyticsExceptionParser().getDescription(
+									Thread.currentThread().toString(),
+									exception), false).build());
+				}
+			}
 		}
 	}
 
 	public void deleteLauncher(Launcher launcher) {
-		SQLiteDatabase database = dbhandler.getWritableDatabase();
-		database.delete(DB_KEYS.WHITE_LIST_TABLE, DB_KEYS.KEY_PKGNAME
-				+ " = ? and " + DB_KEYS.KEY_ACTIVITY + " = ?", new String[] {
-				launcher.getPackageName(), launcher.getActivity() });
-		database.close();
+		SQLiteDatabase database = null;
+		try {
+			database = dbhandler.getWritableDatabase();
+			database.delete(
+					DB_KEYS.WHITE_LIST_TABLE,
+					DB_KEYS.KEY_PKGNAME + " = ? and " + DB_KEYS.KEY_ACTIVITY
+							+ " = ?",
+					new String[] { launcher.getPackageName(),
+							launcher.getActivity() });
+		} finally {
+			if (database != null && database.isOpen()) {
+				try {
+					database.close();
+				} catch (Exception exception) {
+					Tracker tracker = EasyTracker.getInstance(context);
+					tracker.send(MapBuilder.createException(
+							new AnalyticsExceptionParser().getDescription(
+									Thread.currentThread().toString(),
+									exception), false).build());
+				}
+			}
+		}
 		synchronized (dummyForSynch) {
 			if (whitelist != null) {
 				whitelist.remove(launcher);
@@ -171,40 +253,70 @@ public class DBOperations extends DataSetObservable{
 										// „‰ ŒÌÿ
 			if (whitelist == null) {
 				whitelist = new LinkedHashSet<Launcher>();
-				SQLiteDatabase database = dbhandler.getReadableDatabase();
-				Cursor cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null,
-						null, null, null, null, DB_KEYS.KEY_PKGNAME);
-				// loop through all rows and add it to white list
-				if (cursor.moveToFirst()) {
-					if (pe.isSDCardMounted()) {
-						do {
-							String packageName = cursor
-									.getString((cursor
-											.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
-							String activity = cursor
-									.getString((cursor
-											.getColumnIndexOrThrow(DB_KEYS.KEY_ACTIVITY)));
-							Launcher lanucher = new Launcher(packageName,
-									activity);
-							whitelist.add(lanucher);
-						} while (cursor.moveToNext());
-					} else {
-						do {
-							String packageName = cursor
-									.getString((cursor
-											.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
-							String activity = cursor
-									.getString((cursor
-											.getColumnIndexOrThrow(DB_KEYS.KEY_ACTIVITY)));
-							if (!isInstalledOnSdCard(context, packageName)) {
+				SQLiteDatabase database = null;
+				Cursor cursor = null;
+				try {
+					database = dbhandler.getReadableDatabase();
+					cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null,
+							null, null, null, null, DB_KEYS.KEY_PKGNAME);
+					// loop through all rows and add it to white list
+					if (cursor.moveToFirst()) {
+						if (pe.isSDCardMounted()) {
+							do {
+								String packageName = cursor
+										.getString((cursor
+												.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
+								String activity = cursor
+										.getString((cursor
+												.getColumnIndexOrThrow(DB_KEYS.KEY_ACTIVITY)));
 								Launcher lanucher = new Launcher(packageName,
 										activity);
 								whitelist.add(lanucher);
-							}
-						} while (cursor.moveToNext());
+							} while (cursor.moveToNext());
+						} else {
+							do {
+								String packageName = cursor
+										.getString((cursor
+												.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
+								String activity = cursor
+										.getString((cursor
+												.getColumnIndexOrThrow(DB_KEYS.KEY_ACTIVITY)));
+								if (!isInstalledOnSdCard(context, packageName)) {
+									Launcher lanucher = new Launcher(
+											packageName, activity);
+									whitelist.add(lanucher);
+								}
+							} while (cursor.moveToNext());
+						}
+					}
+				} finally {
+					if (cursor != null && !cursor.isClosed()) {
+						try {
+							cursor.close();
+						} catch (Exception exception) {
+							Tracker tracker = EasyTracker.getInstance(context);
+							tracker.send(MapBuilder.createException(
+									new AnalyticsExceptionParser()
+											.getDescription(
+													Thread.currentThread()
+															.toString(),
+													exception), false).build());
+						}
+					}
+					if (database != null && database.isOpen()) {
+						try {
+							database.close();
+						} catch (Exception exception) {
+							Tracker tracker = EasyTracker.getInstance(context);
+							tracker.send(MapBuilder.createException(
+									new AnalyticsExceptionParser()
+											.getDescription(
+													Thread.currentThread()
+															.toString(),
+													exception), false).build());
+						}
 					}
 				}
-				database.close();
 			}
 		}
 		return whitelist;
@@ -227,33 +339,64 @@ public class DBOperations extends DataSetObservable{
 		synchronized (dummyForSynch) {
 			if (whitelistPackages == null) {
 				whitelistPackages = new LinkedHashSet<Launcher>();
-				SQLiteDatabase database = dbhandler.getReadableDatabase();
-				Cursor cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null,
-						null, null, null, null, DB_KEYS.KEY_PKGNAME);
-				// loop through all rows and add it to white list
-				if (cursor.moveToFirst()) {
-					if (pe.isSDCardMounted()) {
-						do {
-							String packageName = cursor
-									.getString((cursor
-											.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
-							Launcher lanucher = new Launcher(packageName, null);
-							whitelistPackages.add(lanucher);
-						} while (cursor.moveToNext());
-					} else {
-						do {
-							String packageName = cursor
-									.getString((cursor
-											.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
-							if (!isInstalledOnSdCard(context, packageName)) {
+				SQLiteDatabase database = null;
+				Cursor cursor = null;
+				try {
+					database = dbhandler.getReadableDatabase();
+					cursor = database.query(DB_KEYS.WHITE_LIST_TABLE,
+							null, null, null, null, null, DB_KEYS.KEY_PKGNAME);
+					// loop through all rows and add it to white list
+					if (cursor.moveToFirst()) {
+						if (pe.isSDCardMounted()) {
+							do {
+								String packageName = cursor
+										.getString((cursor
+												.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
 								Launcher lanucher = new Launcher(packageName,
 										null);
 								whitelistPackages.add(lanucher);
-							}
-						} while (cursor.moveToNext());
+							} while (cursor.moveToNext());
+						} else {
+							do {
+								String packageName = cursor
+										.getString((cursor
+												.getColumnIndexOrThrow(DB_KEYS.KEY_PKGNAME)));
+								if (!isInstalledOnSdCard(context, packageName)) {
+									Launcher lanucher = new Launcher(
+											packageName, null);
+									whitelistPackages.add(lanucher);
+								}
+							} while (cursor.moveToNext());
+						}
+					}
+				} finally {
+					if (cursor != null && !cursor.isClosed()) {
+						try {
+							cursor.close();
+						} catch (Exception exception) {
+							Tracker tracker = EasyTracker.getInstance(context);
+							tracker.send(MapBuilder.createException(
+									new AnalyticsExceptionParser()
+											.getDescription(
+													Thread.currentThread()
+															.toString(),
+													exception), false).build());
+						}
+					}
+					if (database != null && database.isOpen()) {
+						try {
+							database.close();
+						} catch (Exception exception) {
+							Tracker tracker = EasyTracker.getInstance(context);
+							tracker.send(MapBuilder.createException(
+									new AnalyticsExceptionParser()
+											.getDescription(
+													Thread.currentThread()
+															.toString(),
+													exception), false).build());
+						}
 					}
 				}
-				database.close();
 			}
 		}
 		return whitelistPackages;
