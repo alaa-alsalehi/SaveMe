@@ -7,6 +7,7 @@
     <string name="recovery_activity_title">Password Recovery</string>
     <string name="action_unlock">Unlock</string>
     <string name="action_lock">Lock</string>
+    <string name="action_app_log">Using Log</string>
     <string name="action_help">Help</string>
     <string name="done">Done</string>
     <string name="pattern_settings_category">Pattern Options</string>
@@ -47,5 +48,7 @@
     <string name="repeat_hidden_lock_message">Repeat long clicks on the same icons</string>
     <string name="title_activity_user_launcher">Fast Lock -Save Me</string>
     <string name="title_activity_uninstall">UninstallActivity</string>
+    <string name="title_activity_apps_log">Apps Log</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

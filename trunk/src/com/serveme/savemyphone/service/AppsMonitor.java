@@ -48,6 +48,7 @@ public class AppsMonitor extends Service {
 	private volatile MobileState currentState;
 	private volatile MobileState previousState;
 	private ComponentName currentApp;
+	private long startTime;
 
 	@Override
 	public IBinder onBind(Intent arg0) {
@@ -141,19 +142,6 @@ public class AppsMonitor extends Service {
 				ComponentName topActivity = taskInfo.get(0).topActivity;
 				ComponentName baseActivity = taskInfo.get(0).baseActivity;// «·»—‰«„Ã
 				// «·√’·Ì
-				if (currentApp == null
-						|| currentApp.getPackageName() == null
-						|| !currentApp.getPackageName().equals(
-								baseActivity.getPackageName())) {
-					Log.d("change app",
-							"replace "
-									+ (currentApp == null ? " null "
-											: currentApp.toString())
-									+ " by "
-									+ (baseActivity == null ? " null "
-											: baseActivity.getPackageName()));
-					currentApp = baseActivity;
-				}
 				Launcher launcher = new Launcher(topActivity.getPackageName(),
 						null);
 
@@ -246,6 +234,30 @@ public class AppsMonitor extends Service {
 						} else {
 							handler.sendEmptyMessage(1);
 						}
+					}
+					if (currentApp == null
+							|| currentApp.getPackageName() == null
+							|| !currentApp.getPackageName().equals(
+									baseActivity.getPackageName())) {
+						if (currentApp != null
+								&& currentApp.getPackageName() != null
+								&& !currentApp.getPackageName().equals(
+										getPackageName())) {
+							DBOperations.getInstance(AppsMonitor.this)
+									.insertAppLog(currentApp.getPackageName(),
+											startTime,
+											System.currentTimeMillis());
+							Log.d("change app", "replace "
+									+ (currentApp == null ? " null "
+											: currentApp.toString())
+									+ " by "
+									+ (baseActivity == null ? " null "
+											: baseActivity.getPackageName()));
+							Log.d("package", currentApp.getPackageName() + " "
+									+ getPackageName());
+						}
+						startTime = System.currentTimeMillis();
+						currentApp = baseActivity;
 					}
 				}
 			}

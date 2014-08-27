@@ -6,6 +6,7 @@
     <string name="recovery_activity_title">إستعادة كلمة السر</string>
     <string name="action_unlock">إلغاء الحماية</string>
     <string name="action_lock">تفعيل الحماية</string>
+    <string name="action_app_log">سجل الاستخدام</string>
     <string name="action_help">المساعدة</string>
     <string name="done">تم</string>
     <string name="pattern_settings_category">خيارات النمط</string>

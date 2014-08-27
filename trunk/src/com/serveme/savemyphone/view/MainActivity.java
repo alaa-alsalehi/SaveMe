@@ -209,6 +209,11 @@ public class MainActivity extends ActionBarActivity {
 			startActivity(helpIntent);
 			MyTracker.fireButtonPressedEvent(MainActivity.this, "help");
 			return true;
+		case R.id.action_app_log:
+			Intent appLogIntent = new Intent(this, AppsLogActivity.class);
+			startActivity(appLogIntent);
+			MyTracker.fireButtonPressedEvent(MainActivity.this, "app_log");
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}

@@ -8,6 +8,7 @@ import java.util.Set;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.Tracker;
+import com.google.android.gms.internal.fb;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.view.utils.AnalyticsExceptionParser;
 
@@ -42,6 +43,10 @@ public class DBOperations extends DataSetObservable {
 	public static DBOperations getInstance(Context c) {
 		return dboperations != null ? dboperations
 				: (dboperations = new DBOperations(c));
+	}
+	
+	public SQLiteDatabase getDatabase(){
+		return dbhandler.getWritableDatabase();
 	}
 
 	public int getLaunchersCount(String packageName) {
@@ -343,8 +348,8 @@ public class DBOperations extends DataSetObservable {
 				Cursor cursor = null;
 				try {
 					database = dbhandler.getReadableDatabase();
-					cursor = database.query(DB_KEYS.WHITE_LIST_TABLE,
-							null, null, null, null, null, DB_KEYS.KEY_PKGNAME);
+					cursor = database.query(DB_KEYS.WHITE_LIST_TABLE, null,
+							null, null, null, null, DB_KEYS.KEY_PKGNAME);
 					// loop through all rows and add it to white list
 					if (cursor.moveToFirst()) {
 						if (pe.isSDCardMounted()) {
@@ -400,6 +405,30 @@ public class DBOperations extends DataSetObservable {
 			}
 		}
 		return whitelistPackages;
+	}
+
+	public void insertAppLog(String packageName, long startDate, long endDate) {
+		ContentValues values = new ContentValues();
+		values.put(DB_KEYS.KEY_PACKAGE_NAME, packageName);
+		values.put(DB_KEYS.KEY_START_DATE, startDate);
+		values.put(DB_KEYS.KEY_END_DATE, endDate);
+		SQLiteDatabase database = null;
+		try {
+			database = dbhandler.getWritableDatabase();
+			database.insert(DB_KEYS.APP_LOG_TABLE, null, values);
+		} finally {
+			if (database != null && database.isOpen()) {
+				try {
+					database.close();
+				} catch (Exception exception) {
+					Tracker tracker = EasyTracker.getInstance(context);
+					tracker.send(MapBuilder.createException(
+							new AnalyticsExceptionParser().getDescription(
+									Thread.currentThread().toString(),
+									exception), false).build());
+				}
+			}
+		}
 	}
 
 	public static boolean isInstalledOnSdCard(Context context,
