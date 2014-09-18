@@ -24,15 +24,24 @@ public class DBHandler extends SQLiteOpenHelper {
 				+ DB_KEYS.KEY_ACTIVITY + " TEXT)";
 		db.execSQL(createTableStr);
 		createAppLogTable(db);
+		createAppLogSessionTable(db);
 	}
 
 	public void createAppLogTable(SQLiteDatabase db) {
 		String createAppLogTableStr = "CREATE TABLE " + DB_KEYS.APP_LOG_TABLE
-				+ " (" + DB_KEYS.KEY_ID
-				+ " INTEGER PRIMARY KEY  NOT NULL , "
+				+ " (" + DB_KEYS.KEY_ID + " INTEGER PRIMARY KEY  NOT NULL , "
 				+ DB_KEYS.KEY_PACKAGE_NAME + " TEXT NOT NULL  , "
+				+ DB_KEYS.KEY_LOG_SESSION_ID + " INTEGER NOT NULL , "
 				+ DB_KEYS.KEY_START_DATE + " INTEGER NOT NULL , "
 				+ DB_KEYS.KEY_END_DATE + " INTEGER)";
+		db.execSQL(createAppLogTableStr);
+	}
+
+	public void createAppLogSessionTable(SQLiteDatabase db) {
+		String createAppLogTableStr = "CREATE TABLE "
+				+ DB_KEYS.APP_LOG_SESSION_TABLE + " (" + DB_KEYS.KEY_ID
+				+ " INTEGER PRIMARY KEY  NOT NULL , "
+				+ DB_KEYS.KEY_SESSION_DATE + " INTEGER)";
 		db.execSQL(createAppLogTableStr);
 	}
 
@@ -42,6 +51,7 @@ public class DBHandler extends SQLiteOpenHelper {
 		case 2:
 			// adding App log
 			createAppLogTable(db);
+			createAppLogSessionTable(db);
 			break;
 
 		default:

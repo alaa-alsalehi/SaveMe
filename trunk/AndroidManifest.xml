@@ -213,12 +213,11 @@
         </activity>
         <activity
             android:name="com.serveme.savemyphone.view.AppsLogActivity"
-            android:label="@string/title_activity_apps_log"
-            android:parentActivityName="com.serveme.savemyphone.view.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.serveme.savemyphone.view.MainActivity" />
-
+            android:label="@string/title_activity_apps_log">
+        </activity>
+        <activity
+            android:name="com.serveme.savemyphone.view.SessionLogActivity"
+            android:label="@string/title_activity_apps_log">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

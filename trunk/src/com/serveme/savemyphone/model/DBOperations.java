@@ -406,12 +406,36 @@ public class DBOperations extends DataSetObservable {
 		}
 		return whitelistPackages;
 	}
+	
+	public long createAppLogSession(long date) {
+		ContentValues values = new ContentValues();
+		values.put(DB_KEYS.KEY_SESSION_DATE, date);
+		SQLiteDatabase database = null;
+		try {
+			database = dbhandler.getWritableDatabase();
+			long id = database.insert(DB_KEYS.APP_LOG_SESSION_TABLE, null, values);
+			return id;
+		} finally {
+			if (database != null && database.isOpen()) {
+				try {
+					database.close();
+				} catch (Exception exception) {
+					Tracker tracker = EasyTracker.getInstance(context);
+					tracker.send(MapBuilder.createException(
+							new AnalyticsExceptionParser().getDescription(
+									Thread.currentThread().toString(),
+									exception), false).build());
+				}
+			}
+		}
+	}
 
-	public void insertAppLog(String packageName, long startDate, long endDate) {
+	public void insertAppLog(String packageName, long startDate, long endDate,long sessionId) {
 		ContentValues values = new ContentValues();
 		values.put(DB_KEYS.KEY_PACKAGE_NAME, packageName);
 		values.put(DB_KEYS.KEY_START_DATE, startDate);
 		values.put(DB_KEYS.KEY_END_DATE, endDate);
+		values.put(DB_KEYS.KEY_LOG_SESSION_ID, sessionId);
 		SQLiteDatabase database = null;
 		try {
 			database = dbhandler.getWritableDatabase();

@@ -10,6 +10,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ComponentInfo;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -49,6 +50,7 @@ public class AppsMonitor extends Service {
 	private volatile MobileState previousState;
 	private ComponentName currentApp;
 	private long startTime;
+	private long sessionId;
 
 	@Override
 	public IBinder onBind(Intent arg0) {
@@ -60,6 +62,7 @@ public class AppsMonitor extends Service {
 		currentState = MobileState.USER_ACTIVITY;
 		previousState = MobileState.START_APP;
 		db = DBOperations.getInstance(this);
+		sessionId=db.createAppLogSession(System.currentTimeMillis());
 		am = (ActivityManager) this.getSystemService(ACTIVITY_SERVICE);
 		// view = LayoutInflater.from(AppsMonitor.this).inflate(
 		// R.layout.password_request, null);
@@ -121,6 +124,13 @@ public class AppsMonitor extends Service {
 								}
 							}
 						}
+					} else if (msg.what == 2) {
+						Bundle bundle = msg.getData();
+						String packageName = bundle.getString("packageName");
+						long startTime = bundle.getLong("startTime");
+						long endTime = bundle.getLong("endTime");
+						DBOperations.getInstance(AppsMonitor.this)
+								.insertAppLog(packageName, startTime, endTime,sessionId);
 					}
 				}
 
@@ -243,10 +253,18 @@ public class AppsMonitor extends Service {
 								&& currentApp.getPackageName() != null
 								&& !currentApp.getPackageName().equals(
 										getPackageName())) {
-							DBOperations.getInstance(AppsMonitor.this)
-									.insertAppLog(currentApp.getPackageName(),
-											startTime,
-											System.currentTimeMillis());
+							Bundle bundle = new Bundle();
+							bundle.putString("packageName",
+									currentApp.getPackageName());
+							bundle.putLong("startTime", startTime);
+							bundle.putLong("endTime",
+									System.currentTimeMillis());
+							// ≈—”«· «·»Ì«‰«  ··ŒÌÿ «·—∆Ì”Ì ·÷„«‰ ⁄œ„ Õ’Ê· „‘«ﬂ·
+							// ⁄·Ï ﬁ«⁄œ… «·»Ì«‰«  „À· lock
+							Message message = handler.obtainMessage(2);
+							message.setData(bundle);
+							handler.sendMessage(message);
+
 							Log.d("change app", "replace "
 									+ (currentApp == null ? " null "
 											: currentApp.toString())

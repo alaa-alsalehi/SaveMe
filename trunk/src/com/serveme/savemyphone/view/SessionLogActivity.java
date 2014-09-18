@@ -1,9 +1,13 @@
 package com.serveme.savemyphone.view;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.google.analytics.tracking.android.EasyTracker;
@@ -13,53 +17,33 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.control.AppsLogListAdapter;
+import com.serveme.savemyphone.control.SessionLogListAdapter;
+import com.serveme.savemyphone.control.SessionLogListAdapter.ViewHolder;
 import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.model.DB_KEYS;
 import com.serveme.savemyphone.view.utils.AdMobListener;
 import com.serveme.savemyphone.view.utils.AnalyticsExceptionParser;
 
-public class AppsLogActivity extends ActionBarActivity {
+public class SessionLogActivity extends ActionBarActivity {
 
 	private SQLiteDatabase db;
 	private Cursor cursor;
-	private long sessionId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_apps_log);
+		setContentView(R.layout.activity_session_log);
 		// Show the Up button in the action bar.
-		sessionId = getIntent().getLongExtra("sessionId", -1);
-		if (sessionId == -1 && savedInstanceState != null) {
-			sessionId = savedInstanceState.getLong("sessionId", -1);
-		}
 		intialize();
-	}
-
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putLong("sessionId", sessionId);
 	}
 
 	@Override
 	protected void onStart() {
 		super.onStart();
 		db = DBOperations.getInstance(this).getDatabase();
-		if (sessionId == -1) {
-			cursor = db.rawQuery("select sum(" + DB_KEYS.KEY_END_DATE + " - "
-					+ DB_KEYS.KEY_START_DATE + ") all_time ,"
-					+ DB_KEYS.KEY_PACKAGE_NAME + "," + DB_KEYS.KEY_ID
-					+ " from " + DB_KEYS.APP_LOG_TABLE + " group by "
-					+ DB_KEYS.KEY_PACKAGE_NAME, null);
-		} else {
-			cursor = db.rawQuery("select sum(" + DB_KEYS.KEY_END_DATE + " - "
-					+ DB_KEYS.KEY_START_DATE + ") all_time ,"
-					+ DB_KEYS.KEY_PACKAGE_NAME + "," + DB_KEYS.KEY_ID
-					+ " from " + DB_KEYS.APP_LOG_TABLE + " where "
-					+ DB_KEYS.KEY_LOG_SESSION_ID + " =" + sessionId
-					+ " group by " + DB_KEYS.KEY_PACKAGE_NAME, null);
-		}
+		cursor = db.rawQuery("select " + DB_KEYS.KEY_SESSION_DATE + ","
+				+ DB_KEYS.KEY_ID + " from " + DB_KEYS.APP_LOG_SESSION_TABLE,
+				null);
 		intialize();
 	}
 
@@ -91,11 +75,22 @@ public class AppsLogActivity extends ActionBarActivity {
 	}
 
 	protected void intialize() {
-		ListView listView = (ListView) findViewById(R.id.app_list);
-		AppsLogListAdapter adapter = new AppsLogListAdapter(this, cursor);
+		ListView listView = (ListView) findViewById(R.id.session_list);
+		SessionLogListAdapter adapter = new SessionLogListAdapter(this, cursor);
 		listView.setSmoothScrollbarEnabled(true);
 		listView.setAdapter(adapter);
 		listView.setEmptyView(findViewById(R.id.empty));
+		listView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View item, int arg2,
+					long arg3) {
+				ViewHolder tag = (ViewHolder) item.getTag();
+				Intent intent = new Intent(SessionLogActivity.this,
+						AppsLogActivity.class);
+				intent.putExtra("sessionId", tag.sessionId);
+				startActivity(intent);
+			}
+		});
 		adsStuff();
 	}
 

@@ -43,5 +43,9 @@
     <string name="hidden_lock_message">اعمل ضغطات طويلة على أيقونات البرامج</string>
     <string name="repeat_hidden_lock_message">كرر الضغطات الطويلة بنفس الترتيب على البرامج</string>
     <string name="step">الخطوة</string>
+    <string name="session">جلسة العمل</string>
+    <string name="title_activity_apps_log">سجل الاستخدام</string>
+    <string name="title_activity_session_log">سجل جلسات العمل</string>
+    <string name="empty">لا يوجد سجلات للعرض</string>
 
 </resources>

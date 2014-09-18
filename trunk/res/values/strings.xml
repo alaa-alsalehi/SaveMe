@@ -49,6 +49,8 @@
     <string name="title_activity_user_launcher">Fast Lock -Save Me</string>
     <string name="title_activity_uninstall">UninstallActivity</string>
     <string name="title_activity_apps_log">Apps Log</string>
+    <string name="title_activity_session_log">Session Log</string>
     <string name="hello_world">Hello world!</string>
+    <string name="session">Session</string>
 
 </resources>
