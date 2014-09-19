@@ -10,7 +10,11 @@
     <item
         android:id="@+id/action_app_log"
         android:orderInCategory="100"
-        android:title="@string/action_app_log"
+        android:title="@string/action_app_log"/>
+    <item
+        android:id="@+id/action_session_log"
+        android:orderInCategory="100"
+        android:title="@string/action_session_log"
         saveme:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_lock"

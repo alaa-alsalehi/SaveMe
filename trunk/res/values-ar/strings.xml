@@ -7,6 +7,7 @@
     <string name="action_unlock">إلغاء الحماية</string>
     <string name="action_lock">تفعيل الحماية</string>
     <string name="action_app_log">سجل الاستخدام</string>
+    <string name="action_session_log">سجل جلسات العمل</string>
     <string name="action_help">المساعدة</string>
     <string name="done">تم</string>
     <string name="pattern_settings_category">خيارات النمط</string>

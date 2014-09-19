@@ -7,7 +7,8 @@
     <string name="recovery_activity_title">Password Recovery</string>
     <string name="action_unlock">Unlock</string>
     <string name="action_lock">Lock</string>
-    <string name="action_app_log">Using Log</string>
+    <string name="action_app_log">Usage Log</string>
+    <string name="action_session_log">Session Log</string>
     <string name="action_help">Help</string>
     <string name="done">Done</string>
     <string name="pattern_settings_category">Pattern Options</string>
