@@ -4,15 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/row_height" >
 
-    <ToggleButton
-        android:id="@+id/enable_disable"
+    <TextView
+        android:id="@+id/time_in_minutes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center_vertical"
+        android:text="@string/session"
         android:textSize="@dimen/apps_names" />
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/session_time"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -20,12 +22,5 @@
         android:gravity="right"
         android:textAlignment="gravity"
         android:textSize="@dimen/apps_names" />
-
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="@dimen/image_size"
-        android:layout_height="@dimen/image_size"
-        android:layout_margin="10dp"
-        android:contentDescription="@string/app_name" />
 
 </LinearLayout>
