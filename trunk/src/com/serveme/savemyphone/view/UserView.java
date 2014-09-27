@@ -99,7 +99,8 @@ public class UserView extends FrameLayout {
 					Intent i = new Intent(getContext(), BaseActivity.class);
 					i.putExtra("package", launcher.getPackageName());
 					i.putExtra("activity", launcher.getActivity());
-					i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+							| Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					getContext().startActivity(i);
 					MyTracker.fireButtonPressedEvent(getContext(), "run_app");
 				} catch (ActivityNotFoundException e) {
@@ -154,11 +155,14 @@ public class UserView extends FrameLayout {
 				public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
 						int position, long arg3) {
 					currentLaunchers.add(appsinfolist.get(position));
-					for (int i = 0; i < currentLaunchers.size(); i++) {
-						if (!launchers[i].equals(currentLaunchers.get(i))) {
-							currentLaunchers.clear();
-							return true;
+					if (currentLaunchers.size() <= launchers.length) {
+						for (int i = 0; i < currentLaunchers.size(); i++) {
+							if (!launchers[i].equals(currentLaunchers.get(i))) {
+								return true;
+							}
 						}
+					}else{
+						return true;
 					}
 					if (currentLaunchers.size() == launchers.length) {
 						unlock.setVisibility(View.VISIBLE);
