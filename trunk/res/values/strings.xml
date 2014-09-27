@@ -22,6 +22,7 @@
     <string name="uninstall_settings_category">Uninstall</string>
     <string name="uninstall">Uninstall</string>
     <string name="activiate_lock_quesition">Activiate Lock Mode?</string>
+    <string name="buy_quesition">Preminum feature \n are you ready to buy full ver.?</string>
     <string name="uninstall_hidden_lock">Uninstall part of hidden Lock\n Enter new lock?</string>
     <string name="admin_list_header">Choose allowed apps:</string>
     <string name="prevent_message">Unallowed app for use \nPlease wait to load Allowed list</string>

@@ -23,6 +23,7 @@
     <string name="background_categeroy">خيارات الخلفية</string>
     <string name="change_background">تغيير الخلفية</string>
     <string name="activiate_lock_quesition">تفعيل وضع القفل؟</string>
+    <string name="buy_quesition">ميزة مدفوعة هل أنت جاهز لشراء النسخة الكاملة؟</string>
     <string name="uninstall_hidden_lock">قمت بإزالة جزء من القفل الخفي\n تريد إدخال بديل?</string>
     <string name="admin_list_header">اختر التطبيقات المسموحة:</string>
     <string name="prevent_message">تطبيق غير مسموح استخدامه \nالرجاء الانتظار حتى يتم تحميل قائمة البرامج المسموحة</string>
