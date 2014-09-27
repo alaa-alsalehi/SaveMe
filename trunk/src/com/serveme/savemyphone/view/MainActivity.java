@@ -6,7 +6,7 @@ import org.codechimp.apprater.AppRater;
 import org.codechimp.apprater.InCorrectMarketException;
 
 import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
-
+import com.serveme.util.PackageUtil;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.serveme.savemyphone.R;
@@ -15,6 +15,7 @@ import com.serveme.savemyphone.model.DBOperations;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.service.AppsMonitor;
 import com.serveme.savemyphone.util.MyTracker;
+import com.serveme.savemyphone.util.Utility;
 import com.serveme.savemyphone.view.utils.ActivitiesController;
 import com.serveme.savemyphone.view.utils.AdMobListener;
 import com.serveme.savemyphone.view.wizard.HelpActivity;
@@ -210,14 +211,23 @@ public class MainActivity extends ActionBarActivity {
 			MyTracker.fireButtonPressedEvent(MainActivity.this, "help");
 			return true;
 		case R.id.action_app_log:
-			Intent appLogIntent = new Intent(this, AppsLogActivity.class);
-			startActivity(appLogIntent);
-			MyTracker.fireButtonPressedEvent(MainActivity.this, "app_log");
+			if (Utility.isPaid(this)) {
+				Intent appLogIntent = new Intent(this, AppsLogActivity.class);
+				startActivity(appLogIntent);
+				MyTracker.fireButtonPressedEvent(MainActivity.this, "app_log");
+			} else {
+				Utility.buyFull(this);
+			}
 			return true;
 		case R.id.action_session_log:
-			Intent sessionLogIntent = new Intent(this, SessionLogActivity.class);
-			startActivity(sessionLogIntent);
-			MyTracker.fireButtonPressedEvent(MainActivity.this, "app_log");
+			if (Utility.isPaid(this)) {
+				Intent sessionLogIntent = new Intent(this,
+						SessionLogActivity.class);
+				startActivity(sessionLogIntent);
+				MyTracker.fireButtonPressedEvent(MainActivity.this, "app_log");
+			} else {
+				Utility.buyFull(this);
+			}
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

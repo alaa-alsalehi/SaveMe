@@ -96,24 +96,28 @@ public class SettingsActivity extends PreferenceActivity implements
 					@Override
 					public boolean onPreferenceChange(Preference preference,
 							Object newValue) {
-						CheckBoxPreference cbPreference = (CheckBoxPreference) preference;
-						if (cbPreference.isChecked()) {
-							SharedPreferences preferences = getSharedPreferences(
-									"mypref", Context.MODE_PRIVATE);
-							Editor edit = preferences.edit();
-							edit.putBoolean("hidden_lock_active", false);
-							edit.apply();
-							cbPreference.setChecked(false);
-							cbPreference.setEnabled(false);
-							return false;
+						if (Utility.isPaid(SettingsActivity.this)) {
+							CheckBoxPreference cbPreference = (CheckBoxPreference) preference;
+							if (cbPreference.isChecked()) {
+								SharedPreferences preferences = getSharedPreferences(
+										"mypref", Context.MODE_PRIVATE);
+								Editor edit = preferences.edit();
+								edit.putBoolean("hidden_lock_active", false);
+								edit.apply();
+								cbPreference.setChecked(false);
+								return false;
+							} else {
+								SharedPreferences preferences = getSharedPreferences(
+										"mypref", Context.MODE_PRIVATE);
+								Editor edit = preferences.edit();
+								edit.putBoolean("hidden_lock_active", true);
+								edit.apply();
+								cbPreference.setChecked(true);
+								return true;
+							}
 						} else {
-							SharedPreferences preferences = getSharedPreferences(
-									"mypref", Context.MODE_PRIVATE);
-							Editor edit = preferences.edit();
-							edit.putBoolean("hidden_lock_active", true);
-							edit.apply();
-							cbPreference.setChecked(true);
-							return true;
+							Utility.buyFull(SettingsActivity.this);
+							return false;
 						}
 					}
 				});
@@ -162,21 +166,21 @@ public class SettingsActivity extends PreferenceActivity implements
 
 					@Override
 					public boolean onPreferenceClick(Preference preference) {
-						Intent intent = new Intent(SettingsActivity.this,
-								UnlockSettingsActivity.class);
-						startActivityForResult(intent, REQ_CHANGE_LOCK_PATTERN);
-						MyTracker.fireButtonPressedEvent(SettingsActivity.this,
-								"change_lock_pattern");
+						if (Utility.isPaid(SettingsActivity.this)) {
+							Intent intent = new Intent(SettingsActivity.this,
+									UnlockSettingsActivity.class);
+							startActivityForResult(intent,
+									REQ_CHANGE_LOCK_PATTERN);
+							MyTracker.fireButtonPressedEvent(
+									SettingsActivity.this,
+									"change_lock_pattern");
+						} else {
+							Utility.buyFull(SettingsActivity.this);
+						}
 						return true;
 					}
 				});
 
-		// ≈Ìﬁ«› «·ﬁ›· «·„Œ›Ì „ƒﬁ «
-		if (true) {
-			Preference hiddenSettingsPreferenceCategoty = (Preference) findPreference("hidden_settings_category");
-			getPreferenceScreen().removePreference(
-					hiddenSettingsPreferenceCategoty);
-		}
 		uninstallPref
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 					public boolean onPreferenceClick(Preference preference) {
