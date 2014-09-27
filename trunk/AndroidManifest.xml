@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.serveme.savemyphone"
+    package="com.serveme.savemyphone.paid"
     android:installLocation="internalOnly"
     android:permission="android.permission.RECEIVE_BOOT_COMPLETED"
     android:versionCode="27"
@@ -188,7 +188,7 @@
         </activity>
         <activity
             android:name="com.serveme.savemyphone.view.UnlockSettingsActivity"
-            android:label="@string/title_activity_unlock_settings" >
+            android:label="@string/hidden_lock" >
         </activity>
         <activity
             android:name="com.serveme.savemyphone.view.UserLauncherActivity"

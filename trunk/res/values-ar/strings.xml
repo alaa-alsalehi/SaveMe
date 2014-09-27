@@ -2,6 +2,7 @@
 
     <string name="app_name">Save Me</string>
     <string name="settings">الإعدادات</string>
+    <string name="hidden_lock">القفل الخفي</string>
     <string name="apps">التطبيقات</string>
     <string name="recovery_activity_title">إستعادة كلمة السر</string>
     <string name="action_unlock">إلغاء الحماية</string>
@@ -43,7 +44,7 @@
     <string name="cancel">إلغاء</string>
     <string name="continu">التالي</string>
     <string name="wrong_hidden_lock">لقد أخطأت في تكرار الخطوات قم بإعادة الضغط من جديد</string>
-    <string name="hidden_lock_message">اعمل ضغطات طويلة على أيقونات البرامج</string>
+    <string name="hidden_lock_message">قم بالضغط ضغطات طويلة على أيقونات البرامج</string>
     <string name="repeat_hidden_lock_message">كرر الضغطات الطويلة بنفس الترتيب على البرامج</string>
     <string name="step">الخطوة</string>
     <string name="session">جلسة العمل</string>

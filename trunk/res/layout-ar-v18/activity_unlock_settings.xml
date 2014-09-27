@@ -32,7 +32,8 @@
         android:scrollingCache="true"
         android:smoothScrollbar="true"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="@dimen/grid_vspace" >
+        android:verticalSpacing="@dimen/grid_vspace"
+        android:layoutDirection="ltr" >
 
     </GridView>
 
