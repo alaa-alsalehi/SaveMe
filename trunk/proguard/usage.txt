@@ -11,11 +11,13 @@ android.support.v4.app.ActionBarDrawerToggle$1
 android.support.v4.app.ActionBarDrawerToggle$ActionBarDrawerToggleImpl
 android.support.v4.app.ActionBarDrawerToggle$ActionBarDrawerToggleImplBase
 android.support.v4.app.ActionBarDrawerToggle$ActionBarDrawerToggleImplHC
+android.support.v4.app.ActionBarDrawerToggle$ActionBarDrawerToggleImplJellybeanMR2
 android.support.v4.app.ActionBarDrawerToggle$Delegate
 android.support.v4.app.ActionBarDrawerToggle$DelegateProvider
 android.support.v4.app.ActionBarDrawerToggle$SlideDrawable
 android.support.v4.app.ActionBarDrawerToggleHoneycomb
 android.support.v4.app.ActionBarDrawerToggleHoneycomb$SetIndicatorInfo
+android.support.v4.app.ActionBarDrawerToggleJellybeanMR2
 android.support.v4.app.ActivityCompat:
     29:29:public ActivityCompat()
     63:67:public static boolean invalidateOptionsMenu(android.app.Activity)
@@ -160,8 +162,9 @@ android.support.v4.app.FragmentManager:
     public abstract android.support.v4.app.Fragment getFragment(android.os.Bundle,java.lang.String)
     public abstract java.util.List getFragments()
     public abstract android.support.v4.app.Fragment$SavedState saveFragmentInstanceState(android.support.v4.app.Fragment)
+    public abstract boolean isDestroyed()
     public abstract void dump(java.lang.String,java.io.FileDescriptor,java.io.PrintWriter,java.lang.String[])
-    345:346:public static void enableDebugLogging(boolean)
+    351:352:public static void enableDebugLogging(boolean)
 android.support.v4.app.FragmentManager$BackStackEntry
 android.support.v4.app.FragmentManagerImpl:
     static final java.lang.String TAG
@@ -176,17 +179,18 @@ android.support.v4.app.FragmentManagerImpl:
     public static final int ANIM_STYLE_CLOSE_EXIT
     public static final int ANIM_STYLE_FADE_ENTER
     public static final int ANIM_STYLE_FADE_EXIT
-    477:482:public void popBackStack()
-    493:498:public void popBackStack(java.lang.String,int)
-    502:504:public boolean popBackStackImmediate(java.lang.String,int)
-    521:526:public boolean popBackStackImmediate(int,int)
-    531:531:public int getBackStackEntryCount()
-    536:536:public android.support.v4.app.FragmentManager$BackStackEntry getBackStackEntryAt(int)
-    541:545:public void addOnBackStackChangedListener(android.support.v4.app.FragmentManager$OnBackStackChangedListener)
-    549:552:public void removeOnBackStackChangedListener(android.support.v4.app.FragmentManager$OnBackStackChangedListener)
-    583:583:public java.util.List getFragments()
-    588:596:public android.support.v4.app.Fragment$SavedState saveFragmentInstanceState(android.support.v4.app.Fragment)
-    1330:1338:public android.support.v4.app.Fragment findFragmentByWho(java.lang.String)
+    483:488:public void popBackStack()
+    499:504:public void popBackStack(java.lang.String,int)
+    508:510:public boolean popBackStackImmediate(java.lang.String,int)
+    527:532:public boolean popBackStackImmediate(int,int)
+    537:537:public int getBackStackEntryCount()
+    542:542:public android.support.v4.app.FragmentManager$BackStackEntry getBackStackEntryAt(int)
+    547:551:public void addOnBackStackChangedListener(android.support.v4.app.FragmentManager$OnBackStackChangedListener)
+    555:558:public void removeOnBackStackChangedListener(android.support.v4.app.FragmentManager$OnBackStackChangedListener)
+    589:589:public java.util.List getFragments()
+    594:602:public android.support.v4.app.Fragment$SavedState saveFragmentInstanceState(android.support.v4.app.Fragment)
+    607:607:public boolean isDestroyed()
+    1341:1349:public android.support.v4.app.Fragment findFragmentByWho(java.lang.String)
 android.support.v4.app.FragmentManagerImpl$2
 android.support.v4.app.FragmentManagerImpl$3
 android.support.v4.app.FragmentPagerAdapter
@@ -271,10 +275,12 @@ android.support.v4.app.NotificationCompat$Builder
 android.support.v4.app.NotificationCompat$InboxStyle
 android.support.v4.app.NotificationCompat$NotificationCompatImpl
 android.support.v4.app.NotificationCompat$NotificationCompatImplBase
+android.support.v4.app.NotificationCompat$NotificationCompatImplGingerbread
 android.support.v4.app.NotificationCompat$NotificationCompatImplHoneycomb
 android.support.v4.app.NotificationCompat$NotificationCompatImplIceCreamSandwich
 android.support.v4.app.NotificationCompat$NotificationCompatImplJellybean
 android.support.v4.app.NotificationCompat$Style
+android.support.v4.app.NotificationCompatGingerbread
 android.support.v4.app.NotificationCompatHoneycomb
 android.support.v4.app.NotificationCompatIceCreamSandwich
 android.support.v4.app.NotificationCompatJellybean
@@ -477,6 +483,9 @@ android.support.v4.print.PrintHelper$PrintHelperStubImpl
 android.support.v4.print.PrintHelper$PrintHelperVersionImpl
 android.support.v4.print.PrintHelperKitkat
 android.support.v4.print.PrintHelperKitkat$1
+android.support.v4.print.PrintHelperKitkat$2
+android.support.v4.print.PrintHelperKitkat$2$1
+android.support.v4.print.PrintHelperKitkat$2$1$1
 android.support.v4.text.BidiFormatter
 android.support.v4.text.BidiFormatter$1
 android.support.v4.text.BidiFormatter$Builder
@@ -720,7 +729,6 @@ android.support.v4.view.ViewCompat:
     public static final int MEASURED_HEIGHT_STATE_SHIFT
     public static final int MEASURED_STATE_TOO_SMALL
     34:534:public ViewCompat()
-    585:585:public static boolean canScrollVertically(android.view.View,int)
     651:652:public static void onPopulateAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent)
     684:685:public static void onInitializeAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent)
     720:721:public static void onInitializeAccessibilityNodeInfo(android.view.View,android.support.v4.view.accessibility.AccessibilityNodeInfoCompat)
@@ -739,7 +747,6 @@ android.support.v4.view.ViewCompat:
     1156:1156:public int getAccessibilityLiveRegion(android.view.View)
     1188:1189:public void setAccessibilityLiveRegion(android.view.View,int)
 android.support.v4.view.ViewCompat$BaseViewCompatImpl:
-    239:239:public boolean canScrollVertically(android.view.View,int)
     252:252:public void onPopulateAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent)
     255:255:public void onInitializeAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent)
     258:258:public void onInitializeAccessibilityNodeInfo(android.view.View,android.support.v4.view.accessibility.AccessibilityNodeInfoCompat)
@@ -764,7 +771,6 @@ android.support.v4.view.ViewCompat$HCViewCompatImpl:
     419:419:public int getMeasuredHeightAndState(android.view.View)
     423:423:public int getMeasuredState(android.view.View)
 android.support.v4.view.ViewCompat$ICSViewCompatImpl:
-    434:434:public boolean canScrollVertically(android.view.View,int)
     438:439:public void onPopulateAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent)
     442:443:public void onInitializeAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent)
     446:447:public void onInitializeAccessibilityNodeInfo(android.view.View,android.support.v4.view.accessibility.AccessibilityNodeInfoCompat)
@@ -781,7 +787,6 @@ android.support.v4.view.ViewCompat$KitKatViewCompatImpl:
     537:537:public int getAccessibilityLiveRegion(android.view.View)
     542:543:public void setAccessibilityLiveRegion(android.view.View,int)
 android.support.v4.view.ViewCompat$ViewCompatImpl:
-    public abstract boolean canScrollVertically(android.view.View,int)
     public abstract void onInitializeAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent)
     public abstract void onPopulateAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent)
     public abstract void onInitializeAccessibilityNodeInfo(android.view.View,android.support.v4.view.accessibility.AccessibilityNodeInfoCompat)
@@ -812,7 +817,6 @@ android.support.v4.view.ViewCompatHC:
     53:53:public static int getMeasuredState(android.view.View)
 android.support.v4.view.ViewCompatICS:
     27:27:ViewCompatICS()
-    34:34:public static boolean canScrollVertically(android.view.View,int)
     42:43:public static void onPopulateAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent)
     46:47:public static void onInitializeAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent)
     50:51:public static void onInitializeAccessibilityNodeInfo(android.view.View,java.lang.Object)
@@ -1289,7 +1293,6 @@ android.support.v4.widget.CursorAdapter:
     public static final int FLAG_AUTO_REQUERY
     public static final int FLAG_REGISTER_CONTENT_OBSERVER
     121:123:public CursorAdapter(android.content.Context,android.database.Cursor)
-    150:152:public CursorAdapter(android.content.Context,android.database.Cursor,int)
     160:161:protected void init(android.content.Context,android.database.Cursor,boolean)
     420:420:public android.widget.FilterQueryProvider getFilterQueryProvider()
     436:437:public void setFilterQueryProvider(android.widget.FilterQueryProvider)
@@ -1308,15 +1311,15 @@ android.support.v4.widget.DrawerLayout:
     private static final boolean ALLOW_EDGE_LOCK
     private static final boolean CHILDREN_DISALLOW_INTERCEPT
     private static final float TOUCH_SLOP_SENSITIVITY
-    410:417:public int getDrawerLockMode(int)
-    540:549:void moveDrawerToOffset(android.view.View,float)
-    1044:1050:public void openDrawer(int)
-    1084:1090:public void closeDrawer(int)
-    1103:1106:public boolean isDrawerOpen(android.view.View)
-    1119:1123:public boolean isDrawerOpen(int)
-    1150:1154:public boolean isDrawerVisible(int)
+    415:422:public int getDrawerLockMode(int)
+    593:602:void moveDrawerToOffset(android.view.View,float)
+    1097:1103:public void openDrawer(int)
+    1137:1143:public void closeDrawer(int)
+    1156:1159:public boolean isDrawerOpen(android.view.View)
+    1172:1176:public boolean isDrawerOpen(int)
+    1203:1207:public boolean isDrawerVisible(int)
 android.support.v4.widget.DrawerLayout$LayoutParams:
-    1509:1511:public DrawerLayout$LayoutParams(int,int,int)
+    1562:1564:public DrawerLayout$LayoutParams(int,int,int)
 android.support.v4.widget.DrawerLayout$SimpleDrawerListener
 android.support.v4.widget.EdgeEffectCompatIcs:
     28:28:EdgeEffectCompatIcs()
@@ -1336,7 +1339,6 @@ android.support.v4.widget.PopupMenuCompat$PopupMenuImpl
 android.support.v4.widget.PopupMenuCompatKitKat
 android.support.v4.widget.ResourceCursorAdapter:
     54:57:public ResourceCursorAdapter(android.content.Context,int,android.database.Cursor)
-    93:96:public ResourceCursorAdapter(android.content.Context,int,android.database.Cursor,int)
     120:121:public void setViewResource(int)
     129:130:public void setDropDownViewResource(int)
 android.support.v4.widget.ScrollerCompat:
@@ -1402,22 +1404,44 @@ android.support.v4.widget.SearchViewCompatIcs:
     43:43:public static android.view.View newSearchView(android.content.Context)
     47:48:public static void setImeOptions(android.view.View,int)
     51:52:public static void setInputType(android.view.View,int)
-android.support.v4.widget.SimpleCursorAdapter
-android.support.v4.widget.SimpleCursorAdapter$CursorToStringConverter
-android.support.v4.widget.SimpleCursorAdapter$ViewBinder
+android.support.v4.widget.SimpleCursorAdapter:
+    63:67:public SimpleCursorAdapter(android.content.Context,int,android.database.Cursor,java.lang.String[],int[])
+    162:162:public android.support.v4.widget.SimpleCursorAdapter$ViewBinder getViewBinder()
+    175:176:public void setViewBinder(android.support.v4.widget.SimpleCursorAdapter$ViewBinder)
+    228:228:public int getStringConversionColumn()
+    246:247:public void setStringConversionColumn(int)
+    262:262:public android.support.v4.widget.SimpleCursorAdapter$CursorToStringConverter getCursorToStringConverter()
+    278:279:public void setCursorToStringConverter(android.support.v4.widget.SimpleCursorAdapter$CursorToStringConverter)
+    344:348:public void changeCursorAndColumns(android.database.Cursor,java.lang.String[],int[])
 android.support.v4.widget.SlidingPaneLayout:
     private static final java.lang.String TAG
     private static final int DEFAULT_OVERHANG_SIZE
     private static final int DEFAULT_FADE_COLOR
     private static final int MIN_FLING_VELOCITY
-    848:849:public void smoothSlideOpen()
-    866:867:public void smoothSlideClosed()
-    895:895:public boolean canSlide()
-    1103:1122:protected boolean canScroll(android.view.View,boolean,int,int,int)
+    850:851:public void smoothSlideOpen()
+    868:869:public void smoothSlideClosed()
+    897:897:public boolean canSlide()
+    1111:1130:protected boolean canScroll(android.view.View,boolean,int,int,int)
 android.support.v4.widget.SlidingPaneLayout$LayoutParams:
-    1277:1278:public SlidingPaneLayout$LayoutParams(int,int)
-    1289:1291:public SlidingPaneLayout$LayoutParams(android.support.v4.widget.SlidingPaneLayout$LayoutParams)
+    1285:1286:public SlidingPaneLayout$LayoutParams(int,int)
+    1297:1299:public SlidingPaneLayout$LayoutParams(android.support.v4.widget.SlidingPaneLayout$LayoutParams)
 android.support.v4.widget.SlidingPaneLayout$SimplePanelSlideListener
+android.support.v4.widget.SwipeProgressBar:
+    private static final int COLOR1
+    private static final int COLOR2
+    private static final int COLOR3
+    private static final int COLOR4
+    private static final int ANIMATION_DURATION_MS
+    private static final int FINISH_ANIMATION_DURATION_MS
+    133:133:boolean isRunning()
+android.support.v4.widget.SwipeRefreshLayout:
+    private static final long RETURN_TO_ORIGINAL_POSITION_TIMEOUT
+    private static final float ACCELERATE_INTERPOLATION_FACTOR
+    private static final float DECELERATE_INTERPOLATION_FACTOR
+    private static final float PROGRESS_BAR_HEIGHT
+    private static final float MAX_SWIPE_DISTANCE_FACTOR
+    private static final int REFRESH_TRIGGER_DISTANCE
+    282:282:public boolean isRefreshing()
 android.support.v4.widget.ViewDragHelper:
     private static final java.lang.String TAG
     public static final int INVALID_POINTER
@@ -5996,7 +6020,6 @@ com.google.gson.Gson:
     415:418:public com.google.gson.JsonElement toJsonTree(java.lang.Object)
     438:440:public com.google.gson.JsonElement toJsonTree(java.lang.Object,java.lang.reflect.Type)
     499:504:public void toJson(java.lang.Object,java.lang.Appendable)
-    642:643:public java.lang.Object fromJson(java.lang.String,java.lang.Class)
     693:696:public java.lang.Object fromJson(java.io.Reader,java.lang.Class)
     792:793:public java.lang.Object fromJson(com.google.gson.JsonElement,java.lang.Class)
     816:819:public java.lang.Object fromJson(com.google.gson.JsonElement,java.lang.reflect.Type)
@@ -6100,7 +6123,6 @@ com.google.gson.internal.Pair
 com.google.gson.internal.Primitives:
     33:33:private Primitives()
     81:81:public static boolean isWrapperType(java.lang.reflect.Type)
-    97:99:public static java.lang.Class wrap(java.lang.Class)
     114:116:public static java.lang.Class unwrap(java.lang.Class)
 com.google.gson.internal.Streams:
     35:78:public Streams()
@@ -7447,6 +7469,31 @@ com.noqoush.adfalcon.android.sdk.x:
     157:158:public void c(boolean)
     247:247:public com.noqoush.adfalcon.android.sdk.ADFView n()
     254:255:public void b(com.noqoush.adfalcon.android.sdk.ADFView)
+com.serveme.ads.AdMobListener
+com.serveme.analytics.R:
+    9:9:public R()
+com.serveme.analytics.R$attr
+com.serveme.analytics.R$color
+com.serveme.analytics.R$drawable
+com.serveme.analytics.R$id
+com.serveme.analytics.R$integer
+com.serveme.analytics.R$string:
+    84:84:public R$string()
+com.serveme.analytics.R$style
+com.serveme.analytics.R$styleable
+com.serveme.androidmodification.BaseExpandableListAdapter
+com.serveme.androidmodification.CursorFilter
+com.serveme.androidmodification.CursorFilter$CursorFilterClient
+com.serveme.androidmodification.CursorTreeAdapter
+com.serveme.androidmodification.CursorTreeAdapter$MyCursorHelper
+com.serveme.androidmodification.CursorTreeAdapter$MyCursorHelper$MyContentObserver
+com.serveme.androidmodification.CursorTreeAdapter$MyCursorHelper$MyDataSetObserver
+com.serveme.androidmodification.DataSetObservable
+com.serveme.androidmodification.ResourceCursorTreeAdapter
+com.serveme.androidmodification.SimpleCursorTreeAdapter
+com.serveme.androidmodification.SimpleCursorTreeAdapter$ViewBinder
+com.serveme.exception.util.ExceptionUtil:
+    6:6:public ExceptionUtil()
 com.serveme.savemyphone.BuildConfig
 com.serveme.savemyphone.R
 com.serveme.savemyphone.R$anim
@@ -7473,15 +7520,21 @@ com.serveme.savemyphone.model.DBHandler:
     private static final java.lang.String DATABASE_NAME
 com.serveme.savemyphone.model.DB_KEYS
 com.serveme.savemyphone.preferences.PrefEditor:
-    65:68:public void setTempPassword(java.lang.String)
-    71:74:public void removeTempPassword()
-    127:127:public java.lang.String getTempPassword()
+    72:75:public void setTempPassword(java.lang.String)
+    78:81:public void removeTempPassword()
+    135:135:public java.lang.String getTempPassword()
+com.serveme.savemyphone.receivers.HiddenLockUtility:
+    17:17:public HiddenLockUtility()
 com.serveme.savemyphone.service.AppsMonitor:
     private static final int UPDATE_INTERVAL
 com.serveme.savemyphone.util.ConverterUtil
 com.serveme.savemyphone.util.MyTracker:
     14:14:public MyTracker()
+com.serveme.savemyphone.util.Utility:
+    16:16:public Utility()
 com.serveme.savemyphone.view.MainActivity:
+    private static final int REQ_ENTER_PATTERN
+com.serveme.savemyphone.view.ManageSpaceActivity:
     private static final int REQ_ENTER_PATTERN
 com.serveme.savemyphone.view.RecoveryActivity:
     public static final int REQ_CREATE_PATTERN
@@ -7505,6 +7558,10 @@ com.serveme.savemyphone.view.utils.ExceptionUtil:
 com.serveme.savemyphone.view.wizard.PasswordRequest:
     public static final int REQ_CREATE_PATTERN
     public static final int REQ_CREATE_PASSWORD
+com.serveme.util.PackageUtil:
+    13:13:public PackageUtil()
+    15:15:public static boolean isFree(android.content.Context)
+    19:52:public static void rateMyApp(android.content.Context)
 group.pals.android.lib.ui.lockpattern.LockPatternActivity:
     public static final int RESULT_FAILED
     public static final int RESULT_FORGOT_PATTERN

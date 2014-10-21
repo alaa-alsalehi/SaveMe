@@ -87,6 +87,7 @@ android.support.v4.widget.DrawerLayout: void setDrawerListener(android.support.v
 android.support.v4.widget.DrawerLayout: void setDrawerLockMode(int)
 android.support.v4.widget.DrawerLayout: void setDrawerLockMode(int,int)
 android.support.v4.widget.DrawerLayout: void setDrawerLockMode(int,android.view.View)
+android.support.v4.widget.DrawerLayout: void setDrawerTitle(int,java.lang.CharSequence)
 android.support.v4.widget.DrawerLayout$LayoutParams
 android.support.v4.widget.DrawerLayout$LayoutParams: DrawerLayout$LayoutParams(android.content.Context,android.util.AttributeSet)
 android.support.v4.widget.DrawerLayout$SavedState
@@ -110,6 +111,14 @@ android.support.v4.widget.SlidingPaneLayout$LayoutParams
 android.support.v4.widget.SlidingPaneLayout$LayoutParams: SlidingPaneLayout$LayoutParams(android.content.Context,android.util.AttributeSet)
 android.support.v4.widget.SlidingPaneLayout$SavedState
 android.support.v4.widget.SlidingPaneLayout$SavedState: android.os.Parcelable$Creator CREATOR
+android.support.v4.widget.SwipeRefreshLayout
+android.support.v4.widget.SwipeRefreshLayout: SwipeRefreshLayout(android.content.Context)
+android.support.v4.widget.SwipeRefreshLayout: SwipeRefreshLayout(android.content.Context,android.util.AttributeSet)
+android.support.v4.widget.SwipeRefreshLayout: void setOnRefreshListener(android.support.v4.widget.SwipeRefreshLayout$OnRefreshListener)
+android.support.v4.widget.SwipeRefreshLayout: void setTriggerPercentage(float)
+android.support.v4.widget.SwipeRefreshLayout: void setRefreshing(boolean)
+android.support.v4.widget.SwipeRefreshLayout: void setColorScheme(int,int,int,int)
+android.support.v4.widget.SwipeRefreshLayout: void setTargetOffsetTopAndBottom(int)
 android.support.v7.app.ActionBar$LayoutParams
 android.support.v7.app.ActionBar$LayoutParams: ActionBar$LayoutParams(android.content.Context,android.util.AttributeSet)
 android.support.v7.app.ActionBarActivity
@@ -1811,6 +1820,122 @@ com.noqoush.adfalcon.android.sdk.images.a: com.noqoush.adfalcon.android.sdk.imag
 com.noqoush.adfalcon.android.sdk.images.a: com.noqoush.adfalcon.android.sdk.images.a valueOf(java.lang.String)
 com.noqoush.adfalcon.android.sdk.w$a: com.noqoush.adfalcon.android.sdk.w$a[] values()
 com.noqoush.adfalcon.android.sdk.w$a: com.noqoush.adfalcon.android.sdk.w$a valueOf(java.lang.String)
+com.serveme.analytics.R$attr: int adSize
+com.serveme.analytics.R$attr: int adSizes
+com.serveme.analytics.R$attr: int adUnitId
+com.serveme.analytics.R$attr: int cameraBearing
+com.serveme.analytics.R$attr: int cameraTargetLat
+com.serveme.analytics.R$attr: int cameraTargetLng
+com.serveme.analytics.R$attr: int cameraTilt
+com.serveme.analytics.R$attr: int cameraZoom
+com.serveme.analytics.R$attr: int mapType
+com.serveme.analytics.R$attr: int uiCompass
+com.serveme.analytics.R$attr: int uiRotateGestures
+com.serveme.analytics.R$attr: int uiScrollGestures
+com.serveme.analytics.R$attr: int uiTiltGestures
+com.serveme.analytics.R$attr: int uiZoomControls
+com.serveme.analytics.R$attr: int uiZoomGestures
+com.serveme.analytics.R$attr: int useViewLifecycle
+com.serveme.analytics.R$attr: int zOrderOnTop
+com.serveme.analytics.R$color: int common_action_bar_splitter
+com.serveme.analytics.R$color: int common_signin_btn_dark_text_default
+com.serveme.analytics.R$color: int common_signin_btn_dark_text_disabled
+com.serveme.analytics.R$color: int common_signin_btn_dark_text_focused
+com.serveme.analytics.R$color: int common_signin_btn_dark_text_pressed
+com.serveme.analytics.R$color: int common_signin_btn_default_background
+com.serveme.analytics.R$color: int common_signin_btn_light_text_default
+com.serveme.analytics.R$color: int common_signin_btn_light_text_disabled
+com.serveme.analytics.R$color: int common_signin_btn_light_text_focused
+com.serveme.analytics.R$color: int common_signin_btn_light_text_pressed
+com.serveme.analytics.R$color: int common_signin_btn_text_dark
+com.serveme.analytics.R$color: int common_signin_btn_text_light
+com.serveme.analytics.R$drawable: int common_signin_btn_icon_dark
+com.serveme.analytics.R$drawable: int common_signin_btn_icon_disabled_dark
+com.serveme.analytics.R$drawable: int common_signin_btn_icon_disabled_focus_dark
+com.serveme.analytics.R$drawable: int common_signin_btn_icon_disabled_focus_light
+com.serveme.analytics.R$drawable: int common_signin_btn_icon_disabled_light
+com.serveme.analytics.R$drawable: int common_signin_btn_icon_focus_dark
+com.serveme.analytics.R$drawable: int common_signin_btn_icon_focus_light
+com.serveme.analytics.R$drawable: int common_signin_btn_icon_light
+com.serveme.analytics.R$drawable: int common_signin_btn_icon_normal_dark
+com.serveme.analytics.R$drawable: int common_signin_btn_icon_normal_light
+com.serveme.analytics.R$drawable: int common_signin_btn_icon_pressed_dark
+com.serveme.analytics.R$drawable: int common_signin_btn_icon_pressed_light
+com.serveme.analytics.R$drawable: int common_signin_btn_text_dark
+com.serveme.analytics.R$drawable: int common_signin_btn_text_disabled_dark
+com.serveme.analytics.R$drawable: int common_signin_btn_text_disabled_focus_dark
+com.serveme.analytics.R$drawable: int common_signin_btn_text_disabled_focus_light
+com.serveme.analytics.R$drawable: int common_signin_btn_text_disabled_light
+com.serveme.analytics.R$drawable: int common_signin_btn_text_focus_dark
+com.serveme.analytics.R$drawable: int common_signin_btn_text_focus_light
+com.serveme.analytics.R$drawable: int common_signin_btn_text_light
+com.serveme.analytics.R$drawable: int common_signin_btn_text_normal_dark
+com.serveme.analytics.R$drawable: int common_signin_btn_text_normal_light
+com.serveme.analytics.R$drawable: int common_signin_btn_text_pressed_dark
+com.serveme.analytics.R$drawable: int common_signin_btn_text_pressed_light
+com.serveme.analytics.R$drawable: int ic_launcher
+com.serveme.analytics.R$drawable: int ic_plusone_medium_off_client
+com.serveme.analytics.R$drawable: int ic_plusone_small_off_client
+com.serveme.analytics.R$drawable: int ic_plusone_standard_off_client
+com.serveme.analytics.R$drawable: int ic_plusone_tall_off_client
+com.serveme.analytics.R$id: int hybrid
+com.serveme.analytics.R$id: int none
+com.serveme.analytics.R$id: int normal
+com.serveme.analytics.R$id: int satellite
+com.serveme.analytics.R$id: int terrain
+com.serveme.analytics.R$integer: int google_play_services_version
+com.serveme.analytics.R$string: int app_name
+com.serveme.analytics.R$string: int auth_client_needs_enabling_title
+com.serveme.analytics.R$string: int auth_client_needs_installation_title
+com.serveme.analytics.R$string: int auth_client_needs_update_title
+com.serveme.analytics.R$string: int auth_client_play_services_err_notification_msg
+com.serveme.analytics.R$string: int auth_client_requested_by_msg
+com.serveme.analytics.R$string: int auth_client_using_bad_version_title
+com.serveme.analytics.R$string: int common_google_play_services_enable_button
+com.serveme.analytics.R$string: int common_google_play_services_enable_text
+com.serveme.analytics.R$string: int common_google_play_services_enable_title
+com.serveme.analytics.R$string: int common_google_play_services_install_button
+com.serveme.analytics.R$string: int common_google_play_services_install_text_phone
+com.serveme.analytics.R$string: int common_google_play_services_install_text_tablet
+com.serveme.analytics.R$string: int common_google_play_services_install_title
+com.serveme.analytics.R$string: int common_google_play_services_invalid_account_text
+com.serveme.analytics.R$string: int common_google_play_services_invalid_account_title
+com.serveme.analytics.R$string: int common_google_play_services_network_error_text
+com.serveme.analytics.R$string: int common_google_play_services_network_error_title
+com.serveme.analytics.R$string: int common_google_play_services_unknown_issue
+com.serveme.analytics.R$string: int common_google_play_services_unsupported_date_text
+com.serveme.analytics.R$string: int common_google_play_services_unsupported_text
+com.serveme.analytics.R$string: int common_google_play_services_unsupported_title
+com.serveme.analytics.R$string: int common_google_play_services_update_button
+com.serveme.analytics.R$string: int common_google_play_services_update_text
+com.serveme.analytics.R$string: int common_google_play_services_update_title
+com.serveme.analytics.R$string: int common_signin_button_text
+com.serveme.analytics.R$string: int common_signin_button_text_long
+com.serveme.analytics.R$string: int location_client_powered_by_google
+com.serveme.analytics.R$string: int unexist_market
+com.serveme.analytics.R$string: int unresolved_market
+com.serveme.analytics.R$style: int AppBaseTheme
+com.serveme.analytics.R$style: int AppTheme
+com.serveme.analytics.R$styleable: int[] AdsAttrs
+com.serveme.analytics.R$styleable: int AdsAttrs_adSize
+com.serveme.analytics.R$styleable: int AdsAttrs_adSizes
+com.serveme.analytics.R$styleable: int AdsAttrs_adUnitId
+com.serveme.analytics.R$styleable: int[] MapAttrs
+com.serveme.analytics.R$styleable: int MapAttrs_cameraBearing
+com.serveme.analytics.R$styleable: int MapAttrs_cameraTargetLat
+com.serveme.analytics.R$styleable: int MapAttrs_cameraTargetLng
+com.serveme.analytics.R$styleable: int MapAttrs_cameraTilt
+com.serveme.analytics.R$styleable: int MapAttrs_cameraZoom
+com.serveme.analytics.R$styleable: int MapAttrs_mapType
+com.serveme.analytics.R$styleable: int MapAttrs_uiCompass
+com.serveme.analytics.R$styleable: int MapAttrs_uiRotateGestures
+com.serveme.analytics.R$styleable: int MapAttrs_uiScrollGestures
+com.serveme.analytics.R$styleable: int MapAttrs_uiTiltGestures
+com.serveme.analytics.R$styleable: int MapAttrs_uiZoomControls
+com.serveme.analytics.R$styleable: int MapAttrs_uiZoomGestures
+com.serveme.analytics.R$styleable: int MapAttrs_useViewLifecycle
+com.serveme.analytics.R$styleable: int MapAttrs_zOrderOnTop
+com.serveme.app.AnalyticsApplication
 com.serveme.savemyphone.R$anim: int abc_fade_in
 com.serveme.savemyphone.R$anim: int abc_fade_out
 com.serveme.savemyphone.R$anim: int abc_slide_in_bottom
@@ -2152,7 +2277,9 @@ com.serveme.savemyphone.R$drawable: int lock
 com.serveme.savemyphone.R$drawable: int settings
 com.serveme.savemyphone.R$drawable: int unlock
 com.serveme.savemyphone.R$drawable: int vertex
+com.serveme.savemyphone.R$id: int FrameLayout1
 com.serveme.savemyphone.R$id: int LinearLayout1
+com.serveme.savemyphone.R$id: int action_app_log
 com.serveme.savemyphone.R$id: int action_bar
 com.serveme.savemyphone.R$id: int action_bar_activity_content
 com.serveme.savemyphone.R$id: int action_bar_container
@@ -2167,6 +2294,7 @@ com.serveme.savemyphone.R$id: int action_lock
 com.serveme.savemyphone.R$id: int action_menu_divider
 com.serveme.savemyphone.R$id: int action_menu_presenter
 com.serveme.savemyphone.R$id: int action_mode_close_button
+com.serveme.savemyphone.R$id: int action_session_log
 com.serveme.savemyphone.R$id: int action_settings
 com.serveme.savemyphone.R$id: int action_unlock
 com.serveme.savemyphone.R$id: int activity_chooser_view_content
@@ -2177,7 +2305,6 @@ com.serveme.savemyphone.R$id: int alp_textview_info
 com.serveme.savemyphone.R$id: int alp_view_lock_pattern
 com.serveme.savemyphone.R$id: int alp_viewgroup_footer
 com.serveme.savemyphone.R$id: int always
-com.serveme.savemyphone.R$id: int app_icon
 com.serveme.savemyphone.R$id: int app_list
 com.serveme.savemyphone.R$id: int app_name
 com.serveme.savemyphone.R$id: int background_image
@@ -2197,6 +2324,7 @@ com.serveme.savemyphone.R$id: int disableHome
 com.serveme.savemyphone.R$id: int dropdown
 com.serveme.savemyphone.R$id: int editText
 com.serveme.savemyphone.R$id: int edit_query
+com.serveme.savemyphone.R$id: int empty
 com.serveme.savemyphone.R$id: int enable_disable
 com.serveme.savemyphone.R$id: int end
 com.serveme.savemyphone.R$id: int expand_activities_button
@@ -2240,6 +2368,8 @@ com.serveme.savemyphone.R$id: int search_mag_icon
 com.serveme.savemyphone.R$id: int search_plate
 com.serveme.savemyphone.R$id: int search_src_text
 com.serveme.savemyphone.R$id: int search_voice_btn
+com.serveme.savemyphone.R$id: int session_list
+com.serveme.savemyphone.R$id: int session_time
 com.serveme.savemyphone.R$id: int shortcut
 com.serveme.savemyphone.R$id: int showCustom
 com.serveme.savemyphone.R$id: int showHome
@@ -2250,6 +2380,7 @@ com.serveme.savemyphone.R$id: int submit_area
 com.serveme.savemyphone.R$id: int tabMode
 com.serveme.savemyphone.R$id: int terrain
 com.serveme.savemyphone.R$id: int textView
+com.serveme.savemyphone.R$id: int time_in_minutes
 com.serveme.savemyphone.R$id: int title
 com.serveme.savemyphone.R$id: int top_action_bar
 com.serveme.savemyphone.R$id: int unlock
@@ -2286,21 +2417,28 @@ com.serveme.savemyphone.R$layout: int abc_popup_menu_item_layout
 com.serveme.savemyphone.R$layout: int abc_search_dropdown_item_icons_2line
 com.serveme.savemyphone.R$layout: int abc_search_view
 com.serveme.savemyphone.R$layout: int action_bar
+com.serveme.savemyphone.R$layout: int activity_apps_log
+com.serveme.savemyphone.R$layout: int activity_base
+com.serveme.savemyphone.R$layout: int activity_session_log
 com.serveme.savemyphone.R$layout: int activity_unlock_settings
 com.serveme.savemyphone.R$layout: int activity_user_launcher
 com.serveme.savemyphone.R$layout: int alp_lock_pattern_activity
 com.serveme.savemyphone.R$layout: int alp_lock_pattern_activity_land
 com.serveme.savemyphone.R$layout: int alp_lock_pattern_view
+com.serveme.savemyphone.R$layout: int applog_item_layout
 com.serveme.savemyphone.R$layout: int background_activity
 com.serveme.savemyphone.R$layout: int background_item
+com.serveme.savemyphone.R$layout: int empty_listview
 com.serveme.savemyphone.R$layout: int guide_activity
 com.serveme.savemyphone.R$layout: int item_layout
 com.serveme.savemyphone.R$layout: int main_activity
 com.serveme.savemyphone.R$layout: int password_request
 com.serveme.savemyphone.R$layout: int recovery_activity
+com.serveme.savemyphone.R$layout: int session_item_layout
 com.serveme.savemyphone.R$layout: int support_simple_spinner_dropdown_item
 com.serveme.savemyphone.R$layout: int user_activity
 com.serveme.savemyphone.R$menu: int admin
+com.serveme.savemyphone.R$menu: int apps_log
 com.serveme.savemyphone.R$menu: int background
 com.serveme.savemyphone.R$menu: int user
 com.serveme.savemyphone.R$menu: int user_launcher
@@ -2319,8 +2457,10 @@ com.serveme.savemyphone.R$string: int abc_searchview_description_submit
 com.serveme.savemyphone.R$string: int abc_searchview_description_voice
 com.serveme.savemyphone.R$string: int abc_shareactionprovider_share_with
 com.serveme.savemyphone.R$string: int abc_shareactionprovider_share_with_application
+com.serveme.savemyphone.R$string: int action_app_log
 com.serveme.savemyphone.R$string: int action_help
 com.serveme.savemyphone.R$string: int action_lock
+com.serveme.savemyphone.R$string: int action_session_log
 com.serveme.savemyphone.R$string: int action_settings
 com.serveme.savemyphone.R$string: int action_unlock
 com.serveme.savemyphone.R$string: int activiate_lock_quesition
@@ -2357,6 +2497,7 @@ com.serveme.savemyphone.R$string: int auth_client_play_services_err_notification
 com.serveme.savemyphone.R$string: int auth_client_requested_by_msg
 com.serveme.savemyphone.R$string: int auth_client_using_bad_version_title
 com.serveme.savemyphone.R$string: int background_categeroy
+com.serveme.savemyphone.R$string: int buy_quesition
 com.serveme.savemyphone.R$string: int cancel
 com.serveme.savemyphone.R$string: int change_background
 com.serveme.savemyphone.R$string: int change_lock_pattern
@@ -2392,12 +2533,15 @@ com.serveme.savemyphone.R$string: int done
 com.serveme.savemyphone.R$string: int email_message_part1
 com.serveme.savemyphone.R$string: int email_message_part2
 com.serveme.savemyphone.R$string: int email_request_textview
+com.serveme.savemyphone.R$string: int empty
 com.serveme.savemyphone.R$string: int fast_lock
 com.serveme.savemyphone.R$string: int fast_lock_settings_category
 com.serveme.savemyphone.R$string: int ga_trackingId
 com.serveme.savemyphone.R$string: int grant_permission
+com.serveme.savemyphone.R$string: int hello_world
 com.serveme.savemyphone.R$string: int help
 com.serveme.savemyphone.R$string: int help_activity_title
+com.serveme.savemyphone.R$string: int hidden_lock
 com.serveme.savemyphone.R$string: int hidden_lock_message
 com.serveme.savemyphone.R$string: int hidden_settings_category
 com.serveme.savemyphone.R$string: int hide_lock
@@ -2421,13 +2565,19 @@ com.serveme.savemyphone.R$string: int recovery_activity_success_dialoge
 com.serveme.savemyphone.R$string: int recovery_activity_textview
 com.serveme.savemyphone.R$string: int recovery_activity_title
 com.serveme.savemyphone.R$string: int repeat_hidden_lock_message
+com.serveme.savemyphone.R$string: int session
 com.serveme.savemyphone.R$string: int settings
 com.serveme.savemyphone.R$string: int stealth_mode
 com.serveme.savemyphone.R$string: int step
-com.serveme.savemyphone.R$string: int title_activity_unlock_settings
+com.serveme.savemyphone.R$string: int title_activity_apps_log
+com.serveme.savemyphone.R$string: int title_activity_session_log
+com.serveme.savemyphone.R$string: int title_activity_uninstall
 com.serveme.savemyphone.R$string: int title_activity_user_launcher
+com.serveme.savemyphone.R$string: int unexist_market
 com.serveme.savemyphone.R$string: int uninstall
+com.serveme.savemyphone.R$string: int uninstall_hidden_lock
 com.serveme.savemyphone.R$string: int uninstall_settings_category
+com.serveme.savemyphone.R$string: int unresolved_market
 com.serveme.savemyphone.R$string: int usage_help_text
 com.serveme.savemyphone.R$string: int wrong_hidden_lock
 com.serveme.savemyphone.R$style: int AOSP_DialogWindowTitle
@@ -2794,12 +2944,20 @@ com.serveme.savemyphone.service.AppsMonitor
 com.serveme.savemyphone.service.AppsMonitor: AppsMonitor()
 com.serveme.savemyphone.service.AppsMonitor$MobileState: com.serveme.savemyphone.service.AppsMonitor$MobileState[] values()
 com.serveme.savemyphone.service.AppsMonitor$MobileState: com.serveme.savemyphone.service.AppsMonitor$MobileState valueOf(java.lang.String)
+com.serveme.savemyphone.view.AppsLogActivity
+com.serveme.savemyphone.view.AppsLogActivity: AppsLogActivity()
 com.serveme.savemyphone.view.BackGroundActivity
 com.serveme.savemyphone.view.BackGroundActivity: BackGroundActivity()
+com.serveme.savemyphone.view.BaseActivity
+com.serveme.savemyphone.view.BaseActivity: BaseActivity()
 com.serveme.savemyphone.view.MainActivity
 com.serveme.savemyphone.view.MainActivity: MainActivity()
+com.serveme.savemyphone.view.ManageSpaceActivity
+com.serveme.savemyphone.view.ManageSpaceActivity: ManageSpaceActivity()
 com.serveme.savemyphone.view.RecoveryActivity
 com.serveme.savemyphone.view.RecoveryActivity: RecoveryActivity()
+com.serveme.savemyphone.view.SessionLogActivity
+com.serveme.savemyphone.view.SessionLogActivity: SessionLogActivity()
 com.serveme.savemyphone.view.SettingsActivity
 com.serveme.savemyphone.view.SettingsActivity: SettingsActivity()
 com.serveme.savemyphone.view.UnlockSettingsActivity
@@ -2812,6 +2970,8 @@ com.serveme.savemyphone.view.UserView
 com.serveme.savemyphone.view.UserView: UserView(android.content.Context)
 com.serveme.savemyphone.view.UserView: UserView(android.content.Context,android.util.AttributeSet)
 com.serveme.savemyphone.view.UserView: UserView(android.content.Context,android.util.AttributeSet,int)
+com.serveme.savemyphone.view.WaitingActivity
+com.serveme.savemyphone.view.WaitingActivity: WaitingActivity()
 com.serveme.savemyphone.view.wizard.AdminRequest
 com.serveme.savemyphone.view.wizard.AdminRequest: AdminRequest()
 com.serveme.savemyphone.view.wizard.HelpActivity
