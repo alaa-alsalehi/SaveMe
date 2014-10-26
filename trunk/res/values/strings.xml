@@ -55,5 +55,5 @@
     <string name="title_activity_session_log">Session Log</string>
     <string name="hello_world">Hello world!</string>
     <string name="session">Session</string>
-
+	<string name="empty">No records to show</string>
 </resources>
