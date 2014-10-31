@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.serveme.savemyphone"
+    package="com.serveme.savemyphone.paid"
     android:installLocation="internalOnly"
     android:permission="android.permission.RECEIVE_BOOT_COMPLETED"
-    android:versionCode="27"
-    android:versionName="2.3.5" >
+    android:versionCode="28"
+    android:versionName="2.3.6" >
 
     <!-- Minimum and target SDK -->
     <uses-sdk
