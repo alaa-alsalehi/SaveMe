@@ -22,14 +22,26 @@ public class WaitingActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_base);
-		Intent start = getIntent();
-		if (start == null) {
-			return;
+		if (savedInstanceState == null) {
+			Intent start = getIntent();
+			if (start == null) {
+				return;
+			}
+			String packageName = start.getStringExtra("package");
+			this.packageName = packageName;
+			String activity = start.getStringExtra("activity");
+			this.activity = activity;
+		} else {
+			this.packageName = savedInstanceState.getString("package");
+			this.activity = savedInstanceState.getString("activity");
 		}
-		String packageName = start.getStringExtra("package");
-		this.packageName = packageName;
-		String activity = start.getStringExtra("activity");
-		this.activity = activity;
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		outState.putString("package", packageName);
+		outState.putString("activity", activity);
+		super.onSaveInstanceState(outState);
 	}
 
 	@Override
@@ -42,7 +54,15 @@ public class WaitingActivity extends Activity {
 		appIntent.setClassName(packageName, activity);
 		appIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 				| Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		startActivity(appIntent);
+		try {
+			startActivity(appIntent);
+		} catch (SecurityException exception) {
+			appIntent = getPackageManager().getLaunchIntentForPackage(
+					packageName);
+			appIntent.setAction(Intent.ACTION_MAIN);
+			appIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+			startActivity(appIntent);
+		}
 	}
 
 	@Override
