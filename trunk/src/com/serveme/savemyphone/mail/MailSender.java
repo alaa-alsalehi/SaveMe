@@ -1,5 +1,7 @@
 package com.serveme.savemyphone.mail;
 
+import java.net.UnknownHostException;
+
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -44,11 +46,14 @@ public class MailSender implements Response.Listener<String>,
 		Toast.makeText(recoveryActivity, R.string.network_failure,
 				Toast.LENGTH_LONG).show();
 		recoveryActivity.finish();
-		Tracker tracker = EasyTracker.getInstance(recoveryActivity);
-		tracker.send(MapBuilder.createException(
-				new AnalyticsExceptionParser().getDescription(Thread
-						.currentThread().toString(), error.getCause()), false)
-				.build());
+		// «·‘—ÿ · ﬁ·Ì· «· Õ–Ì—«  ⁄·Ï «·Œ«œ„
+		if (!(error.getCause() instanceof UnknownHostException)) {
+			Tracker tracker = EasyTracker.getInstance(recoveryActivity);
+			tracker.send(MapBuilder.createException(
+					new AnalyticsExceptionParser().getDescription(Thread
+							.currentThread().toString(), error.getCause()),
+					false).build());
+		}
 	}
 
 }
