@@ -6020,6 +6020,7 @@ com.google.gson.Gson:
     415:418:public com.google.gson.JsonElement toJsonTree(java.lang.Object)
     438:440:public com.google.gson.JsonElement toJsonTree(java.lang.Object,java.lang.reflect.Type)
     499:504:public void toJson(java.lang.Object,java.lang.Appendable)
+    642:643:public java.lang.Object fromJson(java.lang.String,java.lang.Class)
     693:696:public java.lang.Object fromJson(java.io.Reader,java.lang.Class)
     792:793:public java.lang.Object fromJson(com.google.gson.JsonElement,java.lang.Class)
     816:819:public java.lang.Object fromJson(com.google.gson.JsonElement,java.lang.reflect.Type)
@@ -6123,6 +6124,7 @@ com.google.gson.internal.Pair
 com.google.gson.internal.Primitives:
     33:33:private Primitives()
     81:81:public static boolean isWrapperType(java.lang.reflect.Type)
+    97:99:public static java.lang.Class wrap(java.lang.Class)
     114:116:public static java.lang.Class unwrap(java.lang.Class)
 com.google.gson.internal.Streams:
     35:78:public Streams()
@@ -7524,7 +7526,7 @@ com.serveme.savemyphone.preferences.PrefEditor:
     78:81:public void removeTempPassword()
     135:135:public java.lang.String getTempPassword()
 com.serveme.savemyphone.receivers.HiddenLockUtility:
-    17:17:public HiddenLockUtility()
+    20:20:public HiddenLockUtility()
 com.serveme.savemyphone.service.AppsMonitor:
     private static final int UPDATE_INTERVAL
 com.serveme.savemyphone.util.ConverterUtil

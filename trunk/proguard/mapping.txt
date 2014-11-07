@@ -14905,7 +14905,6 @@ com.google.gson.Gson -> com.google.a.j:
     579:584:void toJson(com.google.gson.JsonElement,java.lang.Appendable) -> a
     591:599:com.google.gson.stream.JsonWriter newJsonWriter(java.io.Writer) -> a
     607:622:void toJson(com.google.gson.JsonElement,com.google.gson.stream.JsonWriter) -> a
-    642:643:java.lang.Object fromJson(java.lang.String,java.lang.Class) -> a
     666:671:java.lang.Object fromJson(java.lang.String,java.lang.reflect.Type) -> a
     720:723:java.lang.Object fromJson(java.io.Reader,java.lang.reflect.Type) -> a
     728:736:void assertFullConsumption(java.lang.Object,com.google.gson.stream.JsonReader) -> a
@@ -15168,7 +15167,6 @@ com.google.gson.internal.Primitives -> com.google.a.b.u:
     java.util.Map WRAPPER_TO_PRIMITIVE_TYPE -> b
     63:65:void add(java.util.Map,java.util.Map,java.lang.Class,java.lang.Class) -> a
     71:71:boolean isPrimitive(java.lang.reflect.Type) -> a
-    97:99:java.lang.Class wrap(java.lang.Class) -> a
 com.google.gson.internal.Streams -> com.google.a.b.v:
     67:68:void write(com.google.gson.JsonElement,com.google.gson.stream.JsonWriter) -> a
     71:71:java.io.Writer writerForAppendable(java.lang.Appendable) -> a
@@ -18090,13 +18088,13 @@ com.serveme.savemyphone.control.StanderListAdapter$ViewHolder -> com.serveme.sav
     com.serveme.savemyphone.control.StanderListAdapter this$0 -> d
 com.serveme.savemyphone.mail.CodeVerifier -> com.serveme.savemyphone.a.a:
     com.serveme.savemyphone.view.RecoveryActivity recoveryActivity -> a
-    39:52:void onResponse(java.lang.String) -> a
-    56:63:void onErrorResponse(com.android.volley.VolleyError) -> a
+    41:54:void onResponse(java.lang.String) -> a
+    58:68:void onErrorResponse(com.android.volley.VolleyError) -> a
     1:1:void onResponse(java.lang.Object) -> a
 com.serveme.savemyphone.mail.MailSender -> com.serveme.savemyphone.a.b:
     com.serveme.savemyphone.view.RecoveryActivity recoveryActivity -> a
-    39:40:void onResponse(java.lang.String) -> a
-    44:52:void onErrorResponse(com.android.volley.VolleyError) -> a
+    41:42:void onResponse(java.lang.String) -> a
+    46:57:void onErrorResponse(com.android.volley.VolleyError) -> a
     1:1:void onResponse(java.lang.Object) -> a
 com.serveme.savemyphone.model.DBHandler -> com.serveme.savemyphone.b.a:
     21:28:void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
@@ -18159,13 +18157,15 @@ com.serveme.savemyphone.receivers.AdminReciver -> com.serveme.savemyphone.receiv
 com.serveme.savemyphone.receivers.BootReceiver -> com.serveme.savemyphone.receivers.BootReceiver:
     15:22:void onReceive(android.content.Context,android.content.Intent) -> onReceive
 com.serveme.savemyphone.receivers.HiddenLockUtility -> com.serveme.savemyphone.receivers.a:
-    20:73:void checkAndHandleHiddenLock(android.content.Context,java.lang.String) -> a
+    23:81:void checkAndHandleHiddenLock(android.content.Context,java.lang.String) -> a
 com.serveme.savemyphone.receivers.HiddenLockUtility$1 -> com.serveme.savemyphone.receivers.b:
-    android.content.Context val$context -> a
-    50:52:void onClick(android.content.DialogInterface,int) -> onClick
+    35:35:java.lang.reflect.Type getGenericComponentType() -> getGenericComponentType
 com.serveme.savemyphone.receivers.HiddenLockUtility$2 -> com.serveme.savemyphone.receivers.c:
     android.content.Context val$context -> a
-    62:64:void onClick(android.content.DialogInterface,int) -> onClick
+    59:61:void onClick(android.content.DialogInterface,int) -> onClick
+com.serveme.savemyphone.receivers.HiddenLockUtility$3 -> com.serveme.savemyphone.receivers.d:
+    android.content.Context val$context -> a
+    70:72:void onClick(android.content.DialogInterface,int) -> onClick
 com.serveme.savemyphone.receivers.RemovePackageReceiver -> com.serveme.savemyphone.receivers.RemovePackageReceiver:
     28:36:void onReceive(android.content.Context,android.content.Intent) -> onReceive
 com.serveme.savemyphone.receivers.SDCardReceiver -> com.serveme.savemyphone.receivers.SDCardReceiver:
@@ -18448,11 +18448,12 @@ com.serveme.savemyphone.view.WaitingActivity -> com.serveme.savemyphone.view.Wai
     java.lang.String packageName -> a
     java.lang.String activity -> b
     15:19:void onNewIntent(android.content.Intent) -> onNewIntent
-    23:33:void onCreate(android.os.Bundle) -> onCreate
-    37:46:void onResume() -> onResume
-    50:52:void onPause() -> onPause
-    57:57:void onBackPressed() -> onBackPressed
-    61:62:void onDestroy() -> onDestroy
+    23:38:void onCreate(android.os.Bundle) -> onCreate
+    42:45:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
+    49:66:void onResume() -> onResume
+    70:72:void onPause() -> onPause
+    77:77:void onBackPressed() -> onBackPressed
+    81:82:void onDestroy() -> onDestroy
 com.serveme.savemyphone.view.utils.ActivitiesController -> com.serveme.savemyphone.view.a.a:
     android.app.Activity activity -> a
     android.app.admin.DevicePolicyManager devicePolicyManager -> b
