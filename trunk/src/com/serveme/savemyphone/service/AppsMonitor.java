@@ -9,7 +9,6 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ComponentInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -166,7 +165,7 @@ public class AppsMonitor extends Service {
 								"com.serveme.savemyphone.view.WaitingActivity")
 						&& !topActivity
 								.getClassName()
-								.equals("group.pals.android.lib.ui.lockpattern.LockPatternActivity")) {
+								.equals("com.haibison.android.lockpattern.LockPatternActivity")) {
 					// ActivityManager manager =
 					// (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
 					// List<RunningAppProcessInfo> services =

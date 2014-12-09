@@ -42,7 +42,7 @@ public class AlertUtility {
 							preferences.getString("background",
 									"background/"
 											+ thisView.getContext().getAssets()
-													.list("background")[10])));
+													.list("background")[3])));
 		} catch (IOException e) {
 			Tracker tracker = EasyTracker.getInstance(context);
 			tracker.send(MapBuilder.createException(
