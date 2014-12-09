@@ -16,7 +16,6 @@ import com.google.analytics.tracking.android.Tracker;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.serveme.savemyphone.R;
-import com.serveme.savemyphone.control.AppsLogListAdapter;
 import com.serveme.savemyphone.control.SessionLogListAdapter;
 import com.serveme.savemyphone.control.SessionLogListAdapter.ViewHolder;
 import com.serveme.savemyphone.model.DBOperations;

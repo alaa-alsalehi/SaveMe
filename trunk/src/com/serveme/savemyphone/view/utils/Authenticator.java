@@ -1,7 +1,9 @@
 package com.serveme.savemyphone.view.utils;
 
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Intent;
+
 import com.haibison.android.lockpattern.util.Settings;
 import com.haibison.android.lockpattern.LockPatternActivity;
 import com.serveme.savemyphone.preferences.PrefEditor;
@@ -31,7 +33,8 @@ public class Authenticator {
 
 		Intent intent = new Intent(LockPatternActivity.ACTION_COMPARE_PATTERN, null, context,LockPatternActivity.class);
 		intent.putExtra(LockPatternActivity.EXTRA_PATTERN, savedPattern);
-		intent.putExtra(LockPatternActivity.EXTRA_PENDING_INTENT_FORGOT_PATTERN, new Intent(context, RecoveryActivity.class));
+		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, RecoveryActivity.class),PendingIntent.FLAG_UPDATE_CURRENT);
+		intent.putExtra(LockPatternActivity.EXTRA_PENDING_INTENT_FORGOT_PATTERN, pendingIntent);
 		context.startActivityForResult(intent,requestCode);
 	}
 	
