@@ -10,6 +10,7 @@
 	<classpathentry exported="true" kind="lib" path="libs/java-mail/mail.jar"/>
 	<classpathentry kind="lib" path="libs/libGoogleAnalyticsServices.jar"/>
 	<classpathentry kind="lib" path="libs/volley.jar"/>
-	<classpathentry kind="src" path="/ServeMe Framework"/>
+	<classpathentry kind="lib" path="libs/gson-2.2.4.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ServeMeFramework"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

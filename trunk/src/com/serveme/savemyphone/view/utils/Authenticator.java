@@ -1,12 +1,11 @@
 package com.serveme.savemyphone.view.utils;
 
-import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
-import group.pals.android.lib.ui.lockpattern.prefs.DisplayPrefs;
-import com.serveme.savemyphone.preferences.PrefEditor;
-import com.serveme.savemyphone.view.RecoveryActivity;
-
 import android.app.Activity;
 import android.content.Intent;
+import com.haibison.android.lockpattern.util.Settings;
+import com.haibison.android.lockpattern.LockPatternActivity;
+import com.serveme.savemyphone.preferences.PrefEditor;
+import com.serveme.savemyphone.view.RecoveryActivity;
 
 public class Authenticator {
 	
@@ -25,14 +24,14 @@ public class Authenticator {
 	public void checkPattern(int requestCode){
 		char[] savedPattern = new PrefEditor(context).getSavedPattern().toCharArray();
 		if(pe.isStealthModeEnabled()){
-			DisplayPrefs.setStealthMode(context, true);
+			Settings.Display.setStealthMode(context, true);
 		} else {
-			DisplayPrefs.setStealthMode(context, false);
+			Settings.Display.setStealthMode(context, false);
 		}
 
 		Intent intent = new Intent(LockPatternActivity.ACTION_COMPARE_PATTERN, null, context,LockPatternActivity.class);
 		intent.putExtra(LockPatternActivity.EXTRA_PATTERN, savedPattern);
-		intent.putExtra(LockPatternActivity.EXTRA_INTENT_ACTIVITY_FORGOT_PATTERN, new Intent(context, RecoveryActivity.class));
+		intent.putExtra(LockPatternActivity.EXTRA_PENDING_INTENT_FORGOT_PATTERN, new Intent(context, RecoveryActivity.class));
 		context.startActivityForResult(intent,requestCode);
 	}
 	

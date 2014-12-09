@@ -117,8 +117,7 @@ public class UserView extends FrameLayout {
 
 			@Override
 			public void onClick(View v) {
-				Intent userActivityIntent = new Intent(getContext(),
-						UserActivity.class);
+				Intent userActivityIntent = new Intent(getContext(), UserActivity.class);
 				userActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				getContext().startActivity(userActivityIntent);
 			}

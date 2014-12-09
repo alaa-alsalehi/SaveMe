@@ -1,7 +1,5 @@
 package com.serveme.savemyphone.view.wizard;
 
-//import org.omar.android.lib.ui.passwordlock.PasswordEntryActivity;
-import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +10,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.haibison.android.lockpattern.LockPatternActivity;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.util.MyTracker;

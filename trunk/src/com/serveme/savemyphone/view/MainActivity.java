@@ -3,28 +3,10 @@ package com.serveme.savemyphone.view;
 //import org.omar.android.lib.ui.passwordlock.PasswordEntryActivity;
 
 import org.codechimp.apprater.AppRater;
-import org.codechimp.apprater.InCorrectMarketException;
-
-import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
-import com.serveme.util.PackageUtil;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.serveme.savemyphone.R;
-import com.serveme.savemyphone.control.AppsListAdapter;
-import com.serveme.savemyphone.model.DBOperations;
-import com.serveme.savemyphone.preferences.PrefEditor;
-import com.serveme.savemyphone.service.AppsMonitor;
-import com.serveme.savemyphone.util.MyTracker;
-import com.serveme.savemyphone.util.Utility;
-import com.serveme.savemyphone.view.utils.ActivitiesController;
-import com.serveme.savemyphone.view.utils.AdMobListener;
-import com.serveme.savemyphone.view.wizard.HelpActivity;
 
 import android.app.AlertDialog;
-import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
@@ -37,6 +19,20 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.haibison.android.lockpattern.LockPatternActivity;
+import com.serveme.savemyphone.R;
+import com.serveme.savemyphone.control.AppsListAdapter;
+import com.serveme.savemyphone.model.DBOperations;
+import com.serveme.savemyphone.preferences.PrefEditor;
+import com.serveme.savemyphone.service.AppsMonitor;
+import com.serveme.savemyphone.util.MyTracker;
+import com.serveme.savemyphone.util.Utility;
+import com.serveme.savemyphone.view.utils.ActivitiesController;
+import com.serveme.savemyphone.view.utils.AdMobListener;
+import com.serveme.savemyphone.view.wizard.HelpActivity;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -74,11 +70,9 @@ public class MainActivity extends ActionBarActivity {
 			listView.setAdapter(adapter);
 		}
 		adsStuff();
-		try {
-			AppRater.app_launched(MainActivity.this);
-		} catch (InCorrectMarketException e) {
 
-		}
+		AppRater.app_launched(MainActivity.this);
+
 	}
 
 	protected LinearLayout createListHeader() {

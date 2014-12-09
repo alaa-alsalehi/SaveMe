@@ -1,6 +1,5 @@
 package com.serveme.savemyphone.view;
 
-import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +8,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.haibison.android.lockpattern.LockPatternActivity;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.mail.CodeVerifier;
 import com.serveme.savemyphone.mail.MailSender;

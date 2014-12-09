@@ -1,7 +1,6 @@
 package com.serveme.savemyphone.view;
 
-import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
-
+import com.haibison.android.lockpattern.LockPatternActivity;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.receivers.AdminReciver;

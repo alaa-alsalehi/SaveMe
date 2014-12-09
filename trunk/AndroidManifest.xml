@@ -24,12 +24,12 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:manageSpaceActivity="com.serveme.savemyphone.view.ManageSpaceActivity"
-        android:theme="@style/AppTheme" 
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
 
         <!--
            <meta-data android:name="com.google.android.gms.version"
-           android:value="@integer/google_play_services_version" />
+           android:value="@integer/google_play_services_version" />
         -->
 
 
@@ -147,12 +147,12 @@
             android:name="org.omar.android.lib.ui.passwordlock.PasswordEntryActivity"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
             android:screenOrientation="portrait"
-            android:theme="@style/Alp.Theme.Dark" />
+            android:theme="@style/Alp.42447968.Theme.Dark" />
         <activity
-            android:name="group.pals.android.lib.ui.lockpattern.LockPatternActivity"
+            android:name="com.haibison.android.lockpattern.LockPatternActivity"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
             android:screenOrientation="user"
-            android:theme="@style/Alp.Theme.Dark" />
+            android:theme="@style/Alp.42447968.Theme.Dark" />
 
         <service android:name="com.google.analytics.tracking.android.CampaignTrackingService" />
 
@@ -214,11 +214,11 @@
         </activity>
         <activity
             android:name="com.serveme.savemyphone.view.AppsLogActivity"
-            android:label="@string/title_activity_apps_log">
+            android:label="@string/title_activity_apps_log" >
         </activity>
         <activity
             android:name="com.serveme.savemyphone.view.SessionLogActivity"
-            android:label="@string/title_activity_apps_log">
+            android:label="@string/title_activity_apps_log" >
         </activity>
     </application>
 

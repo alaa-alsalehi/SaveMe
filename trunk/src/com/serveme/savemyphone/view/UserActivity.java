@@ -1,19 +1,16 @@
 package com.serveme.savemyphone.view;
 
-import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
+import com.haibison.android.lockpattern.LockPatternActivity;
 import com.serveme.savemyphone.R;
 import com.serveme.savemyphone.preferences.PrefEditor;
 import com.serveme.savemyphone.service.AppsMonitor;
@@ -28,12 +25,13 @@ public class UserActivity extends Activity {
 
 	private InterstitialAd interstitial;
 
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// setContentView(R.layout.user_activity);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			getActionBar().hide();
+			// getActionBar().hide();
 		}
 
 		new Authenticator(this).checkPattern(REQ_ENTER_PATTERN);

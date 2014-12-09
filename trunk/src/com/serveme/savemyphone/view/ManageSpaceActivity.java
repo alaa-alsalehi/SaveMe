@@ -1,19 +1,11 @@
 package com.serveme.savemyphone.view;
 
-import group.pals.android.lib.ui.lockpattern.LockPatternActivity;
-
-import com.serveme.savemyphone.R;
-import com.serveme.savemyphone.R.layout;
-import com.serveme.savemyphone.R.menu;
-import com.serveme.savemyphone.preferences.PrefEditor;
-import com.serveme.savemyphone.service.AppsMonitor;
-import com.serveme.savemyphone.util.Utility;
-import com.serveme.savemyphone.view.utils.Authenticator;
-
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.view.Menu;
+import android.os.Bundle;
+
+import com.haibison.android.lockpattern.LockPatternActivity;
+import com.serveme.savemyphone.view.utils.Authenticator;
 
 public class ManageSpaceActivity extends Activity {
 	private static final int REQ_ENTER_PATTERN = 2;

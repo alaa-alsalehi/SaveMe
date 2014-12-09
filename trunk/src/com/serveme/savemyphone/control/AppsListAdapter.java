@@ -7,21 +7,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.codechimp.apprater.AppRater;
-import org.codechimp.apprater.InCorrectMarketException;
-
-import com.serveme.savemyphone.R;
-import com.serveme.savemyphone.model.DBOperations;
-import com.serveme.savemyphone.model.Launcher;
-import com.serveme.savemyphone.util.MyTracker;
-import com.serveme.savemyphone.view.MainActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.provider.ContactsContract.CommonDataKinds.Im;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +22,11 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+
+import com.serveme.savemyphone.R;
+import com.serveme.savemyphone.model.DBOperations;
+import com.serveme.savemyphone.model.Launcher;
+import com.serveme.savemyphone.util.MyTracker;
 
 public class AppsListAdapter extends BaseAdapter {
 
