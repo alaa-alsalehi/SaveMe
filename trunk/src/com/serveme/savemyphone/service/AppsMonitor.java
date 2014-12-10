@@ -5,10 +5,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.ActivityManager;
+import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -40,6 +42,8 @@ public class AppsMonitor extends Service {
 	// »ÕÌÀ Ì÷„‰ ⁄œ„ »ﬁ«¡Â« »⁄œ ≈Ìﬁ«› «·Œœ„…
 	// ÕÌÀ √‰ œ«·… «·≈·€«¡ ·«  ·€Ì «·„Â«„ «·›⁄«·…
 	private volatile boolean stopped;
+	
+	private ServiceUtils serviceUtils;
 
 	private enum MobileState {
 		START_APP, ALLOW_APP, UNALLOW_APP, ANDROID, USER_ACTIVITY, UNALLOW_APP_STARTED_BY_ALLOW_APP, START_ALERT_MESSAGE, END_ALERT_MESSAGE
@@ -61,13 +65,13 @@ public class AppsMonitor extends Service {
 		currentState = MobileState.USER_ACTIVITY;
 		previousState = MobileState.START_APP;
 		db = DBOperations.getInstance(this);
-		sessionId=db.createAppLogSession(System.currentTimeMillis());
+		sessionId = db.createAppLogSession(System.currentTimeMillis());
 		am = (ActivityManager) this.getSystemService(ACTIVITY_SERVICE);
 		// view = LayoutInflater.from(AppsMonitor.this).inflate(
 		// R.layout.password_request, null);
 		final WindowManager.LayoutParams param = AlertUtility.getParam();
 		final View view = AlertUtility.getView(AppsMonitor.this);
-
+		serviceUtils = new ServiceUtils(AppsMonitor.this, am);
 		handler = new Handler() {
 			// Toast toast = Toast.makeText(AppsMonitor.this,
 			// R.string.prevent_message, Toast.LENGTH_LONG);
@@ -143,139 +147,14 @@ public class AppsMonitor extends Service {
 
 	private void doGetRunningApp() {
 		final View view = AlertUtility.getView(AppsMonitor.this);
+
 		timer.scheduleAtFixedRate(new TimerTask() {
 
 			public void run() {
-				List<ActivityManager.RunningTaskInfo> taskInfo = am
-						.getRunningTasks(1);
-				ComponentName topActivity = taskInfo.get(0).topActivity;
-				ComponentName baseActivity = taskInfo.get(0).baseActivity;// «·»—‰«„Ã
-				// «·√’·Ì
-				Launcher launcher = new Launcher(topActivity.getPackageName(),
-						null);
-
-				if (!db.getWhiteListPackages().contains(launcher)
-						&& !topActivity.getPackageName().equals("android")
-						&& !topActivity.getClassName().equals(
-								"com.serveme.savemyphone.view.UserActivity")
-						&& !topActivity
-								.getClassName()
-								.equals("com.serveme.savemyphone.view.RecoveryActivity")
-						&& !topActivity.getClassName().equals(
-								"com.serveme.savemyphone.view.WaitingActivity")
-						&& !topActivity
-								.getClassName()
-								.equals("com.haibison.android.lockpattern.LockPatternActivity")) {
-					// ActivityManager manager =
-					// (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
-					// List<RunningAppProcessInfo> services =
-					// manager.getRunningAppProcesses();
-					// for(RunningAppProcessInfo rpi : services){
-					// if(rpi.processName.startsWith(componentInfo.getPackageName())){
-					// android.os.Process.killProcess(rpi.pid);
-					// }
-					// }
-					// am.killBackgroundProcesses(componentInfo.getPackageName());
-					/*
-					 * componentInfo = taskInfo.get(0).baseActivity; launcher =
-					 * new Launcher( componentInfo.getPackageName(), null);
-					 */
-
-					launcher = new Launcher(baseActivity.getPackageName(), null);
-					if (db.getWhiteListPackages().contains(launcher)) {
-						// Intent intent = new Intent(Intent.ACTION_MAIN);
-						// intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
-						// Intent.FLAG_ACTIVITY_NEW_TASK);
-						// intent.setComponent(new
-						// ComponentName(lastallowedapp.getPackageName(),lastallowedapp.getClassName()));
-						// startActivity(intent);
-						// ≈–« ﬂ«‰ √”«” «·⁄„·Ì… »—‰«„Ã „”„ÊÕ ›ÌÂ ÌÃ» «·⁄Êœ… ≈·Ï
-						// «·»—‰«„Ã «·√’·Ì
-						Intent i = new Intent(AppsMonitor.this,
-								BaseActivity.class);
-						i.putExtra("package", baseActivity.getPackageName());
-						i.putExtra("activity", baseActivity.getClassName());
-						i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-								| Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						startActivity(i);
-						synchronized (view) {
-							if (currentState == MobileState.START_ALERT_MESSAGE) {
-
-							} else if (currentState != MobileState.UNALLOW_APP_STARTED_BY_ALLOW_APP) {
-								handler.sendEmptyMessage(0);
-								setCurrentState(MobileState.UNALLOW_APP_STARTED_BY_ALLOW_APP);
-							}
-						}
-					} else {
-						// Log.d("test", "test");
-						synchronized (view) {
-							if (currentState == MobileState.START_ALERT_MESSAGE) {
-								// ≈–« ⁄‰« —”«·…  Õ–Ì— ‘€«·… „« »·⁄» ≈ÿ·«ﬁ«
-							} else if (currentState != MobileState.UNALLOW_APP) {
-								setCurrentState(MobileState.UNALLOW_APP);
-								handler.sendEmptyMessage(0);
-							}
-						}
-					}
-					//
-				} else if (topActivity.getPackageName().equals("android")) {
-					// lastallowedapp = taskInfo.get(0).topActivity;
-					synchronized (view) {
-						if (currentState != MobileState.START_ALERT_MESSAGE) {
-							setCurrentState(MobileState.ANDROID);
-						} else {
-							handler.sendEmptyMessage(1);
-						}
-					}
-				} else if (topActivity.getClassName().equals(
-						"com.serveme.savemyphone.view.UserActivity")) {
-					synchronized (view) {
-						if (currentState == MobileState.START_ALERT_MESSAGE) {
-							handler.sendEmptyMessage(1);
-						} else {
-							setCurrentState(MobileState.USER_ACTIVITY);
-						}
-					}
+				if(Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP){
+					preventAppFromRunningOnLollipop(view);
 				} else {
-					synchronized (view) {
-						if (currentState != MobileState.START_ALERT_MESSAGE) {
-							setCurrentState(MobileState.ALLOW_APP);
-						} else {
-							handler.sendEmptyMessage(1);
-						}
-					}
-					if (currentApp == null
-							|| currentApp.getPackageName() == null
-							|| !currentApp.getPackageName().equals(
-									baseActivity.getPackageName())) {
-						if (currentApp != null
-								&& currentApp.getPackageName() != null
-								&& !currentApp.getPackageName().equals(
-										getPackageName())) {
-							Bundle bundle = new Bundle();
-							bundle.putString("packageName",
-									currentApp.getPackageName());
-							bundle.putLong("startTime", startTime);
-							bundle.putLong("endTime",
-									System.currentTimeMillis());
-							// ≈—”«· «·»Ì«‰«  ··ŒÌÿ «·—∆Ì”Ì ·÷„«‰ ⁄œ„ Õ’Ê· „‘«ﬂ·
-							// ⁄·Ï ﬁ«⁄œ… «·»Ì«‰«  „À· lock
-							Message message = handler.obtainMessage(2);
-							message.setData(bundle);
-							handler.sendMessage(message);
-
-							Log.d("change app", "replace "
-									+ (currentApp == null ? " null "
-											: currentApp.toString())
-									+ " by "
-									+ (baseActivity == null ? " null "
-											: baseActivity.getPackageName()));
-							Log.d("package", currentApp.getPackageName() + " "
-									+ getPackageName());
-						}
-						startTime = System.currentTimeMillis();
-						currentApp = baseActivity;
-					}
+					preventAppFromRunning(view);
 				}
 			}
 		}, 1, UPDATE_INTERVAL);
@@ -307,5 +186,180 @@ public class AppsMonitor extends Service {
 			} catch (Exception e) {
 			}
 		}
+	}
+	
+	private void preventAppFromRunning(View view){
+		List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
+		ComponentName topActivity = taskInfo.get(0).topActivity;
+		ComponentName baseActivity = taskInfo.get(0).baseActivity;// «·»—‰«„Ã
+		// «·√’·Ì
+		Launcher launcher = new Launcher(topActivity.getPackageName(),
+				null);
+
+		if (!db.getWhiteListPackages().contains(launcher)
+				&& !topActivity.getPackageName().equals("android")
+				&& !topActivity.getClassName().equals(
+						"com.serveme.savemyphone.view.UserActivity")
+				&& !topActivity
+						.getClassName()
+						.equals("com.serveme.savemyphone.view.RecoveryActivity")
+				&& !topActivity.getClassName().equals(
+						"com.serveme.savemyphone.view.WaitingActivity")
+				&& !topActivity
+						.getClassName()
+						.equals("com.haibison.android.lockpattern.LockPatternActivity")) {
+			// ActivityManager manager =
+			// (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+			// List<RunningAppProcessInfo> services =
+			// manager.getRunningAppProcesses();
+			// for(RunningAppProcessInfo rpi : services){
+			// if(rpi.processName.startsWith(componentInfo.getPackageName())){
+			// android.os.Process.killProcess(rpi.pid);
+			// }
+			// }
+			// am.killBackgroundProcesses(componentInfo.getPackageName());
+			/*
+			 * componentInfo = taskInfo.get(0).baseActivity; launcher =
+			 * new Launcher( componentInfo.getPackageName(), null);
+			 */
+
+			launcher = new Launcher(baseActivity.getPackageName(), null);
+			if (db.getWhiteListPackages().contains(launcher)) {
+				// Intent intent = new Intent(Intent.ACTION_MAIN);
+				// intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+				// Intent.FLAG_ACTIVITY_NEW_TASK);
+				// intent.setComponent(new
+				// ComponentName(lastallowedapp.getPackageName(),lastallowedapp.getClassName()));
+				// startActivity(intent);
+				// ≈–« ﬂ«‰ √”«” «·⁄„·Ì… »—‰«„Ã „”„ÊÕ ›ÌÂ ÌÃ» «·⁄Êœ… ≈·Ï
+				// «·»—‰«„Ã «·√’·Ì
+				Intent i = new Intent(AppsMonitor.this,
+						BaseActivity.class);
+				i.putExtra("package", baseActivity.getPackageName());
+				i.putExtra("activity", baseActivity.getClassName());
+				i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+						| Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(i);
+				synchronized (view) {
+					if (currentState == MobileState.START_ALERT_MESSAGE) {
+
+					} else if (currentState != MobileState.UNALLOW_APP_STARTED_BY_ALLOW_APP) {
+						handler.sendEmptyMessage(0);
+						setCurrentState(MobileState.UNALLOW_APP_STARTED_BY_ALLOW_APP);
+					}
+				}
+			} else {
+				// Log.d("test", "test");
+				synchronized (view) {
+					if (currentState == MobileState.START_ALERT_MESSAGE) {
+						// ≈–« ⁄‰« —”«·…  Õ–Ì— ‘€«·… „« »·⁄» ≈ÿ·«ﬁ«
+					} else if (currentState != MobileState.UNALLOW_APP) {
+						setCurrentState(MobileState.UNALLOW_APP);
+						handler.sendEmptyMessage(0);
+					}
+				}
+			}
+			//
+		} else if (topActivity.getPackageName().equals("android")) {
+			// lastallowedapp = taskInfo.get(0).topActivity;
+			synchronized (view) {
+				if (currentState != MobileState.START_ALERT_MESSAGE) {
+					setCurrentState(MobileState.ANDROID);
+				} else {
+					handler.sendEmptyMessage(1);
+				}
+			}
+		} else if (topActivity.getClassName().equals(
+				"com.serveme.savemyphone.view.UserActivity")) {
+			synchronized (view) {
+				if (currentState == MobileState.START_ALERT_MESSAGE) {
+					handler.sendEmptyMessage(1);
+				} else {
+					setCurrentState(MobileState.USER_ACTIVITY);
+				}
+			}
+		} else {
+			synchronized (view) {
+				if (currentState != MobileState.START_ALERT_MESSAGE) {
+					setCurrentState(MobileState.ALLOW_APP);
+				} else {
+					handler.sendEmptyMessage(1);
+				}
+			}
+			if (currentApp == null
+					|| currentApp.getPackageName() == null
+					|| !currentApp.getPackageName().equals(
+							baseActivity.getPackageName())) {
+				if (currentApp != null
+						&& currentApp.getPackageName() != null
+						&& !currentApp.getPackageName().equals(
+								getPackageName())) {
+					Bundle bundle = new Bundle();
+					bundle.putString("packageName",
+							currentApp.getPackageName());
+					bundle.putLong("startTime", startTime);
+					bundle.putLong("endTime",
+							System.currentTimeMillis());
+					// ≈—”«· «·»Ì«‰«  ··ŒÌÿ «·—∆Ì”Ì ·÷„«‰ ⁄œ„ Õ’Ê· „‘«ﬂ·
+					// ⁄·Ï ﬁ«⁄œ… «·»Ì«‰«  „À· lock
+					Message message = handler.obtainMessage(2);
+					message.setData(bundle);
+					handler.sendMessage(message);
+
+					Log.d("change app", "replace "
+							+ (currentApp == null ? " null "
+									: currentApp.toString())
+							+ " by "
+							+ (baseActivity == null ? " null "
+									: baseActivity.getPackageName()));
+					Log.d("package", currentApp.getPackageName() + " "
+							+ getPackageName());
+				}
+				startTime = System.currentTimeMillis();
+				currentApp = baseActivity;
+			}
+		}
+	}
+	 
+	private void preventAppFromRunningOnLollipop(View view){
+		List<RunningAppProcessInfo> runningAppProcesses = am.getRunningAppProcesses();
+		RunningAppProcessInfo runningAppProcessInfo = runningAppProcesses.get(0);
+		
+		List<ActivityManager.RunningAppProcessInfo> processes = am.getRunningAppProcesses();
+		for (ActivityManager.RunningAppProcessInfo process : processes)
+		{
+		    // Take a look at the IMPORTANCE_VISIBLE property as well in the link provided at the bottom
+		    if (process.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND && !serviceUtils.isRunningService(process.processName))
+		    {
+		    	Launcher launcher = new Launcher(process.processName, null);
+
+		        if(isNotAllowed(launcher)){
+		        	android.os.Process.killProcess(process.pid);
+		        	am.killBackgroundProcesses(process.processName);
+		        	synchronized (view) {
+						if (currentState == MobileState.START_ALERT_MESSAGE) {
+							// ≈–« ⁄‰« —”«·…  Õ–Ì— ‘€«·… „« »·⁄» ≈ÿ·«ﬁ«
+						} else if (currentState != MobileState.UNALLOW_APP) {
+							setCurrentState(MobileState.UNALLOW_APP);
+							handler.sendEmptyMessage(0);
+						}
+					}
+		        }
+		    }
+		}
+	}
+	
+	private boolean isNotAllowed(Launcher launcher){
+		List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
+		ComponentName topActivity = taskInfo.get(0).topActivity;
+		if (!db.getWhiteListPackages().contains(launcher)
+				&& !launcher.getPackageName().equals("android")
+				&& !topActivity.getClassName().equals("com.serveme.savemyphone.view.UserActivity")
+				&& !topActivity.getClassName().equals("com.serveme.savemyphone.view.RecoveryActivity")
+				&& !topActivity.getClassName().equals("com.serveme.savemyphone.view.WaitingActivity")
+				&& !topActivity.getClassName().equals("com.haibison.android.lockpattern.LockPatternActivity")) {
+			return false;
+		}
+		return true;
 	}
 }
