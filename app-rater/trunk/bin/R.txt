@@ -1,6 +1,0 @@
-int string app_name 0x7f020000
-int string dialog_title 0x7f020001
-int string later 0x7f020004
-int string no_thanks 0x7f020005
-int string rate 0x7f020003
-int string rate_message 0x7f020002
