@@ -1,0 +1,33 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:saveme="http://schemas.android.com/apk/res-auto" >
+
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/settings"
+        android:orderInCategory="100"
+        android:title="@string/settings"
+        saveme:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_session_log"
+        android:icon="@drawable/session_log"
+        android:orderInCategory="100"
+        android:title="@string/action_session_log"
+        saveme:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_lock"
+        android:icon="@drawable/lock"
+        android:orderInCategory="100"
+        android:title="@string/action_lock"
+        saveme:showAsAction="always"/>
+    <item
+        android:id="@+id/action_app_log"
+        android:orderInCategory="100"
+        android:title="@string/action_app_log"/>
+    <item
+        android:id="@+id/action_help"
+        android:icon="@drawable/action_help"
+        android:orderInCategory="100"
+        android:title="@string/action_help">
+    </item>
+
+</menu>

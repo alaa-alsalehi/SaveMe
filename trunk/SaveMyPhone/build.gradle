@@ -1,0 +1,31 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
+    defaultConfig {
+        applicationId "com.serveme.savemyphone"
+        minSdkVersion 10
+        targetSdkVersion 21
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+        }
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.google.android.gms:play-services:+'
+    compile files('libs/adfalcon-android-adapter.jar')
+    compile files('libs/AdFalconAndroidSDKv2.1.3.jar')
+    compile files('libs/volley.jar')
+    compile project(':..:Libraries:CodeChimpAppRater:apprater')
+    compile project(':..:Libraries:AndroidLockPattern:androidlockpattern')
+    compile project(':..:Libraries:ServeMeFramework:servemeframework')
+}
