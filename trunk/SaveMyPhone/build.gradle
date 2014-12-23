@@ -28,4 +28,5 @@ dependencies {
     compile project(':..:Libraries:CodeChimpAppRater:apprater')
     compile project(':..:Libraries:AndroidLockPattern:androidlockpattern')
     compile project(':..:Libraries:ServeMeFramework:servemeframework')
+    compile project(':..:Libraries:TwoWayView:twowayview')
 }

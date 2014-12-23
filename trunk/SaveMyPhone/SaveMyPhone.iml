@@ -93,6 +93,7 @@
     <orderEntry type="module" module-name="androidlockpattern" exported="" />
     <orderEntry type="module" module-name="servemeframework" exported="" />
     <orderEntry type="module" module-name="apprater" exported="" />
+    <orderEntry type="module" module-name="twowayview" exported="" />
   </component>
 </module>
 

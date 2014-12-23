@@ -16,6 +16,8 @@
             <option value="$PROJECT_DIR$/../Libraries/CodeChimpAppRater/apprater" />
             <option value="$PROJECT_DIR$/../Libraries/ServeMeFramework" />
             <option value="$PROJECT_DIR$/../Libraries/ServeMeFramework/servemeframework" />
+            <option value="$PROJECT_DIR$/../Libraries/TwoWayView" />
+            <option value="$PROJECT_DIR$/../Libraries/TwoWayView/twowayview" />
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/SaveMyPhone" />
           </set>
