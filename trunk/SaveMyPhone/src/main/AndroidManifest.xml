@@ -97,7 +97,6 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -132,11 +131,6 @@
             android:windowSoftInputMode="stateAlwaysVisible" />
 
         <!-- external activities -->
-        <activity
-            android:name="org.omar.android.lib.ui.passwordlock.PasswordEntryActivity"
-            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
-            android:screenOrientation="portrait"
-            android:theme="@style/Alp.42447968.Theme.Dark" />
         <activity
             android:name="com.haibison.android.lockpattern.LockPatternActivity"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
