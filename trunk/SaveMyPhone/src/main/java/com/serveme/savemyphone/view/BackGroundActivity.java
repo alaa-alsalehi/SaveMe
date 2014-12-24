@@ -45,7 +45,7 @@ public class BackGroundActivity extends ActionBarActivity {
 		final FrameLayout progress = (FrameLayout) findViewById(R.id.progress);
 		adapter = new StanderListAdapter(this);
 		imagesPreview.setAdapter(adapter);
-		imagesPreview.setOrientation(TwoWayLayoutManager.Orientation.HORIZONTAL.HORIZONTAL);
+		imagesPreview.setOrientation(TwoWayView.Orientation.HORIZONTAL);
 		new AsyncTask<Void, Void, Result>() {
 			@Override
 			protected void onPreExecute() {
