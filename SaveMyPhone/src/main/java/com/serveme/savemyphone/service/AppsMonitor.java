@@ -336,28 +336,40 @@ public class AppsMonitor extends Service {
 		        	am.killBackgroundProcesses(process.processName);
 		        	synchronized (view) {
 						if (currentState == MobileState.START_ALERT_MESSAGE) {
-							// ��� ��� ����� ����� ����� �� ���� �������
 						} else if (currentState != MobileState.UNALLOW_APP) {
 							setCurrentState(MobileState.UNALLOW_APP);
 							handler.sendEmptyMessage(0);
 						}
 					}
-		        }
+		        } else {
+                    synchronized (view) {
+                        if (currentState != MobileState.START_ALERT_MESSAGE) {
+                            setCurrentState(MobileState.ALLOW_APP);
+                        } else {
+                            handler.sendEmptyMessage(1);
+                        }
+                    }
+                }
 		    }
 		}
 	}
-	
-	private boolean isNotAllowed(Launcher launcher){
-		List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
-		ComponentName topActivity = taskInfo.get(0).topActivity;
-		if (!db.getWhiteListPackages().contains(launcher)
-				&& !launcher.getPackageName().equals("android")
-				&& !topActivity.getClassName().equals("com.serveme.savemyphone.view.UserActivity")
-				&& !topActivity.getClassName().equals("com.serveme.savemyphone.view.RecoveryActivity")
-				&& !topActivity.getClassName().equals("com.serveme.savemyphone.view.WaitingActivity")
-				&& !topActivity.getClassName().equals("com.haibison.android.lockpattern.LockPatternActivity")) {
-			return false;
-		}
-		return true;
-	}
+
+    private boolean isNotAllowed(Launcher launcher){
+        List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
+        ComponentName topActivity = taskInfo.get(0).topActivity;
+        if (!db.getWhiteListPackages().contains(launcher)
+                && !launcher.getPackageName().equals("android")
+                && !topActivity.getClassName().equals("com.serveme.savemyphone.view.UserActivity")
+                && !topActivity.getClassName().equals("com.serveme.savemyphone.view.RecoveryActivity")
+                && !topActivity.getClassName().equals("com.serveme.savemyphone.view.WaitingActivity")
+                && !topActivity.getClassName().equals("com.haibison.android.lockpattern.LockPatternActivity")) {
+
+            Log.v("not   allowed",topActivity.getClassName());
+            return true;
+        }
+        Log.v("allowed",topActivity.getClassName());
+        return false;
+    }
+
+
 }
