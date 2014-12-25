@@ -321,7 +321,6 @@ public class AppsMonitor extends Service {
 
     private void preventAppFromRunningOnLollipop(View view) {
         List<RunningAppProcessInfo> runningAppProcesses = am.getRunningAppProcesses();
-        RunningAppProcessInfo runningAppProcessInfo = runningAppProcesses.get(0);
 
         List<ActivityManager.RunningAppProcessInfo> processes = am.getRunningAppProcesses();
         for (ActivityManager.RunningAppProcessInfo process : processes) {
@@ -346,8 +345,8 @@ public class AppsMonitor extends Service {
                     // }
                     // }
                     // am.killBackgroundProcesses(componentInfo.getPackageName());
-			/*
-			 * componentInfo = taskInfo.get(0).baseActivity; launcher =
+            /*
+             * componentInfo = taskInfo.get(0).baseActivity; launcher =
 			 * new Launcher( componentInfo.getPackageName(), null);
 			 */
                     // Log.d("test", "test");
@@ -414,23 +413,6 @@ public class AppsMonitor extends Service {
                 break;
             }
         }
-    }
-
-    private boolean isNotAllowed(Launcher launcher) {
-        List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
-        ComponentName topActivity = taskInfo.get(0).topActivity;
-        if (!db.getWhiteListPackages().contains(launcher)
-                && !launcher.getPackageName().equals("android")
-                && !topActivity.getClassName().equals("com.serveme.savemyphone.view.UserActivity")
-                && !topActivity.getClassName().equals("com.serveme.savemyphone.view.RecoveryActivity")
-                && !topActivity.getClassName().equals("com.serveme.savemyphone.view.WaitingActivity")
-                && !topActivity.getClassName().equals("com.haibison.android.lockpattern.LockPatternActivity")) {
-
-            Log.v("not   allowed", topActivity.getClassName());
-            return true;
-        }
-        Log.v("allowed", topActivity.getClassName());
-        return false;
     }
 
 
