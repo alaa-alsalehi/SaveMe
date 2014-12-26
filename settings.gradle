@@ -1,1 +1,0 @@
-include ':SaveMyPhone', '..:Libraries:ServeMeFramework:servemeframework', '..:Libraries:AndroidLockPattern:androidlockpattern', '..:Libraries:CodeChimpAppRater:apprater', '..:Libraries:TwoWayView:twowayview'
