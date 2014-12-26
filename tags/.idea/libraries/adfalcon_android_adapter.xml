@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="adfalcon-android-adapter">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/SaveMyPhone/libs/adfalcon-android-adapter.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
